@@ -32,7 +32,6 @@ const userSchema = new mongoose.Schema(
       unique: true,
       minLength: 4,
       maxLength: 15,
-      default: `${this.firstname} ${this.lastname}`,
     },
     email: {
       type: String,
@@ -95,6 +94,8 @@ userSchema.methods.toJSON = function () {
   delete userObject.password;
   delete userObject.tokens;
   delete userObject.is_admin;
+
+  return userObject;
 };
 
 //********************************** Compile User Model *****************************************//
