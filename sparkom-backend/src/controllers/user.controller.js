@@ -1,11 +1,12 @@
 const User = require("../models/user");
-
+const bcrypt = require("bcryptjs");
 //************** Create New User *******************/
 const createUser = async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    res.status(201).send();
+    const token = await user.generateAuthToken();
+    res.status(201).send({ user, token });
   } catch (e) {
     res.status(400).send(e);
   }
@@ -71,4 +72,55 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getAllUsers, updateUser, deleteUser };
+//************** Login *******************/
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) throw new Error();
+    const isMatched = await bcrypt.compare(password, user.password);
+    if (!isMatched) throw new Error();
+    const token = await user.generateAuthToken();
+    res.send({ user, token });
+  } catch (e) {
+    res.status(400).send("Unable to login");
+  }
+};
+
+//************** Logout  *******************/
+
+const logout = async (req, res) => {
+  try {
+    //filtering to new array without current token
+    req.user.tokens = req.user.tokens.filter((token) => {
+      return token.token !== req.token;
+    });
+    await req.user.save();
+    res.send("Logged Out");
+  } catch (e) {
+    res.status(500).send();
+  }
+};
+
+//*********** LogoutAll From All Connected Devices  *********************************/
+
+const logoutAll = async (req, res) => {
+  try {
+    req.user.tokens = [];
+    await req.user.save();
+    res.send("Logged Out From All Devices");
+  } catch (e) {
+    res.status(500).send();
+  }
+};
+
+//****************************************/
+module.exports = {
+  createUser,
+  getAllUsers,
+  updateUser,
+  deleteUser,
+  login,
+  logout,
+  logoutAll,
+};

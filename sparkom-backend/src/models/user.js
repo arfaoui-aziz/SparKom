@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 //********************************** User Schema ***********************************************//
 const userSchema = new mongoose.Schema(
@@ -61,14 +62,14 @@ const userSchema = new mongoose.Schema(
     is_blocked: { type: Boolean, default: false },
     is_admin: { type: Boolean, default: false },
     gender: { type: String, enum: ["f", "m"] },
-    // tokens: [
-    //   {
-    //     token: {
-    //       type: String,
-    //       required: true,
-    //     },
-    //   },
-    // ],
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
@@ -96,6 +97,17 @@ userSchema.methods.toJSON = function () {
   delete userObject.is_admin;
 
   return userObject;
+};
+
+//***** generating Authorization token (method accessible from User instances (Documents)) ******//
+
+userSchema.methods.generateAuthToken = async function () {
+  //providing user._id as data
+  const token = jwt.sign({ _id: this.id.toString() }, process.env.JWT_SECRET);
+  //concat new generated token to the tokens array
+  this.tokens = this.tokens.concat({ token });
+  await this.save();
+  return token;
 };
 
 //********************************** Compile User Model *****************************************//
