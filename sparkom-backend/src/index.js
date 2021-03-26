@@ -8,8 +8,9 @@ app.use(express.json());
 connectToDB();
 
 // Importe Routes
-
+const userRouter = require("./routers/user.router");
 // Define Routes
+app.use(userRouter);
 
 const PORT = process.env.PORT || 3000;
 
