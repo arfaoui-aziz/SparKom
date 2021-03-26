@@ -12,7 +12,7 @@ connectToDB();
 
 // Define Routes
 app.use("/users", userRouter);
-app.use("/me", profileRouter);
+app.use("/profile/me", profileRouter);
 
 const PORT = process.env.PORT || 3000;
 

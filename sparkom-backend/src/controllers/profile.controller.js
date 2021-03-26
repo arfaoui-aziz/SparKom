@@ -21,4 +21,26 @@ const getMyProfile = async (req, res) => {
     res.status(500).send(e);
   }
 };
-module.exports = { createProfile, getMyProfile };
+
+const updateProfile = async (req, res) => {
+  const sentUpdates = Object.keys(req.body);
+  const allowedUpdates = ["followers", "following", "bio", "occupation"];
+
+  const isValidUpdate = sentUpdates.every((update) => {
+    return allowedUpdates.includes(update);
+  });
+
+  if (!isValidUpdate) return res.status(404).send("eroor Invalid update");
+  const my_id = req.user._id;
+  try {
+    const myProfile = await Profile.findOneAndUpdate(my_id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    return res.send(myProfile);
+  } catch (e) {
+    return res.status(500).send();
+  }
+};
+
+module.exports = { createProfile, getMyProfile, updateProfile };
