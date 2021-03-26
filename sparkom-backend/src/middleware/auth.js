@@ -3,7 +3,7 @@ const User = require("../models/user");
 
 const auth = async (req, res, next) => {
   try {
-    //* if we don't have a token replace("Bearer ", "")
+    //* if we don't have a token replace("Bearer ", "") will throw an error
     const token = req.header("Authorization").replace("Bearer ", "");
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     // return data sent & iat(issued at): timestamp
