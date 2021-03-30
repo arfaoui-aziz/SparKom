@@ -7,6 +7,7 @@ import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
 import ChatIcon from "@material-ui/icons/Chat";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import logo from "../../assets/img/logosparkom.png";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 const Header = () => {
   return (
     <div className="header">
@@ -25,7 +26,7 @@ const Header = () => {
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
         <HeaderOption Icon={ChatIcon} title="Messaging" />
         <HeaderOption Icon={NotificationsIcon} title="Notifications" />
-        <HeaderOption avatar="/static/images/avatar/1.jpg" title="me" />
+        <HeaderOption avatar={AccountCircle} />
       </div>
     </div>
   );
