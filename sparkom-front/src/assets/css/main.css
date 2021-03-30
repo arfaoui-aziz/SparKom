@@ -1147,6 +1147,7 @@ Description: "HTML-template"
   min-height: 100vh;
 }
 .landing-page .content-bg-wrap {
+  background: url(../img/landing-users.png);
   -webkit-animation: sidedownscroll 30s linear infinite;
   animation: sidedownscroll 30s linear infinite;
 }
@@ -1158,7 +1159,7 @@ Description: "HTML-template"
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 94, 58, 0.95);
+  background-color: rgba(0, 140, 255, 0.95);
   opacity: 1;
   z-index: auto;
 }
@@ -3860,14 +3861,12 @@ button:hover {
 }
 
 .btn-primary:hover {
-  background-color: #ff763a;
-  border-color: #ff763a;
   opacity: 1;
 }
 
 .btn-secondary:hover {
-  background-color: #ff5e3a;
-  border-color: #ff5e3a;
+  background-color: #008cff;
+  border-color: #008cff;
   opacity: 1;
 }
 
@@ -19094,4 +19093,10 @@ input[type="checkbox"] {
 
 .swiper-container.auto-height .swiper-slide {
   height: auto !important;
+}
+
+/** My Styles*/
+.myb:hover {
+  background-color: whitesmoke;
+  color: white;
 }

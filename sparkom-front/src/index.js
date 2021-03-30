@@ -1,8 +1,8 @@
 import "../node_modules/bootstrap/dist/css/bootstrap-reboot.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
-// import "./assets/css/main.css";
-// import "./assets/css/fonts.min.css";
+import "./assets/css/main.css";
+import "./assets/css/fonts.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
