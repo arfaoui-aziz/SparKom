@@ -19,6 +19,7 @@
   object-fit: contain;
   height: 40px;
   margin-right: 20px;
+  margin-top: 4px;
 }
 
 .header__search {

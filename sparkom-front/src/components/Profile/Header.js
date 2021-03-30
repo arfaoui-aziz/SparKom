@@ -12,11 +12,11 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__left">
-        <img src={logo} alt="why" />
-        <div className="header__search">
+        <img src={logo} alt="sparkom" />
+        {/* <div className="header__search">
           <SearchIcon />
           <input type="text" />
-        </div>
+        </div> */}
       </div>
 
       {/******** Header Right */}

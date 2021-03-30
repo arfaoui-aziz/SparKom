@@ -13,6 +13,7 @@ const MainSettings = () => {
           <form>
             <div class="row">
               <AccountSettings />
+
               {/* <PersonalInformation /> */}
               {/* <ChangePassword /> */}
               {/* <EducationEmployement /> */}
