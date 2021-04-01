@@ -1,10 +1,6 @@
-.quiz__body {
-  flex: 0.6;
-  margin: 40px 20px;
-}
 .quiz {
   background-color: #3d4669;
-  width: 700px;
+
   min-height: 200px;
   height: min-content;
   border-radius: 15px;
