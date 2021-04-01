@@ -19,17 +19,17 @@ const SideBar = () => {
               >
                 <ul class="your-profile-menu">
                   <li>
-                    <Link to="/personal">Personal Information</Link>
+                    <Link to="/settings/perso">Personal Information</Link>
                   </li>
                   <li>
-                    <Link to="/">Account Settings</Link>
+                    <Link to="/settings">Account Settings</Link>
                   </li>
                   <li>
-                    <Link to="/changepwd">Change Password</Link>
+                    <Link to="/settings/changepwd">Change Password</Link>
                   </li>
 
                   <li>
-                    <Link to="/edemp">Education and Employement</Link>
+                    <Link to="/settings/educ">Education and Employement</Link>
                   </li>
                 </ul>
               </div>
