@@ -32,7 +32,7 @@ export default function FriendSuggestion() {
   return (
     <div className="ui-block">
       <div className="ui-block-title">
-        <h6 className="title">You May Know</h6>
+        <h6 className="title">Friend Suggestions</h6>
         <a href="#" className="more">
           <svg className="olymp-three-dots-icon">
             <use xlinkHref={`${icons}#olymp-three-dots-icon`} />

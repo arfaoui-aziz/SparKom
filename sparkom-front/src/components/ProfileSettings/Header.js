@@ -1,6 +1,7 @@
 import React from "react";
 import cover from "../../assets/img/top-header4.png";
 import profilePic from "../../assets/img/author-main1.jpg";
+import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -22,7 +23,7 @@ export default function Header() {
                     <a href="05-ProfilePage-About.html">About</a>
                   </li>
                   <li>
-                    <a href="06-ProfilePage.html">Friends</a>
+                    <Link to="/me/friends">Friends</Link>
                   </li>
                 </ul>
               </div>
@@ -43,9 +44,9 @@ export default function Header() {
                 <img src={profilePic} alt="author" />
               </a>
               <div className="author-content">
-                <a href="02-ProfilePage.html" className="h4 author-name">
+                <Link to="/me" className="h4 author-name">
                   Aziz Arfaoui
-                </a>
+                </Link>
               </div>
             </div>
           </div>

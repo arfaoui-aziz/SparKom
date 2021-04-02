@@ -3,6 +3,7 @@ import avatar from "../../assets/img/avatar10-sm.jpg";
 import avatar3 from "../../assets/img/avatar24-sm.jpg";
 import avatar4 from "../../assets/img/avatar36-sm.jpg";
 import avatar2 from "../../assets/img/avatar38-sm.jpg";
+import { Link } from "react-router-dom";
 
 export default function FriendsList() {
   const friendIcon = (avatar) => {
@@ -32,7 +33,7 @@ export default function FriendsList() {
           {friendIcon(avatar4)}
           {friendIcon(avatar)}
           <li className="all-users">
-            <a href="#">+74</a>
+            <Link to="/me/friends">+74</Link>
           </li>
         </ul>
       </div>
