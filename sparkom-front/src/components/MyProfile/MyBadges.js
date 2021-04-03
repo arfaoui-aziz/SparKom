@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import b1 from "../../assets/img/badge1.png";
 import b2 from "../../assets/img/badge2.png";
 import b3 from "../../assets/img/badge3.png";
@@ -24,7 +25,7 @@ export default function MyBadges() {
           <Badge img={b6} />
           <Badge img={b7} nbr={3} />
           <li className="all-users">
-            <a href="#">+74</a>
+            <Link to="/me/badges">+74</Link>
           </li>
         </ul>
       </div>

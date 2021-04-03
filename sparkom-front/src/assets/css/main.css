@@ -402,8 +402,8 @@ Description: "HTML-template"
   margin-top: 0;
 }
 .control-icon .notification-list .notification-icon svg {
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
 }
 .control-icon .chat-message li.chat-group .author-thumb {
   width: 36px;
@@ -13308,8 +13308,8 @@ ol ol li {
 }
 
 .w-friend-pages-added .notification-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
 }
 
 /*------------- Responsive mode styles --------------*/
@@ -19099,4 +19099,8 @@ input[type="checkbox"] {
 .myb:hover {
   background-color: whitesmoke;
   color: white;
+}
+
+.mynotif:hover{
+  cursor: pointer
 }

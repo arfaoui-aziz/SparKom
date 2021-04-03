@@ -8,19 +8,37 @@ import Notification from "./Notification";
 import Messages from "./Messages";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import FriendRequest from "./FriendRequest";
+import userAvatar from "../../assets/img/avatar1.jpg";
+import img from "../../assets/img/comment-photo.jpg";
+import { Link } from "react-router-dom";
 export default function NavBar() {
   return (
     <header className="header bg-white" id="site-header">
       <div className="page-title ">
-        <img src={logo} alt="logo" style={{ height: 40, marginTop: -10 }} />
+        <Link to="/me">
+          <img src={logo} alt="logo" style={{ height: 40, marginTop: -10 }} />
+        </Link>
       </div>
       <div className="header-content-wrapper">
         <div className="control-block">
+          <div className="control-icon">
+            <div className="author-title ">
+              <Link to="/">
+                <div
+                  className="c-secondary"
+                  style={{ borderBottom: "2px solid blue" }}
+                >
+                  Home
+                </div>
+              </Link>
+            </div>
+          </div>
+
           <div className="control-icon more has-items">
             <svg className="olymp-happy-face-icon c-secondary">
               <PersonAddIcon />
             </svg>
-            <div className="label-avatar bg-blue">6</div>
+            <div className="label-avatar bg-blue">1</div>
             <div className="more-dropdown more-with-triangle triangle-top-center">
               <div className="ui-block-title ui-block-title-small">
                 <h6 className="title">FRIEND REQUESTS</h6>
@@ -30,9 +48,9 @@ export default function NavBar() {
                   <FriendRequest />
                 </ul>
               </div>
-              <a href="#" className="view-all bg-blue">
+              <Link to="/me/requests" className="view-all bg-blue">
                 Check all Friend Request
-              </a>
+              </Link>
             </div>
           </div>
           <div className="control-icon more has-items ">
@@ -58,19 +76,32 @@ export default function NavBar() {
             <svg className="olymp-thunder-icon c-secondary">
               <NotificationsNoneIcon />
             </svg>
-            <div className="label-avatar bg-primary">8</div>
+            <div className="label-avatar bg-primary">2</div>
             <div className="more-dropdown more-with-triangle triangle-top-center">
               <div className="ui-block-title ui-block-title-small">
                 <h6 className="title">Notifications</h6>
               </div>
               <div className="mCustomScrollbar" data-mcs-theme="dark">
                 <ul className="notification-list">
-                  <Notification />
+                  <Notification
+                    userName="Mathilda Binker"
+                    description="commented on your new profile status."
+                    date="4 hours ago"
+                    userAvatar={userAvatar}
+                  />
+                  <Notification
+                    userName="Sarah "
+                    description="commented on your new photo."
+                    date="Yesterday at 5:32am"
+                    userAvatar={userAvatar}
+                    notifImg={img}
+                    comment="“incredible ! We should see each...”"
+                  />
                 </ul>
               </div>
-              <a href="#" className="view-all bg-primary">
+              <Link to="/me/notifs" className="view-all bg-primary">
                 View All Notifications
-              </a>
+              </Link>
             </div>
           </div>
           <div className="author-page author vcard inline-items more">
@@ -88,14 +119,16 @@ export default function NavBar() {
                     <h6 className="title">Your Account</h6>
                   </div>
                   <ul className="account-settings">
-                    <li>
-                      <a href="29-YourAccount-AccountSettings.html">
-                        <svg className="olymp-menu-icon">
-                          <use xlinkHref={`${icons}#olymp-menu-icon`} />
-                        </svg>
-                        <span>Profile Settings</span>
-                      </a>
-                    </li>
+                    <Link to="/settings">
+                      <li>
+                        <a href="29-YourAccount-AccountSettings.html">
+                          <svg className="olymp-menu-icon">
+                            <use xlinkHref={`${icons}#olymp-menu-icon`} />
+                          </svg>
+                          <span>Profile Settings</span>
+                        </a>
+                      </li>
+                    </Link>
                     <li>
                       <a href="36-FavPage-SettingsAndCreatePopup.html">
                         <svg

@@ -29,11 +29,6 @@ export default function FriendRequest() {
           </span>
         </a>
       </span>
-      <div className="more">
-        <svg className="olymp-three-dots-icon">
-          <use xlinkHref="svg-icons/sprites/icons.svg#olymp-three-dots-icon" />
-        </svg>
-      </div>
     </li>
   );
 }
