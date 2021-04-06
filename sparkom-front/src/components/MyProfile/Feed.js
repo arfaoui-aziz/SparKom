@@ -8,21 +8,28 @@ import PostOption from "./PostOption";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
+import { TextField } from "@material-ui/core";
 export default function Feed() {
   return (
     <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
       <div id="newsfeed-items-grid">
         <div className="feed__inputContainer">
           <div className="feed__input">
-            <CreateIcon />
             <form>
-              <input type="text" />
+              <textarea
+                id="postcontent"
+                name="postcontent"
+                rows="4"
+                cols="48"
+              />
+
               <button type="submit">Send</button>
             </form>
           </div>
+
           <div className="feed__postOptions">
             <PostOption title="Photo" Icon={ImageIcon} color="#70B5F9" />
-            <PostOption title="Video" Icon={VideoCallIcon} color="#f03d5b" />
+
             <PostOption
               title="Videos"
               Icon={SubscriptionsIcon}

@@ -11,6 +11,9 @@ import AllBadges from "./components/MyProfile/AllBadges";
 import NavBar from "./components/NavBar/NavBar";
 import AllNotifications from "./components/MyProfile/AllNotifications";
 import AllRequests from "./components/MyProfile/AllRequests";
+import AllMessages from "./components/Chat/AllMessages";
+import Register from "./components/Register";
+import CompanySignup from "./components/CompanySignup";
 function App() {
   return (
     <div>
@@ -20,11 +23,6 @@ function App() {
         <Switch>
           <Route path="/settings" component={Settings} />
           <Route path="/quiz" component={Quiz} />
-          <Route path="/me/friends" component={AllFriends} />
-          <Route path="/me/badges" component={AllBadges} />
-          <Route path="/me/notifs" component={AllNotifications} />
-          <Route path="/me/requests" component={AllRequests} />
-          <Route path="/me" component={MyProfile} />
 
           <Route path="/" exact component={Login} />
         </Switch>

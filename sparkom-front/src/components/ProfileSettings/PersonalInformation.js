@@ -3,6 +3,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import MuiPhoneNumber from "material-ui-phone-number";
 import { useState } from "react";
 import {
   MuiPickersUtilsProvider,
@@ -11,6 +12,11 @@ import {
 import { FormControl } from "@material-ui/core";
 const PersonalInformation = () => {
   const [gender, setGender] = useState("");
+  const [selectedDate, setSelectedDate] = useState();
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   const handleChange = (event) => {
     setGender(event.target.value);
@@ -32,23 +38,26 @@ const PersonalInformation = () => {
         <div className="form-group label-floating">
           <TextField
             id="outlined-basic"
-            label="LastName"
+            label="Username"
             variant="outlined"
             fullWidth
           />
         </div>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <div className="form-group label-floating">
-            <KeyboardDatePicker
-              margin="normal"
-              inputVariant="outlined"
-              id="date-picker-dialog"
-              label="Birthday"
-              format="MM/dd/yyyy"
-              fullWidth
-            />
-          </div>
-        </MuiPickersUtilsProvider>
+        <div className="form-group date-time-picker label-floating">
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <div className="form-group label-floating">
+              <KeyboardDatePicker
+                id="birthday"
+                inputVariant="outlined"
+                label="Birthday"
+                format="MM/dd/yyyy"
+                value={selectedDate}
+                onChange={handleDateChange}
+                fullWidth
+              />
+            </div>
+          </MuiPickersUtilsProvider>
+        </div>
       </div>
       {/* Column 2 Start */}
       <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
@@ -65,19 +74,19 @@ const PersonalInformation = () => {
           <TextField
             id="outlined-basic"
             label="E-mail"
+            type="email"
             variant="outlined"
             fullWidth
           />
         </div>
 
-        <div className="form-group label-floating ">
-          <TextField
-            id="outlined-basic"
-            label="Phone Number"
-            variant="outlined"
-            fullWidth
-          />
-        </div>
+        <MuiPhoneNumber
+          defaultCountry={"tn"}
+          variant="outlined"
+          onChange=""
+          label="Phone Number"
+          fullWidth
+        />
       </div>
 
       <div className="col col-lg-6 col-md-6 col-sm-12 col-12">

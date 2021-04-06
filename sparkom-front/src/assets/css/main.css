@@ -6656,6 +6656,7 @@ fieldset[disabled] .checkbox input[type="checkbox"],
   display: inline-block;
   margin-right: 8px;
 }
+
 .icon-status.online {
   background-color: #32e4cd;
 }
@@ -6811,6 +6812,7 @@ fieldset[disabled] .checkbox input[type="checkbox"],
     float: none;
     margin-top: 5px;
   }
+
   .chat-message-field .notification-friend {
     float: none;
   }
@@ -6818,7 +6820,7 @@ fieldset[disabled] .checkbox input[type="checkbox"],
 
 /*------------- #NOTIFICATION --------------*/
 .popup-chat {
-  width: 320px;
+  /* width: 320px; */
   box-shadow: 0 0 34px 0 rgba(63, 66, 87, 0.1);
   overflow: hidden;
   position: relative;
@@ -6886,12 +6888,17 @@ fieldset[disabled] .checkbox input[type="checkbox"],
   margin-bottom: 5px;
   font-size: 12px;
 }
+
 .popup-chat .notification-date {
-  float: left;
+  /* float: left; */
+  position: absolute;
+  bottom: -2px;
 }
-.popup-chat .author-thumb {
-  width: 26px;
-  height: 26px;
+
+.popup-chat .author-thumb > img {
+  width: 34px;
+  height: 34px;
+  margin-top: 5px;
 }
 .popup-chat .chat-message-field li {
   overflow: hidden;
@@ -12299,7 +12306,7 @@ ol ol li {
 }
 
 .c-primary {
-  color: #ff5e3a;
+  color: #008cff;
 }
 
 .c-white {
@@ -19101,6 +19108,6 @@ input[type="checkbox"] {
   color: white;
 }
 
-.mynotif:hover{
-  cursor: pointer
+.mynotif:hover {
+  cursor: pointer;
 }

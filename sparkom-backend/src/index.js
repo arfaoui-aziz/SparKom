@@ -3,7 +3,9 @@ const connectToDB = require("../config/db");
 // Importe Routes
 const userRouter = require("./routers/user.router");
 const profileRouter = require("./routers/profile.router");
-
+const postRouter = require("./routers/post.router");
+const domainRouter = require("./routers/domain.router");
+const skillRouter = require("./routers/skill.router");
 const app = express();
 app.use(express.json());
 
@@ -13,6 +15,9 @@ connectToDB();
 // Define Routes
 app.use("/users", userRouter);
 app.use("/profile/me", profileRouter);
+app.use("/posts", postRouter);
+app.use("/domains", domainRouter);
+app.use("/skills", skillRouter);
 
 const PORT = process.env.PORT || 3000;
 

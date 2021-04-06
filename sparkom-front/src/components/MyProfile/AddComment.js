@@ -1,7 +1,7 @@
 import React from "react";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import profilePic from "../../assets/img/author-main1.jpg";
-import { Button } from "@material-ui/core";
+
 export default function AddComment() {
   return (
     <form className="comment-form inline-items">

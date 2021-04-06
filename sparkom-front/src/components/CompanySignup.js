@@ -1,50 +1,37 @@
-import React from "react";
 import LandingPage from "./LandingPage";
 import BusinessIcon from "@material-ui/icons/Business";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import TextField from "@material-ui/core/TextField";
-import DateFnsUtils from "@date-io/date-fns";
+
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+
 import { useState } from "react";
 import MuiPhoneNumber from "material-ui-phone-number";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
 import { FormControl, IconButton } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
-
-//**************************************************************************** */
-export default function Register() {
-  const [gender, setGender] = useState("");
+/*********************************************************************** */
+export default function CompanySignup() {
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedDate, setSelectedDate] = useState();
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
   return (
     <LandingPage>
       <div className="registration-login-form">
         {/* Nav tabs */}
         <ul className="nav nav-tabs" role="tablist">
           <li className="nav-item">
-            <Link to="/signup" className="nav-link active" role="tab">
-              <svg className="olymp-register-icon ">
+            <Link to="/signup" className="nav-link active">
+              <svg className="olymp-register-icon c-primary">
                 <PersonAddOutlinedIcon />
               </svg>
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/company" className="nav-link" role="tab">
-              <svg className="olymp-register-icon c-primary">
+            <Link to="/company" className="nav-link">
+              <svg className="olymp-register-icon ">
                 <BusinessIcon />
               </svg>
             </Link>
@@ -61,61 +48,19 @@ export default function Register() {
             <div className="title h6">Register to Sparkom</div>
             <form className="content">
               <div className="row">
-                <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  <div className="form-group label-floating is-empty">
-                    <TextField
-                      id="firstname"
-                      label="First Name"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </div>
-                </div>
-                <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  <div className="form-group label-floating is-empty">
-                    <TextField
-                      id="lastname"
-                      label="Last Name"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </div>
-                </div>
-
-                <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  <div className="form-group label-floating is-empty">
-                    <TextField
-                      id="username"
-                      label="Username"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </div>
-                </div>
-                <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  <div className="form-group label-floating is-empty">
-                    {/** Gender*/}
-                    <FormControl variant="outlined" fullWidth>
-                      <InputLabel id="gender-label">Gender</InputLabel>
-                      <Select
-                        labelId="gender-label"
-                        id="gender"
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
-                        label="Gender"
-                      >
-                        <MenuItem value="m">Male</MenuItem>
-                        <MenuItem value="f">Female</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div>
-
                 <div className="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                   <div className="form-group label-floating is-empty">
                     <TextField
+                      id="compname"
+                      label="Company Name"
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </div>
+                  <div className="form-group label-floating is-empty">
+                    <TextField
                       id="email"
-                      label="Your Email"
+                      label="Company Email"
                       variant="outlined"
                       type="email"
                       fullWidth
@@ -148,29 +93,45 @@ export default function Register() {
                       />
                     </FormControl>
                   </div>
-                  <div className="form-group date-time-picker label-floating">
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <div className="form-group label-floating">
-                        <KeyboardDatePicker
-                          id="birthday"
-                          inputVariant="outlined"
-                          label="Birthday"
-                          format="MM/dd/yyyy"
-                          value={selectedDate}
-                          onChange={handleDateChange}
-                          fullWidth
-                        />
-                      </div>
-                    </MuiPickersUtilsProvider>
+                  {/** Adress */}
+                  <div className="form-group label-floating is-empty">
+                    <TextField
+                      id="compaddress"
+                      label="Company Address"
+                      variant="outlined"
+                      fullWidth
+                    />
                   </div>
+                </div>
+                {/** */}
 
-                  {/** Phone Number*/}
-
+                <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                  <div className="form-group label-floating is-empty">
+                    <TextField
+                      id="city"
+                      label="City / Province"
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </div>
+                </div>
+                <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                  <div className="form-group label-floating is-empty">
+                    <TextField
+                      id="pcode"
+                      label="Zip/Postal Code"
+                      variant="outlined"
+                      fullWidth
+                    />
+                  </div>
+                </div>
+                {/** Phone Number*/}
+                <div className="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                   <MuiPhoneNumber
                     defaultCountry={"tn"}
                     variant="outlined"
-                    onChange=""
                     label="Phone Number"
+                    onChange=""
                     fullWidth
                   />
 

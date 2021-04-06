@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 
 const skillSchema = new mongoose.Schema({
-  domain_id: { type: mongoose.Schema.Types.ObjectId, ref: "Domain" },
-  name: String,
+  domain_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Domain",
+    required: true,
+  },
+  name: { type: String, unique: true },
   description: String,
   skill_img: Buffer,
   quiz: [
@@ -18,4 +22,4 @@ const skillSchema = new mongoose.Schema({
 
 const Skill = mongoose.model("Skill", skillSchema);
 
-export default Skill;
+module.exports = Skill;

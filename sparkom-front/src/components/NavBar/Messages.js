@@ -2,11 +2,11 @@ import React from "react";
 import profilePic from "../../assets/img/avatar1.jpg";
 export default function Messages() {
   return (
-    <li className="message-unread">
+    <li className="message-unread ">
       <div className="author-thumb">
         <img src={profilePic} style={{ width: 34, height: 34 }} alt="author" />
       </div>
-      <div className="notification-event">
+      <div className="notification-event ">
         <a href="#" className="h6 notification-friend">
           Diana Jameson
         </a>

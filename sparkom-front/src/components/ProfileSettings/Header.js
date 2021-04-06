@@ -15,12 +15,7 @@ export default function Header() {
               <div className="col col-lg-5 col-md-5 col-sm-12 col-12">
                 <ul className="profile-menu">
                   <li>
-                    <a href="02-ProfilePage.html" className="active">
-                      Timeline
-                    </a>
-                  </li>
-                  <li>
-                    <a href="05-ProfilePage-About.html">About</a>
+                    <Link href="/me">About</Link>
                   </li>
                   <li>
                     <Link to="/me/friends">Friends</Link>
@@ -40,9 +35,18 @@ export default function Header() {
             </div>
 
             <div className="top-header-author">
-              <a href="02-ProfilePage.html" className="author-thumb">
+              <div className="author-thumb">
+                <input
+                  type="file"
+                  id="avatar"
+                  style={{
+                    cursor: "pointer",
+                    height: 130,
+                    opacity: 0,
+                  }}
+                />
                 <img src={profilePic} alt="author" />
-              </a>
+              </div>
               <div className="author-content">
                 <Link to="/me" className="h4 author-name">
                   Aziz Arfaoui

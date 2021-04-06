@@ -1,51 +1,95 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { Checkbox } from "@material-ui/core";
+import React, { useState } from "react";
+
+import { FormControl, IconButton } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
 export default function ChangePassword() {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <>
       <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div className="form-group label-floating">
-          <TextField
-            id="outlined-basic"
-            label="Current Password"
-            variant="outlined"
-            fullWidth
-          />
+          <FormControl variant="outlined" fullWidth style={{ width: "48%" }}>
+            <InputLabel htmlFor="outlined-adornment-password">
+              Current Password
+            </InputLabel>
+            <OutlinedInput
+              id="password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={130}
+            />
+          </FormControl>
         </div>
       </div>
 
       <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
         <div className="form-group label-floating is-empty">
-          <TextField
-            id="outlined-basic"
-            label="New Password"
-            variant="outlined"
-            fullWidth
-          />
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel htmlFor="outlined-adornment-password">
+              New Password
+            </InputLabel>
+            <OutlinedInput
+              id="password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={110}
+            />
+          </FormControl>
         </div>
       </div>
       <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
         <div className="form-group label-floating is-empty">
-          <TextField
-            id="outlined-basic"
-            label="Confirm Password"
-            variant="outlined"
-            fullWidth
-          />
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel htmlFor="outlined-adornment-password">
+              Confirm Password
+            </InputLabel>
+            <OutlinedInput
+              id="password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={130}
+            />
+          </FormControl>
         </div>
       </div>
 
       <div className="col col-lg-12 col-sm-12 col-sm-12 col-12">
         <div className="remember">
-          <div className="checkbox">
-            <label>
-              <Checkbox color="primary" />
-              Remember Me
-            </label>
-          </div>
-
-          <a href="#" className="forgot">
+          <a href="#" className="forgot mb-4">
             Forgot my Password
           </a>
         </div>

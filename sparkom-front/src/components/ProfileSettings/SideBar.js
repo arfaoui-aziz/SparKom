@@ -19,10 +19,10 @@ const SideBar = () => {
               >
                 <ul class="your-profile-menu">
                   <li>
-                    <Link to="/settings/perso">Personal Information</Link>
+                    <Link to="/settings">Account Settings</Link>
                   </li>
                   <li>
-                    <Link to="/settings">Account Settings</Link>
+                    <Link to="/settings/perso">Personal Information</Link>
                   </li>
                   <li>
                     <Link to="/settings/changepwd">Change Password</Link>
@@ -44,10 +44,16 @@ const SideBar = () => {
               2
             </Link>
           </div>
+
           <div class="ui-block-title">
-            <a href="34-YourAccount-ChatMessages.html" class="h6 title">
+            <Link to="/me/notifs" class="h6 title">
+              My CV
+            </Link>
+          </div>
+          <div class="ui-block-title">
+            <Link to="/me/messages" class="h6 title">
               Chat / Messages
-            </a>
+            </Link>
           </div>
           <div class="ui-block-title">
             <Link to="/me/requests" class="h6 title">
