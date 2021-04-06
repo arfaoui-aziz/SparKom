@@ -1,23 +1,32 @@
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
+import icons from "../../assets/svg-icons/sprites/icons.svg";
 const SideBar = () => {
+  const [dropdown, setDropdown] = useState(false);
+
   return (
     <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 responsive-display-none">
       <div class="ui-block">
         <div class="your-profile">
           <div id="accordion" role="tablist" aria-multiselectable="true">
             <div class="card">
-              <div class="card-header" role="tab" id="headingOne">
-                <h6 class="mb-0">Profile Settings</h6>
+              <div className="card-header" role="tab" id="headingOne-1">
+                <h6 className="mb-0">
+                  <a
+                    onClick={() => setDropdown(!dropdown)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Profile Settings
+                    <svg className="olymp-dropdown-arrow-icon">
+                      <use xlinkHref={`${icons}#olymp-dropdown-arrow-icon`} />
+                    </svg>
+                  </a>
+                </h6>
               </div>
 
-              <div
-                id="collapseOne"
-                class="collapse show"
-                role="tabpanel"
-                aria-labelledby="headingOne"
-              >
-                <ul class="your-profile-menu">
+              <div className={dropdown ? "collapse " : "collapse show"}>
+                <ul className="your-profile-menu">
                   <li>
                     <Link to="/settings">Account Settings</Link>
                   </li>
@@ -37,6 +46,12 @@ const SideBar = () => {
           </div>
 
           <div class="ui-block-title">
+            <Link to="/cv" class="h6 title">
+              My CV
+            </Link>
+          </div>
+
+          <div class="ui-block-title">
             <Link to="/me/notifs" class="h6 title">
               Notifications
             </Link>
@@ -45,11 +60,6 @@ const SideBar = () => {
             </Link>
           </div>
 
-          <div class="ui-block-title">
-            <Link to="/me/notifs" class="h6 title">
-              My CV
-            </Link>
-          </div>
           <div class="ui-block-title">
             <Link to="/me/messages" class="h6 title">
               Chat / Messages

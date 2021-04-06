@@ -14,6 +14,7 @@ import AllRequests from "./components/MyProfile/AllRequests";
 import AllMessages from "./components/Chat/AllMessages";
 import Register from "./components/Register";
 import CompanySignup from "./components/CompanySignup";
+import Cv from "./components/CV/Cv";
 function App() {
   return (
     <div>
