@@ -5,6 +5,7 @@ const cvSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
+    unique: true,
   },
   cv_pdf: Buffer,
   description: String,
@@ -41,4 +42,4 @@ const cvSchema = new mongoose.Schema({
 
 const Cv = mongoose.model("Cv", cvSchema, "Cv");
 
-export default Cv;
+module.exports = Cv;

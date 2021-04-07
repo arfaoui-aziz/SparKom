@@ -42,10 +42,22 @@ const deleteSkill = async (req, res) => {
   }
 };
 const skillsByDomain = async (req, res) => {
-  try{
-  const skills = await Skill.find({domain_id : req.params.id});
-  if (!skills) return res.status(404).send("Skill Not Found");
+  try {
+    const skills = await Skill.find({ domain_id: req.params.id });
+    if (!skills) return res.status(404).send("Skill Not Found");
     res.send(skills);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+};
+
+//**Skill By ID */
+const skillByID = async (req, res) => {
+  try {
+    const skill = await Skill.findById(req.params.id);
+    console.log(skill);
+    if (!skill) return res.status(404).send("Skill Not Found");
+    res.send(skill);
   } catch (e) {
     res.status(500).send(e);
   }
@@ -57,4 +69,5 @@ module.exports = {
   allSkills,
   deleteSkill,
   skillsByDomain,
+  skillByID,
 };

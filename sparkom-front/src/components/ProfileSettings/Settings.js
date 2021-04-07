@@ -6,9 +6,12 @@ import AccountSettings from "./AccountSettings";
 import ChangePassword from "./ChangePassword";
 import EducationEmployement from "./EducationEmployement";
 import PersonalInformation from "./PersonalInformation";
+import NavBar from "../NavBar/NavBar";
 const Settings = (props) => {
   return (
     <>
+    <NavBar />
+        <div class="header-spacer header-spacer-small mb-3"></div>
       <div class="container">
         <div class="row">
           <Header />

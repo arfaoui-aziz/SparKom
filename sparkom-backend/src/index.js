@@ -6,6 +6,9 @@ const profileRouter = require("./routers/profile.router");
 const postRouter = require("./routers/post.router");
 const domainRouter = require("./routers/domain.router");
 const skillRouter = require("./routers/skill.router");
+const badgeRouter = require("./routers/badge.router");
+const cvRouter = require("./routers/cv.router");
+
 const app = express();
 app.use(express.json());
 
@@ -18,6 +21,8 @@ app.use("/profile/me", profileRouter);
 app.use("/posts", postRouter);
 app.use("/domains", domainRouter);
 app.use("/skills", skillRouter);
+app.use("/badges", badgeRouter);
+app.use("/cv", cvRouter);
 
 const PORT = process.env.PORT || 3000;
 

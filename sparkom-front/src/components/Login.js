@@ -13,6 +13,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -69,9 +70,9 @@ export default function Login() {
                 </a>
               </div>
 
-              <a href="#" className="btn btn-lg btn-primary full-width">
+              <Link to="/me" className="btn btn-lg btn-primary full-width">
                 Login
-              </a>
+              </Link>
 
               <div className="or"></div>
 

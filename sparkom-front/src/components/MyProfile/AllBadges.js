@@ -5,10 +5,13 @@ import SearchCard from "./SearchCard";
 import badgeimg from "../../assets/img/badge1.png";
 import badgeimg2 from "../../assets/img/badge2.png";
 import badgeimg3 from "../../assets/img/badge3.png";
+import NavBar from "../NavBar/NavBar";
 
 export default function AllBadges() {
   return (
     <>
+      <NavBar />
+      <div class="header-spacer header-spacer-small mb-3"></div>
       <div className="container">
         <div className="row">
           <Header />

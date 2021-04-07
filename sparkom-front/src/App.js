@@ -24,7 +24,15 @@ function App() {
         <Switch>
           <Route path="/settings" component={Settings} />
           <Route path="/quiz" component={Quiz} />
-
+          <Route path="/cv" component={Cv} />
+          <Route path="/me/friends" component={AllFriends} />
+          <Route path="/me/badges" component={AllBadges} />
+          <Route path="/me/notifs" component={AllNotifications} />
+          <Route path="/me/requests" component={AllRequests} />
+          <Route path="/me/messages" component={AllMessages} />
+          <Route path="/me" component={MyProfile} />
+          <Route path="/signup" component={Register} />
+          <Route path="/company" component={CompanySignup} />
           <Route path="/" exact component={Login} />
         </Switch>
       </Router>

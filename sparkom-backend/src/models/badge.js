@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 
 const badgeSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, unique: true },
   type: String,
+  description: String,
   image: Buffer,
 });
 
 const Badge = mongoose.model("Badge", badgeSchema);
 
-export default Badge;
+module.exports = Badge;
