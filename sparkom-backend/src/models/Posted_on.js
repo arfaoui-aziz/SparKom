@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-const PostedOnSchema = new mongoose.Schema({
+let Schema = mongoose.Schema
+const PostedOnSchema = new Schema({
   description: {
     type: String,
     required: true

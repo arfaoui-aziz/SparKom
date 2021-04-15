@@ -11,7 +11,7 @@ const Job = require('../models/Job');
 const getAllJobs = async (req, res) => {
     Job.find()
       .then(Jobs => res.json(Jobs))
-      .catch(err => res.status(404).json({ noJobsfound: 'No Jobies found' }));
+      .catch(err => res.status(404).json({ noJobsfound: 'No Jobs found' }));
   };
 
 
