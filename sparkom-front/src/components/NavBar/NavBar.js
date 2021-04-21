@@ -11,7 +11,15 @@ import FriendRequest from "./FriendRequest";
 import userAvatar from "../../assets/img/avatar1.jpg";
 import img from "../../assets/img/comment-photo.jpg";
 import { Link } from "react-router-dom";
+import { queryApi } from "../../utils/queryApi";
 export default function NavBar() {
+  const Logout = async () => {
+    const [res, err] = await queryApi("users/logout", "", "POST", false);
+    if (res) {
+      localStorage.removeItem("token");
+    }
+  };
+
   return (
     <header className="header bg-white" id="site-header">
       <div className="container">
@@ -125,7 +133,7 @@ export default function NavBar() {
                             </li>
                           </Link>
 
-                          <li>
+                          <li onClick={Logout}>
                             <Link to="/">
                               <svg className="olymp-logout-icon">
                                 <use xlinkHref={`${icons}#olymp-logout-icon`} />

@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/img/logosparkom.png";
+import { Link } from "react-router-dom";
 export default function LandingPage({ children }) {
   return (
     <div className="landing-page">
@@ -11,11 +12,11 @@ export default function LandingPage({ children }) {
       >
         <div className="container">
           <div className="header--standard-wrap">
-            <a href="#" className="logo">
+            <Link to="/" className="logo">
               <div className="img-wrap">
                 <img src={logo} style={{ width: "200px" }} alt="Olympus" />
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -33,9 +34,9 @@ export default function LandingPage({ children }) {
                 write blog posts, show your favourite music via Stopify, earn
                 badges and much more!
               </p>
-              <a href="#" className="btn  btn-md btn-border c-white ">
+              <Link to="/signup" className="btn  btn-md btn-border c-white ">
                 Register Now!
-              </a>
+              </Link>
             </div>
           </div>
 

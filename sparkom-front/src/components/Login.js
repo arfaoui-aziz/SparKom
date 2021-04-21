@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../assets/img/logosparkom.png";
 import TextField from "@material-ui/core/TextField";
 import {
   Checkbox,
@@ -13,17 +12,43 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { Link } from "react-router-dom";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
+import { queryApi } from "../utils/queryApi";
+//********************************************** */
 export default function Login() {
+  const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState({ visible: false, message: "" });
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: yupSchema,
+    onSubmit: async (values) => {
+      const [res, err] = await queryApi("users/login", values, "POST", false);
+      if (err) {
+        setError({
+          visible: true,
+          message: JSON.stringify(err.errors, null, 2),
+        });
+        console.log(err);
+      } else {
+        localStorage.setItem("token", res.token);
+        history.push("/me");
+        console.log(res);
+      }
+    },
+  });
   return (
     <LandingPage>
       <div className="registration-login-form">
         <div className="title h6">
           <b>Login to your Account</b>
         </div>
-        <form className="content">
+        <form className="content" onSubmit={formik.handleSubmit}>
           <div className="row">
             <div className="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
               <div className="form-group label-floating is-empty">
@@ -31,6 +56,10 @@ export default function Login() {
                   id="email"
                   label="E-mail"
                   variant="outlined"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                   fullWidth
                 />
               </div>
@@ -54,6 +83,14 @@ export default function Login() {
                       </InputAdornment>
                     }
                     labelWidth={70}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.password && Boolean(formik.errors.password)
+                    }
+                    helperText={
+                      formik.touched.password && formik.errors.password
+                    }
                   />
                 </FormControl>
               </div>
@@ -70,9 +107,12 @@ export default function Login() {
                 </a>
               </div>
 
-              <Link to="/me" className="btn btn-lg btn-primary full-width">
+              <button
+                type="submit"
+                className="btn btn-lg btn-primary full-width"
+              >
                 Login
-              </Link>
+              </button>
 
               <div className="or"></div>
 
@@ -97,3 +137,15 @@ export default function Login() {
     </LandingPage>
   );
 }
+
+const yupSchema = Yup.object({
+  email: Yup.string()
+    .email("invalid email")
+    .min(8, "Minimum 3 caractéres")
+    .max(40, "Maximum 40 caractéres")
+    .required("Champs requis!"),
+  password: Yup.string()
+    .min(7, "Minimum 3 caractéres")
+    .max(80, "Maximum 80 caractéres")
+    .required("Champs requis!"),
+});

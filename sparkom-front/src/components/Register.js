@@ -20,16 +20,49 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link } from "react-router-dom";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
+import { queryApi } from "../utils/queryApi";
 //**************************************************************************** */
 export default function Register() {
   const [gender, setGender] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [selectedDate, setSelectedDate] = useState();
-
+  const [error, setError] = useState({ visible: false, message: "" });
+  const history = useHistory();
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      username: "",
+      gender: "",
+      email: "",
+      password: "",
+      birthday: "",
+      phone: 0,
+    },
+    validationSchema: yupSchema,
+    onSubmit: async (values) => {
+      const [res, err] = await queryApi("users", values, "POST", false);
+      if (err) {
+        setError({
+          visible: true,
+          message: JSON.stringify(err.errors, null, 2),
+        });
+        console.log(err);
+      } else {
+        localStorage.setItem("token", res.token);
+        history.push("/me");
+        console.log(res);
+      }
+    },
+  });
+
   return (
     <LandingPage>
       <div className="registration-login-form">
@@ -59,7 +92,7 @@ export default function Register() {
             data-mh="log-tab"
           >
             <div className="title h6">Register to Sparkom</div>
-            <form className="content">
+            <form className="content" onSubmit={formik.handleSubmit}>
               <div className="row">
                 <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                   <div className="form-group label-floating is-empty">
@@ -67,6 +100,15 @@ export default function Register() {
                       id="firstname"
                       label="First Name"
                       variant="outlined"
+                      value={formik.values.firstname}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.firstname &&
+                        Boolean(formik.errors.firstname)
+                      }
+                      helperText={
+                        formik.touched.firstname && formik.errors.firstname
+                      }
                       fullWidth
                     />
                   </div>
@@ -77,6 +119,15 @@ export default function Register() {
                       id="lastname"
                       label="Last Name"
                       variant="outlined"
+                      value={formik.values.lastname}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.lastname &&
+                        Boolean(formik.errors.lastname)
+                      }
+                      helperText={
+                        formik.touched.lastname && formik.errors.lastname
+                      }
                       fullWidth
                     />
                   </div>
@@ -88,6 +139,15 @@ export default function Register() {
                       id="username"
                       label="Username"
                       variant="outlined"
+                      value={formik.values.username}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.username &&
+                        Boolean(formik.errors.username)
+                      }
+                      helperText={
+                        formik.touched.username && formik.errors.username
+                      }
                       fullWidth
                     />
                   </div>
@@ -100,8 +160,15 @@ export default function Register() {
                       <Select
                         labelId="gender-label"
                         id="gender"
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
+                        //onChange={(e) => setGender(e.target.value)}
+                        value={formik.values.gender}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.gender && Boolean(formik.errors.gender)
+                        }
+                        helperText={
+                          formik.touched.gender && formik.errors.gender
+                        }
                         label="Gender"
                       >
                         <MenuItem value="m">Male</MenuItem>
@@ -118,6 +185,12 @@ export default function Register() {
                       label="Your Email"
                       variant="outlined"
                       type="email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      error={
+                        formik.touched.email && Boolean(formik.errors.email)
+                      }
+                      helperText={formik.touched.email && formik.errors.email}
                       fullWidth
                     />
                   </div>
@@ -144,6 +217,12 @@ export default function Register() {
                             </IconButton>
                           </InputAdornment>
                         }
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        error={
+                          formik.touched.password &&
+                          Boolean(formik.errors.password)
+                        }
                         labelWidth={70}
                       />
                     </FormControl>
@@ -168,16 +247,22 @@ export default function Register() {
 
                   <MuiPhoneNumber
                     defaultCountry={"tn"}
+                    id="phone"
                     variant="outlined"
-                    onChange=""
                     label="Phone Number"
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    error={formik.touched.phone && Boolean(formik.errors.phone)}
                     fullWidth
                   />
 
                   <div className="form-group label-floating is-empty "></div>
-                  <a href="#" className="btn btn-primary btn-lg full-width">
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg full-width"
+                  >
                     Complete Registration!
-                  </a>
+                  </button>
                 </div>
               </div>
             </form>
@@ -187,3 +272,8 @@ export default function Register() {
     </LandingPage>
   );
 }
+
+const yupSchema = Yup.object({
+  email: Yup.string().email("must be a valid email").required("Champs requis!"),
+  password: Yup.string().required("Champs requis!"),
+});
