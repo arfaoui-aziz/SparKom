@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { activeUserSelector } from "../../store/slices/auth";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import profilePic from "../../assets/img/author-main1.jpg";
 import AddComment from "./AddComment";
@@ -14,6 +16,7 @@ export default function Post({
   commentsnbr,
   comments,
 }) {
+  const activeUser = useSelector(activeUserSelector);
   const [displayComments, setDisplayComments] = useState(false);
   return (
     <div className="ui-block">
@@ -22,7 +25,7 @@ export default function Post({
           <img src={profilePic} alt="author" />
           <div className="author-date">
             <a className="h6 post__author-name fn" href="02-ProfilePage.html">
-              Aziz Arfaoui
+              {`${activeUser.firstname} ${activeUser.lastname}`}
             </a>
             <div className="post__date">
               <time className="published" dateTime="2017-03-24T18:18">
@@ -76,9 +79,9 @@ export default function Post({
         </div>
       </article>
       <ul class="comments-list">{comments && displayComments && comments}</ul>
-      <a href="#" class="more-comments">
+      <span class="more-comments" onClick={() => setDisplayComments(true)}>
         View more comments <span>+</span>
-      </a>
+      </span>
       <AddComment />
     </div>
   );

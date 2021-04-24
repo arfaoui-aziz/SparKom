@@ -10,13 +10,20 @@ import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import FriendRequest from "./FriendRequest";
 import userAvatar from "../../assets/img/avatar1.jpg";
 import img from "../../assets/img/comment-photo.jpg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { queryApi } from "../../utils/queryApi";
+import { logout, activeUserSelector } from "../../store/slices/auth";
+import { useDispatch, useSelector } from "react-redux";
 export default function NavBar() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const activeUser = useSelector(activeUserSelector);
   const Logout = async () => {
     const [res, err] = await queryApi("users/logout", "", "POST", false);
     if (res) {
       localStorage.removeItem("token");
+      dispatch(logout(res));
+      history.push("/");
     }
   };
 
@@ -147,7 +154,7 @@ export default function NavBar() {
                   </div>
                   <Link to="/me" className="author-name fn">
                     <div className="author-title ">
-                      <div className="c-secondary">Aziz Arfaoui</div>
+                      <div className="c-secondary">{`${activeUser.firstname} ${activeUser.lastname}`}</div>
                     </div>
                   </Link>
                 </div>

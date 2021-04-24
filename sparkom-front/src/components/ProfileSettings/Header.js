@@ -1,8 +1,11 @@
 import React from "react";
 import cover from "../../assets/img/top-header4.png";
 import profilePic from "../../assets/img/author-main1.jpg";
+import { activeUserSelector } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 export default function Header() {
+  const activeUser = useSelector(activeUserSelector);
   return (
     <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div className="ui-block">
@@ -49,7 +52,7 @@ export default function Header() {
               </div>
               <div className="author-content">
                 <Link to="/me" className="h4 author-name">
-                  Aziz Arfaoui
+                  {`${activeUser.firstname} ${activeUser.lastname}`}
                 </Link>
               </div>
             </div>

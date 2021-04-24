@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Checkbox,
   FormControlLabel,
@@ -14,13 +15,18 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
+import { login } from "../store/slices/auth";
 //********************************************** */
 export default function Login() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const [showLoader, setShowLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState({ visible: false, message: "" });
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,23 +34,28 @@ export default function Login() {
     },
     validationSchema: yupSchema,
     onSubmit: async (values) => {
+      setShowLoader(true);
       const [res, err] = await queryApi("users/login", values, "POST", false);
       if (err) {
+        setShowLoader(false);
         setError({
           visible: true,
-          message: JSON.stringify(err.errors, null, 2),
+          message: err,
         });
-        console.log(err);
       } else {
         localStorage.setItem("token", res.token);
+        dispatch(login(res));
+
         history.push("/me");
-        console.log(res);
       }
     },
   });
+  //* check if user connected
+  if (isAuthenticated) return <Redirect to="/me" />;
+
   return (
     <LandingPage>
-      <div className="registration-login-form">
+      <div className="registration-login-form pl-0">
         <div className="title h6">
           <b>Login to your Account</b>
         </div>
@@ -53,13 +64,15 @@ export default function Login() {
             <div className="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
               <div className="form-group label-floating is-empty">
                 <TextField
+                  className="is-invalid"
                   id="email"
+                  name="email"
                   label="E-mail"
                   variant="outlined"
                   value={formik.values.email}
-                  onChange={formik.handleChange}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  onChange={formik.handleChange}
                   fullWidth
                 />
               </div>
@@ -70,6 +83,7 @@ export default function Login() {
                   </InputLabel>
                   <OutlinedInput
                     id="password"
+                    name="password"
                     type={showPassword ? "text" : "password"}
                     endAdornment={
                       <InputAdornment position="end">
@@ -93,7 +107,17 @@ export default function Login() {
                     }
                   />
                 </FormControl>
+                <p className="text-danger ml-1 mt-1">
+                  {formik.touched.password && formik.errors.password}
+                </p>
               </div>
+
+              {error.visible && (
+                <div class="alert alert-danger" role="alert">
+                  {error.message}
+                </div>
+              )}
+              {showLoader && <p>Loading</p>}
 
               <div className="remember">
                 <div className="checkbox">
@@ -138,6 +162,7 @@ export default function Login() {
   );
 }
 
+//********************************************** */
 const yupSchema = Yup.object({
   email: Yup.string()
     .email("invalid email")
@@ -145,7 +170,7 @@ const yupSchema = Yup.object({
     .max(40, "Maximum 40 caractéres")
     .required("Champs requis!"),
   password: Yup.string()
-    .min(7, "Minimum 3 caractéres")
+    .min(7, "Minimum 7 caractéres")
     .max(80, "Maximum 80 caractéres")
     .required("Champs requis!"),
 });
