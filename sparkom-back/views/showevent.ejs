@@ -1,0 +1,46 @@
+<html>
+<body>
+<h2>  List event :  </h2>
+
+<a href="/event/addevent"> Add event</a>
+
+<table border="2">
+
+	<tr>
+		<td>ID</td>
+		<td>Name</td>
+		<td>CreatedBy</td>
+		<td>group_id </td>
+		<td>description</td>
+		<td>adresse</td>
+		<td>Date</td>
+		<td>Image</td>
+		<td>Action</td>
+	</tr>
+<% if(events.length > 0) {  %>
+<% for(var i=0 ; i< events.length ; i++) {    %>
+<tr>
+		<td><%= events[i]._id   %></td>
+		<td><%= events[i].name   %></td>
+		<td><%= events[i].CreatedBy   %></td>
+		<td><%= events[i].group_id   %> </td>
+		<td><%= events[i].description   %> </td>
+		<td><%= events[i].adresse   %> </td>
+		<td><%= events[i].Date    %> </td>
+		<td><%= events[i].Image   %> </td>
+		<td>
+			<a href="/event/edit/event/<%= events[i]._id   %>">Edit</a>
+			<a href="/event/delete/<%= events[i]._id   %>">Remove</a>
+			<a href="/event/<%= events[i]._id   %>">Show</a>
+		</td>
+</tr>
+<%   }  %>
+<%   }else{  %>
+<h3> No event found !!! </h3>
+<%   }  %>
+</table>
+
+</body>
+
+
+</html>
