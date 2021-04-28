@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+
 import profilePic from "../../assets/img/avatar1.jpg";
 import MyMsg from "./MyMsg";
 import SenderMsg from "./SenderMsg";

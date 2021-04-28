@@ -14,6 +14,7 @@ import { Link, useHistory } from "react-router-dom";
 import { queryApi } from "../../utils/queryApi";
 import { logout, activeUserSelector } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { formatMs } from "@material-ui/core";
 export default function NavBar() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -166,3 +167,4 @@ export default function NavBar() {
     </header>
   );
 }
+

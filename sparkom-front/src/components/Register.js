@@ -40,7 +40,7 @@ export default function Register() {
       firstname: "",
       lastname: "",
       username: "",
-      gender: "",
+      gender: ["Male", "Female"],
       email: "",
       password: "",
       birthday: "",
@@ -156,13 +156,14 @@ export default function Register() {
                   <div className="form-group label-floating is-empty">
                     {/** Gender*/}
                     <FormControl variant="outlined" fullWidth>
-                      <InputLabel id="gender-label">Gender</InputLabel>
+                      <InputLabel id="gender">Gender</InputLabel>
                       <Select
-                        labelId="gender-label"
+                        labelId="gender"
                         id="gender"
                         //onChange={(e) => setGender(e.target.value)}
-                        value={formik.values.gender}
+                        value={formik.values.gender[0]}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         error={
                           formik.touched.gender && Boolean(formik.errors.gender)
                         }
@@ -170,9 +171,20 @@ export default function Register() {
                           formik.touched.gender && formik.errors.gender
                         }
                         label="Gender"
+                        defaultValue=" "
                       >
-                        <MenuItem value="m">Male</MenuItem>
-                        <MenuItem value="f">Female</MenuItem>
+                        {formik.values.gender.map(
+                          (option) => (
+                            <MenuItem value={option} key={option}>
+                              {option}
+                            </MenuItem>
+                          )
+                          // <MenuItem key={option} value={option}>
+                          //   {option.name}
+                          // </MenuItem>
+                        )}
+                        {/* <MenuItem value="m">Male</MenuItem>
+                        <MenuItem value="f">Female</MenuItem> */}
                       </Select>
                     </FormControl>
                   </div>
@@ -223,6 +235,9 @@ export default function Register() {
                           formik.touched.password &&
                           Boolean(formik.errors.password)
                         }
+                        helperText={
+                          formik.touched.password && formik.errors.password
+                        }
                         labelWidth={70}
                       />
                     </FormControl>
@@ -235,8 +250,12 @@ export default function Register() {
                           inputVariant="outlined"
                           label="Birthday"
                           format="MM/dd/yyyy"
-                          value={selectedDate}
-                          onChange={handleDateChange}
+                          value={formik.values.birthday}
+                          onChange={formik.handleChange}
+                          error={
+                            formik.touched.birthday &&
+                            Boolean(formik.errors.birthday)
+                          }
                           fullWidth
                         />
                       </div>
@@ -255,7 +274,7 @@ export default function Register() {
                     error={formik.touched.phone && Boolean(formik.errors.phone)}
                     fullWidth
                   />
-
+                  {console.log(formik.values)}
                   <div className="form-group label-floating is-empty "></div>
                   <button
                     type="submit"
@@ -276,4 +295,5 @@ export default function Register() {
 const yupSchema = Yup.object({
   email: Yup.string().email("must be a valid email").required("Champs requis!"),
   password: Yup.string().required("Champs requis!"),
+  gender: Yup.string().required("Champs requis!"),
 });

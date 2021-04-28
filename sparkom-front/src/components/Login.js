@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import GoogleLogin from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Checkbox,
   FormControlLabel,
   FormControl,
   IconButton,
+  Button,
 } from "@material-ui/core";
 import LandingPage from "./LandingPage";
 import Visibility from "@material-ui/icons/Visibility";
@@ -17,7 +19,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useHistory, Redirect } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
-import { login } from "../store/slices/auth";
+import { login, googleAuth } from "../store/slices/auth";
+import FacebookLogin from "react-facebook-login";
 //********************************************** */
 export default function Login() {
   const history = useHistory();
@@ -26,6 +29,19 @@ export default function Login() {
   const [showLoader, setShowLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState({ visible: false, message: "" });
+
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
+
+  const googleSuccess = async (response) => {
+    dispatch(googleAuth(response));
+    // console.log(response);
+    // console.log(response.profileObj);
+  };
+  const googleFailure = async (error) => {
+    console.log(error);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -139,21 +155,32 @@ export default function Login() {
               </button>
 
               <div className="or"></div>
+              <GoogleLogin
+                clientId={process.env.REACT_APP_OAUTH_KEY}
+                render={(renderProps) => (
+                  <button
+                    type="button"
+                    onClick={renderProps.onClick}
+                    href="#"
+                    className="btn btn-lg bg-google full-width btn-icon-left"
+                  >
+                    <i className="fab fa-google" aria-hidden="true"></i>Login
+                    with Gmail
+                  </button>
+                )}
+                onSuccess={googleSuccess}
+                onFailure={googleFailure}
+                cookiePolicy="single_host_origin"
+              />
 
-              <a
-                href="#"
-                className="btn btn-lg bg-google full-width btn-icon-left"
-              >
-                <i className="fab fa-google" aria-hidden="true"></i>Login with
-                Gmail
-              </a>
-              <a
-                href="#"
-                className="btn btn-lg bg-facebook full-width btn-icon-left"
-              >
-                <i className="fab fa-facebook-f" aria-hidden="true"></i>
-                Login with Facebook
-              </a>
+              <FacebookLogin
+                appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                autoLoad={true}
+                fields="name,email,picture"
+                callback={responseFacebook}
+                cssClass="btn btn-lg bg-facebook full-width btn-icon-left"
+                icon="fab fa-facebook-f"
+              />
             </div>
           </div>
         </form>

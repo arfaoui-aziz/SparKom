@@ -8,7 +8,6 @@ import Settings from "./components/ProfileSettings/Settings";
 import Quiz from "./components/Quiz/Quiz";
 import AllFriends from "./components/MyProfile/AllFriends";
 import AllBadges from "./components/MyProfile/AllBadges";
-import NavBar from "./components/NavBar/NavBar";
 import AllNotifications from "./components/MyProfile/AllNotifications";
 import AllRequests from "./components/MyProfile/AllRequests";
 import AllMessages from "./components/Chat/AllMessages";
@@ -17,6 +16,7 @@ import CompanySignup from "./components/CompanySignup";
 import Cv from "./components/CV/Cv";
 import UserProfile from "./components/MyProfile/UserProfile";
 import { useSelector } from "react-redux";
+
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
   return (
@@ -35,10 +35,10 @@ function App() {
             <Route path="/me/requests" component={AllRequests} />
             <Route path="/me/messages" component={AllMessages} />
             <Route path="/me" component={MyProfile} />
-
             <Route path="/user" component={UserProfile} />
             <Route path="/signup" component={Register} />
             <Route path="/company" component={CompanySignup} />
+
             <Route path="/" exact component={Login} />
           </Switch>
         ) : (

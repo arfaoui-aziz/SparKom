@@ -1,4 +1,5 @@
 import React from "react";
+import GeoLocation from "./GeoLocation";
 
 export default function MyMsg() {
   return (
@@ -8,6 +9,7 @@ export default function MyMsg() {
           <p className="text-small mb-0 text-white">
             Test which is a new approach to have all solutions
           </p>
+          <GeoLocation />
         </div>
 
         <p className="small text-muted">12:00 PM | Aug 13</p>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../assets/css/Cv.css";
 import Experience from "./Experience";
 import Projects from "./Projects";
@@ -10,6 +10,10 @@ import Languages from "./Languages";
 import SocialLinks from "./SocialLinks";
 import NavBar from "../NavBar/NavBar";
 export default function Cv() {
+  const [experience, setExperience] = useState([<Experience />]);
+  const handleClick = () => {
+    setExperience((current) => [...current, <Experience />]);
+  };
   return (
     <>
       <NavBar />
@@ -95,9 +99,13 @@ export default function Cv() {
                     </h3>
 
                     {/*//Experience*/}
-                    <Experience />
+                    {experience}
                     {/*//Experience*/}
-                    <button className="btn btn-primary" style={{ width: 170 }}>
+                    <button
+                      className="btn btn-primary"
+                      style={{ width: 170 }}
+                      onClick={handleClick}
+                    >
                       <i class="fas fa-plus-circle pr-2"></i>
                       Add Experience
                     </button>
