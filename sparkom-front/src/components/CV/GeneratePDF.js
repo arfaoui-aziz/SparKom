@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useRef } from "react";
+import ReactToPrint, { useReactToPrint } from "react-to-print";
 import "../../assets/css/Cv.css";
 import Experience from "./Experience";
 import Projects from "./Projects";
@@ -9,17 +9,11 @@ import Skill from "./Skill";
 import Education from "./Education";
 import Languages from "./Languages";
 import SocialLinks from "./SocialLinks";
-import NavBar from "../NavBar/NavBar";
+import Cv from "./Cv";
 
-export default function Cv() {
-  const [experience, setExperience] = useState([<Experience />]);
-  const handleClick = () => {
-    setExperience((current) => [...current, <Experience />]);
-  };
-  return (
-    <>
-      <NavBar />
-      <div className="header-spacer header-spacer-small mb-3"></div>
+class ComponentToPrint extends React.Component {
+  render() {
+    return (
       <div className="main-wrapper">
         <div className="container px-3 px-lg-5">
           <article className="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg">
@@ -35,13 +29,7 @@ export default function Cv() {
                 </div>
                 {/*//resume-title*/}
                 <div className="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
-                  <ul className="list-unstyled mb-0 ">
-                    <li className="mb-2">
-                      <i className="fas fa-download fa-fw fa-lg mr-2"></i>
-                      <Link className="resume-link" to="/pdf">
-                        Download PDF
-                      </Link>
-                    </li>
+                  <ul className="list-unstyled mb-0">
                     <li className="mb-2">
                       <i className="fas fa-phone-square fa-fw fa-lg mr-2 " />
                       <a className="resume-link" href="tel:#">
@@ -107,16 +95,8 @@ export default function Cv() {
                     </h3>
 
                     {/*//Experience*/}
-                    {experience}
+                    <Experience />
                     {/*//Experience*/}
-                    <button
-                      className="btn btn-primary"
-                      style={{ width: 170 }}
-                      onClick={handleClick}
-                    >
-                      <i className="fas fa-plus-circle pr-2"></i>
-                      Add Experience
-                    </button>
                   </section>
 
                   {/*//work-section*/}
@@ -129,32 +109,12 @@ export default function Cv() {
                     <Projects />
 
                     {/*//item*/}
-                    <button
-                      className="btn btn-primary btn-xs"
-                      style={{ width: 170 }}
-                    >
-                      <i class="fas fa-plus-circle pr-2" />
-                      Add Project
-                    </button>
                   </section>
                   {/*//project-section*/}
                 </div>
                 {/*//resume-main*/}
                 <aside className="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4">
                   <section className="skills-section py-3">
-                    <h3 className="text-uppercase resume-section-heading mb-4">
-                      Skills
-                      <i
-                        class="fas fa-plus-circle  ml-2 "
-                        style={{
-                          fontSize: 15,
-                          cursor: "pointer",
-                          position: "absolute",
-                          top: 4.5,
-                        }}
-                      />
-                    </h3>
-
                     <div className="item">
                       <ul className="list-unstyled resume-skills-list">
                         <Skill name="Javascript" confirmed={true} />
@@ -165,18 +125,6 @@ export default function Cv() {
                   </section>
                   {/*//skills-section*/}
                   <section className="education-section py-3">
-                    <h3 className="text-uppercase resume-section-heading mb-4">
-                      Education
-                      <i
-                        class="fas fa-plus-circle  ml-2 "
-                        style={{
-                          fontSize: 15,
-                          cursor: "pointer",
-                          position: "absolute",
-                          top: 4.5,
-                        }}
-                      />
-                    </h3>
                     <ul className="list-unstyled resume-education-list">
                       <Education
                         degree="MSc in Computer Science"
@@ -190,18 +138,6 @@ export default function Cv() {
 
                   {/*//Languages-section*/}
                   <section className="skills-section py-3">
-                    <h3 className="text-uppercase resume-section-heading mb-4">
-                      Languages
-                      <i
-                        class="fas fa-plus-circle  ml-2 "
-                        style={{
-                          fontSize: 15,
-                          cursor: "pointer",
-                          position: "absolute",
-                          top: 4,
-                        }}
-                      />
-                    </h3>
                     <ul className="list-unstyled resume-lang-list">
                       <Languages language="English" level="(Native)" />
                       <Languages language="Spanish" level="(Professional)" />
@@ -209,18 +145,6 @@ export default function Cv() {
                   </section>
                   {/*//certificates-section*/}
                   <section className="skills-section py-3">
-                    <h3 className="text-uppercase resume-section-heading mb-4">
-                      Interests
-                      <i
-                        class="fas fa-plus-circle  ml-2 "
-                        style={{
-                          fontSize: 15,
-                          cursor: "pointer",
-                          position: "absolute",
-                          top: 4,
-                        }}
-                      />
-                    </h3>
                     <ul className="list-unstyled resume-interests-list mb-0">
                       <li className="mb-2">Climbing</li>
                       <li className="mb-2">Snowboarding</li>
@@ -260,6 +184,33 @@ export default function Cv() {
         </div>
         {/*//container*/}
       </div>
-    </>
-  );
+    );
+  }
+}
+
+export default class Example extends React.Component {
+  componentDidMount() {
+    document.getElementById("print").click();
+  }
+  render() {
+    return (
+      <div>
+        <ReactToPrint
+          trigger={() => {
+            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+            // to the root node of the returned component as it will be overwritten.
+            return (
+              <div>
+                <Link id="print" className="invisible" to="/cv">
+                  Print this out!
+                </Link>
+              </div>
+            );
+          }}
+          content={() => this.componentRef}
+        />
+        <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+      </div>
+    );
+  }
 }

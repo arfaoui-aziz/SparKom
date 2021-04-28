@@ -16,6 +16,7 @@ import CompanySignup from "./components/CompanySignup";
 import Cv from "./components/CV/Cv";
 import UserProfile from "./components/MyProfile/UserProfile";
 import { useSelector } from "react-redux";
+import GeneratePDF from "./components/CV/GeneratePDF";
 
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
@@ -38,6 +39,7 @@ function App() {
             <Route path="/user" component={UserProfile} />
             <Route path="/signup" component={Register} />
             <Route path="/company" component={CompanySignup} />
+            <Route path="/pdf" component={GeneratePDF} />
 
             <Route path="/" exact component={Login} />
           </Switch>
