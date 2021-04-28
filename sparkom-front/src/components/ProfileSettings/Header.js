@@ -1,11 +1,12 @@
 import React from "react";
 import cover from "../../assets/img/top-header4.png";
 import profilePic from "../../assets/img/author-main1.jpg";
-import { activeUserSelector } from "../../store/slices/auth";
+import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 export default function Header() {
   const activeUser = useSelector(activeUserSelector);
+  const userAvatar = useSelector(avatarSelector);
   return (
     <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div className="ui-block">
@@ -39,16 +40,11 @@ export default function Header() {
 
             <div className="top-header-author">
               <div className="author-thumb">
-                <input
-                  type="file"
-                  id="avatar"
-                  style={{
-                    cursor: "pointer",
-                    height: 130,
-                    opacity: 0,
-                  }}
+                <img
+                  src={userAvatar}
+                  style={{ width: 150, height: 150 }}
+                  alt="author"
                 />
-                <img src={profilePic} alt="author" />
               </div>
               <div className="author-content">
                 <Link to="/me" className="h4 author-name">

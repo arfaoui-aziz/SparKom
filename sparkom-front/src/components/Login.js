@@ -19,7 +19,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useHistory, Redirect } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
-import { login, googleAuth } from "../store/slices/auth";
+import { login, googleAuth, facebookAuth } from "../store/slices/auth";
 import FacebookLogin from "react-facebook-login";
 //********************************************** */
 export default function Login() {
@@ -31,12 +31,14 @@ export default function Login() {
   const [error, setError] = useState({ visible: false, message: "" });
 
   const responseFacebook = (response) => {
+    dispatch(facebookAuth(response));
     console.log(response);
   };
 
   const googleSuccess = async (response) => {
+    console.log(response);
     dispatch(googleAuth(response));
-    // console.log(response);
+
     // console.log(response.profileObj);
   };
   const googleFailure = async (error) => {
@@ -175,7 +177,6 @@ export default function Login() {
 
               <FacebookLogin
                 appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                autoLoad={true}
                 fields="name,email,picture"
                 callback={responseFacebook}
                 cssClass="btn btn-lg bg-facebook full-width btn-icon-left"
