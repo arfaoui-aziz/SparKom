@@ -1,10 +1,23 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
-const topicSchema = new mongoose.Schema({
-  title: { type: String, unique: true },
-  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-});
+const TopicSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    image: {
+      data: Buffer,
+      contentType: String,
+    },
+    followers: [{ type: ObjectId, ref: "User" }],
 
-const Topic = mongoose.model("Topic", topicSchema);
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = Topic;
+module.exports = mongoose.model("Topic", TopicSchema);

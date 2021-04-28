@@ -1,37 +1,51 @@
 import React from "react";
-
-import "./App.css";
-import Login from "./components/Login";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./pages/Post Managment/Home";
+import Navbar from "./components/Navbar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import { useDispatch, connect } from "react-redux";
+import { authCheck } from "./redux/actions/userActions";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import NavBar from "./components/NavBar/NavBar";
-import Home from "./components/Home/Home";
-import AllTopics from "./components/AllTopics/AllTopics";
-import TopicPage from "./components/TopicPage/TopicPage";
-import TrendPage from "./components/Trend/TrendPage";
-import ForumList from "./components/ForumList/ForumList";
-import QuestionPage from "./components/QuestionPage/QuestionPage";
-import AddQuestion from "./components/AddQuestion/AddQuestion";
+import AllTopics from "./pages/Post Managment/Topics/AllTopics"
+function App({ currentUser }) {
+  const dispatch = useDispatch();
 
-function App() {
+  React.useEffect(() => {
+    dispatch(authCheck());
+  }, [dispatch]);
+
   return (
-    <div>
-      <Router>
-        {/* <NavBar />
-        <div class="header-spacer header-spacer-small mb-3"></div> */}
-        <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/home" component={Home} />
-          <Route path="/alltopics" component={AllTopics} />
-          <Route path="/topicpage" component={TopicPage} />
-          <Route path="/trendpage" component={TrendPage} />
-          <Route path="/forumList" component={ForumList} />
-          <Route path="/questionpage" component={QuestionPage} />
-          <Route path="/addQuestion" component={AddQuestion} />
+    <div
+    style={{
+      backgroundColor: '#EDF2F6',
+    }}
+  >
+    <BrowserRouter>
+      <Navbar currentUser={currentUser && currentUser} />
+      <NavBar />
+      <div class="header-spacer header-spacer-small mb-3"></div>
+      <Switch>
+        <Route path="/" exact component={Home} />
+          <Route path="/alltopics" exact component={AllTopics} />
+        
+        {/*<Route path="/register" exact component={Register} />
+        <Route path="/login" exact component={Login} />
+      
+        <Route path="/user/:userId" exact component={Profile} />
+  <Route path="/user/edit/:userId" exact component={EditProfile} />*/}
+        
 
-        </Switch>
-      </Router>
+      </Switch>
+    </BrowserRouter>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = ({ user: { currentUser } }) => ({
+  currentUser,
+});
+
+export default connect(mapStateToProps)(App);

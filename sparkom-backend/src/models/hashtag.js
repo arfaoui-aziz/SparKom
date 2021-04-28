@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
-const hashtagSchema = new mongoose.Schema({
-  name: { type: String, unique: true },
-  
-});
+const HashtagSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
 
-const Hashtag = mongoose.model("Hashtag", hashtagSchema);
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = Hashtag;
+module.exports = mongoose.model("Hashtag", HashtagSchema);

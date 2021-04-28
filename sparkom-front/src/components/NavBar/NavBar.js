@@ -11,7 +11,54 @@ import FriendRequest from "./FriendRequest";
 import userAvatar from "../../assets/img/avatar1.jpg";
 import img from "../../assets/img/comment-photo.jpg";
 import { Link } from "react-router-dom";
+import { isLogged } from "../../helpers/auth";
+import FormControl from '@material-ui/core/FormControl';
+import InputBase from '@material-ui/core/InputBase';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}))(InputBase);
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
+
 export default function NavBar() {
+  const classes = useStyles();
+  const jwt = isLogged();
   return (
     <header className="header bg-white" id="site-header">
       <div className="page-title ">
@@ -20,7 +67,7 @@ export default function NavBar() {
         </Link>
       </div>
       <div className="header-content-wrapper">
-        <div className="control-block">
+      <div className="control-block">
           <div className="control-icon">
             <div className="author-title ">
               <Link to="/">
@@ -33,6 +80,64 @@ export default function NavBar() {
               </Link>
             </div>
           </div>
+
+
+          <div className="control-icon">
+            <div className="author-title ">
+              <Link to="/">
+                <div
+                  className="c-secondary"
+                  
+                >
+                  Groups
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          <div className="control-icon">
+            <div className="author-title ">
+              <Link to="/">
+                <div
+                  className="c-secondary"
+                  
+                >
+                  Jobs
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          <div className="control-icon">
+            <div className="author-title ">
+              <Link to="/">
+                <div
+                  className="c-secondary"
+                  
+                >
+                  Freelance
+                </div>
+              </Link>
+            </div>
+          </div>
+          <div className="control-icon">
+            <div className="author-title ">
+              <Link to="/">
+                <div
+                  className="c-secondary"
+                  
+                >
+                  Forum
+                </div>
+              </Link>
+            </div>
+          </div>
+
+
+          <FormControl className={classes.margin}>
+        <BootstrapInput id="demo-customized-textbox" placeholder="Search..."/>
+      </FormControl>
+
 
           <div className="control-icon more has-items">
             <svg className="olymp-happy-face-icon c-secondary">
@@ -108,7 +213,8 @@ export default function NavBar() {
             <div className="author-thumb">
               <img
                 alt="author"
-                src={profilePic}
+                src={`http://localhost:8888/api/user/photo/${jwt.user._id
+              }?${new Date().getTime()}`}
                 style={{ width: 36, height: 36 }}
                 className="avatar"
               />
@@ -156,7 +262,7 @@ export default function NavBar() {
             </div>
             <a href="02-ProfilePage.html" className="author-name fn">
               <div className="author-title ">
-                <div className="c-secondary">Aziz Arfaoui</div>
+                <div className="c-secondary">{jwt.user.name}</div>
               </div>
             </a>
           </div>
