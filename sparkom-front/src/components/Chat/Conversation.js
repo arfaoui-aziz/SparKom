@@ -1,9 +1,14 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState } from "react";
 
-import profilePic from "../../assets/img/avatar1.jpg";
+import GeoLocation from "./GeoLocation";
 import MyMsg from "./MyMsg";
 import SenderMsg from "./SenderMsg";
 export default function Conversation() {
+  const [location, setLocation] = useState();
+  const handleClick = (e) => {
+    e.preventDefault();
+    setLocation(<MyMsg location={<GeoLocation />} />);
+  };
   return (
     <div className="px-4 py-5 chat-box bg-white">
       {/* Chat Box*/}
@@ -12,6 +17,7 @@ export default function Conversation() {
       <SenderMsg />
       {/* Reciever Message*/}
       <MyMsg />
+      {location}
 
       {/* Typing area */}
       <form className="bg-light">
@@ -29,6 +35,14 @@ export default function Conversation() {
               className="btn btn-link bg-primary"
             >
               <i className="fa fa-paper-plane" />
+            </button>
+            <button
+              id="button-addon2"
+              type="submit"
+              className="btn btn-link bg-primary ml-1"
+              onClick={handleClick}
+            >
+              <i class="fas fa-map-marker-alt"></i>
             </button>
           </div>
         </div>
