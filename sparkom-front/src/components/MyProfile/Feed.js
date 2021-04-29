@@ -2,13 +2,6 @@ import React from "react";
 import Post from "./Post";
 import postimg from "../../assets/img/post-photo6.jpg";
 import Comments from "./Comments";
-import CreateIcon from "@material-ui/icons/Create";
-import ImageIcon from "@material-ui/icons/Image";
-import PostOption from "./PostOption";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
-import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
-import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
-import { TextField } from "@material-ui/core";
 import PostForm from "./PostForm";
 export default function Feed() {
   return (

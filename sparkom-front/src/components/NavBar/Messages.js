@@ -7,7 +7,7 @@ export default function Messages() {
         <img src={profilePic} style={{ width: 34, height: 34 }} alt="author" />
       </div>
       <div className="notification-event ">
-        <a href="#" className="h6 notification-friend">
+        <a href="#top" className="h6 notification-friend">
           Diana Jameson
         </a>
         <span className="chat-message-item">

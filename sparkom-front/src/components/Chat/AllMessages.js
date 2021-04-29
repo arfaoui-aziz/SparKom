@@ -8,9 +8,9 @@ export default function AllMessages() {
   return (
     <>
       <NavBar />
-      <div class="header-spacer header-spacer-small mb-3"></div>
-      <div class="container">
-        <div class="row">
+      <div className="header-spacer header-spacer-small mb-3"></div>
+      <div className="container">
+        <div className="row">
           <Header />
           <div className="col col-xl-12  col-lg-12  col-md-12  col-sm-12 col-12">
             <div className="ui-block">
@@ -22,7 +22,7 @@ export default function AllMessages() {
           {/**/}
           <div className="col col-xl-3  col-lg-4  col-md-12 col-sm-12  padding-r-0">
             <ul className="notification-list chat-message">
-              <a href="#">
+              <a href="#top">
                 <Messages />
               </a>
               <Messages />

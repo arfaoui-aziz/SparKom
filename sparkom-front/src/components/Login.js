@@ -7,7 +7,6 @@ import {
   FormControlLabel,
   FormControl,
   IconButton,
-  Button,
 } from "@material-ui/core";
 import LandingPage from "./LandingPage";
 import Visibility from "@material-ui/icons/Visibility";
@@ -88,7 +87,7 @@ export default function Login() {
                   label="E-mail"
                   variant="outlined"
                   value={formik.values.email}
-                  helperText={formik.touched.email && formik.errors.email}
+                  helpertext={formik.touched.email && formik.errors.email}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   onChange={formik.handleChange}
                   fullWidth
@@ -120,7 +119,7 @@ export default function Login() {
                     error={
                       formik.touched.password && Boolean(formik.errors.password)
                     }
-                    helperText={
+                    helpertext={
                       formik.touched.password && formik.errors.password
                     }
                   />
@@ -131,7 +130,7 @@ export default function Login() {
               </div>
 
               {error.visible && (
-                <div class="alert alert-danger" role="alert">
+                <div className="alert alert-danger" role="alert">
                   {error.message}
                 </div>
               )}
@@ -144,7 +143,7 @@ export default function Login() {
                     label="Remember Me"
                   />
                 </div>
-                <a href="#" className="forgot">
+                <a href="#top" className="forgot">
                   Forgot my Password
                 </a>
               </div>
@@ -179,7 +178,7 @@ export default function Login() {
                 appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                 fields="name,email,picture"
                 callback={responseFacebook}
-                cssClass="btn btn-lg bg-facebook full-width btn-icon-left"
+                cssclassName="btn btn-lg bg-facebook full-width btn-icon-left"
                 icon="fab fa-facebook-f"
               />
             </div>

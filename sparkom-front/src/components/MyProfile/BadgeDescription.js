@@ -9,13 +9,13 @@ export default function BadgeDescription({ name, img, description, progress }) {
         <div className="author-thumb">
           <img src={img} alt="author" />
           {progress === 100 && (
-            <div class="label-avatar" style={{ backgroundColor: "green" }}>
+            <div className="label-avatar" style={{ backgroundColor: "green" }}>
               &#10003;
             </div>
           )}
         </div>
         <div className="birthday-author-name">
-          <a href="#" className="h6 author-name">
+          <a href="#top" className="h6 author-name">
             {name}
           </a>
           <div className="birthday-date">{description}</div>

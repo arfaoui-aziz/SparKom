@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function useGeoLocation() {
   const [location, setLocation] = useState({ lat: "", lng: "" });
@@ -8,6 +8,8 @@ export default function useGeoLocation() {
       lng: location.coords.longitude,
     });
   };
+
+  
 
   const onError = (error) => {
     setLocation({ error });

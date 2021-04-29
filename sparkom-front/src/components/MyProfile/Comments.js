@@ -9,7 +9,7 @@ export default function Comments() {
         <div className="post__author author vcard inline-items">
           <img src={profilePic} alt="author" />
           <div className="author-date">
-            <a className="h6 post__author-name fn" href="#">
+            <a className="h6 post__author-name fn" href="#top">
               Green Rock
             </a>
             <div className="post__date">
@@ -18,7 +18,7 @@ export default function Comments() {
               </time>
             </div>
           </div>
-          <a href="#" className="more">
+          <a href="#top" className="more">
             <svg className="olymp-three-dots-icon">
               <use xlinkHref={`${icons}#olymp-three-dots-icon`} />
             </svg>
@@ -31,13 +31,13 @@ export default function Comments() {
           dolorem ipsum quia dolor sit amet, consectetur adipisci velit en lorem
           ipsum der.
         </p>
-        <a href="#" className="post-add-icon inline-items">
+        <a href="#top" className="post-add-icon inline-items">
           <svg className="olymp-heart-icon">
             <use xlinkHref={`${icons}#olymp-heart-icon`} />
           </svg>
           <span>5</span>
         </a>
-        <a href="#" className="reply">
+        <a href="#top" className="reply">
           Reply
         </a>
         <CommentResponses />

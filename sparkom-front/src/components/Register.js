@@ -26,14 +26,14 @@ import { useHistory } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
 //**************************************************************************** */
 export default function Register() {
-  const [gender, setGender] = useState("");
+  // const [gender, setGender] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedDate, setSelectedDate] = useState();
+  // const [selectedDate, setSelectedDate] = useState();
   const [error, setError] = useState({ visible: false, message: "" });
   const history = useHistory();
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+  // const handleDateChange = (date) => {
+  //   setSelectedDate(date);
+  // };
 
   const formik = useFormik({
     initialValues: {
@@ -52,7 +52,7 @@ export default function Register() {
       if (err) {
         setError({
           visible: true,
-          message: JSON.stringify(err.errors, null, 2),
+          message: err,
         });
         console.log(err);
       } else {
@@ -106,7 +106,7 @@ export default function Register() {
                         formik.touched.firstname &&
                         Boolean(formik.errors.firstname)
                       }
-                      helperText={
+                      helpertext={
                         formik.touched.firstname && formik.errors.firstname
                       }
                       fullWidth
@@ -125,7 +125,7 @@ export default function Register() {
                         formik.touched.lastname &&
                         Boolean(formik.errors.lastname)
                       }
-                      helperText={
+                      helpertext={
                         formik.touched.lastname && formik.errors.lastname
                       }
                       fullWidth
@@ -145,7 +145,7 @@ export default function Register() {
                         formik.touched.username &&
                         Boolean(formik.errors.username)
                       }
-                      helperText={
+                      helpertext={
                         formik.touched.username && formik.errors.username
                       }
                       fullWidth
@@ -167,7 +167,7 @@ export default function Register() {
                         error={
                           formik.touched.gender && Boolean(formik.errors.gender)
                         }
-                        helperText={
+                        helpertext={
                           formik.touched.gender && formik.errors.gender
                         }
                         label="Gender"
@@ -202,7 +202,7 @@ export default function Register() {
                       error={
                         formik.touched.email && Boolean(formik.errors.email)
                       }
-                      helperText={formik.touched.email && formik.errors.email}
+                      helpertext={formik.touched.email && formik.errors.email}
                       fullWidth
                     />
                   </div>
@@ -235,7 +235,7 @@ export default function Register() {
                           formik.touched.password &&
                           Boolean(formik.errors.password)
                         }
-                        helperText={
+                        helpertext={
                           formik.touched.password && formik.errors.password
                         }
                         labelWidth={70}
@@ -275,6 +275,11 @@ export default function Register() {
                     fullWidth
                   />
                   {console.log(formik.values)}
+                  {error.visible && (
+                    <div className="alert alert-danger" role="alert">
+                      {error.message}
+                    </div>
+                  )}
                   <div className="form-group label-floating is-empty "></div>
                   <button
                     type="submit"

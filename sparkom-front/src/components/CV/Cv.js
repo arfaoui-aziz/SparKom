@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 import "../../assets/css/Cv.css";
 import Experience from "./Experience";
 import Projects from "./Projects";
 import profilePic from "../../assets/img/author-main1.jpg";
-import { Link } from "react-router-dom";
 import Skill from "./Skill";
 import Education from "./Education";
 import Languages from "./Languages";
@@ -56,7 +55,10 @@ export default function Cv() {
                     </li>
                     <li className="mb-2">
                       <i className="fas fa-globe fa-fw fa-lg mr-2" />
-                      <a className="resume-link" href="#">
+                      <a
+                        className="resume-link"
+                        href="https://www.azizarfaoui.com"
+                      >
                         www.azizarfaoui.com
                       </a>
                     </li>
@@ -133,7 +135,7 @@ export default function Cv() {
                       className="btn btn-primary btn-xs"
                       style={{ width: 170 }}
                     >
-                      <i class="fas fa-plus-circle pr-2" />
+                      <i className="fas fa-plus-circle pr-2" />
                       Add Project
                     </button>
                   </section>
@@ -145,7 +147,7 @@ export default function Cv() {
                     <h3 className="text-uppercase resume-section-heading mb-4">
                       Skills
                       <i
-                        class="fas fa-plus-circle  ml-2 "
+                        className="fas fa-plus-circle  ml-2 "
                         style={{
                           fontSize: 15,
                           cursor: "pointer",
@@ -168,7 +170,7 @@ export default function Cv() {
                     <h3 className="text-uppercase resume-section-heading mb-4">
                       Education
                       <i
-                        class="fas fa-plus-circle  ml-2 "
+                        className="fas fa-plus-circle  ml-2 "
                         style={{
                           fontSize: 15,
                           cursor: "pointer",
@@ -193,7 +195,7 @@ export default function Cv() {
                     <h3 className="text-uppercase resume-section-heading mb-4">
                       Languages
                       <i
-                        class="fas fa-plus-circle  ml-2 "
+                        className="fas fa-plus-circle  ml-2 "
                         style={{
                           fontSize: 15,
                           cursor: "pointer",
@@ -212,7 +214,7 @@ export default function Cv() {
                     <h3 className="text-uppercase resume-section-heading mb-4">
                       Interests
                       <i
-                        class="fas fa-plus-circle  ml-2 "
+                        className="fas fa-plus-circle  ml-2 "
                         style={{
                           fontSize: 15,
                           cursor: "pointer",

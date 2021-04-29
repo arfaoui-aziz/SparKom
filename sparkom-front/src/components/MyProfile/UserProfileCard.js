@@ -11,11 +11,11 @@ export default function UserProfileCard() {
         </a>
         <div className="content">
           <h6 className="title">
-            Aziz Arfaoui <br />
+            Amen Allah <br />
           </h6>
           <span>
             Followers <br />
-            <a href="#" class="alert-link text-white">
+            <a href="#top" className="alert-link text-white">
               5.7k
             </a>
           </span>

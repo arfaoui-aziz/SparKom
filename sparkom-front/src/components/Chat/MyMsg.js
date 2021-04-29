@@ -1,5 +1,4 @@
 import React from "react";
-import GeoLocation from "./GeoLocation";
 
 export default function MyMsg({ location }) {
   return (

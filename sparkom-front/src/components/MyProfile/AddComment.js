@@ -8,10 +8,10 @@ export default function AddComment() {
       <div className="post__author author vcard inline-items">
         <img src={profilePic} alt="author" />
         <div className="form-group with-icon-right">
-          <textarea className="form-control" placeholder defaultValue={""} />
+          <textarea className="form-control" defaultValue=" " />
           <div className="add-options-message">
             <a
-              href="#"
+              href="#top"
               className="options-message"
               data-toggle="modal"
               data-target="#update-header-photo"

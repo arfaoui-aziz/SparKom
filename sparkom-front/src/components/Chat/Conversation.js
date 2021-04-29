@@ -42,7 +42,7 @@ export default function Conversation() {
               className="btn btn-link bg-primary ml-1"
               onClick={handleClick}
             >
-              <i class="fas fa-map-marker-alt"></i>
+              <i className="fas fa-map-marker-alt"></i>
             </button>
           </div>
         </div>

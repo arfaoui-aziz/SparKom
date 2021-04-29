@@ -1,5 +1,4 @@
 import React from "react";
-import profilePic from "../../assets/img/avatar1.jpg";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 export default function Notification({
   userAvatar,
@@ -15,7 +14,7 @@ export default function Notification({
         <img src={userAvatar} style={{ width: 34, height: 34 }} alt="author" />
       </div>
       <div className="notification-event">
-        <a href="#" className="h6 notification-friend">
+        <a href="#top" className="h6 notification-friend">
           {userName}
         </a>{" "}
         {description}
@@ -32,7 +31,7 @@ export default function Notification({
       </span>
       {notifImg && (
         <div className="comment-photo">
-          <img src={notifImg} alt="photo" />
+          <img src={notifImg} alt="photoNotif" />
           <span>{comment}</span>
         </div>
       )}

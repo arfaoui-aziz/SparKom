@@ -11,21 +11,21 @@ const Settings = (props) => {
   return (
     <>
     <NavBar />
-        <div class="header-spacer header-spacer-small mb-3"></div>
-      <div class="container">
-        <div class="row">
+        <div className="header-spacer header-spacer-small mb-3"></div>
+      <div className="container">
+        <div className="row">
           <Header />
 
           <SideBar />
           {/* main content */}
-          <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
-            <div class="ui-block">
-              <div class="ui-block-title">
-                <h6 class="title">Account Settings</h6>
+          <div className="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+            <div className="ui-block">
+              <div className="ui-block-title">
+                <h6 className="title">Account Settings</h6>
               </div>
-              <div class="ui-block-content">
+              <div className="ui-block-content">
                 <form>
-                  <div class="row">
+                  <div className="row">
                     {/* <AccountSettings /> */}
 
                     <Switch>
@@ -46,13 +46,13 @@ const Settings = (props) => {
                         component={AccountSettings}
                       />
                     </Switch>
-                    <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-                      <button class="btn btn-secondary btn-lg full-width">
+                    <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
+                      <button className="btn btn-secondary btn-lg full-width">
                         Restore all Attributes
                       </button>
                     </div>
-                    <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-                      <button class="btn btn-primary btn-lg full-width">
+                    <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
+                      <button className="btn btn-primary btn-lg full-width">
                         Save all Changes
                       </button>
                     </div>

@@ -5,12 +5,12 @@ export default function Pagination() {
     <nav aria-label="Page navigation">
       <ul className="pagination justify-content-center">
         <li className="page-item disabled">
-          <a className="page-link" href="#" tabIndex={-1}>
+          <a className="page-link" href="#top" tabIndex={-1}>
             Previous
           </a>
         </li>
         <li className="page-item">
-          <a className="page-link" href="#">
+          <a className="page-link" href="#top">
             1
             <div className="ripple-container">
               <div
@@ -26,27 +26,27 @@ export default function Pagination() {
           </a>
         </li>
         <li className="page-item">
-          <a className="page-link" href="#">
+          <a className="page-link" href="#top">
             2
           </a>
         </li>
         <li className="page-item">
-          <a className="page-link" href="#">
+          <a className="page-link" href="#top">
             3
           </a>
         </li>
         <li className="page-item">
-          <a className="page-link" href="#">
+          <a className="page-link" href="#top">
             ...
           </a>
         </li>
         <li className="page-item">
-          <a className="page-link" href="#">
+          <a className="page-link" href="#top">
             12
           </a>
         </li>
         <li className="page-item">
-          <a className="page-link" href="#">
+          <a className="page-link" href="#top">
             Next
           </a>
         </li>

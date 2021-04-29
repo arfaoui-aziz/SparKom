@@ -136,7 +136,7 @@ export default function CompanySignup() {
                   />
 
                   <div className="form-group label-floating is-empty "></div>
-                  <a href="#" className="btn btn-primary btn-lg full-width">
+                  <a href="#top" className="btn btn-primary btn-lg full-width">
                     Complete Registration!
                   </a>
                 </div>

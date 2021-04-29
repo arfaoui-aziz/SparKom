@@ -51,7 +51,7 @@ function PostForm() {
               </div>
             </form>
             <div className="d-inline-flex bd-highlight">
-              <div class="d-flex justify-content-start">
+              <div className="d-flex justify-content-start">
                 <div className={classes.root}>
                   <input
                     accept="image/*"
@@ -92,7 +92,7 @@ function PostForm() {
                 </div>
               </div>
 
-              <div class="d-flex justify-content-end">
+              <div className="d-flex justify-content-end">
                 <div className={classes.root}>
                   <input
                     accept="image/*"

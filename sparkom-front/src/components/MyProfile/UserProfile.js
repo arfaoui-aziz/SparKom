@@ -9,9 +9,9 @@ export default function UserProfile() {
   return (
     <>
       <NavBar />
-      <div class="header-spacer header-spacer-small mb-3"></div>
-      <div class="container">
-        <div class="row">
+      <div className="header-spacer header-spacer-small mb-3"></div>
+      <div className="container">
+        <div className="row">
           <Header />
           <div className="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-12 col-12 ">
             <UserProfileCard />

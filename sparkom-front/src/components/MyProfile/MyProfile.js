@@ -9,9 +9,9 @@ export default function MyProfile() {
   return (
     <>
       <NavBar />
-      <div class="header-spacer header-spacer-small mb-3"></div>
-      <div class="container">
-        <div class="row">
+      <div className="header-spacer header-spacer-small mb-3"></div>
+      <div className="container">
+        <div className="row">
           <Header />
           <LeftSidebar />
           <Feed />

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import "./App.css";
 import Login from "./components/Login";
 import MyProfile from "./components/MyProfile/MyProfile";
@@ -15,7 +15,6 @@ import Register from "./components/Register";
 import CompanySignup from "./components/CompanySignup";
 import Cv from "./components/CV/Cv";
 import UserProfile from "./components/MyProfile/UserProfile";
-import { useSelector } from "react-redux";
 import GeneratePDF from "./components/CV/GeneratePDF";
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
     <div>
       <Router>
         {/* <NavBar />
-        <div class="header-spacer header-spacer-small mb-3"></div> */}
+        <div className="header-spacer header-spacer-small mb-3"></div> */}
         {activeUser ? (
           <Switch>
             <Route path="/settings" component={Settings} />

@@ -9,7 +9,7 @@ export default function FriendSuggestion() {
           <img src={avatar} alt="author" />
         </div>
         <div className="notification-event">
-          <a href="#" className="h6 notification-friend">
+          <a href="#top" className="h6 notification-friend">
             {name}
           </a>
           <span className="chat-message-item">
@@ -17,7 +17,7 @@ export default function FriendSuggestion() {
           </span>
         </div>
         <span className="notification-icon">
-          <a href="#" className="accept-request">
+          <a href="#top" className="accept-request">
             <span className="icon-add without-text">
               <svg className="olymp-happy-face-icon">
                 <use xlinkHref={`${icons}#olymp-happy-face-icon`} />
@@ -33,7 +33,7 @@ export default function FriendSuggestion() {
     <div className="ui-block">
       <div className="ui-block-title">
         <h6 className="title">Friend Suggestions</h6>
-        <a href="#" className="more">
+        <a href="#top" className="more">
           <svg className="olymp-three-dots-icon">
             <use xlinkHref={`${icons}#olymp-three-dots-icon`} />
           </svg>

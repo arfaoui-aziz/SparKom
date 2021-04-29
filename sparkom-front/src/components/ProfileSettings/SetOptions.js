@@ -7,13 +7,13 @@ const SetOptions = ({ title, description }) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
   return (
-    <div class="description-toggle">
-      <div class="description-toggle-content">
-        <div class="h6">{title}</div>
+    <div className="description-toggle">
+      <div className="description-toggle-content">
+        <div className="h6">{title}</div>
         <p>{description}</p>
       </div>
 
-      <div class="togglebutton">
+      <div className="togglebutton">
         <label>
           <IOSSwitch
             checked={state.checkedB}

@@ -3,10 +3,10 @@ import SetOptions from "./SetOptions";
 const AccountSettings = () => {
   return (
     <>
-      <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-        <div class="form-group label-floating is-select"></div>
+      <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
+        <div className="form-group label-floating is-select"></div>
       </div>
-      <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <SetOptions
           title="Notifications Sound"
           description=" A sound will be played each time you receive a new activity

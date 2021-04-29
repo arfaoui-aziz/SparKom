@@ -8,7 +8,7 @@ export default function CommentResponses() {
         <div className="post__author author vcard inline-items">
           <img src={profilePic} alt="author" />
           <div className="author-date">
-            <a className="h6 post__author-name fn" href="#">
+            <a className="h6 post__author-name fn" href="#top">
               Nicholas Grisom
             </a>
             <div className="post__date">
@@ -17,20 +17,20 @@ export default function CommentResponses() {
               </time>
             </div>
           </div>
-          <a href="#" className="more">
+          <a href="#top" className="more">
             <svg className="olymp-three-dots-icon">
               <use xlinkHref={`${icons}#olymp-three-dots-icon`} />
             </svg>
           </a>
         </div>
         <p>Excepteur sint occaecat cupidatat non proident.</p>
-        <a href="#" className="post-add-icon inline-items">
+        <a href="#top" className="post-add-icon inline-items">
           <svg className="olymp-heart-icon">
             <use xlinkHref={`${icons}#olymp-heart-icon`} />
           </svg>
           <span>0</span>
         </a>
-        <a href="#" className="reply">
+        <a href="#top" className="reply">
           Reply
         </a>
       </li>

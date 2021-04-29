@@ -6,16 +6,17 @@ const SideBar = () => {
   const [dropdown, setDropdown] = useState(false);
 
   return (
-    <div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 responsive-display-none">
-      <div class="ui-block">
-        <div class="your-profile">
+    <div className="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 responsive-display-none">
+      <div className="ui-block">
+        <div className="your-profile">
           <div id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="card">
+            <div className="card">
               <div className="card-header" role="tab" id="headingOne-1">
                 <h6 className="mb-0">
                   <a
                     onClick={() => setDropdown(!dropdown)}
                     style={{ cursor: "pointer" }}
+                    href="javascript.void(0)"
                   >
                     Profile Settings
                     <svg className="olymp-dropdown-arrow-icon">
@@ -45,31 +46,31 @@ const SideBar = () => {
             </div>
           </div>
 
-          <div class="ui-block-title">
-            <Link to="/cv" class="h6 title">
+          <div className="ui-block-title">
+            <Link to="/cv" className="h6 title">
               My CV
             </Link>
           </div>
 
-          <div class="ui-block-title">
-            <Link to="/me/notifs" class="h6 title">
+          <div className="ui-block-title">
+            <Link to="/me/notifs" className="h6 title">
               Notifications
             </Link>
-            <Link to="/me/notifs" class="items-round-little bg-primary">
+            <Link to="/me/notifs" className="items-round-little bg-primary">
               2
             </Link>
           </div>
 
-          <div class="ui-block-title">
-            <Link to="/me/messages" class="h6 title">
+          <div className="ui-block-title">
+            <Link to="/me/messages" className="h6 title">
               Chat / Messages
             </Link>
           </div>
-          <div class="ui-block-title">
-            <Link to="/me/requests" class="h6 title">
+          <div className="ui-block-title">
+            <Link to="/me/requests" className="h6 title">
               Friend Requests
             </Link>
-            <Link to="/me/requests" class="items-round-little bg-blue">
+            <Link to="/me/requests" className="items-round-little bg-blue">
               1
             </Link>
           </div>

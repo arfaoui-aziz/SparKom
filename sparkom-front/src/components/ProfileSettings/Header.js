@@ -1,6 +1,5 @@
 import React from "react";
 import cover from "../../assets/img/top-header4.png";
-import profilePic from "../../assets/img/author-main1.jpg";
 import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -19,7 +18,7 @@ export default function Header() {
               <div className="col col-lg-5 col-md-5 col-sm-12 col-12">
                 <ul className="profile-menu">
                   <li>
-                    <Link href="/me">About</Link>
+                    <Link to="/me">About</Link>
                   </li>
                   <li>
                     <Link to="/me/friends">Friends</Link>

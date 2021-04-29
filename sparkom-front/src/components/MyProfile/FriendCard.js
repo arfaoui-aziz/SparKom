@@ -3,6 +3,7 @@ import icons from "../../assets/svg-icons/sprites/icons.svg";
 import friendCover from "../../assets/img/friend1.jpg";
 import friendAvatar from "../../assets/img/avatar1.jpg";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
+import { Link } from "react-router-dom";
 export default function FriendCard() {
   return (
     <div className="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6">
@@ -19,13 +20,13 @@ export default function FriendCard() {
               </svg>
               <ul className="more-dropdown">
                 <li>
-                  <a href="#">Report Profile</a>
+                  <a href="#top">Report Profile</a>
                 </li>
                 <li>
-                  <a href="#">Block Profile</a>
+                  <a href="#top">Block Profile</a>
                 </li>
                 <li>
-                  <a href="#">Turn Off Notifications</a>
+                  <a href="#top">Turn Off Notifications</a>
                 </li>
               </ul>
             </div>
@@ -34,8 +35,8 @@ export default function FriendCard() {
                 <img src={friendAvatar} alt="author" />
               </div>
               <div className="author-content">
-                <a href="#" className="h5 author-name">
-                  Nicholas Grissom
+                <a href="#top" className="h5 author-name">
+                  Amen Allah
                 </a>
                 <div className="country">San Francisco, CA</div>
               </div>
@@ -44,15 +45,15 @@ export default function FriendCard() {
               <div className="swiper-wrapper">
                 <div className="swiper-slide">
                   <div className="friend-count" data-swiper-parallax={-500}>
-                    <a href="#" className="friend-count-item">
+                    <a href="#top" className="friend-count-item">
                       <div className="h6">52</div>
                       <div className="title">Friends</div>
                     </a>
-                    <a href="#" className="friend-count-item">
+                    <a href="#top" className="friend-count-item">
                       <div className="h6">240</div>
                       <div className="title">Photos</div>
                     </a>
-                    <a href="#" className="friend-count-item">
+                    <a href="#top" className="friend-count-item">
                       <div className="h6">16</div>
                       <div className="title">Videos</div>
                     </a>
@@ -61,12 +62,12 @@ export default function FriendCard() {
                     className="control-block-button"
                     data-swiper-parallax={-100}
                   >
-                    <a href="#" className="btn btn-control bg-blue ">
+                    <Link to="/user" className="btn btn-control bg-blue ">
                       <svg className="olymp-happy-face-icon pb-2">
                         <VisibilityOutlinedIcon />
                       </svg>
-                    </a>
-                    <a href="#" className="btn btn-control bg-purple">
+                    </Link>
+                    <a href="#top" className="btn btn-control bg-purple">
                       <svg className="olymp-chat---messages-icon pb-2">
                         <use
                           xlinkHref={`${icons}#olymp-chat---messages-icon`}

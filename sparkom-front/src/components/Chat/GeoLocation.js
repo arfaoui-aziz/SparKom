@@ -13,9 +13,7 @@ export default function GeoLocation() {
       center: [lng, lat],
       zoom: 10,
     });
-    var marker = new mapboxgl.Marker({ color: "red" })
-      .setLngLat([lng, lat])
-      .addTo(map);
+    new mapboxgl.Marker({ color: "red" }).setLngLat([lng, lat]).addTo(map);
     return () => map.remove();
   }, [lat, lng]);
   return (

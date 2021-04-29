@@ -14,7 +14,7 @@ export default function Projects() {
       <div className="item-content">
         <p>
           You can use this section for your side projects. You can{" "}
-          <a href="#" className="theme-link">
+          <a href="www.myproject.com" className="theme-link">
             provide a project link here
           </a>{" "}
           as well. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.

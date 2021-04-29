@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import React from "react";
+import ReactToPrint from "react-to-print";
 import "../../assets/css/Cv.css";
 import Experience from "./Experience";
 import Projects from "./Projects";
@@ -9,7 +9,6 @@ import Skill from "./Skill";
 import Education from "./Education";
 import Languages from "./Languages";
 import SocialLinks from "./SocialLinks";
-import Cv from "./Cv";
 
 class ComponentToPrint extends React.Component {
   render() {
@@ -44,7 +43,10 @@ class ComponentToPrint extends React.Component {
                     </li>
                     <li className="mb-2">
                       <i className="fas fa-globe fa-fw fa-lg mr-2" />
-                      <a className="resume-link" href="#">
+                      <a
+                        className="resume-link"
+                        href="http://www.azizarfaoui.com"
+                      >
                         www.azizarfaoui.com
                       </a>
                     </li>
@@ -189,7 +191,7 @@ class ComponentToPrint extends React.Component {
 }
 
 export default class Example extends React.Component {
-  componentDidMount() {
+  static getDerivedStateFromProps(props, state) {
     document.getElementById("print").click();
   }
   render() {

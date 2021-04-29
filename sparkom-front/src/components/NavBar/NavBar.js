@@ -12,19 +12,28 @@ import userAvatar from "../../assets/img/avatar1.jpg";
 import img from "../../assets/img/comment-photo.jpg";
 import { Link, useHistory } from "react-router-dom";
 import { queryApi } from "../../utils/queryApi";
-import { logout, activeUserSelector } from "../../store/slices/auth";
+import {
+  logout,
+  activeUserSelector,
+  oAuthSelector,
+} from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { formatMs } from "@material-ui/core";
 export default function NavBar() {
   const dispatch = useDispatch();
   const history = useHistory();
   const activeUser = useSelector(activeUserSelector);
+  const oAuth = useSelector(oAuthSelector);
   const Logout = async () => {
-    const [res, err] = await queryApi("users/logout", "", "POST", false);
-    if (res) {
-      localStorage.removeItem("token");
-      dispatch(logout(res));
+    if (oAuth) {
+      localStorage.clear();
+      dispatch(logout());
       history.push("/");
+    } else {
+      const [res, err] = await queryApi("users/logout", "", "POST", false);
+      if (res) {
+        dispatch(logout(res));
+        history.push("/");
+      } else console.log(err);
     }
   };
 
@@ -65,9 +74,12 @@ export default function NavBar() {
                   </div>
                 </div>
                 <div className="control-icon more has-items ">
-                  <svg className="olymp-chat---messages-icon c-secondary">
+                  <span
+                    className="olymp-chat---messages-icon c-secondary"
+                    style={{ cursor: "pointer" }}
+                  >
                     <ChatOutlinedIcon />
-                  </svg>
+                  </span>
                   <div className="label-avatar bg-purple">2</div>
                   <div className="more-dropdown more-with-triangle triangle-top-center">
                     <div className="ui-block-title ui-block-title-small">
@@ -167,4 +179,3 @@ export default function NavBar() {
     </header>
   );
 }
-

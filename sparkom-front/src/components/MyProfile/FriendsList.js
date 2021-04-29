@@ -9,7 +9,7 @@ export default function FriendsList() {
   const friendIcon = (avatar) => {
     return (
       <li>
-        <a href="#">
+        <a href="#top">
           <img src={avatar} alt="author" />
         </a>
       </li>

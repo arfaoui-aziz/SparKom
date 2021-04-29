@@ -8,7 +8,7 @@ export default function AllFriends() {
   return (
     <>
       <NavBar />
-      <div class="header-spacer header-spacer-small mb-3"></div>
+      <div className="header-spacer header-spacer-small mb-3"></div>
       <div className="container">
         <div className="row">
           <Header />

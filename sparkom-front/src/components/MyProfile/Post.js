@@ -39,20 +39,20 @@ export default function Post({
             </svg>
             <ul className="more-dropdown">
               <li>
-                <a href="#">Edit Post</a>
+                <a href="#top">Edit Post</a>
               </li>
               <li>
-                <a href="#">Delete Post</a>
+                <a href="#top">Delete Post</a>
               </li>
             </ul>
           </div>
         </div>
         <p>{content}</p>
         <div className="post-thumb">
-          <img src={img} alt="photo" />
+          <img src={img} alt="postImg" />
         </div>
         <div className="post-additional-info inline-items">
-          <a href="#" className="post-add-icon inline-items">
+          <a href="#top" className="post-add-icon inline-items">
             <svg className="olymp-heart-icon">
               <use xlinkHref={`${icons}#olymp-heart-icon`} />
             </svg>
@@ -61,15 +61,16 @@ export default function Post({
 
           <div className="comments-shared">
             <Link
-              className="post-add-icon inline-items"
+              className="btn btn-link post-add-icon inline-items"
               onClick={() => setDisplayComments(!displayComments)}
+              to="/"
             >
               <svg className="olymp-speech-balloon-icon">
                 <use xlinkHref={`${icons}#olymp-speech-balloon-icon`} />
               </svg>
               <span>{commentsnbr}</span>
             </Link>
-            <a href="#" className="post-add-icon inline-items">
+            <a href="#top" className="post-add-icon inline-items">
               <svg className="olymp-share-icon">
                 <use xlinkHref={`${icons}#olymp-share-icon`} />
               </svg>
@@ -78,8 +79,10 @@ export default function Post({
           </div>
         </div>
       </article>
-      <ul class="comments-list">{comments && displayComments && comments}</ul>
-      <span class="more-comments" onClick={() => setDisplayComments(true)}>
+      <ul className="comments-list">
+        {comments && displayComments && comments}
+      </ul>
+      <span className="more-comments" onClick={() => setDisplayComments(true)}>
         View more comments <span>+</span>
       </span>
       <AddComment />
