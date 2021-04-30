@@ -146,7 +146,7 @@ export default function GroupCard (props) {
                               alt="author"
                               onClick={() =>
                                 dispatch(
-                                  JoinGroup(jwt.token, jwt.user._id, dm._id)
+                                  LeaveGroup(jwt.token, jwt.user._id, dm._id)
                                 )
                               }
                             />
@@ -164,8 +164,8 @@ export default function GroupCard (props) {
                               alt="author"
                               onClick={() =>
                                 dispatch(
-                                 
-                                  LeaveGroup(jwt.token, jwt.user._id, dm._id)
+                                  JoinGroup(jwt.token, jwt.user._id, dm._id)
+                                
                                   
                                 )
                               }
