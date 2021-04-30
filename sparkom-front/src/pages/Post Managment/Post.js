@@ -143,7 +143,7 @@ export default function Post({ post }) {
               <span>24(soon)</span>
             </a>
           </div>
-        </div>  
+        </div>
       </article>
 
       <CommentsList postId={post._id} comments={comments && comments} />
