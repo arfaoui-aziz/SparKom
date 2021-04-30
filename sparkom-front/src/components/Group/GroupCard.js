@@ -17,35 +17,33 @@ import { queryServerApi } from "../../utils/queryServerApi";
 
 import { useHistory } from "react-router-dom";
 
-export default function GroupCard (props) {
+export default function GroupCard ({dms}) {
   const dispatch = useDispatch();
   const [members, setmembers] = React.useState([]);
   const [member, setmember] = React.useState(false);
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
   React.useEffect(() => {
-    setmembers(props.dms&& props.dms);
-   // checkmember(props.dms && props.dms);
-  }, [props.dms]);
+    setmembers(dms&& dms.Members);
+   checkmember(dms && dms.Members);
+  }, [dms.Members]);
 
- /*function checkmember(members) {
+ function checkmember(members) {
     let match = members.indexOf(jwt.user._id) !== -1;
     setmember(match);
-  }*/
+  }
   const jwt = isLogged();
   useEffect(() => {
-    console.log(props.dms);
+    console.log(dms);
   
-  }, [props.dms]);
+  }, [dms]);
   const history = useHistory();
   const Details = (id) => {
     history.replace("/g/" + id);
   };
   return (
-    <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-      <div className="container">
-        <div className="row">
-          {props.dms?.map((dm, index) => (
-            <div key={index}>
+   
+         
+            
               <div className="ui-block" data-mh="friend-groups-item">
                 {/* Friend Item */}
                 <div className="friend-item friend-groups">
@@ -72,16 +70,16 @@ export default function GroupCard (props) {
                           src={
                             process.env.REACT_APP_API_URL_UPLOADS +
                             "/" +
-                            dm.Image
+                            dms.Image
                           }
-                          onClick={() => Details(dm._id)}
+                          onClick={() => Details(dms._id)}
                         />
                       </div>
                       <div className="author-content">
                         <a href="." className="h5 author-name">
-                          {dm.name}
+                          {dms.name}
                         </a>
-                        <div className="country"> {dm.Members.length} Members in the Group</div>
+                        <div className="country"> {dms.Members.length} Members in the Group</div>
                       </div>
                     </div>
                     {/*  <ul className="friends-harmonic">
@@ -146,7 +144,7 @@ export default function GroupCard (props) {
                               alt="author"
                               onClick={() =>
                                 dispatch(
-                                  LeaveGroup(jwt.token, jwt.user._id, dm._id)
+                                  LeaveGroup(jwt.token, jwt.user._id, dms._id)
                                 )
                               }
                             />
@@ -164,7 +162,7 @@ export default function GroupCard (props) {
                               alt="author"
                               onClick={() =>
                                 dispatch(
-                                  JoinGroup(jwt.token, jwt.user._id, dm._id)
+                                  JoinGroup(jwt.token, jwt.user._id, dms._id)
                                 
                                   
                                 )
@@ -178,12 +176,7 @@ export default function GroupCard (props) {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div class="header-spacer header-spacer-small mb-3"></div>
-        <div class="header-spacer header-spacer-small mb-3"></div>
-      </div>
-    </div>
+         
+   
   );
 }
