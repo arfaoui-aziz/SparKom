@@ -12,13 +12,13 @@ export default function Add(props) {
   const [error, setError] = useState({ visible: false, message: "" });
   const history = useHistory();
   let valeurs;
- const custom_file_upload_url = `http://localhost:3000/boards/add`;
+ const custom_file_upload_url = `http://localhost:3000/group/addboard`;
 
   const handleSubmitFile = (values) => {
     console.log(valeurs);
     let formData = new FormData();
-    formData.append("board_name", valeurs.Boardname);
-    formData.append("is_public", valeurs.Ispublic);
+    formData.append("name", valeurs.name);
+    formData.append("status", valeurs.status);
  
 
   

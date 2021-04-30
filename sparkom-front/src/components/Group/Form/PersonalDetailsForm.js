@@ -4,13 +4,13 @@ import { Field, reduxForm } from "redux-form";
 import Fileget from "./Fileget";
 import validate from "../../../validation/validation";
 import FormInput from "../FormInput";
-import { Multiselect, DropdownList } from "react-widgets";
-import { upper, aadhaar, pan, salary } from "../../../validation/normalize";
+//import { isLogged } from "../../../helpers/auth";
+
 import { Button, Card, CardBody, Col, FormGroup, Label } from "reactstrap";
 import Select from "react-select";
 import { regionOptions } from "../data";
-import Test from "./Test";
 
+//const jwt = isLogged();
 const customFileInput = (field) => {
   delete field.input.value;
   return <input type="file" id="file" {...field.input} />;

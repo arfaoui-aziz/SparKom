@@ -7,15 +7,17 @@ var logger = require("morgan");
 // import mongoDB
 var mongoose = require("mongoose");
 var config = require("./database/mongodb");
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+
 var groupRouter = require("./routes/group");
 var eventRouter = require("./routes/event");
 var boardsRouter = require("./routes/boards");
-
+var userRoutes = require("./routes/user");
+var postRoutes = require("./routes/post");
+var topicRoutes = require("./routes/topic");
 var app = express();
 const bodyParser = require("body-parser");
 
+require("dotenv").config();
 // mongo config
 mongoose.connect(
   config.mongo.uri,
@@ -36,8 +38,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/public", express.static(path.join(__dirname, "public")));
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+
+app.use("/", postRoutes);
+app.use("/", topicRoutes);
+
+app.use("/", userRoutes);
 app.use("/group", groupRouter);
 app.use("/event", eventRouter);
 app.use("/boards", boardsRouter);

@@ -4,26 +4,34 @@ import HeaderG from "../Group/HeaderG";
 
 import NavBar from "../../components/NavBar/NavBar";
 import Events from "../Events/Events";
-export default function EventsPage() {
+import { useParams } from "react-router-dom";
+import { useServerApi } from "../../hooks/useServerApi";
+export default function EventsPage(props) {
+  const { id } = useParams();
+  const [dm, err, reload] = useServerApi("group/getdev/" + id);
+  const toRender = dm;
   return (
     <div>
       <div className="app">
         {/* Header */}
         <NavBar />
         <div class="header-spacer header-spacer-small mb-3"></div> 
-        <HeaderG />
+        {toRender ? (
+          <>
+        <HeaderG  dm={toRender} />
         
-        {/* App Body */}
-        <div className="app__body">
+     
         
        
           <Events />
           
          
-     
+          </>
+        ) : (
+          <p>Product not found</p>
+        )}
          
         </div>
       </div>
-    </div>
   );
 }

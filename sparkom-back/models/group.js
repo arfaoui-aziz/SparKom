@@ -1,42 +1,45 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-
-var group = new Schema({
-  name:{
-    type: String,
-    required: true,
-  },
-  CreatedBy:{
-    type: String
-  },
-  Topic: [
-    {
-      value: String,
-      label: String,
-     
+var { ObjectId } = mongoose.Schema;
+var group = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-  ],
-  description:{
-    type: String,
-    required: true,
+    CreatedBy: {
+      type: ObjectId,
+      ref: "User",
+    },
+    Topic: [
+      {
+        value: String,
+        label: String,
+      },
+    ],
+    description: {
+      type: String,
+      required: true,
+    },
+    IsPrivate: {
+      type: String,
+      required: true,
+    },
+    Image: {
+      type: String,
+      required: false,
+    },
+    Coins: {
+      type: Number,
+      default: "0",
+    },
+    Reports: {
+      type: Number,
+      default: "0",
+    },
+    Members: [{ type: ObjectId, ref: "User" }],
   },
-  IsPrivate:{
-    type: String,
-    required: true,
-  },
-  Image:{
-    type: String,
-    required: false,
-  },
-  Coins:{
-    type: Number,
-    default: "0",
-  }
-  ,
-  Reports:{
-    type: Number,
-    default: "0",
-  }
-},{timestamps: true});
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("group", group);

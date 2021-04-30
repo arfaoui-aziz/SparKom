@@ -47,7 +47,7 @@ const Border = (props) => {
             <FormGroup row>
               <Col xs="12" lg="6">
                 <Field
-                  name="Boardname"
+                  name="name"
                   type="text"
                   component={FormInput}
                   label="name"
@@ -56,7 +56,7 @@ const Border = (props) => {
               </Col>
               <Col xs="12" lg="6">
                 <Field
-                  name="Ispublic"
+                  name="status"
                   type="text"
                   component={FormInput}
                   label="type"

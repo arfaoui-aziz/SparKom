@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Stepper from "react-stepper-horizontal";
 import { Card } from "reactstrap";
-
+//import { isLogged } from "../../../helpers/auth";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 
 
 class Form extends Component {
+  
   constructor(props) {
     super(props);
    
@@ -23,6 +24,7 @@ class Form extends Component {
   
 
   render() {
+    //const jwt = isLogged();
     const { onSubmit } = this.props;
     const { page, steps } = this.state;
 

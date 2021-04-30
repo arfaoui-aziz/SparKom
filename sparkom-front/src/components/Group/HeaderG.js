@@ -5,7 +5,20 @@ import profilePic from "../../assets/img/author-main2.jpg";
 import eya from "../../assets/img/eya.png";
 import leave from "../../assets/img/leave.png";
 import add from "../../assets/img/add.png";
-export default function HeaderG() {
+import { queryServerApi } from "../../utils/queryServerApi";
+
+import { useHistory } from "react-router-dom";
+export default function HeaderG(props) {
+  const history = useHistory();
+  const Details = (id) => {
+    history.replace("/g/" + id);
+  };
+  const events = (id) => {
+    history.replace("/ge/" + id);
+  };
+  const statistic = (id) => {
+    history.replace("/static/" + id);
+  };
   return (
     <div>
       <div className="container">
@@ -17,13 +30,20 @@ export default function HeaderG() {
                   <img src={cover} alt="nature" />
                   <div className="top-header-author">
                     <div className="author-thumb">
-                      <img src={profilePic} alt="author" />
+                      <img
+                        src={
+                          process.env.REACT_APP_API_URL_UPLOADS +
+                          "/" +
+                          props.dm.Image
+                        }
+                        alt="author"
+                      />
                     </div>
                     <div className="author-content">
                       <a href=".html" className="h3 author-name">
-                        GroupName
+                        {props.dm.name}
                       </a>
-                      <div className="country">5630 Members</div>
+                      <div className="country">0 Members</div>
                     </div>
                   </div>
                 </div>
@@ -32,7 +52,7 @@ export default function HeaderG() {
                     <div className="col col-xl-8 m-auto col-lg-8 col-md-12">
                       <ul className="profile-menu">
                         <li>
-                          <Link to="/g">Timeline</Link>
+                          <a onClick={() => Details(props.dm._id)}>Timeline</a>
                         </li>
                         <li>
                           <a href="13-FavouritePage-About.html">About</a>
@@ -44,32 +64,24 @@ export default function HeaderG() {
                           <a href="09-ProfilePage-Videos.html">Videos</a>
                         </li>
                         <li>
-                        <Link to="/static">Statistics</Link>
-                            
-                          
+                          <a onClick={() => statistic(props.dm._id)}>
+                            Statistics
+                          </a>
                         </li>
                         <li>
-                          <Link to="/ge">Events</Link>
+                          <a onClick={() => events(props.dm._id)}>Events</a>
                         </li>
                       </ul>
                     </div>
                   </div>
                   <div className="control-block-button">
-                    {/* <a href=".html" className="btn btn-control">
-                 
-                     
+                    <a href=".html" className="btn btn-control">
                       <img src={eya} alt="author" />
-                       
-                     
                     </a>
                     <a href=".html" className="btn btn-control">
-                 
-                     
                       <img src={leave} alt="author" />
-                       
-                     
-  </a>*/}
-                    <a href=".html" className="btn btn-control">
+                    </a>
+                    {/*  <a href=".html" className="btn btn-control">
                       <div className="more">
                         <img src={add} alt="author" />
                         <ul className="more-dropdown">
@@ -78,7 +90,7 @@ export default function HeaderG() {
                           </li>
                         </ul>
                       </div>
-                    </a>
+                    </a>*/}
                   </div>
                 </div>
               </div>

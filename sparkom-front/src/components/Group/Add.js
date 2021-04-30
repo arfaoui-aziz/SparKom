@@ -1,24 +1,28 @@
-import React, { Component, useState, useEffect } from "react";
+import React, {  useState } from "react";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import { isLogged } from "../../helpers/auth";
 import Form from "./Form/Form";
 
-import Join_form from "./Join_form";
-import { queryServerApi } from "../../utils/queryServerApi";
 import axios from "axios";
-
 export default function Add(props) {
+
   const [showLoader, setShowLoader] = useState(false);
   const [error, setError] = useState({ visible: false, message: "" });
   const history = useHistory();
   let valeurs;
- const custom_file_upload_url = `http://localhost:3000/group/add`;
-
+  const jwt = isLogged();
+ const custom_file_upload_url = `http://localhost:8888/group/add/${jwt.user._id}`;
+ const config = {
+  headers: {
+    Authorization: `Bearer ${jwt}`,
+  },
+};
+ 
   const handleSubmitFile = (values) => {
     console.log(valeurs);
     let formData = new FormData();
-    formData.append("img", valeurs.img);
-    formData.append("CreatedBy", valeurs.Username);
+    formData.append("img", valeurs.img);  
+    formData.append("CreatedBy",jwt.user._id);
     formData.append("name", valeurs.GroupName);
     formData.append("description", valeurs.Description);
     formData.append("IsPrivate", valeurs.Type);
@@ -27,17 +31,16 @@ export default function Add(props) {
 
     formData.append("Topic", reg);
     console.log(reg);
-
+    
     // the image field name should be similar to your api endpoint field name
     // in my case here the field name is customFile
 
     axios
-      .post(custom_file_upload_url, formData, {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      })
+      .post(custom_file_upload_url, formData, config 
+      )
       .then((res) => {
+       
+  
         console.log(reg);
       })
       .catch((err) => {

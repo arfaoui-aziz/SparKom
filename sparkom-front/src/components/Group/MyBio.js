@@ -1,8 +1,9 @@
 import React from "react";
+import { date } from "yup";
 import BioInfo from "./BioInfo";
 import SocialNetwork from "./SocialNetwork";
 
-export default function MyBio() {
+export default function MyBio(props) {
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -11,20 +12,25 @@ export default function MyBio() {
       <div className="ui-block-content">
         <ul className="widget w-personal-info item-block">
           <BioInfo
-            title="Rules"
-            text="Hi, I’m Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-            Est eum vitae vel ex nobis sunt distinctio nisi, I’m 36 and I work as
-            a Digital Designer for the."
+            title="Bio"
+            text={props.dm.description}
           />
 
           <BioInfo
             title="Created At:"
-            text="September 17th, 2013"
+            text={props.dm.createdAt.substring(0,10)}
           />
 
           <BioInfo
-            title="Based in:"
-            text="San Francisco, California"
+            title="Topic:"
+            text={props.dm.Topic?.map((ds, index) => (
+              <div className="row" key={index}>
+                <span class="btn-pill m-1 badge badge-info">
+                  "{ds.value}
+                </span>
+              </div>
+            ))}
+            
           />
              <BioInfo
             title="WebSite:"
@@ -32,7 +38,7 @@ export default function MyBio() {
           />
              <BioInfo
             title="Members:"
-            text="5630"
+            text="0"
           />
           <SocialNetwork/>
         </ul>

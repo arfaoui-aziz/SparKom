@@ -1,2 +1,3 @@
-sparkom-backend/node_modules
+sparkomback/node_modules/.idea/.vscode
+sparkom-front/node_modules/.idea/.vscode
 *.env

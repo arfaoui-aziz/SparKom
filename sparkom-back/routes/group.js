@@ -1,8 +1,24 @@
 var express = require("express");
 var router = express.Router();
 var group = require("../models/group");
+var boards = require("../models/boards");
 var multer = require("multer");
 var path = require("path");
+
+
+
+const { getUserById } = require("../controllers/user");
+const { requireSignin } = require("../controllers/auth");
+const {
+  
+  JoinGroup,
+  LeaveGroup,
+ 
+} = require("../controllers/group");
+router.put("/JoinGroup", requireSignin, JoinGroup);
+router.put("/LeaveGroup", requireSignin, LeaveGroup);
+
+
 
 router.use(express.static(__dirname + "./public/"));
 // router.use(express.static(__dirname+"./public/"));
@@ -29,6 +45,31 @@ router.get("/getdev", function (req, res, next) {
 });
 
 
+
+/* add*/
+router.post("/add/:userId",upload, function (req, res, next) {
+  const obj = JSON.parse(JSON.stringify(req.body));
+ const kar = JSON.parse(obj.Topic);
+ 
+  console.log(obj);
+  const newgroup = {
+    name: obj.name, 
+    CreatedBy: req.profile._id,
+    Topic: kar,
+    description: obj.description,
+    IsPrivate: obj.IsPrivate,
+    Createdat: obj.Createdat,
+    Image: req.file.filename,
+  };
+  group.create(newgroup, function (err) {
+    if (err) {
+      res.render("/addgroup/");
+    } else {
+      res.redirect("/group");
+    }
+  });
+});
+
 router.get("/", function (req, res, next) {
   group.find(function (err, data) {
     if (err) {
@@ -38,9 +79,18 @@ router.get("/", function (req, res, next) {
     }
   });
 });
+/*Join Member*/
 
-
-
+router.post("/join/:Id", function (req, res, next) {
+  group.findByIdAndUpdate(
+    req.body.postId,
+    { $push: { Members: req.body.userId } },
+    { new: true }
+  ).exec((err, result) => {
+    if (err) res.json({ error: err });
+    res.json(result);
+  });
+});
 
 
 /* GET group DB. 
@@ -64,22 +114,21 @@ router.get("/:id", function (req, res, next) {
     }
   });
 });
-
+router.get("/getdev/:id", function (req, res, next) {
+  group.findById(req.params.id, function (err, data) {
+    if (err) throw err;
+    res.json(data);
+  });
+});
 /* add*/
-router.post("/add",upload, function (req, res, next) {
+router.post("/addboard", function (req, res, next) {
   const obj = JSON.parse(JSON.stringify(req.body));
- const kar = JSON.parse(obj.Topic);
   console.log(obj);
   const newgroup = {
     name: obj.name, 
-    CreatedBy: obj.CreatedBy,
-    Topic: kar,
-    description: obj.description,
-    IsPrivate: obj.IsPrivate,
-    Createdat: obj.Createdat,
-    Image: req.file.filename,
+    status: obj.status,
   };
-  group.create(newgroup, function (err) {
+  boards.create(newgroup, function (err) {
     if (err) {
       res.render("/addgroup/");
     } else {
@@ -87,6 +136,7 @@ router.post("/add",upload, function (req, res, next) {
     }
   });
 });
+
 
 /*EDITTTTTTTTTTTTTTTTTT*/
 router.post("/edit/:id", function (req, res, next) {

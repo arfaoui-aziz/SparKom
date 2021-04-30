@@ -22,13 +22,7 @@ export default function AdminMembers({ link, img, nbr }) {
           <div className="ui-block-content">
             <ul className="widget w-faved-page js-zoom-gallery">
               {AdminIcon(avatar)}
-              {AdminIcon(avatar2)}
-              {AdminIcon(avatar3)}
-              {AdminIcon(avatar4)}
-              {AdminIcon(avatar)}
-              {AdminIcon(avatar2)}
-              {AdminIcon(avatar3)}
-              {AdminIcon(avatar4)}
+             
               
             </ul>
           </div>

@@ -14,7 +14,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "popper.js";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-
+import { BrowserRouter } from "react-router-dom";
 const loader = document.querySelector("#preloader");
 
 // if you want to show the loader when React loads data again
@@ -27,7 +27,9 @@ setTimeout(
     // the show/hide functions are passed as props
     ReactDOM.render(
       <Provider store={store}>
+        <BrowserRouter>
         <App hideLoader={hideLoader} showLoader={showLoader} />
+        </BrowserRouter>
       </Provider>,
       document.getElementById("root")
     ),
