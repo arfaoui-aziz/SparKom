@@ -8,7 +8,7 @@ var event = new Schema({
       },
       CreatedBy:{
         type: Schema.Types.ObjectId,
-        ref:'member' 
+        ref:'User' 
       },
       group_id:{
         type: Schema.Types.ObjectId,

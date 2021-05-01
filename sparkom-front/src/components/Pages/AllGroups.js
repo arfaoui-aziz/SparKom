@@ -30,7 +30,7 @@ export default function AllGroups() {
                   {data &&
                     data.map((item, i) => {
                       
-                      return  <GroupCard dms={item} key={item._id} />
+                      return <GroupCard dms={item} key={item._id} />
                       
                       ;
                     })}

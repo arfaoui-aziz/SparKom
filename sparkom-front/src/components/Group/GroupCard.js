@@ -17,72 +17,68 @@ import { queryServerApi } from "../../utils/queryServerApi";
 
 import { useHistory } from "react-router-dom";
 
-export default function GroupCard ({dms}) {
+export default function GroupCard({ dms }) {
   const dispatch = useDispatch();
   const [members, setmembers] = React.useState([]);
   const [member, setmember] = React.useState(false);
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
   React.useEffect(() => {
-    setmembers(dms&& dms.Members);
-   checkmember(dms && dms.Members);
+    setmembers(dms && dms.Members);
+    checkmember(dms && dms.Members);
   }, [dms.Members]);
 
- function checkmember(members) {
+  function checkmember(members) {
     let match = members.indexOf(jwt.user._id) !== -1;
     setmember(match);
   }
   const jwt = isLogged();
   useEffect(() => {
     console.log(dms);
-  
+    
   }, [dms]);
   const history = useHistory();
   const Details = (id) => {
     history.replace("/g/" + id);
   };
   return (
-   
-         
-            
-              <div className="ui-block" data-mh="friend-groups-item">
-                {/* Friend Item */}
-                <div className="friend-item friend-groups">
-                  <div className="friend-item-content">
-                    <div className="more">
-                      <svg className="olymp-three-dots-icon">
-                        <use xlinkHref={`${icons}#olymp-three-dots-icon`} />
-                      </svg>
-                      <ul className="more-dropdown">
-                        <li>
-                          <a href=".">Report Group</a>
-                        </li>
-                        <li>
-                          <a href=".">Block Group</a>
-                        </li>
-                        <li>
-                          <a href=".">Turn Off Notifications</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="friend-avatar">
-                      <div className="author-thumb">
-                        <img
-                          src={
-                            process.env.REACT_APP_API_URL_UPLOADS +
-                            "/" +
-                            dms.Image
-                          }
-                          onClick={() => Details(dms._id)}
-                        />
-                      </div>
-                      <div className="author-content">
-                        <a href="." className="h5 author-name">
-                          {dms.name}
-                        </a>
-                        <div className="country"> {dms.Members.length} Members in the Group</div>
-                      </div>
-                    </div>
-                    {/*  <ul className="friends-harmonic">
+    <div className="ui-block" data-mh="friend-groups-item">
+      {/* Friend Item */}
+      <div className="friend-item friend-groups">
+        <div className="friend-item-content">
+          <div className="more">
+            <svg className="olymp-three-dots-icon">
+              <use xlinkHref={`${icons}#olymp-three-dots-icon`} />
+            </svg>
+            <ul className="more-dropdown">
+              <li>
+                <a href=".">Report Group</a>
+              </li>
+              <li>
+                <a href=".">Block Group</a>
+              </li>
+              <li>
+                <a href=".">Turn Off Notifications</a>
+              </li>
+            </ul>
+          </div>
+          <div className="friend-avatar">
+            <div className="author-thumb">
+              <img
+                src={process.env.REACT_APP_API_URL_UPLOADS + "/" + dms.Image}
+                onClick={() => Details(dms._id)}
+              />
+            </div>
+            <div className="author-content">
+              <a href="." className="h5 author-name">
+                {dms.name}
+              </a>
+              <div className="country">
+                {" "}
+                {dms.Members.length} Members in the Group
+              </div>
+            </div>
+          </div>
+          {/*  <ul className="friends-harmonic">
                   <li>
                     <a href=".">
                       <img src={fr2} alt="friend" />
@@ -135,48 +131,43 @@ export default function GroupCard ({dms}) {
                   </li>
                 </ul>*/}
 
-                    {member? (
-                      <>
-                        <div className="control-block-button">
-                          <a className="btn btn-control">
-                          <img
-                              src={leave}
-                              alt="author"
-                              onClick={() =>
-                                dispatch(
-                                  LeaveGroup(jwt.token, jwt.user._id, dms._id)
-                                )
-                              }
-                            />
-                          </a>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="control-block-button">
-                          <a className="btn btn-control">
-                            
-                          
-                             <img
-                              src={add}
-                              alt="author"
-                              onClick={() =>
-                                dispatch(
-                                  JoinGroup(jwt.token, jwt.user._id, dms._id)
-                                
-                                  
-                                )
-                              }
-                            />
-                            
-                          </a>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
+          {member ? (
+            <>
+              <div className="control-block-button">
+                <a className="btn btn-control">
+                  <img
+                    src={leave}
+                    alt="author"
+                    onClick={() =>
+                      dispatch(LeaveGroup(jwt.token, jwt.user._id, dms._id))
+                    }
+                  />
+                  
+                </a>
               </div>
-         
-   
+            </>
+          ) : (
+            <>
+              <div className="control-block-button">
+                <a className="btn btn-control">
+                  <img
+                    src={add}
+                    alt="author"
+                    onClick={() =>
+                      dispatch(JoinGroup(jwt.token, jwt.user._id, dms._id))
+                    }
+                  />{" "}
+                  <ul className="more-dropdown">
+                    <li>
+                      <a href=".">Join Group</a>
+                    </li>
+                  </ul>
+                </a>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

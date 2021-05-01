@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useEffect } from "react";
 import cover from "../../assets/img/top-header2.jpg";
 import { Link } from "react-router-dom";
 import profilePic from "../../assets/img/author-main2.jpg";
@@ -6,7 +6,9 @@ import eya from "../../assets/img/eya.png";
 import leave from "../../assets/img/leave.png";
 import add from "../../assets/img/add.png";
 import { queryServerApi } from "../../utils/queryServerApi";
-
+import { isLogged } from "../../helpers/auth";
+import { useDispatch } from "react-redux";
+import { JoinGroup, LeaveGroup } from "../../redux/actions/postActions";
 import { useHistory } from "react-router-dom";
 export default function HeaderG(props) {
   const history = useHistory();
@@ -19,6 +21,25 @@ export default function HeaderG(props) {
   const statistic = (id) => {
     history.replace("/static/" + id);
   };
+  const dispatch = useDispatch();
+  const [members, setmembers] = React.useState([]);
+  const [member, setmember] = React.useState(false);
+  //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
+
+  React.useEffect(() => {
+    setmembers(props.dm && props.dm.Members);
+    checkmember(props.dm && props.dm.Members);
+  }, [props.dm.Members]);
+
+  const jwt = isLogged();
+  useEffect(() => {
+    console.log(props.dm);
+  }, [props.dm]);
+
+  function checkmember(members) {
+    let match = members.indexOf(jwt.user._id) !== -1;
+    setmember(match);
+  }
   return (
     <div>
       <div className="container">
@@ -74,14 +95,53 @@ export default function HeaderG(props) {
                       </ul>
                     </div>
                   </div>
-                  <div className="control-block-button">
-                    <a href=".html" className="btn btn-control">
-                      <img src={eya} alt="author" />
-                    </a>
-                    <a href=".html" className="btn btn-control">
-                      <img src={leave} alt="author" />
-                    </a>
-                    {/*  <a href=".html" className="btn btn-control">
+                  {member ? (
+                    <>
+                      <div className="control-block-button">
+                        <a className="btn btn-control">
+                          <img
+                            src={leave}
+                            alt="author"
+                            onClick={() =>
+                              dispatch(
+                                LeaveGroup(
+                                  jwt.token,
+                                  jwt.user._id,
+                                  props.dm._id
+                                )
+                              )
+                            }
+                          /> </a>
+                          <a className="btn btn-control">
+                            <img src={eya} alt="author" />
+                          </a>
+                       
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="control-block-button">
+                        <a className="btn btn-control">
+                          <img
+                            src={add}
+                            alt="author"
+                            onClick={() =>
+                              dispatch(
+                                JoinGroup(jwt.token, jwt.user._id, props.dm._id)
+                              )
+                            }
+                          />{" "}
+                          <ul className="more-dropdown">
+                            <li>
+                              <a href=".">Join Group</a>
+                            </li>
+                          </ul>
+                        </a>
+                      </div>
+                    </>
+                  )}
+
+                  {/*  <a href=".html" className="btn btn-control">
                       <div className="more">
                         <img src={add} alt="author" />
                         <ul className="more-dropdown">
@@ -91,7 +151,6 @@ export default function HeaderG(props) {
                         </ul>
                       </div>
                     </a>*/}
-                  </div>
                 </div>
               </div>
             </div>

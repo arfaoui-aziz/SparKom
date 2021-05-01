@@ -12,41 +12,41 @@ import userAvatar from "../../assets/img/avatar1.jpg";
 import img from "../../assets/img/comment-photo.jpg";
 import { Link } from "react-router-dom";
 import { isLogged } from "../../helpers/auth";
-import FormControl from '@material-ui/core/FormControl';
-import InputBase from '@material-ui/core/InputBase';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import FormControl from "@material-ui/core/FormControl";
+import InputBase from "@material-ui/core/InputBase";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
-    'label + &': {
+    "label + &": {
       marginTop: theme.spacing(3),
     },
   },
   input: {
     borderRadius: 4,
-    position: 'relative',
+    position: "relative",
     backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
+    border: "1px solid #ced4da",
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    padding: "10px 26px 10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
+    ].join(","),
+    "&:focus": {
       borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      borderColor: "#80bdff",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
     },
   },
 }))(InputBase);
@@ -67,7 +67,7 @@ export default function NavBar() {
         </Link>
       </div>
       <div className="header-content-wrapper">
-      <div className="control-block">
+        <div className="control-block">
           <div className="control-icon">
             <div className="author-title ">
               <Link to="/">
@@ -81,16 +81,10 @@ export default function NavBar() {
             </div>
           </div>
 
-
           <div className="control-icon">
             <div className="author-title ">
               <Link to="/all">
-                <div
-                  className="c-secondary"
-                  
-                >
-                  Groups
-                </div>
+                <div className="c-secondary">Groups</div>
               </Link>
             </div>
           </div>
@@ -98,12 +92,7 @@ export default function NavBar() {
           <div className="control-icon">
             <div className="author-title ">
               <Link to="/">
-                <div
-                  className="c-secondary"
-                  
-                >
-                  Jobs
-                </div>
+                <div className="c-secondary">Jobs</div>
               </Link>
             </div>
           </div>
@@ -111,38 +100,30 @@ export default function NavBar() {
           <div className="control-icon">
             <div className="author-title ">
               <Link to="/">
-                <div
-                  className="c-secondary"
-                  
-                >
-                  Freelance
-                </div>
+                <div className="c-secondary">Freelance</div>
               </Link>
             </div>
           </div>
           <div className="control-icon">
             <div className="author-title ">
               <Link to="/">
-                <div
-                  className="c-secondary"
-                  
-                >
-                  Forum
-                </div>
+                <div className="c-secondary">Forum</div>
               </Link>
             </div>
           </div>
-
 
           <FormControl className={classes.margin}>
-        <BootstrapInput id="demo-customized-textbox" placeholder="Search..."/>
-      </FormControl>
-
+            <BootstrapInput
+              id="demo-customized-textbox"
+              placeholder="Search..."
+            />
+          </FormControl>
 
           <div className="control-icon more has-items">
             <svg className="olymp-happy-face-icon c-secondary">
               <PersonAddIcon />
             </svg>
+            
             <div className="label-avatar bg-blue">1</div>
             <div className="more-dropdown more-with-triangle triangle-top-center">
               <div className="ui-block-title ui-block-title-small">
@@ -213,8 +194,9 @@ export default function NavBar() {
             <div className="author-thumb">
               <img
                 alt="author"
-                src={`http://localhost:8888/api/user/photo/${jwt.user._id
-              }?${new Date().getTime()}`}
+                src={`http://localhost:8888/api/user/photo/${
+                  jwt.user._id
+                }?${new Date().getTime()}`}
                 style={{ width: 36, height: 36 }}
                 className="avatar"
               />
