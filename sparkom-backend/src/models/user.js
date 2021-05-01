@@ -52,9 +52,9 @@ const userSchema = new mongoose.Schema(
     },
     avatar: Buffer,
     phone: {
-      type: Number,
+      type: String,
       validate(value) {
-        if (!validator.isMobilePhone(value + ""))
+        if (!validator.isMobilePhone(value))
           throw new Error("invalid Phone Number");
       },
     },

@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import LandingPage from "./LandingPage";
 import BusinessIcon from "@material-ui/icons/Business";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
@@ -19,49 +20,58 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
+import { login } from "../store/slices/auth";
 //**************************************************************************** */
 export default function Register() {
-  // const [gender, setGender] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  // const [selectedDate, setSelectedDate] = useState();
-  const [error, setError] = useState({ visible: false, message: "" });
   const history = useHistory();
-  // const handleDateChange = (date) => {
-  //   setSelectedDate(date);
-  // };
-
-  const formik = useFormik({
-    initialValues: {
-      firstname: "",
-      lastname: "",
-      username: "",
-      gender: ["Male", "Female"],
-      email: "",
-      password: "",
-      birthday: "",
-      phone: 0,
-    },
-    validationSchema: yupSchema,
-    onSubmit: async (values) => {
-      const [res, err] = await queryApi("users", values, "POST", false);
-      if (err) {
-        setError({
-          visible: true,
-          message: err,
-        });
-        console.log(err);
-      } else {
-        localStorage.setItem("token", res.token);
-        history.push("/me");
-        console.log(res);
-      }
-    },
+  const [showPassword, setShowPassword] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    gender: "",
+    email: "",
+    password: "",
+    birthday: new Date(),
+    phone: "",
   });
+
+  const {
+    firstname,
+    lastname,
+    username,
+    gender,
+    email,
+    password,
+    birthday,
+    phone,
+  } = userData;
+
+  const [error, setError] = useState({ visible: false, message: "" });
+
+  const handleChange = (e) => {
+    console.log(e.target);
+    setUserData({ ...userData, [e.target.id]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setShowLoader(true);
+    const [res, err] = await queryApi("users", userData, "POST", false);
+    if (err) {
+      setShowLoader(false);
+      setError({
+        visible: true,
+        message: err?.message,
+      });
+    } else {
+      dispatch(login(res));
+      history.push("/me");
+    }
+  };
 
   return (
     <LandingPage>
@@ -92,7 +102,8 @@ export default function Register() {
             data-mh="log-tab"
           >
             <div className="title h6">Register to Sparkom</div>
-            <form className="content" onSubmit={formik.handleSubmit}>
+
+            <form className="content" onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                   <div className="form-group label-floating is-empty">
@@ -100,15 +111,8 @@ export default function Register() {
                       id="firstname"
                       label="First Name"
                       variant="outlined"
-                      value={formik.values.firstname}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.firstname &&
-                        Boolean(formik.errors.firstname)
-                      }
-                      helpertext={
-                        formik.touched.firstname && formik.errors.firstname
-                      }
+                      value={firstname}
+                      onChange={handleChange}
                       fullWidth
                     />
                   </div>
@@ -119,15 +123,8 @@ export default function Register() {
                       id="lastname"
                       label="Last Name"
                       variant="outlined"
-                      value={formik.values.lastname}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.lastname &&
-                        Boolean(formik.errors.lastname)
-                      }
-                      helpertext={
-                        formik.touched.lastname && formik.errors.lastname
-                      }
+                      value={lastname}
+                      onChange={handleChange}
                       fullWidth
                     />
                   </div>
@@ -139,15 +136,8 @@ export default function Register() {
                       id="username"
                       label="Username"
                       variant="outlined"
-                      value={formik.values.username}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.username &&
-                        Boolean(formik.errors.username)
-                      }
-                      helpertext={
-                        formik.touched.username && formik.errors.username
-                      }
+                      value={username}
+                      onChange={handleChange}
                       fullWidth
                     />
                   </div>
@@ -156,35 +146,22 @@ export default function Register() {
                   <div className="form-group label-floating is-empty">
                     {/** Gender*/}
                     <FormControl variant="outlined" fullWidth>
-                      <InputLabel id="gender">Gender</InputLabel>
+                      <InputLabel id="genderLabel">Gender</InputLabel>
                       <Select
                         labelId="gender"
                         id="gender"
                         //onChange={(e) => setGender(e.target.value)}
-                        value={formik.values.gender[0]}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={
-                          formik.touched.gender && Boolean(formik.errors.gender)
-                        }
-                        helpertext={
-                          formik.touched.gender && formik.errors.gender
+                        value={gender.value}
+                        onChange={(e) =>
+                          setUserData({
+                            ...userData,
+                            gender: e.target.value,
+                          })
                         }
                         label="Gender"
-                        defaultValue=" "
                       >
-                        {formik.values.gender.map(
-                          (option) => (
-                            <MenuItem value={option} key={option}>
-                              {option}
-                            </MenuItem>
-                          )
-                          // <MenuItem key={option} value={option}>
-                          //   {option.name}
-                          // </MenuItem>
-                        )}
-                        {/* <MenuItem value="m">Male</MenuItem>
-                        <MenuItem value="f">Female</MenuItem> */}
+                        <MenuItem value="m">Male</MenuItem>
+                        <MenuItem value="f">Female</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
@@ -197,12 +174,8 @@ export default function Register() {
                       label="Your Email"
                       variant="outlined"
                       type="email"
-                      value={formik.values.email}
-                      onChange={formik.handleChange}
-                      error={
-                        formik.touched.email && Boolean(formik.errors.email)
-                      }
-                      helpertext={formik.touched.email && formik.errors.email}
+                      value={email}
+                      onChange={handleChange}
                       fullWidth
                     />
                   </div>
@@ -229,15 +202,8 @@ export default function Register() {
                             </IconButton>
                           </InputAdornment>
                         }
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        error={
-                          formik.touched.password &&
-                          Boolean(formik.errors.password)
-                        }
-                        helpertext={
-                          formik.touched.password && formik.errors.password
-                        }
+                        value={password}
+                        onChange={handleChange}
                         labelWidth={70}
                       />
                     </FormControl>
@@ -246,15 +212,12 @@ export default function Register() {
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <div className="form-group label-floating">
                         <KeyboardDatePicker
-                          id="birthday"
                           inputVariant="outlined"
                           label="Birthday"
                           format="MM/dd/yyyy"
-                          value={formik.values.birthday}
-                          onChange={formik.handleChange}
-                          error={
-                            formik.touched.birthday &&
-                            Boolean(formik.errors.birthday)
+                          value={birthday}
+                          onChange={(e) =>
+                            setUserData({ ...userData, birthday: e })
                           }
                           fullWidth
                         />
@@ -269,17 +232,18 @@ export default function Register() {
                     id="phone"
                     variant="outlined"
                     label="Phone Number"
-                    value={formik.values.phone}
-                    onChange={formik.handleChange}
-                    error={formik.touched.phone && Boolean(formik.errors.phone)}
+                    value={phone}
+                    onChange={(e) => setUserData({ ...userData, phone: e })}
                     fullWidth
                   />
-                  {console.log(formik.values)}
+
+                  <br />
                   {error.visible && (
                     <div className="alert alert-danger" role="alert">
                       {error.message}
                     </div>
                   )}
+                  {showLoader && <p>Loading</p>}
                   <div className="form-group label-floating is-empty "></div>
                   <button
                     type="submit"
@@ -296,9 +260,3 @@ export default function Register() {
     </LandingPage>
   );
 }
-
-const yupSchema = Yup.object({
-  email: Yup.string().email("must be a valid email").required("Champs requis!"),
-  password: Yup.string().required("Champs requis!"),
-  gender: Yup.string().required("Champs requis!"),
-});
