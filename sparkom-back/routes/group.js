@@ -12,6 +12,7 @@ const { requireSignin } = require("../controllers/auth");
 const {
   
   JoinGroup,
+  
   LeaveGroup,
  
 } = require("../controllers/group");
@@ -54,7 +55,7 @@ router.post("/add/:userId",upload, function (req, res, next) {
   console.log(obj);
   const newgroup = {
     name: obj.name, 
-    CreatedBy: req.profile._id,
+    CreatedBy:obj.CreatedBy,
     Topic: kar,
     description: obj.description,
     IsPrivate: obj.IsPrivate,

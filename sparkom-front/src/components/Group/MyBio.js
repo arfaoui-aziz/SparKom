@@ -38,7 +38,7 @@ export default function MyBio(props) {
           />
              <BioInfo
             title="Members:"
-            text="0"
+            text={props.dm.Members.length}
           />
           <SocialNetwork/>
         </ul>
