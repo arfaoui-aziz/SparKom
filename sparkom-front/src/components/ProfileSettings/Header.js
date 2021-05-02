@@ -3,6 +3,7 @@ import cover from "../../assets/img/top-header4.png";
 import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 export default function Header() {
   const activeUser = useSelector(activeUserSelector);
   const userAvatar = useSelector(avatarSelector);
@@ -39,15 +40,18 @@ export default function Header() {
 
             <div className="top-header-author">
               <div className="author-thumb">
+                <input type="file" style={{ display: "none" }} />
                 <img
                   src={userAvatar}
                   style={{ width: 150, height: 150 }}
+                  className="img-fluid rounded pr-2"
                   alt="author"
                 />
               </div>
               <div className="author-content">
                 <Link to="/me" className="h4 author-name">
                   {`${activeUser.firstname} ${activeUser.lastname}`}
+                  <VerifiedUserIcon className="ml-2 c-primary" />
                 </Link>
               </div>
             </div>

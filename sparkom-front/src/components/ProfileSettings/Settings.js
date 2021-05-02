@@ -10,8 +10,8 @@ import NavBar from "../NavBar/NavBar";
 const Settings = (props) => {
   return (
     <>
-    <NavBar />
-        <div className="header-spacer header-spacer-small mb-3"></div>
+      <NavBar />
+      <div className="header-spacer header-spacer-small mb-3"></div>
       <div className="container">
         <div className="row">
           <Header />
@@ -24,8 +24,7 @@ const Settings = (props) => {
                 <h6 className="title">Account Settings</h6>
               </div>
               <div className="ui-block-content">
-                <form>
-                  <div className="row">
+                
                     {/* <AccountSettings /> */}
 
                     <Switch>
@@ -46,18 +45,7 @@ const Settings = (props) => {
                         component={AccountSettings}
                       />
                     </Switch>
-                    <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
-                      <button className="btn btn-secondary btn-lg full-width">
-                        Restore all Attributes
-                      </button>
-                    </div>
-                    <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
-                      <button className="btn btn-primary btn-lg full-width">
-                        Save all Changes
-                      </button>
-                    </div>
-                  </div>
-                </form>
+          
               </div>
             </div>
           </div>

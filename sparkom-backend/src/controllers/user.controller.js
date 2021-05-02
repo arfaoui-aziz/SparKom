@@ -1,7 +1,10 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const sharp = require("sharp");
+const sendEmail = require("../utils/sendEmail");
+
 //************** Create New User *******************/
 const createUser = async (req, res) => {
   try {
@@ -56,7 +59,7 @@ const updateUser = async (req, res) => {
     await user.save();
     res.send(user);
   } catch (e) {
-    res.status.send(400);
+    res.status(400).send(e);
   }
 };
 
@@ -87,6 +90,28 @@ const login = async (req, res) => {
   } catch (e) {
     res.status(400).send("Unable to login");
   }
+};
+
+//************** Forgot Password *******************/
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("Wrong Email");
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "15m",
+    });
+    console.log(user, token);
+    sendEmail();
+    res.send(`http://localhost:3002/reset/${token}`);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+};
+
+//************** Reset Password *******************/
+const resetPassword = async (req, res) => {
+  //recuperi el token w nverifiwah w baed nlogiw
 };
 
 //************** Logout  *******************/
@@ -199,4 +224,5 @@ module.exports = {
   displayAvatar,
   MyAvatar,
   deleteAvatar,
+  forgotPassword,
 };

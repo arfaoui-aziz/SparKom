@@ -13,10 +13,11 @@ const {
   displayAvatar,
   MyAvatar,
   deleteAvatar,
+  forgotPassword,
 } = require("../controllers/user.controller");
 
 const router = new express.Router();
-
+router.post("/forgot", forgotPassword);
 router.post("/", createUser);
 router.post("/login", login);
 

@@ -23,11 +23,11 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import { Link, useHistory } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
 import { login } from "../store/slices/auth";
+import SweetAlert from "./SweetAlert";
 //**************************************************************************** */
 export default function Register() {
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     firstname: "",
@@ -51,22 +51,16 @@ export default function Register() {
     phone,
   } = userData;
 
-  const [error, setError] = useState({ visible: false, message: "" });
-
   const handleChange = (e) => {
     console.log(e.target);
     setUserData({ ...userData, [e.target.id]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowLoader(true);
+
     const [res, err] = await queryApi("users", userData, "POST", false);
     if (err) {
-      setShowLoader(false);
-      setError({
-        visible: true,
-        message: err?.message,
-      });
+      SweetAlert("Error!", err, "error");
     } else {
       dispatch(login(res));
       history.push("/me");
@@ -237,13 +231,6 @@ export default function Register() {
                     fullWidth
                   />
 
-                  <br />
-                  {error.visible && (
-                    <div className="alert alert-danger" role="alert">
-                      {error.message}
-                    </div>
-                  )}
-                  {showLoader && <p>Loading</p>}
                   <div className="form-group label-floating is-empty "></div>
                   <button
                     type="submit"

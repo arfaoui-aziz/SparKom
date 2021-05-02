@@ -36,7 +36,14 @@ const deleteMyProfile = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   const sentUpdates = Object.keys(req.body);
-  const allowedUpdates = ["followers", "following", "bio", "occupation"];
+  const allowedUpdates = [
+    "followers",
+    "following",
+    "bio",
+    "occupation",
+    "is_verified",
+    "is_expert",
+  ];
 
   const isValidUpdate = sentUpdates.every((update) => {
     return allowedUpdates.includes(update);
@@ -81,7 +88,7 @@ const followUser = async (req, res) => {
     });
     userProfile.followers = deleteFollower;
     await userProfile.save();
-    
+
     res.send(myProfile.following);
   } catch (e) {}
 };
