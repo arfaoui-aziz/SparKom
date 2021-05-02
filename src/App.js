@@ -13,6 +13,13 @@ import AllNotifications from "./components/MyProfile/AllNotifications";
 import AllRequests from "./components/MyProfile/AllRequests";
 import Boards from "./components/Myboards/Allboards";
 import Showboard from "./components/Myboards/ShowBoard";
+import BoardForm from "./components/Myboards/BoardForm";
+import PBoardAdd from "./components/Myboards/PBoardAdd";
+import Form2 from "./components/Myboards/Form2";
+import ListForm from "./components/Myboards/ListForm";
+import ActionButtonL from "./components/Myboards/ActionButtonL";
+import EditCard from "./components/Myboards/EditCard";
+
 function App() {
   return (
     <div>
@@ -28,7 +35,14 @@ function App() {
           <Route path="/me/requests" component={AllRequests} />
           <Route path="/me" component={MyProfile} />
           <Route path="/boards" component={Boards} />
-          <Route path="/showboard" component={Showboard} />
+          <Route path="/showboard/:id" component={Showboard} />
+          <Route path="/BoardForm" component={BoardForm} />
+          <Route path="/Form2" component={Form2} />
+          <Route path="/ListForm" component={ListForm} />
+          <Route path="/PBoardAdd" component={PBoardAdd} />
+          <Route path="/ActionButtonL" component={ActionButtonL} />
+          <Route path="/EditCard" component={EditCard} />
+
 
           <Route path="/" exact component={Login} />
         </Switch>

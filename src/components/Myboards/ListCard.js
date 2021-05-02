@@ -8,6 +8,9 @@ import CardForm from "./CardForm";
 import avatar2 from "../../assets/img/avatar72-sm.jpg";
 import avatar5 from "../../assets/img/avatar70-sm.jpg";
 import avatar6 from "../../assets/img/avatar71-sm.jpg";
+import { useServerApi } from "../../hooks/useServerApi";
+import { queryServerApi } from "../../utils/queryServerApi";
+import { Link } from "react-router-dom";
 const CardContainer = styled.div`
   margin: 0 0 8px 0;
   position: relative;
@@ -30,14 +33,17 @@ const EditButton = styled(EditIcon)`
   }
 `;
 
-  const ListCard = ({name}) => {
+  const ListCard = (props) => {
       const [buttonPopup, setButtonPopup] = useState(false);
+    
     return (
       <div>
+        {props.cards?.map((dm, index) => (
+        <div key={index}>
      <Card style={styles.cardContainer}>
          <cardContainer >
              <Card >
-                 <Typography gutterBottom> {name} </Typography>
+                 <Typography gutterBottom>  {dm.Card_name} </Typography>
                 
                  <img alt="author" src={avatar2} className="avatar"/>
                  <img alt="author" src={avatar5} className="avatar"/>
@@ -46,9 +52,14 @@ const EditButton = styled(EditIcon)`
             
          </cardContainer>
          <div style={{paddingLeft: '250px'}}>
-         <i class="far fa-trash-alt" style={{cursor:"pointer"}} >  </i>
-         <i class="far fa-edit" style={{cursor:"pointer"}}  onClick={() => setButtonPopup(true)}></i>
-        
+         <Link>
+         <i class="far fa-trash-alt" style={{cursor:"pointer"}}  onClick={() => {props.deletecard(dm._id);
+              window.location.reload(false);}}  >  </i>
+              </Link>
+         {/*<i class="far fa-edit" style={{cursor:"pointer"}}  onClick={() => setButtonPopup(true)}></i>*/}
+        <Link to="/EditCard">
+        <i class="far fa-edit" style={{cursor:"pointer"}} ></i>
+        </Link>
          </div>
          
          
@@ -57,6 +68,8 @@ const EditButton = styled(EditIcon)`
          
             <CardForm/>
             </CardEdit>
+            </div> 
+    ))}
      </div>
     );}
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useEffect } from "react";
 import logo from "../../assets/img/logo.png";
 import friend from "../../assets/img/friend-harmonic5.jpg";
 import friend1 from "../../assets/img/friend-harmonic7.jpg";
@@ -6,12 +6,23 @@ import friend2 from "../../assets/img/friend-harmonic8.jpg";
 import friend3 from "../../assets/img/friend-harmonic2.jpg";
 import friend4 from "../../assets/img/friend-harmonic4.jpg";
 import friend5 from "../../assets/img/friend-harmonic3.jpg";
-
+import { useHistory } from "react-router-dom";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
-import { Link } from "react-router-dom";
-export default function Oneboard() {
+
+export default function Oneboard(props) {
+  useEffect(() => {
+    console.log(props.dms);
+  }, [props.dms]);
+  const history = useHistory();
+  const Details = (idd) => {
+    history.replace("/ShowBoard/" + idd);
+    console.log(history);
+  };
   return (
-    <div class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6">
+    <div class="col col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+        {props.dms?.map((dm, index) => (
+        <div key={index}>
+       
     <div class="ui-block" data-mh="friend-groups-item">
       <div class="friend-item friend-groups">
         <div class="friend-item-content">
@@ -21,7 +32,8 @@ export default function Oneboard() {
             </svg>
             <ul class="more-dropdown">
               <li>
-                <a href="#">delete board</a>
+                <a href="/boards" onClick={() => props.deleteboard(dm._id)} >delete board</a>
+              
               </li>
               <li>
                 <a href="#">unjoin board</a>
@@ -34,8 +46,8 @@ export default function Oneboard() {
           <div class="friend-avatar">
            
             <div class="author-content">
-              <a href="/showboard" class="h5 author-name">
-               Esprit
+              <a  class="h5 author-name"  onClick={() => Details(dm._id)}>
+               {dm.Board_name}
               </a>
               <div class="country">6 Friends in the Group</div>
             </div>
@@ -95,5 +107,7 @@ export default function Oneboard() {
         </div>
       </div>
     </div>
-  </div>
+    </div> 
+    ))}
+</div>
   );}

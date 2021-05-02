@@ -61,12 +61,12 @@ class ActionButton extends React.Component {
 
         return (
             <div>
-            <Card style={{
+            {/*<Card style={{
                 overflow: "visible",
                 minHeight: 80,
                 minWidth:272,
                 padding: "6px 8px 2px"
-            }}>
+            }}>*/}
              <TextareaAutosize placeholder={placeholder} 
              autoFocus onBlur={this.closeForm}
              value={this.state.text}
@@ -80,7 +80,7 @@ class ActionButton extends React.Component {
              }}
              />
  
-            </Card>
+            {/*</Card>*/}
             <div style={styles.formButtonGroup}>
             <Button variant="contained" color="primary" href="#contained-buttons">
                     {buttonTittle} {" "}

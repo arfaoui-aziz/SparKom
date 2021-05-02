@@ -1,6 +1,10 @@
+import { PinDropSharp } from "@material-ui/icons";
 import React from "react";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
-export default function Alllists() {
+export default function Alllists(props) {
+  console.log(PinDropSharp);
+  const board=props.dm;
+  
   return (
     <div class="container">
    
@@ -10,7 +14,7 @@ export default function Alllists() {
                 <div>
                  <a href="/boards" data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2"><i className="fab fa-trello boards-btn-icon" /> Back to Boards</a>
                 </div>
-                <div class="h6 title"> Esprit</div>
+                <div class="h6 title"> {board.Board_name}</div>
               
   
                 <form class="search-bar w-search notification-list friend-requests bg-white">
