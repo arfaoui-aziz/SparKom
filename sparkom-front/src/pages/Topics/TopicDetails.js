@@ -1,0 +1,79 @@
+import React, { Component } from "react";
+import { useSelector } from "react-redux";
+import { useParams, Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import { getTopic } from "../../redux/actions/topicActions";
+import PostList from "../Post Managment/PostList";
+import AddPost from "../Post Managment/AddPost";
+import { useDispatch, connect } from "react-redux";
+import LeftSidebar from "../Post Managment/LeftSidebar";
+import RightSidebar from "../Post Managment/RightSidebar";
+function TopicDetails({ posts }) {
+  const { topicId } = useParams();
+  const [topic, setTopic] = React.useState("");
+  const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    async function getTopic() {
+      axios
+    .get(`http://127.0.0.1:8888/api/topic/${topicId}`)
+    .then((res) => {
+      if (res.data.error) {
+        setError(res.data.error);
+      } else {
+        
+        setTopic(res.data);
+      }
+    })
+    }
+    
+    
+      getTopic();
+    
+    
+  }, [topicId]);
+
+  
+return (
+
+
+<div>
+            <div className="main-header">
+	<div className="content-bg-wrap bg-badges"></div>
+	<div className="container">
+		<div className="row">
+			<div className="col col-lg-8 m-auto col-md-8 col-sm-12 col-12">
+				<div className="main-header-content">
+					<h1>{topic.title}</h1>
+					<p>Your home feed is based on your topics and the profiles you follow.<br/><b>Share your thoughts with other</b> </p>
+				</div>
+			</div>
+		</div>
+	</div>
+ 
+
+</div>
+<div class="container">
+      <div class="row">
+        <LeftSidebar />
+        <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+      <div id="newsfeed-items-grid">
+        <AddPost />
+        <PostList posts={posts && posts} />
+      </div>
+    </div>
+        
+        <RightSidebar />
+      </div>
+    </div>
+        </div>
+
+
+);
+  
+}
+
+const mapStateToProps = ({ post: { posts } }) => ({
+  posts,
+});
+export default connect(mapStateToProps, null)(TopicDetails);
