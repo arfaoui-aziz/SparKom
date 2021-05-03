@@ -21,7 +21,6 @@ import { queryApi } from "../utils/queryApi";
 import { login, googleAuth, facebookAuth } from "../store/slices/auth";
 import FacebookLogin from "react-facebook-login";
 import SweetAlert from "./SweetAlert";
-import { fetchProfile } from "../store/slices/profile";
 //********************************************** */
 export default function Login() {
   const history = useHistory();
@@ -32,14 +31,12 @@ export default function Login() {
 
   const responseFacebook = (response) => {
     dispatch(facebookAuth(response));
-    dispatch(fetchProfile());
     console.log(response);
   };
 
   const googleSuccess = async (response) => {
     console.log(response);
     dispatch(googleAuth(response));
-    dispatch(fetchProfile());
 
     // console.log(response.profileObj);
   };
@@ -61,7 +58,6 @@ export default function Login() {
         SweetAlert("Error !", err, "error");
       } else {
         dispatch(login(res));
-        dispatch(fetchProfile());
         history.push("/me");
       }
     },

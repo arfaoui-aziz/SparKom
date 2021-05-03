@@ -24,7 +24,6 @@ import { Link, useHistory } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
 import { login } from "../store/slices/auth";
 import SweetAlert from "./SweetAlert";
-import { fetchProfile } from "../store/slices/profile";
 //**************************************************************************** */
 export default function Register() {
   const history = useHistory();
@@ -64,7 +63,6 @@ export default function Register() {
       SweetAlert("Error!", err, "error");
     } else {
       dispatch(login(res));
-      dispatch(fetchProfile());
       history.push("/me");
     }
   };
