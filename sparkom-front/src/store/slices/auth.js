@@ -20,6 +20,7 @@ const authSlice = createSlice({
     },
     login(state, action) {
       const { token, user } = action.payload;
+      localStorage.setItem("token", token);
       return {
         ...state,
         isAuthenticated: true,
@@ -82,5 +83,11 @@ export const isAuthenticatedSelector = (state) => state.auth?.isAuthenticated;
 export const oAuthSelector = (state) => state.auth?.oAuth;
 export const avatarSelector = (state) => state.auth?.user?.avatar;
 
-export const { login, logout, googleAuth, facebookAuth,updateUser } = authSlice.actions;
+export const {
+  login,
+  logout,
+  googleAuth,
+  facebookAuth,
+  updateUser,
+} = authSlice.actions;
 export default authSlice.reducer;

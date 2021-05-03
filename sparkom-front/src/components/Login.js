@@ -16,7 +16,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory, Redirect, Link } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
 import { login, googleAuth, facebookAuth } from "../store/slices/auth";
 import FacebookLogin from "react-facebook-login";
@@ -60,9 +60,7 @@ export default function Login() {
           message: err,
         });
       } else {
-        localStorage.setItem("token", res.token);
         dispatch(login(res));
-
         history.push("/me");
       }
     },
@@ -143,9 +141,9 @@ export default function Login() {
                     label="Remember Me"
                   />
                 </div>
-                <a href="#top" className="forgot">
+                <Link to="/forgot" className="forgot">
                   Forgot my Password
-                </a>
+                </Link>
               </div>
 
               <button

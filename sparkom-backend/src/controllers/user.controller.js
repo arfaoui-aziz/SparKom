@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const sharp = require("sharp");
-const sendEmail = require("../utils/sendEmail");
+const sendSMS = require("../utils/sendSMS");
 
 //************** Create New User *******************/
 const createUser = async (req, res) => {
@@ -93,19 +93,49 @@ const login = async (req, res) => {
 };
 
 //************** Forgot Password *******************/
+// const forgotPassword = async (req, res) => {
+//   try {
+//     const { email } = req.body;
+//     const user = await User.findOne({ email });
+//     if (!user) throw new Error("Wrong Email");
+//     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+//       expiresIn: "15m",
+//     });
+//     console.log(user, token);
+//     sendEmail();
+//     res.send(`http://localhost:3000/reset/${token}`);
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+// };
+
+//************** Forgot Password SMS *******************/
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (!user) throw new Error("Wrong Email");
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "15m",
-    });
-    console.log(user, token);
-    sendEmail();
-    res.send(`http://localhost:3002/reset/${token}`);
+    const verifCode = Math.floor(Math.random() * 1_000_000_0);
+    sendSMS(verifCode);
+    user.verif_code = verifCode;
+    await user.save();
+    res.send(user);
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send("Invalid Email Address");
+  }
+};
+
+const checkVerifCode = async (req, res) => {
+  try {
+    const { email, verif_code } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("Invalid Email Address");
+    const isMatched = user.verif_code === verif_code;
+    if (!isMatched) throw new Error("Wrong Verification Code");
+    const token = await user.generateAuthToken();
+    res.send({ user, token });
+  } catch (e) {
+    res.status(400).send(e.message);
   }
 };
 
@@ -225,4 +255,5 @@ module.exports = {
   MyAvatar,
   deleteAvatar,
   forgotPassword,
+  checkVerifCode,
 };

@@ -14,10 +14,12 @@ const {
   MyAvatar,
   deleteAvatar,
   forgotPassword,
+  checkVerifCode,
 } = require("../controllers/user.controller");
 
 const router = new express.Router();
 router.post("/forgot", forgotPassword);
+router.post("/verif", checkVerifCode);
 router.post("/", createUser);
 router.post("/login", login);
 

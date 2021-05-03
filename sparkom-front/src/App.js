@@ -16,7 +16,8 @@ import CompanySignup from "./components/CompanySignup";
 import Cv from "./components/CV/Cv";
 import UserProfile from "./components/MyProfile/UserProfile";
 import GeneratePDF from "./components/CV/GeneratePDF";
-import Signup from "./components/SignUp/Signup";
+import ForgotPassword from "./components/ForgotPassword";
+import VerificationCode from "./components/VerificationCode";
 
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
@@ -48,9 +49,9 @@ function App() {
             <Route path="/user" component={UserProfile} />
             <Route path="/signup" component={Register} />
             <Route path="/company" component={CompanySignup} />
-            <Route path="/test" component={Signup} />
+            <Route path="/forgot" component={ForgotPassword} />
+            <Route path="/verif" component={VerificationCode} />
             <Route path="/" exact component={Login} />
-
           </Switch>
         )}
       </Router>

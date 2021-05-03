@@ -2,37 +2,34 @@ import { TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import LandingPage from "./LandingPage";
 import SweetAlert from "./SweetAlert";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { queryApi } from "../utils/queryApi";
-import { updateUser } from "../store/slices/auth";
-export default function ForgotPassword() {
-  const [email, setEmail] = useState("");
-  const dispatch = useDispatch();
+import { activeUserSelector, login } from "../store/slices/auth";
+export default function VerificationCode() {
+  const [verifCode, setVerifCode] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { email } = useSelector(activeUserSelector);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const [res, err] = await queryApi("users/forgot", { email }, "POST");
+    const [res, err] = await queryApi(
+      "users/verif",
+      { email, verif_code: verifCode },
+      "POST"
+    );
     if (err) {
-      SweetAlert("Error !", err, "error");
-      console.log(err);
+      SweetAlert("Error !", "Invalid Verification Code", "error");
     } else {
-      console.log(res);
-      SweetAlert(
-        "check your Phone !",
-        "Verification code has been sent to your phone",
-        "success"
-      );
-      dispatch(updateUser(res));
-      history.push("/verif");
+      dispatch(login(res));
+      history.push("/settings/changepwd");
     }
   };
   return (
     <LandingPage>
       <div className="registration-login-form pl-0 " style={{ minHeight: 200 }}>
         <div className="title h6">
-          <b>Forgot Password</b>
+          <b>Enter Your Verifiaction Code</b>
         </div>
         <form className="content" onSubmit={handleSubmit}>
           <div className="row">
@@ -40,12 +37,12 @@ export default function ForgotPassword() {
               <div className="form-group label-floating is-empty">
                 <TextField
                   className="is-invalid"
-                  id="email"
-                  name="email"
-                  label="E-mail"
+                  id="verifCode"
+                  name="verifCode"
+                  label="verification Code"
                   variant="outlined"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={verifCode}
+                  onChange={(e) => setVerifCode(e.target.value)}
                   fullWidth
                 />
               </div>
@@ -54,7 +51,7 @@ export default function ForgotPassword() {
                 type="submit"
                 className="btn btn-lg btn-primary full-width"
               >
-                Send
+                Confirm
               </button>
             </div>
           </div>

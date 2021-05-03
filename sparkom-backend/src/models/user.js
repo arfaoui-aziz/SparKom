@@ -62,6 +62,7 @@ const userSchema = new mongoose.Schema(
     is_blocked: { type: Boolean, default: false },
     is_admin: { type: Boolean, default: false },
     gender: { type: String, enum: ["f", "m"] },
+    verif_code: String ,
     tokens: [
       {
         token: {
