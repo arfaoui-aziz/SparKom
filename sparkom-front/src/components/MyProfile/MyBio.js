@@ -1,7 +1,10 @@
 import React from "react";
 import BioInfo from "./BioInfo";
+import { useSelector } from "react-redux";
+import { myProfileSelector } from "../../store/slices/profile";
 
 export default function MyBio() {
+  const profile = useSelector(myProfileSelector);
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -9,23 +12,11 @@ export default function MyBio() {
       </div>
       <div className="ui-block-content">
         <ul className="widget w-personal-info item-block">
-          <BioInfo
-            title="About Me:"
-            text="Hi, I’m James, I’m 36 and I work as a Digital Designer for the
-                “Daydreams” Agency in Pier 56."
-          />
+          {profile?.occupation && (
+            <BioInfo title="Occupation:" text={profile?.occupation} />
+          )}
 
-          <BioInfo
-            title="Favourite TV Shows:"
-            text="Breaking Good, RedDevil, People of Interest, The Running Dead,
-              Found, American Guy."
-          />
-
-          <BioInfo
-            title="Favourite Music Bands / Artists:"
-            text="  Iron Maid, DC/AC, Megablow, The Ill, Kung Fighters, System of a
-              Revenge."
-          />
+          {profile?.bio && <BioInfo title="About Me:" text={profile?.bio} />}
         </ul>
       </div>
     </div>

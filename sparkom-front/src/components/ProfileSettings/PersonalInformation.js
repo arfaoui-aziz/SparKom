@@ -25,7 +25,6 @@ const PersonalInformation = () => {
   console.log(profileData);
   const { bio, occupation } = profileData;
   const {
-    _id,
     firstname,
     lastname,
     username,
