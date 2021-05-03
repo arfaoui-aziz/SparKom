@@ -37,7 +37,7 @@ function App() {
             <Route path="/me/requests" component={AllRequests} />
             <Route path="/me/messages" component={AllMessages} />
             <Route path="/me" component={MyProfile} />
-            <Route path="/user" component={UserProfile} />
+            <Route path="/user/:id" component={UserProfile} />
             <Route path="/signup" component={Register} />
             <Route path="/company" component={CompanySignup} />
             <Route path="/pdf" component={GeneratePDF} />

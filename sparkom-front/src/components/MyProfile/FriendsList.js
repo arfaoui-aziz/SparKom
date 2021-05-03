@@ -1,8 +1,6 @@
 import React from "react";
-import avatar from "../../assets/img/avatar10-sm.jpg";
 import avatar3 from "../../assets/img/avatar24-sm.jpg";
-import avatar4 from "../../assets/img/avatar36-sm.jpg";
-import avatar2 from "../../assets/img/avatar38-sm.jpg";
+
 import { Link } from "react-router-dom";
 import { friendsSelector } from "../../store/slices/profile";
 import { useSelector } from "react-redux";

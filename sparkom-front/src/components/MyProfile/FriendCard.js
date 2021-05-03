@@ -35,12 +35,12 @@ export default function FriendCard({ friend }) {
             </div>
             <div className="friend-avatar">
               <div className="author-thumb">
-                <img src={avatar ? avatar : friendAvatar} alt="author" />
+                <img src={avatar || friendAvatar} alt="author" />
               </div>
               <div className="author-content">
-                <a href="#top" className="h5 author-name">
+                <Link to={`/user/${_id}`} className="h5 author-name">
                   {username}
-                </a>
+                </Link>
                 <div className="country">{email}</div>
               </div>
             </div>
@@ -49,23 +49,22 @@ export default function FriendCard({ friend }) {
                 <div className="swiper-slide">
                   <div className="friend-count" data-swiper-parallax={-500}>
                     <a href="#top" className="friend-count-item">
-                      <div className="h6">52</div>
-                      <div className="title">Friends</div>
+                      <div className="h6">{following.length}</div>
+                      <div className="title">Following</div>
                     </a>
                     <a href="#top" className="friend-count-item">
-                      <div className="h6">240</div>
-                      <div className="title">Photos</div>
-                    </a>
-                    <a href="#top" className="friend-count-item">
-                      <div className="h6">16</div>
-                      <div className="title">Videos</div>
+                      <div className="h6">{followers.length}</div>
+                      <div className="title">Followers</div>
                     </a>
                   </div>
                   <div
                     className="control-block-button"
                     data-swiper-parallax={-100}
                   >
-                    <Link to="/user" className="btn btn-control bg-blue ">
+                    <Link
+                      to={`/user/${_id}`}
+                      className="btn btn-control bg-blue "
+                    >
                       <svg className="olymp-happy-face-icon pb-2">
                         <VisibilityOutlinedIcon />
                       </svg>
