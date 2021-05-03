@@ -1,15 +1,15 @@
 const Profile = require("../models/profile");
 
-const createProfile = async (req, res) => {
-  try {
-    const my_id = req.user._id;
-    const profile = new Profile({ ...req.body, my_id });
-    await profile.save();
-    res.status(201).send(profile);
-  } catch (e) {
-    res.status(400).send(e);
-  }
-};
+// const createProfile = async (req, res) => {
+//   try {
+//     const my_id = req.user._id;
+//     const profile = new Profile({ ...req.body, my_id });
+//     await profile.save();
+//     res.status(201).send(profile);
+//   } catch (e) {
+//     res.status(400).send(e);
+//   }
+// };
 
 const getMyProfile = async (req, res) => {
   try {
@@ -60,7 +60,7 @@ const updateProfile = async (req, res) => {
     await myProfile.save();
     return res.send(myProfile);
   } catch (e) {
-    return res.status(500).send();
+    return res.status(500).send(e.message);
   }
 };
 
@@ -94,7 +94,6 @@ const followUser = async (req, res) => {
 };
 
 module.exports = {
-  createProfile,
   getMyProfile,
   updateProfile,
   deleteMyProfile,

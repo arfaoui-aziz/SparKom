@@ -4,14 +4,18 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const sharp = require("sharp");
 const sendSMS = require("../utils/sendSMS");
+const Profile = require("../models/profile");
 
 //************** Create New User *******************/
 const createUser = async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
+    const my_id = user._id;
+    const profile = new Profile({ ...req.body, my_id });
+    await profile.save();
     const token = await user.generateAuthToken();
-    res.status(201).send({ user, token });
+    res.status(201).send({ user, token, profile });
   } catch (e) {
     res.status(400).send(e);
   }

@@ -1,7 +1,6 @@
 const express = require("express");
 const auth = require("../middleware/auth");
 const {
-  createProfile,
   getMyProfile,
   updateProfile,
   deleteMyProfile,
@@ -10,7 +9,7 @@ const {
 
 const router = new express.Router();
 
-router.post("/", auth, createProfile);
+// router.post("/", auth, createProfile);
 router.get("/", auth, getMyProfile);
 router.patch("/", auth, updateProfile);
 router.delete("/", auth, deleteMyProfile);

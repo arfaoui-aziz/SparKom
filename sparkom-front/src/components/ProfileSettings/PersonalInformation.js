@@ -56,14 +56,14 @@ const PersonalInformation = () => {
     );
     console.log(res, err);
     const [userRes, userErr] = await queryApi(
-      `users/${_id}`,
+      "users",
       { firstname, lastname, username, email, phone, date_of_birth, gender },
       "PATCH"
     );
     if (err || userErr) {
       err
-        ? SweetAlert("Error!", err.message, "error")
-        : SweetAlert("Error!", userErr.message, "error");
+        ? SweetAlert("Error!", err, "error")
+        : SweetAlert("Error!", userErr, "error");
     } else {
       SweetAlert(
         "Profile Updated !",
