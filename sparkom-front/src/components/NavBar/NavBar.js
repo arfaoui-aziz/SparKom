@@ -18,7 +18,51 @@ import {
   oAuthSelector,
 } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
+import FormControl from "@material-ui/core/FormControl";
+import InputBase from "@material-ui/core/InputBase";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    "label + &": {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: "relative",
+    backgroundColor: theme.palette.background.paper,
+    border: "1px solid #ced4da",
+    fontSize: 16,
+    padding: "10px 26px 10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    "&:focus": {
+      borderRadius: 4,
+      borderColor: "#80bdff",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+    },
+  },
+}))(InputBase);
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
+
 export default function NavBar() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const activeUser = useSelector(activeUserSelector);
@@ -39,20 +83,70 @@ export default function NavBar() {
 
   return (
     <header className="header bg-white" id="site-header">
-      <div className="container">
-        <div className="row">
-          <div className="col col-sm-12 ">
-            <div className="page-title ">
+    <div className="page-title ">
+     
+         
               <Link to="/me">
                 <img
                   src={logo}
                   alt="logo"
-                  style={{ height: 40, marginTop: -10, marginLeft: -50 }}
+                  style={{ height: 40, marginTop: -10 }}
                 />
               </Link>
             </div>
             <div className="header-content-wrapper">
               <div className="control-block">
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <Link to="/">
+                      <div
+                        className="c-secondary"
+                      
+                      >
+                        Home
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <Link >
+                      <div className="c-secondary">Groups</div>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <Link to="/">
+                      <div className="c-secondary">Jobs</div>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <Link to="/boards">
+                      <div className="c-secondary">Boards</div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <Link to="/">
+                      <div className="c-secondary">Forum</div>
+                    </Link>
+                  </div>
+                </div>
+
+                <FormControl className={classes.margin}>
+                  <BootstrapInput
+                    id="demo-customized-textbox"
+                    placeholder="Search..."
+                  />
+                </FormControl>
+
                 <div className="control-icon more has-items">
                   <svg className="olymp-happy-face-icon c-secondary">
                     <PersonAddIcon />
@@ -170,12 +264,11 @@ export default function NavBar() {
                       <div className="c-secondary">{`${activeUser.firstname} ${activeUser.lastname}`}</div>
                     </div>
                   </Link>
-                </div>
-              </div>
-            </div>
+                  </div>
+            
           </div>
         </div>
-      </div>
+     
     </header>
   );
 }
