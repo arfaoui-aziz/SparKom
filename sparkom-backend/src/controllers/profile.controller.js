@@ -93,9 +93,28 @@ const followUser = async (req, res) => {
   } catch (e) {}
 };
 
+const getProfileByID = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const profile = await Profile.findById(id);
+    if (!profile) throw new Error("Inexisting Profile");
+    await profile.populate("my_id").execPopulate();
+    res.send(profile);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+};
+
+const getFollowers = async (req, res) => {
+  try {
+    const allProfiles = await Profile.find({});
+  } catch (error) {}
+};
+
 module.exports = {
   getMyProfile,
   updateProfile,
   deleteMyProfile,
   followUser,
+  getProfileByID,
 };
