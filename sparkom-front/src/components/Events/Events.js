@@ -39,29 +39,8 @@ export default function Events({ props, events }) {
 
   return (
     <div>
-      <div className="container">
-        <div className="row">
-          <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div className="ui-block">
-              <div className="ui-block-title">
-                <div className="h6 title">GroupName’s Events</div>
-                <div style={{ float: "right" }}>
-                  <a
-                    onClick={() => Direction(props.dm._id)}
-                    data-toggle="modal"
-                    data-target="#create-photo-album"
-                    className="btn btn-primary btn-md-2"
-                  >
-                    Create Event
-                  </a>
-                </div>
-                <a href="." className="more">
-                  <svg className="olymp-three-dots-icon">
-                    <use xlinkHref="svg-icons/sprites/icons.svg#olymp-three-dots-icon" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+      
+         
             <div className="ui-block">
               <div className="ui-block-title ui-block-title-small">
                 <h6 className="title">UPCOMING EVENTS 2021</h6>
@@ -80,9 +59,15 @@ export default function Events({ props, events }) {
                     </td>
                     <td className="author">
                       <div className="event-author inline-items">
-                      
-                          <img src={process.env.REACT_APP_API_URL_UPLOADS + "/" + events.Image} alt="author" />
-                    
+                        <img
+                          src={
+                            process.env.REACT_APP_API_URL_UPLOADS +
+                            "/" +
+                            events.Image
+                          }
+                          alt="author"
+                        />
+
                         <div className="author-date">
                           <a href="." className="author-name h6">
                             {events.name}
@@ -121,7 +106,7 @@ export default function Events({ props, events }) {
                     {member ? (
                       <>
                         <td className="add-event">
-                        <a
+                          <a
                             className="btn btn-breez btn-sm"
                             onClick={() =>
                               dispatch(
@@ -154,15 +139,6 @@ export default function Events({ props, events }) {
               </table>
             </div>
           </div>
-        </div>
-      </div>
-      <a className="back-to-top" href=".">
-        <img
-          src="svg-icons/back-to-top.svg"
-          alt="arrow"
-          className="back-icon"
-        />
-      </a>
-    </div>
+      
   );
 }
