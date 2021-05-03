@@ -9,6 +9,7 @@ import fr4 from "../../assets/img/friend-harmonic3.jpg";
 import fr5 from "../../assets/img/friend-harmonic3.jpg";
 import ph1 from "../../assets/img/aziz.jpg";
 import leave from "../../assets/img/leave.png";
+import trash from "../../assets/img/delete.png";
 import add from "../../assets/img/add.png";
 import { isLogged } from "../../store/slices/auth";
 import { useDispatch } from "react-redux";
@@ -64,12 +65,12 @@ export default function GroupCard({ dms }) {
             </ul>
           </div>
           <div className="friend-avatar">
-            <div className="author-thumb">
+          
               <img
                 src={process.env.REACT_APP_API_URL_UPLOADS + "/" + dms.Image}
                 onClick={() => Details(dms._id)}
               />
-            </div>
+           
             <div className="author-content">
               <a href="." className="h5 author-name">
                 {dms.name}
@@ -132,7 +133,16 @@ export default function GroupCard({ dms }) {
                     </a>
                   </li>
                 </ul>*/}
-
+            {
+                  activeUser._id === dms.CreatedBy ? (
+                    <div className="control-block-button">
+                      <a className="btn btn-control">
+                      
+                      </a>
+                      
+                    </div>
+                    ) : (
+                      <>
           {member ? (
             <>
               <div className="control-block-button">
@@ -166,7 +176,7 @@ export default function GroupCard({ dms }) {
                 </a>
               </div>
             </>
-          )}
+          )}</>)}
         </div>
       </div>
     </div>

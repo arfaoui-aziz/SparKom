@@ -17,6 +17,9 @@ router.get("/", function (req, res, next) {
     }
   });
 });
+
+
+
 router.post('/delete/:id', function(req,res,next){
 	event.findByIdAndRemove(req.params.id, 
     	function (err, docs) {
@@ -24,6 +27,9 @@ router.post('/delete/:id', function(req,res,next){
         res.send("event deleted");
     })
 })
+
+
+
 /*direction add*/
 router.get("/addevent", function (req, res, next) {
   res.render("addev");

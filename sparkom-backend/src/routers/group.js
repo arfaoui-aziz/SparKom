@@ -84,6 +84,30 @@ router.post("/add/:userId",upload,function (req, res, next) {
   });
 });
 
+
+router.put("/updategr/:id", upload, function (req, res, next) {
+  const obj = JSON.parse(JSON.stringify(req.body));
+  console.log(obj);
+  const newCustomer = {
+    name: obj.name,
+    description: obj.description,
+    IsPrivate: obj.IsPrivate,
+    Createdat: obj.Createdat,
+   Image: req.file.filename,
+  };
+  group.findByIdAndUpdate(
+    req.params.id,
+    newCustomer,
+    async function (err, data) {
+      if (err) throw err; 
+      
+      console.log("UPDATED");
+      res.send("UPDATED OK");
+    }
+  );
+});
+
+
 router.get("/:id", function (req, res, next) {
   event.findById(req.params.id, function (err, data) {
     if (err) {
@@ -206,13 +230,13 @@ router.post("/edit/:id", function (req, res, next) {
       res.redirect("/group");
     }
   });
-});
+}); 
 
 
-router.get("/delete/:id", function (req, res, next) {
+router.put("/delete/:id", function (req, res, next) {
   group.findByIdAndRemove(req.params.id, function (err, docs) {
     if (err) console.log(err);
-    res.redirect("/group");
+    console.log("deleteeed");
   });
 });
 

@@ -2,20 +2,21 @@ import React, { Fragment, useEffect } from "react";
 import cover from "../../assets/img/top-header2.jpg";
 import { Link } from "react-router-dom";
 import profilePic from "../../assets/img/author-main2.jpg";
+import axios from "axios";
 import eya from "../../assets/img/eya.png";
 import leave from "../../assets/img/leave.png";
 import add from "../../assets/img/add.png";
-import { queryServerApi } from "../../utils/queryApi";
+import trash from "../../assets/img/delete.png";
+import { queryApi } from "../../utils/queryApi";
 import { useDispatch } from "react-redux";
 import { JoinGroup, LeaveGroup } from "../../redux/actions/groupActions";
 import { useHistory } from "react-router-dom";
-import {activeUserSelector,thistoken} from "../../store/slices/auth";
-import {  useSelector } from "react-redux";
-
-
+import { activeUserSelector, thistoken } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
 
 export default function HeaderG(props) {
-
+ 
+  
   const activeUser = useSelector(activeUserSelector);
   const token = useSelector(thistoken);
   const history = useHistory();
@@ -31,6 +32,24 @@ export default function HeaderG(props) {
   const dispatch = useDispatch();
   const [members, setmembers] = React.useState([]);
   const [member, setmember] = React.useState(false);
+
+  const handleDelete = async (id) => {
+    history.replace("/all");
+    const [, err] = await queryApi(
+      `group/delete/${id}`,
+      null,
+      "PUT",
+      false
+    );
+  
+    if (err) {
+     console.log(err);
+    }
+   else {history.replace("/all");}
+  
+  };
+  
+  
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
 
   React.useEffect(() => {
@@ -38,13 +57,12 @@ export default function HeaderG(props) {
     checkmember(props.dm && props.dm.Members);
   }, [props.dm.Members]);
 
-
   useEffect(() => {
     console.log(props.dm);
   }, [props.dm]);
 
   function checkmember(members) {
-    let match = members.indexOf( activeUser._id) !== -1;
+    let match = members.indexOf(activeUser._id) !== -1;
     setmember(match);
   }
   return (
@@ -71,7 +89,9 @@ export default function HeaderG(props) {
                       <a href=".html" className="h3 author-name">
                         {props.dm.name}
                       </a>
-                      <div className="country">{props.dm.Members.length} Member(s)</div>
+                      <div className="country">
+                        {props.dm.Members.length} Member(s)
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -102,6 +122,20 @@ export default function HeaderG(props) {
                       </ul>
                     </div>
                   </div>
+
+
+                  {
+                  activeUser._id === props.dm.CreatedBy ? (
+                    <div className="control-block-button">
+                      <a className="btn btn-control">
+                        <img src={trash} alt="author" onClick={()=> {handleDelete(props.dm._id)}} />{" "}
+                      </a>
+                      
+                    </div>
+                    ) : (
+                      <>
+                 
+
                   {member ? (
                     <>
                       <div className="control-block-button">
@@ -111,22 +145,20 @@ export default function HeaderG(props) {
                             alt="author"
                             onClick={() =>
                               dispatch(
-                                LeaveGroup(
-                                  token,
-                                  activeUser._id,
-                                  props.dm._id
-                                )
+                                LeaveGroup(token, activeUser._id, props.dm._id)
                               )
                             }
-                          /> </a>
-                          <a className="btn btn-control">
-                            <img src={eya} alt="author" />
-                          </a>
-                       
+                          />{" "}
+                        </a>
+                        <a className="btn btn-control">
+                          <img src={eya} alt="author" />
+                        </a>
                       </div>
                     </>
                   ) : (
+
                     <>
+
                       <div className="control-block-button">
                         <a className="btn btn-control">
                           <img
@@ -134,7 +166,7 @@ export default function HeaderG(props) {
                             alt="author"
                             onClick={() =>
                               dispatch(
-                                JoinGroup(token,  activeUser._id, props.dm._id)
+                                JoinGroup(token, activeUser._id, props.dm._id)
                               )
                             }
                           />{" "}
@@ -147,6 +179,7 @@ export default function HeaderG(props) {
                       </div>
                     </>
                   )}
+                  </>)}
 
                   {/*  <a href=".html" className="btn btn-control">
                       <div className="more">

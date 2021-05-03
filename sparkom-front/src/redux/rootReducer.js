@@ -5,6 +5,8 @@ const rootReducer = combineReducers({
   
   form: reducerForm,
   auth,
+
+
   
 });
 

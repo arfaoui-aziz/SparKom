@@ -2,8 +2,17 @@ import React from "react";
 import { date } from "yup";
 import BioInfo from "./BioInfo";
 import SocialNetwork from "./SocialNetwork";
-
+import { activeUserSelector, thistoken } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import edit from "../../assets/img/edit.png";
 export default function MyBio(props) {
+  const history = useHistory();
+  const Update = (id) => {
+    history.replace("/update/" + id);
+  };
+
+  const activeUser = useSelector(activeUserSelector);
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -11,6 +20,16 @@ export default function MyBio(props) {
       </div>
       <div className="ui-block-content">
         <ul className="widget w-personal-info item-block">
+        { activeUser._id=== props.dm.CreatedBy && 
+         
+      
+          
+                <a className="btn btn-control">
+                  <img
+                    src={edit}
+                    alt="author"
+                    onClick={() => Update(props.dm._id)} 
+                  /></a>}
           <BioInfo
             title="Bio"
             text={props.dm.description}

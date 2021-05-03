@@ -80,9 +80,9 @@ export default function Events({ props, events }) {
                     </td>
                     <td className="author">
                       <div className="event-author inline-items">
-                        <div className="author-thumb">
-                          <img alt="author" />
-                        </div>
+                      
+                          <img src={process.env.REACT_APP_API_URL_UPLOADS + "/" + events.Image} alt="author" />
+                    
                         <div className="author-date">
                           <a href="." className="author-name h6">
                             {events.name}

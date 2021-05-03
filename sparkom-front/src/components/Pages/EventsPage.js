@@ -15,7 +15,7 @@ export default function EventsPage(props) {
   const toRender2 = events;
   console.log(events);
 
-  console.log(events);
+
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {

@@ -12,7 +12,7 @@ export default function LeftSidebar(props) {
      {toRender ? (
           <>
       <MyBio dm={toRender}/>
-      <AdminMembers dm={toRender}/>
+     {/*} <AdminMembers dm={toRender}/>*/}
       </>
         ) : (
           <p>Product not found</p>

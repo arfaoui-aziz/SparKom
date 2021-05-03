@@ -23,6 +23,7 @@ import AllGroups from "./components/Pages/AllGroups";
 import Statics from "./components/Pages/StaticsPageGroup";
 import AddGroup from "./components/Pages/AddGroup";
 import Direction from "./components/Events/DirectionForm";
+import Update from "./components/Group/Update";
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/DFe/:id" component={Direction} />
           <Route path="/all" component={AllGroups} />
           <Route path="/static/:id" component={Statics} />
+          <Route path="/update/:id" component={Update} />
           <Route path="/add" component={AddGroup} />
             <Route path="/" exact component={Login} />
           </Switch>
