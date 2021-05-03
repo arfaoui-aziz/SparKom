@@ -15,10 +15,15 @@ const {
   
   JoinGroup,
   LeaveGroup,
+  JoinEvent,
+  LeaveEvent
  
 } = require("../controllers/group");
 router.put("/JoinGroup", auth, JoinGroup);
 router.put("/LeaveGroup", auth, LeaveGroup);
+router.put("/JoinEvent", auth, JoinEvent);
+router.put("/LeaveEvent", auth, LeaveEvent);
+
 
 
 
@@ -29,7 +34,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   localStorage = new LocalStorage("./scratch");
 }
 var Storage = multer.diskStorage({
-  destination: "./public/uploads/",
+  destination: "./src/public/uploads/",
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
   },
@@ -45,6 +50,8 @@ router.get("/getdev", function (req, res, next) {
     res.json(data);
   });
 });
+
+
 router.get("/getev", function (req, res, next) {
   events.find(function (err, data) {
     if (err) throw err;
@@ -66,7 +73,7 @@ router.post("/add/:userId",upload,function (req, res, next) {
     description: obj.description,
     IsPrivate: obj.IsPrivate,
     Createdat: obj.Createdat,
-   // Image: req.file.filename,
+   Image: req.file.filename,
   };
   group.create(newgroup, function (err) {
     if (err) {
@@ -86,6 +93,18 @@ router.get("/:id", function (req, res, next) {
     }
   });
 });
+
+router.get("/getevent/:id", function (req, res, next) {
+  events.find(
+    { $or: [{ group_id: req.params.id }, { group_id: req.params.id }] },
+    async function (err, data) {
+      res.json(data);
+    }
+  );
+});
+
+
+
 
 router.post("/addEvent/:userId/:groupId",upload, function (req, res, next) {
   const obj = JSON.parse(JSON.stringify(req.body));
@@ -121,6 +140,7 @@ router.post("/join/:Id", function (req, res, next) {
     res.json(result);
   });
 });
+
 
 
 /* GET group DB. 

@@ -36,7 +36,6 @@ export default function GroupCard({ dms }) {
   }
   useEffect(() => {
     console.log(dms);
-    console.log(token);
   }, [dms]);
   const history = useHistory();
 

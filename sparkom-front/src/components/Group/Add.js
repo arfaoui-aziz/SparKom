@@ -30,7 +30,7 @@ export default function Add(props) {
   const handleSubmitFile = (values) => {
     console.log(valeurs);
     let formData = new FormData();
-    //formData.append("img", valeurs.img);
+    formData.append("img", valeurs.img);
     formData.append("CreatedBy", activeUser._id);
     formData.append("name", valeurs.GroupName);
     formData.append("description", valeurs.Description);

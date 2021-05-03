@@ -6,24 +6,27 @@ import "./assets/css/fonts.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistStore } from "redux-persist";
-import store from "./store/store";
+
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import store from "./redux/store";
+import { BrowserRouter } from "react-router-dom";
+const loader = document.querySelector("#preloader");
+
+// if you want to show the loader when React loads data again
+const showLoader = () => loader.classList.remove("loader--hide");
+
+const hideLoader = () => loader.classList.add("loader--hide");
 
 
-//****************************************** */
-let persistor = persistStore(store);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <BrowserRouter>
+    <App hideLoader={hideLoader} showLoader={showLoader} />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
