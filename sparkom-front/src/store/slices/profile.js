@@ -15,7 +15,15 @@ const profileSlice = createSlice({
     populateFriends(state, action) {
       state.friendsList = action.payload;
     },
-
+    unfollowFriend(state, action) {
+      const payload = action.payload;
+      const index = state.friendsList.findIndex(
+        (friend) => friend._id === payload
+      );
+      if (index !== -1) {
+        state.friendsList.splice(index, 1);
+      }
+    },
     setErrors(state, action) {
       state.errors = action.payload;
     },
@@ -58,5 +66,6 @@ export const {
   populateProfile,
   updateProfile,
   populateFriends,
+  unfollowFriend,
 } = profileSlice.actions;
 export default profileSlice.reducer;

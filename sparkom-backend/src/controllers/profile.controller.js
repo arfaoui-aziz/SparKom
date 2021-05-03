@@ -76,7 +76,7 @@ const followUser = async (req, res) => {
       await myProfile.save();
       userProfile.followers.push(myProfile._id);
       await userProfile.save();
-      return res.send(myProfile.following);
+      return res.send(myProfile);
     }
     const Unfollow = myProfile.following.filter((userId) => {
       userId !== userProfile._id;
@@ -89,7 +89,7 @@ const followUser = async (req, res) => {
     userProfile.followers = deleteFollower;
     await userProfile.save();
 
-    res.send(myProfile.following);
+    res.send(myProfile);
   } catch (e) {}
 };
 
@@ -104,7 +104,7 @@ const getProfileByID = async (req, res) => {
     res.status(400).send(e.message);
   }
 };
-
+//************** All My Followers *****************************/
 const getFollowers = async (req, res) => {
   const my_id = req.user._id;
   let myFriends = [];

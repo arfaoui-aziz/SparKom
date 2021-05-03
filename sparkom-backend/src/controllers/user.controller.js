@@ -243,7 +243,17 @@ const deleteAvatar = async (req, res) => {
     res.status(400).send(e);
   }
 };
-
+//********************* get User By UserName */
+const getUserByUserName = async (req, res) => {
+  const { username } = req.query;
+  try {
+    const user = await User.findOne({ username });
+    if (!user) return res.status(404).send("No User with the Entred Name");
+    res.send(user);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
 //****************************************/
 module.exports = {
   createUser,
@@ -260,4 +270,5 @@ module.exports = {
   deleteAvatar,
   forgotPassword,
   checkVerifCode,
+  getUserByUserName,
 };

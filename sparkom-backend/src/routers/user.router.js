@@ -15,6 +15,7 @@ const {
   deleteAvatar,
   forgotPassword,
   checkVerifCode,
+  getUserByUserName,
 } = require("../controllers/user.controller");
 
 const router = new express.Router();
@@ -40,5 +41,6 @@ router.post(
 router.get("/me/avatar", auth, MyAvatar);
 router.delete("/me/avatar", auth, deleteAvatar);
 router.get("/:id/avatar", displayAvatar);
+router.get("/search", auth, getUserByUserName);
 
 module.exports = router;

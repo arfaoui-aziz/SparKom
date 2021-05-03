@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -18,11 +18,13 @@ import {
   oAuthSelector,
 } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
+
 export default function NavBar() {
   const dispatch = useDispatch();
   const history = useHistory();
   const activeUser = useSelector(activeUserSelector);
   const oAuth = useSelector(oAuthSelector);
+  const [searchInput, setSearchInput] = useState("");
   const Logout = async () => {
     if (oAuth) {
       localStorage.clear();
@@ -37,6 +39,9 @@ export default function NavBar() {
     }
   };
 
+  const handleChange = async (e) => {
+    setSearchInput(e.target.value);
+  };
   return (
     <header className="header bg-white" id="site-header">
       <div className="container">
@@ -51,8 +56,27 @@ export default function NavBar() {
                 />
               </Link>
             </div>
+
             <div className="header-content-wrapper">
               <div className="control-block">
+                <form className="w-search" style={{ marginRight: 170 }}>
+                  <div className="form-group with-button">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Search For Users"
+                      value={searchInput}
+                      onChange={handleChange}
+                    />
+                    <button style={{ borderRadius: "0" }}>
+                      <svg className="olymp-magnifying-glass-icon">
+                        <use
+                          xlinkHref={`${icons}#olymp-magnifying-glass-icon`}
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </form>
                 <div className="control-icon more has-items">
                   <svg className="olymp-happy-face-icon c-secondary">
                     <PersonAddIcon />
