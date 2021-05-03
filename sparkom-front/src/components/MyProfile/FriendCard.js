@@ -4,7 +4,10 @@ import friendCover from "../../assets/img/friend1.jpg";
 import friendAvatar from "../../assets/img/avatar1.jpg";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import { Link } from "react-router-dom";
-export default function FriendCard() {
+export default function FriendCard({ friend }) {
+  console.log(friend);
+  const { my_id, followers, following, _id } = friend;
+  const { username, email, avatar } = my_id;
   return (
     <div className="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-6">
       <div className="ui-block">
@@ -32,13 +35,13 @@ export default function FriendCard() {
             </div>
             <div className="friend-avatar">
               <div className="author-thumb">
-                <img src={friendAvatar} alt="author" />
+                <img src={avatar ? avatar : friendAvatar} alt="author" />
               </div>
               <div className="author-content">
                 <a href="#top" className="h5 author-name">
-                  Amen Allah
+                  {username}
                 </a>
-                <div className="country">San Francisco, CA</div>
+                <div className="country">{email}</div>
               </div>
             </div>
             <div className="swiper-container" data-slide="fade">

@@ -6,10 +6,14 @@ const profileSlice = createSlice({
   initialState: {
     userProfile: null,
     errors: "",
+    friendsList: [],
   },
   reducers: {
     populateProfile(state, action) {
       state.userProfile = action.payload;
+    },
+    populateFriends(state, action) {
+      state.friendsList = action.payload;
     },
 
     setErrors(state, action) {
@@ -32,7 +36,17 @@ export const fetchProfile = () => async (dispatch) => {
     dispatch(populateProfile(res));
   }
 };
+
+export const fetchFriends = () => async (dispatch) => {
+  const [res, error] = await queryApi("profile/me/followers");
+  if (error) {
+    dispatch(setErrors(error));
+  } else {
+    dispatch(populateFriends(res));
+  }
+};
 export const myProfileSelector = (state) => state.profile?.userProfile;
+export const friendsSelector = (state) => state.profile?.friendsList;
 
 // export const activeUserSelector = (state) => state.auth?.user;
 // export const isAuthenticatedSelector = (state) => state.auth?.isAuthenticated;
@@ -43,5 +57,6 @@ export const {
   setErrors,
   populateProfile,
   updateProfile,
+  populateFriends,
 } = profileSlice.actions;
 export default profileSlice.reducer;

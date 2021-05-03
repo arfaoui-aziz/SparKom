@@ -3,8 +3,11 @@ import NavBar from "../NavBar/NavBar";
 import Header from "../ProfileSettings/Header";
 import FriendCard from "./FriendCard";
 import SearchCard from "./SearchCard";
+import { friendsSelector } from "../../store/slices/profile";
+import { useSelector } from "react-redux";
 
 export default function AllFriends() {
+  const myFriendsList = useSelector(friendsSelector);
   return (
     <>
       <NavBar />
@@ -20,12 +23,9 @@ export default function AllFriends() {
       </div>
       <div className="container">
         <div className="row">
-          <FriendCard />
-          <FriendCard />
-          <FriendCard />
-          <FriendCard />
-          <FriendCard />
-          <FriendCard />
+          {myFriendsList?.map((friend, i) => (
+            <FriendCard friend={friend} key={i} />
+          ))}
         </div>
       </div>
     </>
