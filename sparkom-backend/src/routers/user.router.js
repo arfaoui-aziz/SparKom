@@ -24,7 +24,7 @@ router.post("/", createUser);
 router.post("/login", login);
 
 router.get("/", auth, getAllUsers);
-router.patch("/:id", auth, updateUser);
+router.patch("/", auth, updateUser);
 router.delete("/:id", auth, deleteUser);
 router.post("/logout", auth, logout);
 router.post("/logoutall", auth, logoutAll);

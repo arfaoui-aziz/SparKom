@@ -123,10 +123,9 @@
 // export default PostForm;
 
 import React from "react";
-import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
-import PermMediaIcon from "@material-ui/icons/PermMedia";
-import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
+// import PermMediaIcon from "@material-ui/icons/PermMedia";
+// import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import { makeStyles } from "@material-ui/core/styles";
 import PermMedia from "@material-ui/icons/PermMedia";
 
@@ -172,7 +171,7 @@ export default function PostForm() {
     image: "",
   });
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   function handleInputChange(event) {
     const value =

@@ -48,9 +48,9 @@ const updateUser = async (req, res) => {
   if (!isAllowed) return res.status(400).send("eroor Invalid update ! ");
 
   //! update if allowed
-  const { id } = req.params;
+  const { _id } = req.user;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(_id);
     if (!user) return res.status(404).send("User not Found");
 
     insertedUpdates.forEach((updatedField) => {
@@ -59,7 +59,7 @@ const updateUser = async (req, res) => {
     await user.save();
     res.send(user);
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send(e.message);
   }
 };
 
@@ -116,7 +116,7 @@ const forgotPassword = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) throw new Error("Wrong Email");
     const verifCode = Math.floor(Math.random() * 1_000_000_0);
-    sendSMS(verifCode);
+    sendSMS(verifCode, user.phone);
     user.verif_code = verifCode;
     await user.save();
     res.send(user);

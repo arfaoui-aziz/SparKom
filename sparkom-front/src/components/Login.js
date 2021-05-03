@@ -20,6 +20,7 @@ import { useHistory, Redirect, Link } from "react-router-dom";
 import { queryApi } from "../utils/queryApi";
 import { login, googleAuth, facebookAuth } from "../store/slices/auth";
 import FacebookLogin from "react-facebook-login";
+import SweetAlert from "./SweetAlert";
 //********************************************** */
 export default function Login() {
   const history = useHistory();
@@ -27,7 +28,6 @@ export default function Login() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [showLoader, setShowLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState({ visible: false, message: "" });
 
   const responseFacebook = (response) => {
     dispatch(facebookAuth(response));
@@ -55,10 +55,7 @@ export default function Login() {
       const [res, err] = await queryApi("users/login", values, "POST", false);
       if (err) {
         setShowLoader(false);
-        setError({
-          visible: true,
-          message: err,
-        });
+        SweetAlert("Error !", err, "error");
       } else {
         dispatch(login(res));
         history.push("/me");
@@ -127,11 +124,6 @@ export default function Login() {
                 </p>
               </div>
 
-              {error.visible && (
-                <div className="alert alert-danger" role="alert">
-                  {error.message}
-                </div>
-              )}
               {showLoader && <p>Loading</p>}
 
               <div className="remember">

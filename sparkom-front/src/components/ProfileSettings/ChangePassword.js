@@ -6,17 +6,35 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SweetAlert from "../SweetAlert";
+import { useDispatch } from "react-redux";
+import { queryApi } from "../../utils/queryApi";
+import { updateUser } from "../../store/slices/auth";
 export default function ChangePassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(password, password2);
     if (password !== password2) {
       SweetAlert("Error !", "Password Mismatch", "error");
+    } else {
+      const [res, err] = await queryApi("users", { password }, "PATCH");
+      if (err) {
+        SweetAlert("Error !", err, "error");
+      } else {
+        dispatch(updateUser(res));
+        SweetAlert(
+          "Password Updated !",
+          "Password Updated Successfully",
+          "success"
+        );
+        setPassword("");
+        setPassword2("");
+      }
     }
   };
   return (
@@ -66,7 +84,7 @@ export default function ChangePassword() {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={() => setShowPassword2(!showPassword)}
+                      onClick={() => setShowPassword2(!showPassword2)}
                       edge="end"
                     >
                       {showPassword2 ? <Visibility /> : <VisibilityOff />}
