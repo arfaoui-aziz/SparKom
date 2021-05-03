@@ -12,17 +12,9 @@ import { useServerApi } from "../../hooks/useServerApi";
 import { queryApi } from "../../utils/queryApi";
 import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
-export default function AllUsers(props) {
+export default function AllUsers({dm,board_id,dms}) {
   const history = useHistory();
 
-  const [dms] = useServerApi("boards/");
-  const [dmss, err, reload] = useServerApi("boards/");
-  const deleteboard = async (id) => {
-    const [err] = await queryApi("boards/delete/" + id, {}, "GET");
-    if (err) {
-      console.log(err);
-    } else await reload();
-  };
   const addmember = async (idb, idu) => {
     const [err] = await queryApi(
       "boards/AddMember/",
@@ -34,15 +26,29 @@ export default function AllUsers(props) {
       console.log(err);
     } else history.push("/boards");
   };
-  const boardid = props.board_id;
+  const [members, setmembers] = React.useState([]);
+  const [member, setmember] = React.useState(false);
+  //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
+
+  React.useEffect(() => {
+    setmembers(dms && dms.Members);
+    checkmember(dms && dms.Members);
+  }, [dms.Members]);
+
+  function checkmember(members) {
+    let match = members.indexOf(dm._id) !== -1;
+    setmember(match);
+  }
+
+
   
 
   return (
     <>
-      {props.dms?.map((dm, index) => (
+     {!member? (
         <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
           <div class="ui-block">
-            <div key={index}>
+
             
                 <div class="birthday-item inline-items">
                   <div class="author-thumb">
@@ -57,7 +63,7 @@ export default function AllUsers(props) {
                   <a
                     class="btn btn-sm bg-blue"
                     onClick={() => {
-                      addmember(props.board_id, dm._id);
+                      addmember(board_id, dm._id);
                       history.push("/boards");
                     }}
                   >
@@ -66,9 +72,9 @@ export default function AllUsers(props) {
                 </div>
            
             </div>
-          </div>
+
         </div>
-      ))}
+        ):(<></>)}
     </>
   );
 }

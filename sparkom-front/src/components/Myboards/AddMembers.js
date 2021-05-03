@@ -14,7 +14,12 @@ import AllUsers from "./AllUsers";
 export default function AddMembers() {
   const { id } = useParams();
   console.log(id);
-  const [dms] = useServerApi("boards//get/Allusers" );
+  const [dms] = useServerApi("boards/get/Allusers" );
+  const [data, setData] = React.useState([]);
+  React.useEffect(() => {
+    setData(dms);
+  }, [dms]);
+  
   const [dmss, err, reload] = useServerApi("lists/");
 
 
@@ -37,9 +42,15 @@ export default function AddMembers() {
               </div>
             </div>
           </div>
+          {data &&
+                    data.map((item, i) => {
+                      
+                      return <AllUsers dm={item} dms={toRender} board_id={id} key={item._id}/>
+                      
+                      ;
+                    })}
 
-          {/*<Alllists dm={toRender}/>*/}
-          <AllUsers dms={dms} board_id={id}/>
+          {/*<GroupCard dms={item} key={item._id} />*/}
         </div>
       </div>
       </>
