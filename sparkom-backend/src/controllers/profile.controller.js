@@ -106,9 +106,19 @@ const getProfileByID = async (req, res) => {
 };
 
 const getFollowers = async (req, res) => {
+  const my_id = req.user._id;
+  let myFriends = [];
   try {
-    const allProfiles = await Profile.find({});
-  } catch (error) {}
+    const myProfile = await Profile.findOne({ my_id });
+    for (let i = 0; i < myProfile.following.length; i++) {
+      const profile = await Profile.findById(myProfile.following[i]);
+      await profile.populate("my_id").execPopulate();
+      myFriends.push(profile);
+    }
+    res.send(myFriends);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 };
 
 module.exports = {
@@ -117,4 +127,5 @@ module.exports = {
   deleteMyProfile,
   followUser,
   getProfileByID,
+  getFollowers,
 };

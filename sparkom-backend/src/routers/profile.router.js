@@ -6,12 +6,14 @@ const {
   deleteMyProfile,
   followUser,
   getProfileByID,
+  getFollowers,
 } = require("../controllers/profile.controller");
 
 const router = new express.Router();
 
 // router.post("/", auth, createProfile);
 router.get("/followers/:id", auth, getProfileByID);
+router.get("/followers", auth, getFollowers);
 router.get("/", auth, getMyProfile);
 
 router.patch("/", auth, updateProfile);
