@@ -6,13 +6,13 @@
 .feed__inputContainer {
   background-color: white;
   padding: 10px;
-  padding-bottom: 20px;
+
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .feed__input {
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
   border-radius: 30px;
   display: flex;
   padding: 10px;
@@ -20,12 +20,14 @@
   padding-left: 15px;
 }
 
-.feed__input > form > input {
+.feed__input > form > textarea {
   border: none;
   flex: 1;
   margin-left: 10px;
   outline-width: 0;
   font-weight: 600;
+  resize: none;
+  overflow: hidden;
 }
 
 .feed__input > form > button {

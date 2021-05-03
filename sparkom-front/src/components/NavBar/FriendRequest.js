@@ -8,20 +8,20 @@ export default function FriendRequest() {
         <img src={profilePic} style={{ width: 34, height: 34 }} alt="author" />
       </div>
       <div className="notification-event">
-        <a href="#" className="h6 notification-friend">
+        <a href="#top" className="h6 notification-friend">
           Tamara Romanoff
         </a>
         <span className="chat-message-item">Mutual Friend: Sarah Hetfield</span>
       </div>
       <span className="notification-icon">
-        <a href="#" className="accept-request">
+        <a href="#top" className="accept-request">
           <span className="icon-add without-text">
             <svg className="olymp-happy-face-icon">
               <use xlinkHref={`${icons}#olymp-happy-face-icon`} />
             </svg>
           </span>
         </a>
-        <a href="#" className="accept-request request-del">
+        <a href="#top" className="accept-request request-del">
           <span className="icon-minus">
             <svg className="olymp-happy-face-icon">
               <use xlinkHref={`${icons}#olymp-happy-face-icon`} />

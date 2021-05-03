@@ -1,51 +1,61 @@
 import React from "react";
-import Home from "./pages/Post Managment/Home";
-import Navbar from "./components/Navbar";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import { useDispatch, connect } from "react-redux";
-import { authCheck } from "./redux/actions/userActions";
-import Profile from "./pages/Profile";
-import EditProfile from "./pages/EditProfile";
-import NavBar from "./components/NavBar/NavBar";
-import AllTopics from "./pages/Post Managment/Topics/AllTopics"
-function App({ currentUser }) {
-  const dispatch = useDispatch();
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
+import "./App.css";
+import Login from "./components/Login";
+import MyProfile from "./components/MyProfile/MyProfile";
+import Settings from "./components/ProfileSettings/Settings";
+import Quiz from "./components/Quiz/Quiz";
+import AllFriends from "./components/MyProfile/AllFriends";
+import AllBadges from "./components/MyProfile/AllBadges";
+import AllNotifications from "./components/MyProfile/AllNotifications";
+import AllRequests from "./components/MyProfile/AllRequests";
+import AllMessages from "./components/Chat/AllMessages";
+import Register from "./components/Register";
+import CompanySignup from "./components/CompanySignup";
+import Cv from "./components/CV/Cv";
+import UserProfile from "./components/MyProfile/UserProfile";
+import GeneratePDF from "./components/CV/GeneratePDF";
 
-  React.useEffect(() => {
-    dispatch(authCheck());
-  }, [dispatch]);
+import AddPost from "./pages/addPost";
 
+function App() {
+  const activeUser = useSelector((state) => state.auth.isAuthenticated);
   return (
-    <div
-    style={{
-      backgroundColor: '#EDF2F6',
-    }}
-  >
-    <BrowserRouter>
-      <Navbar currentUser={currentUser && currentUser} />
-      <NavBar />
-      <div class="header-spacer header-spacer-small mb-3"></div>
-      <Switch>
-        <Route path="/" exact component={Home} />
-          <Route path="/alltopics" exact component={AllTopics} />
-        
-        {/*<Route path="/register" exact component={Register} />
-        <Route path="/login" exact component={Login} />
-      
-        <Route path="/user/:userId" exact component={Profile} />
-  <Route path="/user/edit/:userId" exact component={EditProfile} />*/}
-        
+    <div>
+      <Router>
+        {/* <NavBar />
+        <div className="header-spacer header-spacer-small mb-3"></div> */}
+        {activeUser ? (
+          <Switch>
+            <Route path="/settings" component={Settings} />
+            <Route path="/quiz" component={Quiz} />
+            <Route path="/cv" component={Cv} />
+            <Route path="/me/friends" component={AllFriends} />
+            <Route path="/me/badges" component={AllBadges} />
+            <Route path="/me/notifs" component={AllNotifications} />
+            <Route path="/me/requests" component={AllRequests} />
+            <Route path="/me/messages" component={AllMessages} />
+            <Route path="/me" component={MyProfile} />
+            <Route path="/user" component={UserProfile} />
+            <Route path="/signup" component={Register} />
+            <Route path="/company" component={CompanySignup} />
+            <Route path="/pdf" component={GeneratePDF} />
+            <Route path="/home" component={AddPost} />
 
-      </Switch>
-    </BrowserRouter>
+            <Route path="/" exact component={Login} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/user" component={UserProfile} />
+            <Route path="/signup" component={Register} />
+            <Route path="/company" component={CompanySignup} />
+            <Route path="/" exact component={Login} />
+          </Switch>
+        )}
+      </Router>
     </div>
   );
 }
 
-const mapStateToProps = ({ user: { currentUser } }) => ({
-  currentUser,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;
