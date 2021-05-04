@@ -2,19 +2,29 @@ import React, { useState } from "react";
 import logo from "../../assets/img/logo.png";
 import friend from "../../assets/img/friend-harmonic5.jpg";
 import axios from "axios";
-import icons from "../../assets/svg-icons/sprites/icons.svg";
-import { Link } from "react-router-dom";
-import Oneboard from "./OneBoard";
-import BoardAdd from "./BoardAdd";
-import PBoardAdd from "./PBoardAdd";
 import { useHistory } from "react-router-dom";
-import { useServerApi } from "../../hooks/useServerApi";
 import { queryApi } from "../../utils/queryApi";
 import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 export default function AllUsers({dm,board_id,dms}) {
   const history = useHistory();
   const activeUser = useSelector(activeUserSelector);
+  const [sent, setSend] = useState(false);
+  const [text, setText] = useState("");
+  const mail = dm.email;
+  const text2 = `Hello  ${dm.firstname} ! You are Now a member in the board ${dms.Board_name} , ${activeUser.firstname} invited you`;
+  const handleSend = async () => {
+    setSend(true);
+    try {
+      await axios.post("http://localhost:3002/send_mail", {
+        text2,mail
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(sent);
+  console.log(text2);
   const addmember = async (idb, idu) => {
     const [err] = await queryApi(
       "boards/AddMember/",
@@ -22,10 +32,15 @@ export default function AllUsers({dm,board_id,dms}) {
       "Put",
       false
     );
+   handleSend();
+   
     if (err) {
       console.log(err);
-    } else history.push("/boards");
+    } else {history.push("/boards");
+   
+  }
   };
+  console.log(sent);
   const [members, setmembers] = React.useState([]);
   const [member, setmember] = React.useState(false);
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;

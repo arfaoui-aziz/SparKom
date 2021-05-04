@@ -40,7 +40,7 @@ app.use('/lists', listRouter);
 app.use('/cards', cardRouter);
 
 app.post("/send_mail",cors(), async (req, res) => {
-  let {text} = req.body
+  let {text2} = req.body
   let {mail} = req.body
   const transport = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
@@ -63,7 +63,7 @@ app.post("/send_mail",cors(), async (req, res) => {
     font-size: 20px;
     ">
     <h2>Here is your email!</h2>
-    <p>${text}</p>
+    <p>${text2}</p>
     <p> All the best ,Sparkom</p>
     </div>`
   })
