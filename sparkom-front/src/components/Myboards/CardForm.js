@@ -49,7 +49,7 @@ export default function CardForm(props) {
         });
         console.log(err);
       } else {
-        history.push("/boards");
+        history.push("/EditCard/"+ props.idc);
         console.log("hedhiii", res);
       }
     },
@@ -65,12 +65,17 @@ export default function CardForm(props) {
         message: err?.message,
       });
     } else {
-      history.push("/boards");
+      
     }
   };
 
+  const replace =  () => {history.replace("/EditCard/"+ props.idc);};
   const members = (idd) => {
     history.replace("/CardMembers/" + props.idc + "/"+ card.list_id);
+    console.log(history);
+  };
+  const lists = (idd) => {
+    history.replace("/CardLists/" + props.idc + "/"+ card.list_id);
     console.log(history);
   };
   return (
@@ -116,6 +121,7 @@ export default function CardForm(props) {
                 <button
                   type="submit"
                   className="btn btn-primary btn-md full-width"
+                  onClick={() => {window.location.reload(false);}}
                 >
                   {" "}
                   {card.Description!=null? ( "Update Description" ): ("Add Description")}
@@ -184,6 +190,7 @@ export default function CardForm(props) {
                     <button
                     type="submit"
                     className="btn btn-primary btn-s "
+                    onClick={() => {window.location.reload(false);}}
                   >
                     {card.Due_date!=null? ( "Update Date" ): ("Add Date")}
                   </button>
@@ -210,6 +217,7 @@ export default function CardForm(props) {
                 href="#"
                 class="btn btn-smoke btn-md btn-light-bg"
                 style={style}
+                onClick={() => lists(card._id)}
               >
                 <i class="fas fa-arrow-alt-circle-right"></i> Move
               </a>

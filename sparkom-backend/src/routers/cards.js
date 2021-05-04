@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Card = require("../Models/cards");
+var List = require("../Models/lists");
 const {
   AddDescription,
   AddDueDate,
@@ -30,6 +31,22 @@ router.get("/:id", function (req, res, next) {
       console.log(err);
     } else {
       res.json(data);
+    }
+  });
+});
+router.get("/board/:id", function (req, res, next) {
+  Card.find({list_id: req.params.id },function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      List.findById(req.params.id, function (err, dataa) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json(dataa);
+        }
+      });
+
     }
   });
 });

@@ -37,7 +37,7 @@ export default function ShowBoard() {
       {toRender ? (
           <>
           <NavBar/>
-        <Members/>
+        <Members dm={toRender}/>
         <Bheader/>
 
         <Alllists dm={toRender}/>

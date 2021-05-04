@@ -15,13 +15,19 @@ const style = {
     height: 545,
     right: 0
 };
-export default function Boards() {
-  return (
+export default function Members(props) {
 
+  return (
+	  <>
+
+		  
     <div className="fixed-sidebar right">
 	<div className="fixed-sidebar-right sidebar--small" id="sidebar-right">
 
 		<div className="mCustomScrollbar" data-mcs-theme="dark">
+		{ 	props.dm?.Members?.map((item, i) => (
+			<div key={i}>
+				
 			<ul className="chat-users">
 				<li className="inline-items js-chat-open">
 					<div className="author-thumb">
@@ -29,58 +35,14 @@ export default function Boards() {
 						<span className="icon-status online"></span>
 					</div>
 				</li>
-				<li className="inline-items js-chat-open">
-					<div className="author-thumb">
-						<img alt="author" src={avatar} className="avatar"/>
-						<span className="icon-status online"></span>
-					</div>
-				</li>
-
-				<li className="inline-items js-chat-open">
-					<div className="author-thumb">
-						<img alt="author" src={avatar2} className="avatar"/>
-						<span className="icon-status online"></span>
-					</div>
-				</li>
-
-				<li className="inline-items js-chat-open">
-					<div className="author-thumb">
-						<img alt="author" src={avatar3} className="avatar"/>
-						<span className="icon-status away"></span>
-					</div>
-				</li>
-
-				<li className="inline-items js-chat-open">
-					<div className="author-thumb">
-						<img alt="author" src={avatar5}className="avatar"/>
-						<span className="icon-status disconected"></span>
-					</div>
-				</li>
-				<li className="inline-items js-chat-open">
-					<div className="author-thumb">
-						<img alt="author" src={avatar4} className="avatar"/>
-						<span className="icon-status online"></span>
-					</div>
-				</li>
-				<li className="inline-items js-chat-open">
-					<div className="author-thumb">
-						<img alt="author" src={avatar6} className="avatar"/>
-						<span className="icon-status online"></span>
-					</div>
-				</li>
-				<li className="inline-items js-chat-open">
-					<div className="author-thumb">
-						<img alt="author" src={avatar7} className="avatar"/>
-						<span className="icon-status away"></span>
-					</div>
-				</li>
-                
-                 
+			
                
-               </ul>        
+               </ul> 
+			   </div>
+		))}       
                <li className="all-users">
                 
-                +74
+               {props.dm?.Members.length}
                </li>
         </div>
 
@@ -91,7 +53,7 @@ export default function Boards() {
 	</div>
 
 	</div>
-    
 
+</>
   );
 }

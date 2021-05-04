@@ -72,40 +72,18 @@ export default function Oneboard(props) {
               <div class="country">{dm.Members.length} Members in the board</div>
             </div>
           </div>
-              
-          <ul class="friends-harmonic">
+          { 	dm.Members?.map((item, i) => (
+			
+          <ul class="friends-harmonic" key={i}>
             <li>
               <a href="#">
                 <img src={friend} alt="friend" />
               </a>
             </li>
-            <li>
-              <a href="#">
-                <img src={friend1} alt="friend" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src={friend2} alt="friend" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src={friend3} alt="friend" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src={friend4} alt="friend" />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src={friend5} alt="author" />
-              </a>
-            </li>
+            
           </ul>
-                            
+      
+		))}                  
                             <div class="control-block-button">
                                 <a onClick={() => members(dm._id)} className="accept-request">
                                 <span className="icon-add without-text">
