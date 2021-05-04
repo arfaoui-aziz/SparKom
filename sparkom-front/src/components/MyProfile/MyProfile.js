@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchProfile, fetchFriends } from "../../store/slices/profile";
+import {
+  fetchProfile,
+  fetchFriends,
+  fetchAllProfiles,
+} from "../../store/slices/profile";
 import NavBar from "../NavBar/NavBar";
 import Header from "../ProfileSettings/Header";
 import Feed from "./Feed";
@@ -12,6 +16,7 @@ export default function MyProfile() {
   useEffect(() => {
     dispatch(fetchProfile());
     dispatch(fetchFriends());
+    dispatch(fetchAllProfiles());
   }, [dispatch]);
   return (
     <>

@@ -124,23 +124,14 @@ const getFollowers = async (req, res) => {
 
 const getAllProfiles = async (req, res) => {
   try {
+    let userPattern = new RegExp("^" + req.query.username.toLowerCase());
     const profiles = await Profile.find({}).populate("my_id").exec();
-    //     const profiles = await Profile.aggregate([
-    //       {
-    //         $lookup: {
-    //           from: User.collection.name,
-    //           localField: "my_id",
-    //           foreignField: "_id",
-    //           as: "userArray",
-    //         },
-    //       },
-    //       {
-    //         $unwind: "$userArray",
-    //       },
-    // ,
-    //     ]).exec();
 
-    res.send(profiles);
+    const searchProfiles = profiles.filter((profile) => {
+      return profile.my_id.username.toLowerCase().match(userPattern);
+    });
+
+    req.query.username ? res.send(searchProfiles) : res.send(profiles);
   } catch (e) {
     res.status(500).send(e.message);
   }

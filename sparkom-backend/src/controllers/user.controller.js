@@ -246,7 +246,7 @@ const deleteAvatar = async (req, res) => {
 //********************* get User By UserName */
 const getUserByUserName = async (req, res) => {
   try {
-    let userPattern = new RegExp("^" + req.query.username);
+    let userPattern = new RegExp("^" + req.query.username.toLowerCase());
     const users = await User.find({
       $or: [
         { username: { $regex: userPattern } },

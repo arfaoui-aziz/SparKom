@@ -1,6 +1,7 @@
 import React from "react";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import avatar from "../../assets/img/avatar38-sm.jpg";
+import { Link } from "react-router-dom";
 export default function FriendSuggestion() {
   const friendSug = (name, nbrCommon) => {
     return (
@@ -33,11 +34,11 @@ export default function FriendSuggestion() {
     <div className="ui-block">
       <div className="ui-block-title">
         <h6 className="title">Friend Suggestions</h6>
-        <a href="#top" className="more">
+        <Link to="/all" className="more">
           <svg className="olymp-three-dots-icon">
             <use xlinkHref={`${icons}#olymp-three-dots-icon`} />
           </svg>
-        </a>
+        </Link>
       </div>
 
       <ul className="widget w-friend-pages-added notification-list friend-requests">
