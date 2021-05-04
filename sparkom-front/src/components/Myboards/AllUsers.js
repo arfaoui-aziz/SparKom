@@ -19,6 +19,7 @@ export default function AllUsers({dm,board_id,dms}) {
       await axios.post("http://localhost:3002/send_mail", {
         text2,mail
       });
+      
     } catch (error) {
       console.log(error);
     }
