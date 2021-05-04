@@ -9,9 +9,9 @@ import { useServerApi } from "../../hooks/useServerApi";
 import { queryApi } from "../../utils/queryApi";
 import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
-import AllUsers from "./AllUsers";
+import AllMembers from "./AllMembers";
 
-export default function AddMembers() {
+export default function DeleteMembers() {
   const { id } = useParams();
   console.log(id);
   const [dms] = useServerApi("boards/get/Allusers" );
@@ -36,14 +36,14 @@ export default function AddMembers() {
           <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="ui-block">
               <div class="ui-block-title">
-                <h6 class="title">Add members to the board</h6>
+                <h6 class="title">remove members from the board</h6>
               </div>
             </div>
           </div>
           {data &&
                     data.map((item, i) => {
                       
-                      return <AllUsers dm={item} dms={toRender} board_id={id} key={item._id}/>
+                      return <AllMembers dm={item} dms={toRender} board_id={id} key={item._id}/>
                       
                       ;
                     })}

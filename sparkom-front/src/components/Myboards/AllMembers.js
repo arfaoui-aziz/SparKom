@@ -15,9 +15,9 @@ import { useSelector } from "react-redux";
 export default function AllUsers({dm,board_id,dms}) {
   const history = useHistory();
   const activeUser = useSelector(activeUserSelector);
-  const addmember = async (idb, idu) => {
+  const removemember = async (idb, idu) => {
     const [err] = await queryApi(
-      "boards/AddMember/",
+      "boards/LeaveBoard/",
       { board_id: idb, userId: idu },
       "Put",
       false
@@ -34,7 +34,7 @@ export default function AllUsers({dm,board_id,dms}) {
     setmembers(dms && dms.Members);
     checkmember(dms && dms.Members);
   }, [dms.Members]);
-
+  console.log(dms.Members);
   function checkmember(members) {
     let match = members.indexOf(dm._id) !== -1;
     setmember(match);
@@ -45,7 +45,7 @@ export default function AllUsers({dm,board_id,dms}) {
 
   return (
     <>
-     {!member && dm._id!==dms.creator_id ? (
+     {member && dm._id!==dms.creator_id ? (
         <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
           <div class="ui-block">
 
@@ -63,11 +63,11 @@ export default function AllUsers({dm,board_id,dms}) {
                   <a
                     class="btn btn-sm bg-blue"
                     onClick={() => {
-                      addmember(board_id, dm._id);
+                        removemember(board_id, dm._id);
                       history.push("/boards");
                     }}
                   >
-                    Add{" "}
+                    remove{" "}
                   </a>
                 </div>
            

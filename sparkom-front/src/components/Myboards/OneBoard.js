@@ -25,13 +25,17 @@ export default function Oneboard(props) {
     history.replace("/AddMembers/" + idd);
     console.log(history);
   };
+  const dmembers = (idd) => {
+    history.replace("/DeleteMembers/" + idd);
+    console.log(history);
+  };
   return (
     <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
        
         {props.dms?.map((dm, index) => (
         <div key={index}>
-
+          {dm.Is_public || dm.creator_id===activeUser._id ? (
     <div class="ui-block" data-mh="friend-groups-item">
       <div class="friend-item friend-groups">
         <div class="friend-item-content">
@@ -47,12 +51,16 @@ export default function Oneboard(props) {
               </li>):
               (<li></li>)
               }
+               {(dm.creator_id!==activeUser._id) ? (
               <li>
                 <a href="#">unjoin board</a>
               </li>
-              <li>
+              ):
+              (<li></li>)
+              }
+              {/*<li>
                 <a href="#">Turn Off Notifications</a>
-              </li>
+              </li>*/}
             </ul>
           </div>
           <div class="friend-avatar">
@@ -107,8 +115,8 @@ export default function Oneboard(props) {
                                 
                                 </span>
                                 </a>
-                                {(dm.creator_id!==activeUser._id) ? (
-                                <a href="#" className="accept-request request-del">
+                                {(dm.creator_id===activeUser._id) ? (
+                                <a onClick={() => dmembers(dm._id)} href="#" className="accept-request request-del">
                                 <span className="icon-minus">
                                     <svg className="olymp-happy-face-icon">
                                 <use xlinkHref={`${icons}#olymp-happy-face-icon`} />
@@ -120,6 +128,7 @@ export default function Oneboard(props) {
         </div>
       </div>
     </div>
+    ): (<></>)}
     </div> 
 
     ))}

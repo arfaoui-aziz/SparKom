@@ -79,15 +79,7 @@ router.post("/add/:id", function (req, res, next) {
 });
 
 
-router.get("/:id", function (req, res, next) {
-  List.findById(req.params.id, function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("detail", { user: data });
-    }
-  });
-});
+
 /*router.post("/", function (req, res, next) {
   var user = new List({
     list_name: "todo",
@@ -103,6 +95,15 @@ router.get("/delete/:id", function (req, res, next) {
   List.findByIdAndRemove(req.params.id, function (err, docs) {
     if (err) console.log(err);
     res.redirect("/lists/");
+  });
+});
+router.get("/detail/list/:id", function (req, res, next) {
+  List.findById(req.params.id, function (err, data) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(data);
+    }
   });
 });
 module.exports = router;

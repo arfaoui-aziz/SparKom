@@ -70,7 +70,7 @@ export default function CardForm(props) {
   };
 
   const members = (idd) => {
-    history.replace("/CardMembers/" + props.idc);
+    history.replace("/CardMembers/" + props.idc + "/"+ card.list_id);
     console.log(history);
   };
   return (

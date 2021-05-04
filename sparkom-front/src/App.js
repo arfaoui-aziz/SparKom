@@ -26,8 +26,9 @@ import Form2 from "./components/Myboards/Form2";
 import ListForm from "./components/Myboards/ListForm";
 import ActionButtonL from "./components/Myboards/ActionButtonL";
 import EditCard from "./components/Myboards/EditCard";
-import AddMembers from "./components/Myboards/AddMembers"
-import CardMembers from "./components/Myboards/CardMembers"
+import AddMembers from "./components/Myboards/AddMembers";
+import DeleteMembers from "./components/Myboards/DeleteMembers";
+import CardMembers from "./components/Myboards/CardMembers";
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
   return (
@@ -60,7 +61,8 @@ function App() {
           <Route path="/ActionButtonL" component={ActionButtonL} />
           <Route path="/EditCard/:idc" component={EditCard} />
           <Route path="/AddMembers/:id" component={AddMembers} />
-          <Route path="/CardMembers/:id" component={CardMembers} />
+          <Route path="/DeleteMembers/:id" component={DeleteMembers} />
+          <Route path="/CardMembers/:id/:idl" component={CardMembers} />
 
             <Route path="/" exact component={Login} />
           </Switch>
