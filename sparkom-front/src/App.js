@@ -27,6 +27,7 @@ import Form3 from "./components/Myboards/Form3";
 import ListForm from "./components/Myboards/ListForm";
 import ActionButtonL from "./components/Myboards/ActionButtonL";
 import EditCard from "./components/Myboards/EditCard";
+import CardDetails from "./components/Myboards/CardDetails";
 import AddMembers from "./components/Myboards/AddMembers";
 import DeleteMembers from "./components/Myboards/DeleteMembers";
 import CardMembers from "./components/Myboards/CardMembers";
@@ -64,6 +65,7 @@ function App() {
           <Route path="/PBoardAdd" component={PBoardAdd} />
           <Route path="/ActionButtonL" component={ActionButtonL} />
           <Route path="/EditCard/:idc" component={EditCard} />
+          <Route path="/CardDetails/:idc" component={CardDetails} />
           <Route path="/AddMembers/:id" component={AddMembers} />
           <Route path="/DeleteMembers/:id" component={DeleteMembers} />
           <Route path="/CardMembers/:id/:idl" component={CardMembers} />

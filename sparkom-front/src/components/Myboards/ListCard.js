@@ -44,13 +44,16 @@ const EditButton = styled(EditIcon)`
         history.replace("/EditCard/" + idc);
         console.log(history);
       };
+      const carddetails =(id) => {
+        history.replace("/CardDetails/" + id);
+      };
     
     return (
       <div>
         {cards?.map((dm, index) => (
         <div key={index}>
-     <Card style={styles.cardContainer}>
-         <cardContainer >
+     <Card style={styles.cardContainer}   onClick={() => {carddetails(dm._id);}}>
+         <cardContainer style={{cursor:"pointer"}} >
              <Card >
                  <Typography gutterBottom>  {dm.Card_name} </Typography>
                 
