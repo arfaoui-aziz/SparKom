@@ -29,6 +29,18 @@ const userPosts = (req, res) => {
     });
 };
 
+const topicPosts = (req, res) => {
+  Post.find({ topics: req.params.topicId })
+    .populate("comments", "text created")
+    .populate("comments.postedBy", "_id name")
+    .populate("postedBy", "_id name")
+    .sort("-createdAt")
+    .exec((err, posts) => {
+      if (err) res.json({ error: err });
+      res.json(posts);
+    });
+};
+
 const getPostById = (req, res, next, id) => {
   Post.findById(id)
     .populate("comments", "text created")
@@ -219,4 +231,5 @@ module.exports = {
   updatePost,
   getPostPhoto,
   addPostTopic,
+  topicPosts,
 };

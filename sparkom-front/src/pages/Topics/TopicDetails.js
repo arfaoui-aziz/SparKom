@@ -10,7 +10,7 @@ import LeftSidebar from "../Post Managment/LeftSidebar";
 import RightSidebar from "../Post Managment/RightSidebar";
 import { isLogged } from "../../helpers/auth";
 import { getAllPosts } from "../../redux/actions/postActions";
-
+import { getTopicPosts } from "../../redux/actions/postActions";
 function TopicDetails({ posts }) {
   const { topicId } = useParams();
   const [topic, setTopic] = React.useState("");
@@ -22,7 +22,7 @@ function TopicDetails({ posts }) {
   React.useEffect(() => {
     if (jwt) {
       function loadPosts() {
-        dispatch(getAllPosts(jwt.token, jwt.user._id));
+        dispatch(getTopicPosts(jwt.token, topicId));
       }
       loadPosts();
     }

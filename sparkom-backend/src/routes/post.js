@@ -5,6 +5,7 @@ const {
   addPost,
   getAllPosts,
   userPosts,
+  topicPosts,
   getPostById,
   isOwner,
   deletePost,
@@ -22,6 +23,7 @@ const router = express.Router();
 
 router.get("/api/posts/:userId", requireSignin, getAllPosts);
 router.get("/api/posts/by/:userId", requireSignin, userPosts);
+router.get("/api/posts/byTopic/:topicId", requireSignin, topicPosts);
 router.delete("/api/post/:postId", requireSignin, isOwner, deletePost);
 router.post("/api/post/create/:userId", requireSignin, addPost);
 router.put("/api/post/like", requireSignin, likePost);

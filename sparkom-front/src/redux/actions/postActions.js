@@ -20,6 +20,27 @@ export const getUserPosts = (token, userId) => {
   };
 };
 
+export const getTopicPosts = (token, topicId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return (dispatch) => {
+    axios
+      .get(`http://localhost:8888/api/posts/byTopic/${topicId}`, config)
+      .then((res) => {
+        dispatch({
+          type: postTypes.GET_ALL,
+          payload: res.data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+
+
 export const getAllPosts = (token, userId) => {
   const config = {
     headers: {
