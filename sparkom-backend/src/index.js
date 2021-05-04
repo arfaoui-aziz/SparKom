@@ -15,6 +15,8 @@ const badgeRouter = require("./routers/badge.router");
 const cvRouter = require("./routers/cv.router");
 var groupRouter = require("./routers/group");
 var eventRouter = require("./routers/event");
+
+var postGrRouter  = require("./routers/postGr");
 const bodyParser = require("body-parser");
 const app = express();
 app.use(cors());
@@ -37,6 +39,7 @@ app.use("/badges", badgeRouter);
 app.use("/cv", cvRouter);
 app.use("/group", groupRouter);
 app.use("/event", eventRouter);
+app.use("/", postGrRouter);
 
 const PORT = process.env.PORT || 3000;
 app.set("views", path.join(__dirname, "views"));

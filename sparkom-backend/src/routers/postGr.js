@@ -19,16 +19,16 @@ const { getUserById } = require("../controllers/user.controller");
 
 const router = express.Router();
 
-router.get("/api/posts/:userId", auth, getAllPosts);
-router.get("/api/posts/by/:userId", auth, userPosts);
-router.delete("/api/post/:postId", auth, isOwner, deletePost);
-router.post("/api/post/create/:userId", auth, addPost);
-router.put("/api/post/like", auth, likePost);
-router.put("/api/post/unlike", auth, unlikePost);
-router.put("/api/post/comment", auth, addComment);
-router.put("/api/post/uncomment", auth, deleteComment);
-router.get("/api/post/photo/:postId", getPostPhoto);
-router.param("userId", getUserById);
+router.get("/posts/:userId", auth, getAllPosts);
+router.get("/posts/by/:userId", auth, userPosts);
+router.delete("/post/:postId", auth, isOwner, deletePost);
+router.post("/post/create/:userId", auth, addPost);
+router.put("/post/like", auth, likePost);
+router.put("/post/unlike", auth, unlikePost);
+router.put("/post/comment", auth, addComment);
+router.put("/post/uncomment", auth, deleteComment);
+router.get("/post/photo/:postId", getPostPhoto);
+//router.param("userId", getUserById);
 router.param("postId", getPostById);
 
 router.put("/api/posts/:postId", auth, updatePost);

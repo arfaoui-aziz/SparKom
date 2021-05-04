@@ -19,6 +19,7 @@ const PostGrSchema = new mongoose.Schema(
     postedIn: {
       type: ObjectId,
       ref: "group",
+      required: false,
     },
     likes: [{ type: ObjectId, ref: "User" }],
     comments: [

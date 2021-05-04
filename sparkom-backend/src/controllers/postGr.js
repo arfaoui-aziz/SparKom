@@ -66,7 +66,7 @@ const addPost = (req, res) => {
   let form = new formidable.IncomingForm();
   const { text } = req.body;
   form.keepExtensions = true;
-  let post = new Post({ text, postedBy: req.profile._id  });
+  let post = new Post({ text, postedBy: req.params._id  });
 
   form.parse(req, (err, fields, files) => {
     if (err)

@@ -103,7 +103,7 @@ const PersonalDetailsForm = (props) => {
                             name="Type"
                             component="input"
                             type="radio"
-                            value= "1"
+                            value= "Public"
                           />{" "}
                           Public
                         </label>
@@ -112,7 +112,7 @@ const PersonalDetailsForm = (props) => {
                             name="Type"
                             component="input"
                             type="radio"
-                            value="0"
+                            value="Private"
                           />
                           Private
                         </label>

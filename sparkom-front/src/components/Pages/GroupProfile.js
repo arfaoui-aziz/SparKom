@@ -11,10 +11,13 @@ import { activeUserSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 import lock from "../../assets/img/lock.png";
 import axios from "axios";
+import Home from "../Group/PostGR/Home";
 export default function MyProfile() {
   const { id } = useParams();
   const [dm, err, reload] = useServerApi("group/getdev/" + id);
   const toRender = dm;
+  const [dms, err2, reload2] = useServerApi("group/getev/" + id);
+  const toRender2 = dms;
   const activeUser = useSelector(activeUserSelector);
   const [members, setmembers] = useState([]);
   const [member, setmember] = useState(false);
@@ -55,7 +58,7 @@ export default function MyProfile() {
           <>
             <HeaderG dm={toRender} />
 
-            {toRender.IsPrivate === "0" &&
+            {toRender.IsPrivate === "Private" &&
             toRender.CreatedBy !== activeUser._id &&
             !member ? (
               <div className="col col-xl-12 col-lg-12 col-lg-12 col-sm-12 col-12">
@@ -75,8 +78,8 @@ export default function MyProfile() {
               <>
                 {" "}
                 <LeftSidebar dm={toRender} />
-                <Feed dm={toRender} />
-                <RightSidebar dm={toRender} />
+                <Home />
+                <RightSidebar dms={toRender2} />
               </>
             )}
           </>

@@ -12,6 +12,8 @@ export default function MyBio(props) {
     history.replace("/update/" + id);
   };
 
+
+  
   const activeUser = useSelector(activeUserSelector);
   return (
     <div className="ui-block">
@@ -39,7 +41,10 @@ export default function MyBio(props) {
             title="Created At:"
             text={props.dm.createdAt.substring(0,10)}
           />
-
+           <BioInfo
+            title="Status:"
+            text={props.dm.IsPrivate}
+          />
           <BioInfo
             title="Topic:"
             text={props.dm.Topic?.map((ds, index) => (
