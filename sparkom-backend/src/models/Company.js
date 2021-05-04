@@ -3,11 +3,16 @@ let Schema = mongoose.Schema
 const CompanySchema = new Schema({
   company_name: {
     type: String,
-    required: true
+    required: false
   },
   company_details: {
    type: String
-  }
+  },
+  company_owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  required: false
+ }
 });
 
 

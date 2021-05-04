@@ -11,7 +11,7 @@ const PostedOnSchema = new Schema({
   },
   job_id: {
     type: Schema.Types.ObjectId,
-    ref: 'Job',
+    ref: 'job',
     required: true
  }
 });

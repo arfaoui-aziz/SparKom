@@ -1,8 +1,18 @@
 const express = require('express');
 const router = express.Router();
-
+const multer = require('multer');
 const Job = require('../models/Job');
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, './public');
+    },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);
+  }
+});
+
+const uploadImg = multer({storage: storage}).single('image');
 
 
 // @route GET api/Job/showJobs
@@ -29,6 +39,9 @@ const getJobById = async (req, res) => {
 // @description api/Job/addcomp
 // @access Public
 const createJob = async (req, res) => {
+  let jobd = req.body;
+  console.log(jobd);
+  jobd.image=req.file.path;
     Job.create(req.body)
       .then(Jobs => res.json({ msg: 'Job added successfully' }))
       .catch(err => res.status(400).json({ error: 'Unable to add this Job' }));
@@ -59,5 +72,6 @@ const updateJobById = async(req, res) => {
     getJobById,
     createJob,
     deleteJob,
-    updateJobById
+    updateJobById,
+    uploadImg
   };

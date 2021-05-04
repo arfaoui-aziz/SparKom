@@ -29,6 +29,7 @@ const getCompanyById = async (req, res) => {
 // @description api/company/addcomp
 // @access Public
 const createCompany = async (req, res) => {
+  console.log(req.body);
     Company.create(req.body)
       .then(companys => res.json({ msg: 'Company added successfully' }))
       .catch(err => res.status(400).json({ error: 'Unable to add this Company' }));

@@ -3,20 +3,51 @@ let Schema = mongoose.Schema
 const JobSchema = new Schema({
   title: {
     type: String,
-    required: true
+  required: false
   },
-  job_type_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'Job_type',
-    required: true
- },
+  location: {
+    type: String,
+  required: false
+  },
+  contract: {
+    type: String,
+  required: false
+  },
+  salary: {
+    type: String,
+  required: false
+  },
+  experience: {
+    type: String,
+  required: false
+  },
+  study: {
+    type: String,
+  required: false
+  },
+  startingtime: {
+    type: Number,
+    required: false
+  },
+  endingtime: {
+    type: Number,
+    required: false
+  },
+  Languages: {
+    type: String,
+  required: false
+  },
+  Responsibility: {
+    type: String,
+  required: false
+  },
   posted_date: {
     type: Date,
     default: Date.now
   },
   start_date: {
     type: Date,
-    required: true
+  required: false
   },
   employees_needed: {
     type: Number
@@ -26,13 +57,12 @@ const JobSchema = new Schema({
   },
   company_id: {
     type: Schema.Types.ObjectId,
-    ref: 'Company',
-    required: true
+    ref: 'company',
+  required: false
  },
-  date_process_started: {
-    type: Date,
-   
-  }
+  image : {
+    type : String,
+  },
 });
 
 

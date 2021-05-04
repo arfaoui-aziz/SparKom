@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const sharp = require("sharp");
 //************** Create New User *******************/
 const createUser = async (req, res) => {
   try {
@@ -114,6 +116,75 @@ const logoutAll = async (req, res) => {
   }
 };
 
+//! Setting up multer
+const avatarUpload = multer({
+  limits: {
+    fileSize: 1_000_000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|png|jpeg)$/)) {
+      cb(new Error("File must be a Valid Image Type"));
+    }
+
+    cb(undefined, true);
+  },
+});
+//*********** Upload & Update Avatar *********************************/
+
+const addAvatar = async (req, res) => {
+  try {
+    //!req.file.buffer   to get the Binary of the Uploaded file
+
+    const buffer = await sharp(req.file.buffer)
+      .resize({ width: 250, height: 250 })
+      .png()
+      .toBuffer();
+    //? req.user.avatar = req.file.buffer;
+    req.user.avatar = buffer;
+    await req.user.save();
+    res.status(200).send("Image Uploaded");
+  } catch (e) {
+    res.status(500).send();
+  }
+};
+//*************** Display users Avatar ****************************/
+const displayAvatar = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user || !user.avatar) {
+      throw new Error("You don't have an avatar");
+    }
+
+    res.set("Content-Type", "image/png");
+    res.send(user.avatar);
+  } catch (e) {
+    res.status(404).send(e);
+  }
+};
+//*************** Display My Avatar ****************************/
+
+const MyAvatar = async (req, res) => {
+  try {
+    if (!req.user.avatar) {
+      throw new Error("You don't have an avatar");
+    }
+    res.set("Content-Type", "image/png");
+    res.send(req.user.avatar);
+  } catch (e) {
+    res.status(404).send(e);
+  }
+};
+//*************** Delete users Avatar ****************************/
+const deleteAvatar = async (req, res) => {
+  req.user.avatar = undefined;
+  try {
+    await req.user.save();
+    res.status(200).send("Avatar Deleted");
+  } catch (e) {
+    res.status(400).send(e);
+  }
+};
+
 //****************************************/
 module.exports = {
   createUser,
@@ -123,4 +194,9 @@ module.exports = {
   login,
   logout,
   logoutAll,
+  avatarUpload,
+  addAvatar,
+  displayAvatar,
+  MyAvatar,
+  deleteAvatar,
 };
