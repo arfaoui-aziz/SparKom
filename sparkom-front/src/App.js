@@ -32,6 +32,7 @@ import AddMembers from "./components/Myboards/AddMembers";
 import DeleteMembers from "./components/Myboards/DeleteMembers";
 import CardMembers from "./components/Myboards/CardMembers";
 import CardLists from "./components/Myboards/CardLists";
+import Mail from "./components/Myboards/Mail";
 
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
@@ -70,6 +71,7 @@ function App() {
           <Route path="/DeleteMembers/:id" component={DeleteMembers} />
           <Route path="/CardMembers/:id/:idl" component={CardMembers} />
           <Route path="/CardLists/:id/:idl" component={CardLists} />
+          <Route path="/Mail" component={Mail} />
           
             <Route path="/" exact component={Login} />
           </Switch>
