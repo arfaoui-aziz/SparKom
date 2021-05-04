@@ -14,6 +14,7 @@ const {
   addComment,
   updatePost,
   getPostPhoto,
+  addPostTopic,
 } = require("../controllers/post");
 const { getUserById } = require("../controllers/user");
 
@@ -30,7 +31,7 @@ router.put("/api/post/uncomment", requireSignin, deleteComment);
 router.get("/api/post/photo/:postId", getPostPhoto);
 router.param("userId", getUserById);
 router.param("postId", getPostById);
-
+router.post("/api/post/create/topic", requireSignin, addPostTopic);
 router.put("/api/posts/:postId", requireSignin, updatePost);
 
 

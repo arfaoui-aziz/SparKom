@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema(
       ref: "User",
     },
     likes: [{ type: ObjectId, ref: "User" }],
-    topics: [{ type: ObjectId, ref: "Topic" }],
+    topics: { type: ObjectId, ref: "Topic" },
     hastags: [{ type: ObjectId, ref: "Hashtag" }],
     comments: [
       {

@@ -59,16 +59,46 @@ const isOwner = (req, res, next) => {
 };*/
 
 const addPost = (req, res) => {
-  console.log(req.body);
+  
   let form = new formidable.IncomingForm();
   const { text } = req.body;
   form.keepExtensions = true;
-  let post = new Post({ text, postedBy: req.user._id });
+  let post = new Post({ text, postedBy: req.profile._id });
 
   form.parse(req, (err, fields, files) => {
+    console.log(fields);
+    console.log(fields.topics);
+    console.log("cbn");
+    post.topics=fields.topics;
     if (err)
       return res.json({ error: "Impossible d'ajouter le fichier séléctionné" });
     post = _.extend(post, fields);
+    if (files.image) {
+      post.image.data = fs.readFileSync(files.image.path);
+      post.image.contentType = files.image.type;
+    }
+
+    post.save((err, result) => {
+      if (err) return res.json({ error: err });
+      res.json(result);
+    });
+  })
+};
+
+const addPostTopic = (req, res) => {
+
+  let form = new formidable.IncomingForm();
+  const { text } = req.body;
+  form.keepExtensions = true;
+  let post = new Post({ text, postedBy: req.profile._id });
+
+  form.parse(req, (err, fields, files) => {
+    
+
+    if (err)
+      return res.json({ error: "Impossible d'ajouter le fichier séléctionné" });
+    post = _.extend(post, fields);
+    console.log(fildes.topics);
     if (files.image) {
       post.image.data = fs.readFileSync(files.image.path);
       post.image.contentType = files.image.type;
@@ -188,4 +218,5 @@ module.exports = {
   deleteComment,
   updatePost,
   getPostPhoto,
+  addPostTopic,
 };

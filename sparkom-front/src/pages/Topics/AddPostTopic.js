@@ -1,19 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-//import { isLogged } from "../../helpers/auth";
-//import { addPost } from "../../redux/actions/postActions";
+import { isLogged } from "../../helpers/auth";
+import { addPost } from "../../redux/actions/postActions";
 import Button from "@material-ui/core/Button";
-
+import PermMediaIcon from "@material-ui/icons/PermMedia";
+import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import { makeStyles } from "@material-ui/core/styles";
 import PermMedia from "@material-ui/icons/PermMedia";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { queryApi } from "../utils/queryApi";
-import { addPost } from "../store/slices/postsSlice";
-import { activeUserSelector} from "../store/slices/auth";
-import { useSelector } from "react-redux";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,61 +42,58 @@ const style1 = {
   background: "#236aed",
 };
 export default function AddPost() {
-console.log("yes");
-
-  const refreshPage = ()=>{
-    window.location.reload();
- }
-  const activeUser = useSelector(activeUserSelector);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [showLoader, setShowLoader] = useState(false);
-  const [error, setError] = useState({ visible: false, message: "" });
-  const formik = useFormik({
-  initialValues: {
-  text: "",
-  },
-  validationSchema: yupSchema,
-onSubmit: async (values) => {
-    setShowLoader(true);
-    const [res, err] = await queryApi("posts/create/" + activeUser._id, values, "POST", true);
-    if (err) {
-    setShowLoader(false);
-    setError({
-    visible: true,
-    message: JSON.stringify(err.errors, null, 2),
-    });
-    } else {
-    dispatch(addPost(res));
-    console.log("cbn");
-    history.push("/home");
-    }
-    },
-});
-
-
-
-
-
-
+  const { topicId } = useParams();
   const classes = useStyles();
-  
+  const postData = new FormData();
+console.log(topicId);
+  const [post, setPost] = React.useState({
+    text: "",
+    image: "",
+    topics: topicId,
+  });
+  const jwt = isLogged();
+  const dispatch = useDispatch();
+
+  function handleInputChange(event) {
+    const value =
+      event.target.name === "image"
+        ? event.target.files[0]
+        : event.target.value;
+    setPost({
+      ...post,
+      [event.target.name]: value,
+      [event.target.name]: value,
+      [event.target.name]: value,
+    });
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    post.text && postData.append("text", post.text);
+    post.image && postData.append("image", post.image);
+    post.postedBy && postData.append(jwt.user._id);
+    post.topics && postData.append("topics", post.topics);
+
+    dispatch(addPost(jwt.token, jwt.user._id, postData));
+  }
 
   return (
     <div className="ui-block">
       <div className="news-feed-form">
         <div className="tab-content">
-          <form onSubmit={formik.handleSubmit} className="card p-2">
+          <form onSubmit={handleFormSubmit} className="card p-2">
             <div className="form-group">
               <textarea
                 rows="5"
                 cols="30"
                 name="text"
-                placeholder="What's on your mind,Amen Allah?"
-                value={formik.values.title}
-onChange={formik.handleChange}
+                placeholder="Communicate with the community"
+                value={post.text}
+                required
+                onChange={(event) => handleInputChange(event)}
                 className="form-control"
               />
+              
             </div>
             <br />
 
@@ -130,9 +121,7 @@ onChange={formik.handleChange}
                   type="file"
                   accept="image/*"
                   name="image"
-                  onChange={(event) => {
-                    formik.setFieldValue("image", event.target.files[0]);
-                    }}
+                  onChange={(event) => handleInputChange(event)}
                   className="form-control"
                 />
               </label>
@@ -153,7 +142,6 @@ onChange={formik.handleChange}
                   size="small"
                   className={classes.button}
                   type="submit"
-                  onClick={refreshPage}
                 >
                   Post
                 </Button>
@@ -166,9 +154,3 @@ onChange={formik.handleChange}
     </div>
   );
 }
-const yupSchema = Yup.object({
-  text: Yup.string()
-  .min(3, "Minimum 3 caractéres")
-  .max(80, "Maximum 80 caractéres")
-  .required("Champs requis!"),
-  });

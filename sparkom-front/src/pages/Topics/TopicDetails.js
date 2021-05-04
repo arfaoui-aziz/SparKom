@@ -4,14 +4,30 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { getTopic } from "../../redux/actions/topicActions";
 import PostList from "../Post Managment/PostList";
-import AddPost from "../Post Managment/AddPost";
+import AddPostTopic from "../Topics/AddPostTopic";
 import { useDispatch, connect } from "react-redux";
 import LeftSidebar from "../Post Managment/LeftSidebar";
 import RightSidebar from "../Post Managment/RightSidebar";
+import { isLogged } from "../../helpers/auth";
+import { getAllPosts } from "../../redux/actions/postActions";
+
 function TopicDetails({ posts }) {
   const { topicId } = useParams();
   const [topic, setTopic] = React.useState("");
   const [error, setError] = React.useState("");
+  const jwt = isLogged();
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (jwt) {
+      function loadPosts() {
+        dispatch(getAllPosts(jwt.token, jwt.user._id));
+      }
+      loadPosts();
+    }
+  }, []);
+
 
   React.useEffect(() => {
     async function getTopic() {
@@ -32,6 +48,21 @@ function TopicDetails({ posts }) {
     
     
   }, [topicId]);
+
+
+if (!jwt) {
+    return (
+      <div className="container">
+        <div className="row my-5">
+          <div className="col-md-8 mx-auto">
+            <div className="alert alert-info">
+              <Link to="/login">Connectez vous pour voir les tweets</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   
 return (
@@ -58,7 +89,7 @@ return (
         <LeftSidebar />
         <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
       <div id="newsfeed-items-grid">
-        <AddPost />
+        <AddPostTopic />
         <PostList posts={posts && posts} />
       </div>
     </div>
