@@ -31,7 +31,6 @@ const profileSlice = createSlice({
     setErrors(state, action) {
       state.errors = action.payload;
     },
-
     updateProfile(state, action) {
       state.userProfile = action.payload;
     },

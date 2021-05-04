@@ -19,6 +19,7 @@ import GeneratePDF from "./components/CV/GeneratePDF";
 import ForgotPassword from "./components/ForgotPassword";
 import VerificationCode from "./components/VerificationCode";
 import AllProfiles from "./components/MyProfile/AllProfiles";
+import ScrapedResume from "./components/CV/ScrapedResume";
 
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
@@ -43,6 +44,7 @@ function App() {
             <Route path="/company" component={CompanySignup} />
             <Route path="/pdf" component={GeneratePDF} />
             <Route path="/all" component={AllProfiles} />
+            <Route path="/resume" component={ScrapedResume} />
 
             <Route path="/" exact component={Login} />
           </Switch>

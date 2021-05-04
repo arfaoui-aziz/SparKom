@@ -150,16 +150,14 @@ const LinkedinScrapper = async (req, res) => {
     const api_endpoint = "https://nubela.co/proxycurl/api/v2/linkedin";
     const linkedin_profile_url = req.query.url;
     // "https://www.linkedin.com/in/sonia-hadouej-798677165/";
+    // https://www.linkedin.com/in/bradtraversy/
     const api_key = process.env.SCRAPER_API_KEY;
     const header_dic = { Authorization: "Bearer " + api_key };
     const response = await axios.get(api_endpoint, {
       params: { url: linkedin_profile_url },
       headers: header_dic,
     });
-    console.log(response);
-    console.log("*******");
-    console.log(response.data);
-    // const data = JSON.stringify(response.data);
+
     res.send(response.data);
   } catch (e) {
     res.status(400).send(e.message);

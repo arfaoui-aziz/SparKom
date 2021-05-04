@@ -1,0 +1,350 @@
+{
+  "public_identifier": "sonia-hadouej-798677165",
+  "profile_pic_url": "https://media-exp1.licdn.com/dms/image/C4D03AQEsnI-ft9YmJQ/profile-displayphoto-shrink_200_200/0/1575894889545?e=1625702400&v=beta&t=jdR93z0o0W6_2C7qYNt4psFe3MkgxtHvyrqnHROjZR8",
+  "background_cover_image_url": null,
+  "first_name": "Sonia",
+  "last_name": "Hadouej",
+  "full_name": "Sonia Hadouej",
+  "occupation": "Member in Joya Startup at Open Startup Tunisia",
+  "headline": "Élève Ingénieur en Informatique Financière      -          \n\n                  Opener chez Open Startup Tunisia",
+  "summary": null,
+  "country": "TN",
+  "country_full_name": "Tunisia",
+  "city": null,
+  "state": "Ariana Governorate",
+  "birth_date": null,
+  "experiences": [
+    {
+      "starts_at": {
+        "day": null,
+        "month": 10,
+        "year": 2020
+      },
+      "ends_at": {
+        "day": null,
+        "month": 12,
+        "year": 2020
+      },
+      "company": "Open Startup Tunisia",
+      "company_linkedin_profile_url": "https://tn.linkedin.com/company/open-startup-international",
+      "title": "Member in Joya Startup",
+      "company_urn": null,
+      "description": null,
+      "location": null,
+      "employment_type": null,
+      "media": []
+    },
+    {
+      "starts_at": {
+        "day": null,
+        "month": 8,
+        "year": 2020
+      },
+      "ends_at": {
+        "day": null,
+        "month": 9,
+        "year": 2020
+      },
+      "company": "BH Assurance",
+      "company_linkedin_profile_url": "https://tn.linkedin.com/company/bh-assurance",
+      "title": "Stagiaire été",
+      "company_urn": null,
+      "description": "Développement d'une application informatique décisionnelle permettant l'analyse du chiffre d'affaires de l'assurance BH, realisée par Power BI",
+      "location": "Tunis, Tunisie",
+      "employment_type": null,
+      "media": []
+    },
+    {
+      "starts_at": {
+        "day": null,
+        "month": 6,
+        "year": 2019
+      },
+      "ends_at": {
+        "day": null,
+        "month": 7,
+        "year": 2019
+      },
+      "company": "Telnet Consulting",
+      "company_linkedin_profile_url": "https://tn.linkedin.com/company/telnet-consulting",
+      "title": "Stagiaire été",
+      "company_urn": null,
+      "description": null,
+      "location": "Gouvernorat de Tunis, Tunisia",
+      "employment_type": null,
+      "media": []
+    },
+    {
+      "starts_at": {
+        "day": null,
+        "month": 8,
+        "year": 2018
+      },
+      "ends_at": {
+        "day": null,
+        "month": 8,
+        "year": 2018
+      },
+      "company": "BH INVEST",
+      "company_linkedin_profile_url": "https://tn.linkedin.com/company/bh-invest",
+      "title": "Stage d’été",
+      "company_urn": null,
+      "description": "Gestion de  portefeuille ( Gestion sous mondât et gestion libre),Suivie des contrats d'achat et de vente à distance.Règlement des clients, comptabilisation des journées boursièresTenu de registre des actions BH, Assurance Selim et Modern Leasing.",
+      "location": null,
+      "employment_type": null,
+      "media": []
+    }
+  ],
+  "education": [
+    {
+      "starts_at": {
+        "day": null,
+        "month": null,
+        "year": 2017
+      },
+      "ends_at": {
+        "day": null,
+        "month": null,
+        "year": 2021
+      },
+      "field_of_study": "Informatique",
+      "degree_name": "Diplôme d'ingénieur",
+      "school": "Ecole Supérieure Privée d'Ingénierie et de Technologies - ESPRIT",
+      "description": null
+    },
+    {
+      "starts_at": {
+        "day": null,
+        "month": null,
+        "year": 2014
+      },
+      "ends_at": {
+        "day": null,
+        "month": null,
+        "year": 2017
+      },
+      "field_of_study": null,
+      "degree_name": null,
+      "school": "Lycée ennasr",
+      "description": null
+    }
+  ],
+  "languages": [],
+  "accomplishment_organisations": [],
+  "accomplishment_publications": [],
+  "accomplishment_honors_awards": [],
+  "accomplishment_patents": [],
+  "accomplishment_courses": [],
+  "accomplishment_projects": [],
+  "accomplishment_test_scores": [],
+  "volunteer_work": [
+    {
+      "starts_at": {
+        "day": null,
+        "month": 3,
+        "year": 2018
+      },
+      "ends_at": {
+        "day": null,
+        "month": 2,
+        "year": 2020
+      },
+      "cause": null,
+      "company": "INCEPTUM junior Entreprise Esprit",
+      "company_linkedin_profile_url": null,
+      "title": "Membre du pole développement commercial",
+      "company_urn": null,
+      "description": null
+    },
+    {
+      "starts_at": {
+        "day": null,
+        "month": 10,
+        "year": 2018
+      },
+      "ends_at": {
+        "day": null,
+        "month": 12,
+        "year": 2018
+      },
+      "cause": null,
+      "company": "Junior Enterprises of Tunisia",
+      "company_linkedin_profile_url": "https://tn.linkedin.com/company/junior-enterprises-of-tunisia",
+      "title": "Comité Organisateur de JOBS - Junior Official Business Seminar",
+      "company_urn": null,
+      "description": null
+    },
+    {
+      "starts_at": {
+        "day": null,
+        "month": 10,
+        "year": 2017
+      },
+      "ends_at": {
+        "day": null,
+        "month": 3,
+        "year": 2018
+      },
+      "cause": null,
+      "company": "Esprit CyberSec",
+      "company_linkedin_profile_url": "https://tn.linkedin.com/company/esprit-cybersec",
+      "title": "Membre",
+      "company_urn": null,
+      "description": null
+    }
+  ],
+  "certifications": [
+    {
+      "starts_at": null,
+      "ends_at": null,
+      "url": null,
+      "name": "formation de formateurs",
+      "license_number": null,
+      "display_source": null,
+      "authority": "MedSirat"
+    }
+  ],
+  "connections": 149,
+  "people_also_viewed": [
+    {
+      "link": "https://tn.linkedin.com/in/k-ahlem",
+      "name": "Ahlem KAABI",
+      "summary": "Étudiante",
+      "location": "تونس, تونس"
+    },
+    {
+      "link": "https://bd.linkedin.com/in/azizul-islam-0780641ab",
+      "name": "Azizul Islam",
+      "summary": "Student at Narsingdi Government university",
+      "location": "دكا"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/ines-bouslah",
+      "name": "Ines Bouslah",
+      "summary": "Opener at Open Startup",
+      "location": "المهدية"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/myriam-zitouni-bbb798200",
+      "name": "Myriam Zitouni",
+      "summary": "Responsable développement commercial chez Designers Junior Entreprise",
+      "location": "عين زغوان"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/marwen-labidi-5a9082142",
+      "name": "Marwen Labidi",
+      "summary": "Full-stack Developer  chez Upwork",
+      "location": "تونس, تونس"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/sahmim-syrine-878b182a",
+      "name": "SAHMIM Syrine",
+      "summary": "blockchain consultant/Startup Mentor chez RedStart Tunisie/ostx taskforce member",
+      "location": "تونس"
+    },
+    {
+      "link": "https://no.linkedin.com/in/lisa-hope-703516114",
+      "name": "Lisa Hope",
+      "summary": "VR/AR developer i Rainfall AS",
+      "location": "برغن"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/nour-el-houda-aboudhiaf-aa60a1209",
+      "name": "Nour El Houda Aboudhiaf",
+      "summary": "Etudiante à l'IHEC Carthage parcours Finance",
+      "location": "تونس"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/fares-seaidi",
+      "name": "Fares Seaidi",
+      "summary": "Investment Professional at Smart Capital: The national operator of the Startup Act",
+      "location": "تونس, تونس"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/wiem-ben-fguir-bb16a7185",
+      "name": "Wiem Ben Fguir",
+      "summary": "software ingineering studient",
+      "location": "بنزرت, تونس"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/oussama-soussou-b3b9581b2",
+      "name": "Oussama Soussou",
+      "summary": "Étudiant(e) à Ecole Supérieure Privée d'Ingénieurs de Monastir",
+      "location": "صيادة لمطة بوحجر"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/rached-echeikh-0b439b1b3",
+      "name": "Rached ECHEIKH",
+      "summary": "--",
+      "location": "تونس"
+    },
+    {
+      "link": "https://ae.linkedin.com/in/azza-albouchi-2a462b180",
+      "name": "Azza Albouchi",
+      "summary": "Responsible of sales and communication",
+      "location": "دبي, الإمارات العربية المتحدة"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/syrine-boussarsar-686320208",
+      "name": "Syrine Boussarsar",
+      "summary": "Étudiant à Collège LaSalle Tunis",
+      "location": "تونس"
+    },
+    {
+      "link": "https://id.linkedin.com/in/muklison-alawi-6719051b1",
+      "name": "Muklison Alawi",
+      "summary": "Junior Electrician di PT WEISSTECH (Kapal Api Group)",
+      "location": "سيدوارجو"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/yasmine-douma-840399208",
+      "name": "Yasmine Douma",
+      "summary": "Étudiante à collège la Salle, Tunis",
+      "location": "تونس"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/mariem-ayadi-6ba86419a",
+      "name": "Mariem Ayadi",
+      "summary": "First aid trainer",
+      "location": "أريانة, تونس"
+    },
+    {
+      "link": "https://ma.linkedin.com/in/ayoub-laghlid",
+      "name": "Ayoub Laghlid",
+      "summary": "Élève ingénieur en 2ème année génie informatique",
+      "location": "بني ملال-خنيفرة, المغرب"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/kais-jerbi-72514a195",
+      "name": "kais jerbi",
+      "summary": "Finance Project Manager at AIESEC",
+      "location": "بن عروس, تونس"
+    },
+    {
+      "link": "https://tn.linkedin.com/in/cyrine-smida-8a25b5173",
+      "name": "Cyrine Smida",
+      "summary": "Etudiante en Marketing Digital à Esprit School of Business\n\nDesigner Graphique",
+      "location": "أريانة, تونس"
+    }
+  ],
+  "recommendations": [],
+  "activities": [
+    {
+      "title": "Après 5 ans de travail acharné et de sacrifices, surtout cette dernière année qui a été pleine de difficultés et d'obstacles pour nous tous,\nj'ai…",
+      "link": "https://www.linkedin.com/signup/cold-join",
+      "activity_status": "تم الإعجاب من Sonia Hadouej"
+    },
+    {
+      "title": "So… you are seeing a therapist?\n \nAre you mentally ok or are you depressed?\n \nThis was the reaction I got by some people early last year when I told…",
+      "link": "https://www.linkedin.com/signup/cold-join",
+      "activity_status": "تم الإعجاب من Sonia Hadouej"
+    },
+    {
+      "title": "How’s your morning coffee served?",
+      "link": "https://www.linkedin.com/signup/cold-join",
+      "activity_status": "تم الإعجاب من Sonia Hadouej"
+    }
+  ],
+  "similarly_named_profiles": [],
+  "articles": []
+}

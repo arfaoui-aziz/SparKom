@@ -39,7 +39,7 @@ const SideBar = () => {
                   </li>
 
                   <li>
-                    <Link to="/settings/educ">Education and Employement</Link>
+                    <Link to="/settings/educ">Resume Generator</Link>
                   </li>
                 </ul>
               </div>
