@@ -86,7 +86,7 @@ export default function HeaderG(props) {
                       />
                     </div>
                     <div className="author-content">
-                      <a href=".html" className="h3 author-name">
+                      <a className="h3 author-name"  onClick={() => Details(props.dm._id)}>
                         {props.dm.name}
                       </a>
                       <div className="country">

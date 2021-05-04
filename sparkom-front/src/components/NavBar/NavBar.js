@@ -101,7 +101,7 @@ export default function NavBar() {
                     <Link to="/">
                       <div
                         className="c-secondary"
-                        style={{ borderBottom: "2px solid blue" }}
+                        
                       >
                         Home
                       </div>
@@ -128,7 +128,7 @@ export default function NavBar() {
                 <div className="control-icon">
                   <div className="author-title ">
                     <Link to="/">
-                      <div className="c-secondary">Freelance</div>
+                      <div className="c-secondary">Boards</div>
                     </Link>
                   </div>
                 </div>

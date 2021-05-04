@@ -19,6 +19,8 @@ import { useHistory } from "react-router-dom";
 import { activeUserSelector, thistoken } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 export default function GroupCard({ dms }) {
+
+  
   const dispatch = useDispatch();
   const activeUser = useSelector(activeUserSelector);
   const token = useSelector(thistoken);
@@ -66,7 +68,7 @@ export default function GroupCard({ dms }) {
           </div>
           <div className="friend-avatar">
           
-              <img
+              <img className="photo"
                 src={process.env.REACT_APP_API_URL_UPLOADS + "/" + dms.Image}
                 onClick={() => Details(dms._id)}
               />

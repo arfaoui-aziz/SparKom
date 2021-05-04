@@ -60,6 +60,9 @@ router.get("/getev", function (req, res, next) {
 });
 
 
+
+
+
 /* add*/
 router.post("/add/:userId",upload,function (req, res, next) {
   const obj = JSON.parse(JSON.stringify(req.body));
@@ -95,7 +98,7 @@ router.put("/updategr/:id", upload, function (req, res, next) {
     Createdat: obj.Createdat,
    Image: req.file.filename,
   };
-  group.findByIdAndUpdate(
+  group.findByIdAndUpdate( 
     req.params.id,
     newCustomer,
     async function (err, data) {

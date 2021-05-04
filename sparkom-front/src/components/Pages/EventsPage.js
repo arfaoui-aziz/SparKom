@@ -37,15 +37,21 @@ export default function EventsPage(props) {
               <div className="row">
                 <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-10">
                   <AddEventButt dm={toRender} />
+                  <div className="ui-block">
+              <div className="ui-block-title ui-block-title-small">
+                <h6 className="title">UPCOMING EVENTS 2021</h6></div>
+            
                   {data &&
                     data.map((item, i) => {
                       return (
+                        <>
                         <Events dm={toRender} events={item} key={item._id} />
+                        <div className="ui-block-title ui-block-title-small"></div></>
                       );
                     })}
+                    </div></div></div>
                 </div>
-              </div>
-            </div>
+            
           </>
         ) : (
           <p>Product not found</p>

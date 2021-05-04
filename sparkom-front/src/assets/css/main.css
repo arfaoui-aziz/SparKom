@@ -123,6 +123,16 @@ Description: "HTML-template"
 /*------------- #THEME-STYLES --------------*/
 /*------------- #VARIABLES --------------*/
 /*------------- #HEADER --------------*/
+
+.photo {
+  height: 170px;
+  width: 170px;
+}
+
+.imgEv {
+  height: 50px;
+  width: 50px;
+}
 .header {
   height: 70px;
   background-color: #3f4257;

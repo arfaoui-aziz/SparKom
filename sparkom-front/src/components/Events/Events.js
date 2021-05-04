@@ -23,6 +23,7 @@ export default function Events({ props, events }) {
   const dispatch = useDispatch();
   const activeUser = useSelector(activeUserSelector);
   const token = useSelector(thistoken);
+  
   const [members, setmembers] = useState([]);
   const [member, setmember] = useState(false);
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
@@ -36,15 +37,13 @@ export default function Events({ props, events }) {
     let match = members.indexOf(activeUser._id) !== -1;
     setmember(match);
   }
+const m= events.Date;
 
   return (
     <div>
       
          
-            <div className="ui-block">
-              <div className="ui-block-title ui-block-title-small">
-                <h6 className="title">UPCOMING EVENTS 2021</h6>
-              </div>
+            
               <table className="event-item-table">
                 <tbody>
                   <tr className="event-item">
@@ -53,13 +52,13 @@ export default function Events({ props, events }) {
                         <svg className="olymp-small-calendar-icon">
                           <use xlinkHref="svg-icons/sprites/icons.svg#olymp-small-calendar-icon" />
                         </svg>
-                        <span className="day">{events.Date}</span>
-                        <span className="month">may</span>
+                        <span className="day">{events.Date.substring(8,10) }</span>
+                        <span className="month">{events.Date.substring(5,7) }</span>
                       </div>
                     </td>
                     <td className="author">
                       <div className="event-author inline-items">
-                        <img
+                        <img className="imgEv"  
                           src={
                             process.env.REACT_APP_API_URL_UPLOADS +
                             "/" +
@@ -67,16 +66,16 @@ export default function Events({ props, events }) {
                           }
                           alt="author"
                         />
-
+                        <br/>
                         <div className="author-date">
                           <a href="." className="author-name h6">
-                            {events.name}
+                            {""}{events.name}
                           </a>
                           <time
                             className="published"
                             dateTime="2017-03-24T18:18"
                           >
-                            Saturday at 9:00pm
+                            at 9:00pm
                           </time>
                         </div>
                       </div>
@@ -136,9 +135,8 @@ export default function Events({ props, events }) {
                     )}
                   </tr>
                 </tbody>
-              </table>
-            </div>
-          </div>
+              </table></div>
+         
       
   );
 }
