@@ -30,9 +30,8 @@ export default function UserProfileCard({ profile }) {
     } else {
       dispatch(unfollowFriend(_id));
       dispatch(updateProfile(res));
+      followed ? setFollowers((u) => u - 1) : setFollowers((u) => u + 1);
       setFollowed(!followed);
-      //TODO: fix incerment
-      isFollowed ? setFollowers((u) => u + 1) : setFollowers((u) => u - 1);
     }
   };
 
