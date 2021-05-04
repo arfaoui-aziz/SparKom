@@ -47,7 +47,7 @@ export default function OneList({dm,idl,card,board_id}) {
 
                   </div>
                   <a class="btn btn-sm bg-blue" onClick={() => { move(card._id,dm._id);  history.push("/EditCard/"+card._id);}} >
-                    Add{" "}
+                    Move{" "}
                   </a>
                 </div>
            

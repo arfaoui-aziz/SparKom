@@ -23,6 +23,7 @@ import Showboard from "./components/Myboards/ShowBoard";
 import BoardForm from "./components/Myboards/BoardForm";
 import PBoardAdd from "./components/Myboards/PBoardAdd";
 import Form2 from "./components/Myboards/Form2";
+import Form3 from "./components/Myboards/Form3";
 import ListForm from "./components/Myboards/ListForm";
 import ActionButtonL from "./components/Myboards/ActionButtonL";
 import EditCard from "./components/Myboards/EditCard";
@@ -58,6 +59,7 @@ function App() {
           <Route path="/showboard/:id" component={Showboard} />
           <Route path="/BoardForm" component={BoardForm} />
           <Route path="/Form2" component={Form2} />
+          <Route path="/Form3" component={Form3} />
           <Route path="/ListForm" component={ListForm} />
           <Route path="/PBoardAdd" component={PBoardAdd} />
           <Route path="/ActionButtonL" component={ActionButtonL} />
