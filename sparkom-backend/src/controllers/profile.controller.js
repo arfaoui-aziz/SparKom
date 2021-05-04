@@ -124,14 +124,16 @@ const getFollowers = async (req, res) => {
 
 const getAllProfiles = async (req, res) => {
   try {
-    let userPattern = new RegExp("^" + req.query.username.toLowerCase());
     const profiles = await Profile.find({}).populate("my_id").exec();
+    if (req.query.username) {
+      let userPattern = new RegExp("^" + req.query.username.toLowerCase());
+      const searchProfiles = profiles.filter((profile) => {
+        return profile.my_id.username.toLowerCase().match(userPattern);
+      });
+      return res.send(searchProfiles);
+    }
 
-    const searchProfiles = profiles.filter((profile) => {
-      return profile.my_id.username.toLowerCase().match(userPattern);
-    });
-
-    req.query.username ? res.send(searchProfiles) : res.send(profiles);
+    res.send(profiles);
   } catch (e) {
     res.status(500).send(e.message);
   }
