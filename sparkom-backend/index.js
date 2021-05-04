@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./src/routes/user");
 const postRoutes = require("./src/routes/post");
 const topicRoutes = require("./src/routes/topic");
+const questionRoutes = require("./src/routes/question");
 
 // const expressJwt = require("express-jwt");
 
@@ -44,7 +45,7 @@ connectToDatabase();
 app.use("/", userRoutes);
 app.use("/", postRoutes);
 app.use("/", topicRoutes);
-
+app.use("/", questionRoutes);
 //home page
 app.get("/", function (req, res) {
   res.send("it's working");
