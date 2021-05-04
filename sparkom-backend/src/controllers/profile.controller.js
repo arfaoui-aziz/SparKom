@@ -68,6 +68,7 @@ const updateProfile = async (req, res) => {
 //***************************** */
 const followUser = async (req, res) => {
   const my_id = req.user._id;
+
   try {
     const myProfile = await Profile.findOne({ my_id });
     const userProfile = await Profile.findById(req.params.id);
@@ -78,20 +79,23 @@ const followUser = async (req, res) => {
       userProfile.followers.push(myProfile._id);
       await userProfile.save();
       return res.send(myProfile);
+    } else {
+      console.log(userProfile);
+      const Unfollow = myProfile.following.filter(
+        (userId) => userId != userProfile._id + ""
+      );
+      console.log(Unfollow);
+      myProfile.following = Unfollow;
+      await myProfile.save();
+      const deleteFollower = userProfile.followers.filter((userId) =>  userId != myProfile._id + "");
+      console.log(deleteFollower);
+      userProfile.followers = deleteFollower;
+      await userProfile.save();
     }
-    const Unfollow = myProfile.following.filter((userId) => {
-      userId !== userProfile._id;
-    });
-    myProfile.following = Unfollow;
-    await myProfile.save();
-    const deleteFollower = userProfile.followers.filter((userId) => {
-      userId !== myProfile._id;
-    });
-    userProfile.followers = deleteFollower;
-    await userProfile.save();
-
     res.send(myProfile);
-  } catch (e) {}
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
 };
 
 const getProfileByID = async (req, res) => {

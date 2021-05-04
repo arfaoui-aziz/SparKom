@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 export default function UserProfile() {
   const { id } = useParams();
   const userProfile = useSelector((state) =>
-    state.profile.friendsList.find((profile) => profile._id === id)
+    state.profile.allProfiles.find((profile) => profile._id === id)
   );
 
   return (

@@ -2,15 +2,26 @@ import profilePic from "../../assets/img/author-main1.jpg";
 import React, { useState } from "react";
 import { queryApi } from "../../utils/queryApi";
 import SweetAlert from "../SweetAlert";
-import { useDispatch } from "react-redux";
-import { unfollowFriend, updateProfile } from "../../store/slices/profile";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  unfollowFriend,
+  updateProfile,
+  friendsSelector,
+} from "../../store/slices/profile";
 
 export default function UserProfileCard({ profile }) {
   const dispatch = useDispatch();
-  const { followers, my_id, _id } = profile;
+
+  const myFriendsList = useSelector(friendsSelector);
+  const isFollowed = myFriendsList.some((friend) => {
+    return friend._id === profile._id;
+  });
+  const [followers, setFollowers] = useState(profile?.followers.length);
+
+  const { my_id, _id } = profile;
   const { avatar, username } = my_id;
-  const [followed, setFollowed] = useState(true);
-  //TODO: fix unfollowFriend
+  const [followed, setFollowed] = useState(isFollowed);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const [res, err] = await queryApi(`profile/me/follow/${_id}`, "", "POST");
@@ -20,6 +31,8 @@ export default function UserProfileCard({ profile }) {
       dispatch(unfollowFriend(_id));
       dispatch(updateProfile(res));
       setFollowed(!followed);
+      //TODO: fix incerment
+      isFollowed ? setFollowers((u) => u + 1) : setFollowers((u) => u - 1);
     }
   };
 
@@ -36,7 +49,7 @@ export default function UserProfileCard({ profile }) {
           <span>
             Followers <br />
             <a href="#top" className="alert-link text-white">
-              {followers.length}
+              {followers}
             </a>
           </span>
           <button
