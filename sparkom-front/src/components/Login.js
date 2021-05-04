@@ -21,6 +21,7 @@ import { queryApi } from "../utils/queryApi";
 import { login, googleAuth, facebookAuth } from "../store/slices/auth";
 import FacebookLogin from "react-facebook-login";
 import SweetAlert from "./SweetAlert";
+
 //********************************************** */
 export default function Login() {
   const history = useHistory();
@@ -28,7 +29,6 @@ export default function Login() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [showLoader, setShowLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
   const responseFacebook = (response) => {
     dispatch(facebookAuth(response));
     console.log(response);

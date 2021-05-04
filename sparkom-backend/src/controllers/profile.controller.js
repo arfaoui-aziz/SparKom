@@ -1,5 +1,5 @@
 const Profile = require("../models/profile");
-const User = require("../models/user");
+const axios = require("axios");
 
 // const createProfile = async (req, res) => {
 //   try {
@@ -87,7 +87,9 @@ const followUser = async (req, res) => {
       console.log(Unfollow);
       myProfile.following = Unfollow;
       await myProfile.save();
-      const deleteFollower = userProfile.followers.filter((userId) =>  userId != myProfile._id + "");
+      const deleteFollower = userProfile.followers.filter(
+        (userId) => userId != myProfile._id + ""
+      );
       console.log(deleteFollower);
       userProfile.followers = deleteFollower;
       await userProfile.save();
@@ -143,6 +145,27 @@ const getAllProfiles = async (req, res) => {
   }
 };
 
+const LinkedinScrapper = async (req, res) => {
+  try {
+    const api_endpoint = "https://nubela.co/proxycurl/api/v2/linkedin";
+    const linkedin_profile_url = req.query.url;
+    // "https://www.linkedin.com/in/sonia-hadouej-798677165/";
+    const api_key = process.env.SCRAPER_API_KEY;
+    const header_dic = { Authorization: "Bearer " + api_key };
+    const response = await axios.get(api_endpoint, {
+      params: { url: linkedin_profile_url },
+      headers: header_dic,
+    });
+    console.log(response);
+    console.log("*******");
+    console.log(response.data);
+    // const data = JSON.stringify(response.data);
+    res.send(response.data);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+};
+
 module.exports = {
   getMyProfile,
   updateProfile,
@@ -151,4 +174,5 @@ module.exports = {
   getProfileByID,
   getFollowers,
   getAllProfiles,
+  LinkedinScrapper,
 };
