@@ -245,11 +245,18 @@ const deleteAvatar = async (req, res) => {
 };
 //********************* get User By UserName */
 const getUserByUserName = async (req, res) => {
-  const { username } = req.query;
   try {
-    const user = await User.findOne({ username });
-    if (!user) return res.status(404).send("No User with the Entred Name");
-    res.send(user);
+    let userPattern = new RegExp("^" + req.query.username);
+    const users = await User.find({
+      $or: [
+        { username: { $regex: userPattern } },
+        { firstname: { $regex: userPattern } },
+        { lastname: { $regex: userPattern } },
+      ],
+    });
+
+    if (!users) return res.status(404).send("No User with the Entred Name");
+    res.send(users);
   } catch (e) {
     res.status(500).send(e.message);
   }

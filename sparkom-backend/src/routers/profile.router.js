@@ -7,6 +7,7 @@ const {
   followUser,
   getProfileByID,
   getFollowers,
+  getAllProfiles,
 } = require("../controllers/profile.controller");
 
 const router = new express.Router();
@@ -15,6 +16,7 @@ const router = new express.Router();
 router.get("/followers/:id", auth, getProfileByID);
 router.get("/followers", auth, getFollowers);
 router.get("/", auth, getMyProfile);
+router.get("/all", auth, getAllProfiles);
 
 router.patch("/", auth, updateProfile);
 router.delete("/", auth, deleteMyProfile);
