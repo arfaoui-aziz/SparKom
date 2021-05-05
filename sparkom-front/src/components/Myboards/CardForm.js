@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -20,7 +21,7 @@ export default function CardForm(props) {
   const card= props.dm;
   const dispatch = useDispatch();
   const [showLoader, setShowLoader] = useState(false);
-  const style = { width: "200px" };
+  const style = { width: "250px" };
   const style1 = { width: "150px" };
   const [error, setError] = useState({ visible: false, message: "" });
 
@@ -29,7 +30,13 @@ export default function CardForm(props) {
     due_date: new Date(),
   });
   const { due_date } = cardData;
- 
+  const AddCalender = async (id) => {
+    try {
+      await axios.post("http://localhost:3002/showCalendar/" + id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const formik = useFormik({
     initialValues: {
       description: "",
@@ -64,9 +71,11 @@ export default function CardForm(props) {
         visible: true,
         message: err?.message,
       });
+  
     } else {
-      
+ 
     }
+
   };
 
   const replace =  () => {history.replace("/EditCard/"+ props.idc);};
@@ -153,15 +162,15 @@ export default function CardForm(props) {
                 <i class="fas fa-user"></i> Members
               </a>
               <br />
-              {/*<a
+              <a onClick={() => AddCalender(card._id)}
                 href="#"
                 class="btn btn-smoke btn-md btn-light-bg"
                 style={style}
               >
                 {" "}
-                <i class="fas fa-tag"></i> Labels
+                <i class="far fa-calendar-check"/> Add to calender
               </a>
-              <br />*/}
+              <br />
               {/*<a
                 href="#"
                 class="btn btn-smoke btn-md btn-light-bg"

@@ -9,7 +9,7 @@ const domainRouter = require("./routers/domain.router");
 const skillRouter = require("./routers/skill.router");
 const badgeRouter = require("./routers/badge.router");
 const cvRouter = require("./routers/cv.router");
-
+var cardC = require("./Models/cards");
 const nodemailer =require("nodemailer");
 var boardRouter = require('./routers/boards');
 var listRouter = require('./routers/lists');
@@ -17,6 +17,105 @@ var cardRouter = require('./routers/cards');
 const bodyParser = require("body-parser");
 
 const app = express();
+
+const { google } = require("googleapis");
+const { OAuth2 } = google.auth;
+
+const oAuth2Client = new OAuth2(
+  "551834373875-16htusu1d6srp6fsks6m5eadpgds82n0.apps.googleusercontent.com",
+  "PvZ6Lrv6pdah8739Br2UpiDQ"
+);
+
+oAuth2Client.setCredentials({
+  refresh_token:
+    "1//04r7LwM-CZxL4CgYIARAAGAQSNwF-L9IrC1H4YrmedReq47ehSaCCYPXdGe8_G0DQn2Yutor2Jl4yChYLRgsaHIqviLB-jwo9Hxg",
+});
+const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+
+
+
+
+app.post("/showCalendar/:id", cors(), async (req, res) => {
+  cardC.findById(req.params.id, function (err, data) {
+    const obj = JSON.parse(JSON.stringify(data));
+    if (obj != null) {
+      const date = obj.Due_date;
+      const datee = new Date(date);
+      //datee.setDate(datee.getDay() + 2);
+
+      const dateeF = new Date(date);
+      
+
+      //dateeF.setDate(dateeF.getDay() + 2);
+      dateeF.setMinutes(dateeF.getMinutes() + 45);
+      const event = {
+        summary: obj.Card_name,
+        location: "",
+        description: obj.Description,
+        colorId: 1,
+        start: {
+          dateTime: datee,
+          timeZone: "America/Denver",
+        },
+        end: {
+          dateTime: dateeF,
+          timeZone: "America/Denver",
+        },
+      };
+      calendar.freebusy.query(
+        {
+          resource: {
+            timeMin: datee,
+            timeMax: dateeF,
+            timeZone: "America/Denver",
+            items: [{ id: "primary" }],
+          },
+        },
+        (err, res) => {
+          // Check for errors in our query and log them if they exist.
+          if (err) return console.error("Free Busy Query Error: ", err);
+
+          // Create an array of all events on our calendar during that time.
+          const eventArr = res.data.calendars.primary.busy;
+
+          // Check if event array is empty which means we are not busy
+
+          // If we are not busy create a new calendar event.
+          return calendar.events.insert(
+            { calendarId: "primary", resource: event },
+
+            (err) => {
+              // Check for errors and log them if they exist.
+              if (err)
+                return console.error("Error Creating Calender Event:", err);
+              // Else log that the event was created.
+              return console.log("Calendar event successfully created.");
+            }
+          );
+        }
+      );
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.use(cors());
 app.use(express.json());
 

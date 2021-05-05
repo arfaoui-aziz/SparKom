@@ -52,8 +52,8 @@ const EditButton = styled(EditIcon)`
       <div>
         {cards?.map((dm, index) => (
         <div key={index}>
-     <Card style={styles.cardContainer}   onClick={() => {carddetails(dm._id);}}>
-         <cardContainer style={{cursor:"pointer"}} >
+     <Card style={styles.cardContainer}   >
+         <cardContainer style={{cursor:"pointer"}} onClick={() => {carddetails(dm._id);}}>
              <Card >
                  <Typography gutterBottom>  {dm.Card_name} </Typography>
                 
