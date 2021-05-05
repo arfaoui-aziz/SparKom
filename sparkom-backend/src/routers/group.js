@@ -191,6 +191,7 @@ router.get("/:id", function (req, res, next) {
     }
   });
 });
+
 router.get("/getdev/:id", function (req, res, next) {
   group.findById(req.params.id, function (err, data) {
     if (err) throw err;

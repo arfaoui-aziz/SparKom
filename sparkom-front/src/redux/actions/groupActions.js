@@ -38,6 +38,16 @@ export const JoinEvent = (token, userId, eventId) => {
         });
       })
       .catch((err) => console.log(err));
+      axios
+      .post(`http://localhost:3002/showCalendar/`+eventId )
+      .then((res) => {
+        dispatch({
+          type: groupTypes.JoinEvent,
+          payload: res.data,
+          userId,
+        });
+      })
+      .catch((err) => console.log(err));
   };
 };
 
@@ -49,7 +59,11 @@ export const LeaveGroup = (token, userId, groupId) => {
   };
   return (dispatch) => {
     axios
-      .put(`http://localhost:3002/group/LeaveGroup`, { userId, groupId }, config)
+      .put(
+        `http://localhost:3002/group/LeaveGroup`,
+        { userId, groupId },
+        config
+      )
       .then((res) => {
         dispatch({
           type: groupTypes.JoinGroup,
@@ -69,7 +83,11 @@ export const LeaveEvent = (token, userId, eventId) => {
   };
   return (dispatch) => {
     axios
-      .put(`http://localhost:3002/group/LeaveEvent`, { userId, eventId }, config)
+      .put(
+        `http://localhost:3002/group/LeaveEvent`,
+        { userId, eventId },
+        config
+      )
       .then((res) => {
         dispatch({
           type: groupTypes.JoinEvent,
