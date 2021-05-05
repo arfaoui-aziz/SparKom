@@ -136,6 +136,8 @@ const removeFollower = (req, res) => {
     });
 };
 
+
+
 module.exports = {
   createUser,
   getUserById,

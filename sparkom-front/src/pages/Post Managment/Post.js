@@ -35,7 +35,7 @@ export default function Post({ post }) {
         <div className="post__author author vcard inline-items">
           <img src={`http://localhost:8888/api/user/photo/${postedBy}?${new Date().getTime()}`} alt="author" />
           <div className="author-date">
-            <a className="h6 post__author-name fn" href="02-ProfilePage.html">
+            <a className="h6 post__author-name fn" href={"http://localhost:3006/room"}>
             {post.postedBy.name || jwt.user.name}
             </a>
             <div className="post__date">

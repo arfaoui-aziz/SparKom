@@ -14,7 +14,7 @@ const NewsItem = ({title,author,publishedAt,url,urlToImage}) => {
 </div>
 
 <div className="composition">
-  <a href={url} className="composition-name">{title}</a>
+  <a href={url} target="_blank" className="composition-name">{title}</a>
   <a href="#" className="composition-author">By: {author} - {format(publishedAt)}</a>
 </div>
 

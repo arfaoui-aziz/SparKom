@@ -10,7 +10,7 @@ const [articles,setArticles]= useState([]);
 useEffect(() => {
     const getArticles = async () => {
         const res = await Axios.get(
-            "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d4a6b3f308c2488a98dd332572344b78"
+            "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d7d6e3a32ec746fd88ab0ece50ab62e0"
         );
         setArticles(res.data.articles)
         console.log(res);

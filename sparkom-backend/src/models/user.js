@@ -30,6 +30,8 @@ const UserSchema = new mongoose.Schema(
     },
     following: [{ type: ObjectId, ref: "User" }],
     followers: [{ type: ObjectId, ref: "User" }],
+    SavedPost: [{ type: ObjectId, ref: "Post" }],
+
   },
   {
     timestamps: true,

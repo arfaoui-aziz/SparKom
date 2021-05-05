@@ -15,7 +15,7 @@ export default function Comment({ comment, postId }) {
     <div className="comments-list">
     <div className="comment-item">
             <div className="post__author author vcard inline-items">
-                <img  src={`http://localhost:8888/api/user/photo/${jwt.user._id
+                <img  src={`http://localhost:8888/api/user/photo/${postedBy
             }?${new Date().getTime()}`} alt="author" />
     <div className="more">
             <svg className="olymp-three-dots-icon">

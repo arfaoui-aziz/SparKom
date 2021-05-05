@@ -5,13 +5,17 @@ import avatar from "../../assets/img/avatar2.jpg";
 import { useDispatch, connect } from "react-redux";
 import Header from "./Header";
 import { isLogged } from "../../helpers/auth";
+import { format } from "timeago.js";
+import AnswersList from "./AnswersList"
+import RelatedQuestion from "./RelatedQuestion";
 
-
-function QuestionDetails({ posts }) {
+function QuestionDetails({ questions }) {
   const { questionId } = useParams();
   const [question, setQuestion] = React.useState("");
   const [error, setError] = React.useState("");
   const jwt = isLogged();
+  const [answers, setAnswers] = React.useState([{}]);
+
 
   const dispatch = useDispatch();
 
@@ -31,14 +35,16 @@ function QuestionDetails({ posts }) {
       }
     })
     }
-    
-    
+    async function getAnswers() {
+      setAnswers(question && question.answers);
+    }
+    getAnswers();
       getQuestion();
     
     
   }, [questionId]);
 
-
+  
 if (!jwt) {
     return (
       <div className="container">
@@ -59,12 +65,7 @@ return (
 
   <div>
      <Header />
-  <p>
-    
-    {question.body}
-    {question.type}
-  </p>
-
+ 
   <div class="container">
         <div class="row">
           <div class="col col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
@@ -82,11 +83,10 @@ return (
 <tr>
     <td class="author">
         <div class="author-thumb">
-            <img src={avatar} alt="author"/>
+            <img src={`http://localhost:8888/api/user/photo/${question.questionedBy}?${new Date().getTime()}`} alt="author"/>
         </div>
         <div class="author-content">
-<a href="02-ProfilePage.html" class="h6 author-name">{/*question.questionedBy.name*/}</a>
-            <div class="country">Long Island, NY</div>
+            <div class="country"> {format(question.createdAt)}   </div>
         </div>
     </td>
     <td class="posts">
@@ -100,32 +100,8 @@ return (
 
 
 
-<tr>
-    <td class="author">
-        <div class="author-thumb">
-            <img src={avatar} alt="author"/>
-        </div>
-        <div class="author-content">
-            <a href="02-ProfilePage.html" class="h6 author-name">Marina Valentine</a>
-            <div class="country">Long Island, NY</div>
-        </div>
-    </td>
-    <td class="posts">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <p>Duis aute irure dolor in reprehenderit.</p>
-        <p>Thanks!</p>
-    </td>
-</tr>
 
-<tr>
-    <td class="topic-date" colspan="2">
-        March 24th, 2016 at 8:05 pm
-        <a href="#" class="reply-topic">Like</a>
-        <a href="#" class="reply-topic">Dislike</a>
 
-    </td>
-</tr>
 
 
 
@@ -133,11 +109,13 @@ return (
 </table>
 
 
-{/* <AddReply/>*/}
+{/*<AnswersList questionId={question._id} answers={answers && answers}/>*/ }
+
+
             </div>
             
           </div>
-         {/*<RelatedQuestion/> */} 
+         <RelatedQuestion/> 
 
         </div>
       </div>

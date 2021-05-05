@@ -122,7 +122,7 @@ export default function NavBar() {
           </div>
           <div className="control-icon">
             <div className="author-title ">
-              <Link to="/">
+              <Link to="/questions">
                 <div
                   className="c-secondary"
                   
@@ -130,8 +130,16 @@ export default function NavBar() {
                   Forum
                 </div>
               </Link>
+
             </div>
           </div>
+          <div className="control-icon">
+            <div className="author-title ">
+            <a href={"http://localhost:3006/live"} target="_blank" className="composition-name"><span style={{color: "red"}}> Go Live •</span></a>
+
+              </div></div>
+
+          
 
 
           <FormControl className={classes.margin}>

@@ -1,41 +1,92 @@
-import React from "react";
-import profilePic from "../../assets/img/author-main1.jpg";
-import topicImg from "../../assets/img/playlist9.jpg";
-import icons from "../../assets/svg-icons/sprites/icons.svg";
-import AddIcon from '@material-ui/icons/Add';
 
-export default function TopTopics() {
-  const topTopic = (name, nbrFollowers) => {
-    return (
+import React, { Component } from "react";
+import axios from "axios";
+import {  Col, Row } from "antd";
+
+import { Link } from "react-router-dom";
+
+const style1 = {
+  border: 0,
+  color: "#fff",
+  background: "#236aed",
+};
+const Topic = props => (
+  
+
 
 <li className="js-open-popup" data-popup-target=".playlist-popup">
-<div className="playlist-thumb">
-  <img src={topicImg} alt="thumb-composition" />
-  
-</div>
+
 
 <div className="composition">
-  <a href="topicpage" className="composition-name">{name}</a>
-  <a href="#" className="composition-author">{nbrFollowers} Followers</a>
+<Link
+                      to={`/topic/${props.topic._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                    <a href="topicpage" class="h6 author-name"> {props.topic.title}</a>
+                    </Link>
 </div>
 
 <div className="composition-time">
 <span className="notification-icon">
-          <a href="#" className="accept-request">
-            <AddIcon />
-          </a>
         </span>
 </div>
 
 </li>
 
-    );
-  };
 
 
 
 
-  return (
+);
+
+export default class AllTopics extends Component {
+  constructor(props) {
+    super(props);
+    
+
+    this.state = {
+      topics: [],
+     
+    };
+  }
+  componentDidMount() {
+    axios
+      .get("http://127.0.0.1:8888/api/topics")
+      .then(response => {
+        this.setState({ topics: response.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  
+
+   
+
+  topicList() {
+    console.log(this.state.topics);
+    return this.state.topics.map(currenttopic => {
+      return (
+         <div>
+             <Topic
+          topic={currenttopic}
+          key={currenttopic._id}
+        /></div>
+        
+        
+      );
+    });
+  }
+
+
+
+  render() {
+    return (
+
+
+
+
 
 <div className="ui-block">
 				<div className="ui-block-title">
@@ -43,9 +94,7 @@ export default function TopTopics() {
 				</div>
 
 				<ol className="widget w-playlist">
-				{topTopic("Web Design", "13")}
-        {topTopic("Architecture & Design", "2.768")}
-				{topTopic("Python", "10.810")}
+        {this.topicList()}
 
 
 					
@@ -57,11 +106,6 @@ export default function TopTopics() {
 
 				
 			</div>
-  );
+    );
+  }
 }
-
-
-
-
-
-
