@@ -2,7 +2,7 @@ import React from "react";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import profilePic from "../../assets/img/avatar1.jpg";
+import myAvatar from "../../assets/img/myAvatar.png";
 import logo from "../../assets/img/logosparkom.png";
 import Notification from "./Notification";
 import Messages from "./Messages";
@@ -133,7 +133,7 @@ export default function NavBar() {
                   <div className="author-thumb">
                     <img
                       alt="author"
-                      src={profilePic}
+                      src={myAvatar}
                       style={{ width: 36, height: 36 }}
                       className="avatar"
                     />

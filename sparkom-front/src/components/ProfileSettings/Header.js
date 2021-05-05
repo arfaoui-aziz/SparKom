@@ -4,7 +4,7 @@ import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import avatar from "../../assets/img/avatar1.jpg";
+import myAvatar from "../../assets/img/myAvatar.png";
 export default function Header() {
   const activeUser = useSelector(activeUserSelector);
   const userAvatar = useSelector(avatarSelector);
@@ -43,7 +43,7 @@ export default function Header() {
               <div className="author-thumb">
                 <input type="file" style={{ display: "none" }} />
                 <img
-                  src={userAvatar || avatar}
+                  src={userAvatar || myAvatar}
                   style={{ width: 130, height: 130 }}
                   className="img-fluid rounded pr-2"
                   alt="author"

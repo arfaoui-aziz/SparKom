@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const sharp = require("sharp");
 const sendSMS = require("../utils/sendSMS");
+const sendEmail = require("../utils/sendEmail");
 const Profile = require("../models/profile");
 
 //************** Create New User *******************/
@@ -121,6 +122,7 @@ const forgotPassword = async (req, res) => {
     if (!user) throw new Error("Wrong Email");
     const verifCode = Math.floor(Math.random() * 1_000_000_0);
     sendSMS(verifCode, user.phone);
+    sendEmail(verifCode, user.email);
     user.verif_code = verifCode;
     await user.save();
     res.send(user);

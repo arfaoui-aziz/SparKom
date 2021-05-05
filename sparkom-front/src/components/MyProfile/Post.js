@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { activeUserSelector } from "../../store/slices/auth";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
-import profilePic from "../../assets/img/author-main1.jpg";
+import profilePic from "../../assets/img/myAvatar.png";
 import AddComment from "./AddComment";
 import { Link } from "react-router-dom";
 import "../../assets/css/Feed.css";
