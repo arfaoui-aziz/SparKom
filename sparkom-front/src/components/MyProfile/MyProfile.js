@@ -18,9 +18,6 @@ export default function MyProfile() {
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
-    dispatch(fetchProfile());
-    dispatch(fetchFriends());
-    dispatch(fetchAllProfiles());
     alanBtn({
       key: process.env.REACT_APP_ALLAN_KEY,
       onCommand: ({ command, questions }) => {
@@ -29,7 +26,12 @@ export default function MyProfile() {
           history.push("/quiz");
         }
       },
-    });
+    }).playText(
+      "Welcome To Sparkom , Im Sparki your voice Assistant during your journey "
+    );
+    dispatch(fetchProfile());
+    dispatch(fetchFriends());
+    dispatch(fetchAllProfiles());
   }, [dispatch, history]);
   return (
     <>
