@@ -2,7 +2,7 @@
   "name": "sparkom-front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://localhost:3000",
+  "proxy": "https://sparkom.netlify.app/",
   "dependencies": {
     "@alan-ai/alan-sdk-web": "^1.8.26",
     "@date-io/date-fns": "^1.3.13",
