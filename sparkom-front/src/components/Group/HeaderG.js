@@ -148,9 +148,9 @@ export default function HeaderG(props) {
                         <img
                           src={trash}
                           alt="author"
-                          /*  onClick={() => {
+                           onClick={() => {
                             handleDelete(props.dm._id);
-                          }}*/
+                          }}
                         />{" "}
                       </a>
                     </div>
