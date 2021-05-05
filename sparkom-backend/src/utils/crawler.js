@@ -7,8 +7,7 @@ const crawler = async () => {
   await page.evaluate(() => {
     const form = document.querySelector("form");
     const btn = document.querySelector("form > button");
-    form.email.value = "sparkit.sparkom@gmail.com";
-    form.password.value = "Sparkom2021";
+
     btn.click();
   });
   await page.screenshot({ path: "example.png" });
@@ -20,4 +19,4 @@ const crawler = async () => {
   //   console.log(title);
 };
 
-crawler();
+//crawler();

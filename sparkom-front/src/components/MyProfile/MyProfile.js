@@ -30,7 +30,7 @@ export default function MyProfile() {
         }
       },
     });
-  }, [dispatch]);
+  }, [dispatch, history]);
   return (
     <>
       <NavBar />
