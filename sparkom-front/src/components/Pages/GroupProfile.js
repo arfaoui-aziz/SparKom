@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import lock from "../../assets/img/lock.png";
 import axios from "axios";
 import Home from "../Group/PostGR/Home";
+import FeedBack from "./FeedBack";
 export default function MyProfile() {
   const { id } = useParams();
   const [dm, err, reload] = useServerApi("group/getdev/" + id);
@@ -51,6 +52,7 @@ export default function MyProfile() {
 
   return (
     <div class="container">
+        <FeedBack />
       <div class="row">
         <NavBar />
         <div class="header-spacer header-spacer-small mb-3"></div>
