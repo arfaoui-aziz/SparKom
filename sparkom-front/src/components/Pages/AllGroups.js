@@ -2,6 +2,7 @@ import React from "react";
 
 import AddGrBu from "../Group/AddGrBu";
 import GroupCard from "../Group/GroupCard";
+import FeedBack from "./FeedBack";
 import NavBar from "../../components/NavBar/NavBar";
 import { useServerApi } from "../../hooks/useServerApi";
 export default function AllGroups() {
@@ -15,6 +16,7 @@ export default function AllGroups() {
 
   return (
     <div>
+      <FeedBack/>
       <div className="app">
         {/* Header */}
         <NavBar />

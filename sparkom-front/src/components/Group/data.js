@@ -16,6 +16,8 @@ export const regionOptions = [
   { value: "PHP", label: "PHP"},
   { value: "Gamers", label: "Gamers"},
   { value: "Programming", label: "Programming" },
+  { value: "Food", label: "Food" },
+  { value: "LeaguesOfLegend", label: "LeaguesOfLegend" },
 ];
 
 export const stateOptions = [

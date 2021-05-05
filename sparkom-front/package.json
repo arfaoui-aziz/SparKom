@@ -29,6 +29,7 @@
     "bootstrap": "^4.0.0",
     "clsx": "1.1.0",
     "date-fns": "^2.19.0",
+    "feeder-react-feedback": "0.0.6",
     "formik": "^2.2.6",
     "framer-motion": "1.8.4",
     "google-map-react": "1.1.6",
