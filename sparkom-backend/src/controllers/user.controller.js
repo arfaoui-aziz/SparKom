@@ -92,7 +92,7 @@ const login = async (req, res) => {
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (e) {
-    res.status(400).send("Unable to login");
+    res.status(400).send("Invalid Email or Password");
   }
 };
 

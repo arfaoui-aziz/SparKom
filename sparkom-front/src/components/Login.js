@@ -87,6 +87,9 @@ export default function Login() {
                   onChange={formik.handleChange}
                   fullWidth
                 />
+                <p className="text-danger ml-1 mt-1">
+                  {formik.touched.email && formik.errors.email}
+                </p>
               </div>
               <div className="form-group label-floating is-empty">
                 <FormControl variant="outlined" fullWidth>

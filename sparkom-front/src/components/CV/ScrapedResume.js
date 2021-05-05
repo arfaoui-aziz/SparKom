@@ -48,6 +48,12 @@ export default function ScrapedResume() {
                 <div className="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
                   <ul className="list-unstyled mb-0 ">
                     <li className="mb-2">
+                      <Link to="/pdf" className="btn btn-primary">
+                        <i className="far fa-file-pdf mr-2" />
+                        Download PDF
+                      </Link>
+                    </li>
+                    <li className="mb-2">
                       <i className="fas fa-phone-square fa-fw fa-lg mr-2 " />
                       <a className="resume-link" href="tel:#">
                         0123 4567 890
