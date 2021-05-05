@@ -19,7 +19,7 @@ const { getUserById } = require("../controllers/user");
 
 const router = express.Router();
 
-router.get("/api/questions", requireSignin, getAllQuestions);
+router.get("/api/questions", getAllQuestions);
 router.get("/api/questions/by/:userId", requireSignin, userQuestions);
 router.delete("/api/question/:questionId", requireSignin, isOwner, deleteQuestion);
 router.post("/api/question/create/:userId", requireSignin, addQuestion);

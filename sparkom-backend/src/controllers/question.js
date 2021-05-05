@@ -60,8 +60,7 @@ const isOwner = (req, res, next) => {
 };*/
 
 const addQuestion = (req, res) => {
-  
-  console.log(req.body);
+  console.log("here!");
   let form = new formidable.IncomingForm();
   const { title } = req.body;
   const { body } = req.body;

@@ -12,6 +12,11 @@ import NavBar from "./components/NavBar/NavBar";
 import AllTopics from "./pages/Topics/AllTopics";
 import Users from "./pages/Users";
 import TopicDetails from "./pages/Topics/TopicDetails";
+import AddQuestion from "./pages/Question/addQuestion";
+import AllQuestion from "./pages/Question/AllQuestions";
+import QuestionDetails from "./pages/Question/QuestionDetails";
+import News from "./pages/API News/NewsCard";
+
 
 function App({ currentUser }) {
   const dispatch = useDispatch();
@@ -35,13 +40,18 @@ function App({ currentUser }) {
         
         <Route path="/topics" exact component={AllTopics} />
         <Route path="/topic/:topicId" exact component={TopicDetails} />
+        <Route path="/question/:questionId" exact component={QuestionDetails} />
+
+        <Route path="/questions" exact component={AllQuestion} />
+        <Route path="/addQuestion" exact component={AddQuestion} />
 
         <Route path="/register" exact component={Register} />
         <Route path="/login" exact component={Login} />
         <Route path="/users" exact component={Users} />
         <Route path="/user/:userId" exact component={Profile} />
   <Route path="/user/edit/:userId" exact component={EditProfile} />
-  
+  <Route path="/news" exact component={News} />
+
         
 
       </Switch>
