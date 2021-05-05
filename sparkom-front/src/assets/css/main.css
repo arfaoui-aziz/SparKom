@@ -123,7 +123,13 @@ Description: "HTML-template"
 /*------------- #THEME-STYLES --------------*/
 /*------------- #VARIABLES --------------*/
 /*------------- #HEADER --------------*/
-
+.buttonF {     
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;        
+}
 .photo {
   height: 170px;
   width: 170px;

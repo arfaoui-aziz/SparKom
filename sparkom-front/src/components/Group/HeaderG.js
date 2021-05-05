@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import cover from "../../assets/img/top-header2.jpg";
 import { Link } from "react-router-dom";
 import profilePic from "../../assets/img/author-main2.jpg";
@@ -8,15 +8,37 @@ import leave from "../../assets/img/leave.png";
 import add from "../../assets/img/add.png";
 import trash from "../../assets/img/delete.png";
 import { queryApi } from "../../utils/queryApi";
+import {
+  Button,
+  FormFeedback,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap";
 import { useDispatch } from "react-redux";
 import { JoinGroup, LeaveGroup } from "../../redux/actions/groupActions";
 import { useHistory } from "react-router-dom";
 import { activeUserSelector, thistoken } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
+import Popup from "reactjs-popup";
 
 export default function HeaderG(props) {
- 
-  
+  const [sent, setSend] = useState(false);
+  const [text, setText] = useState("");
+  const [mail, setMail] = useState("");
+  // const mail = "eya.bellil@esprit.tn";
+  const handleSend = async () => {
+    setSend(true);
+    try {
+      await axios.post("http://localhost:3002/send_mail", {
+        text,
+        mail,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const activeUser = useSelector(activeUserSelector);
   const token = useSelector(thistoken);
   const history = useHistory();
@@ -35,21 +57,15 @@ export default function HeaderG(props) {
 
   const handleDelete = async (id) => {
     history.replace("/all");
-    const [, err] = await queryApi(
-      `group/delete/${id}`,
-      null,
-      "PUT",
-      false
-    );
-  
+    const [, err] = await queryApi(`group/delete/${id}`, null, "PUT", false);
+
     if (err) {
-     console.log(err);
+      console.log(err);
+    } else {
+      history.replace("/all");
     }
-   else {history.replace("/all");}
-  
   };
-  
-  
+
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
 
   React.useEffect(() => {
@@ -86,7 +102,10 @@ export default function HeaderG(props) {
                       />
                     </div>
                     <div className="author-content">
-                      <a className="h3 author-name"  onClick={() => Details(props.dm._id)}>
+                      <a
+                        className="h3 author-name"
+                        onClick={() => Details(props.dm._id)}
+                      >
                         {props.dm.name}
                       </a>
                       <div className="country">
@@ -123,63 +142,104 @@ export default function HeaderG(props) {
                     </div>
                   </div>
 
-
-                  {
-                  activeUser._id === props.dm.CreatedBy ? (
+                  {activeUser._id === props.dm.CreatedBy ? (
                     <div className="control-block-button">
                       <a className="btn btn-control">
-                        <img src={trash} alt="author" onClick={()=> {handleDelete(props.dm._id)}} />{" "}
+                        <img
+                          src={trash}
+                          alt="author"
+                          /*  onClick={() => {
+                            handleDelete(props.dm._id);
+                          }}*/
+                        />{" "}
                       </a>
-                      
                     </div>
-                    ) : (
-                      <>
-                 
-
-                  {member ? (
-                    <>
-                      <div className="control-block-button">
-                        <a className="btn btn-control">
-                          <img
-                            src={leave}
-                            alt="author"
-                            onClick={() =>
-                              dispatch(
-                                LeaveGroup(token, activeUser._id, props.dm._id)
-                              )
-                            }
-                          />{" "}
-                        </a>
-                        <a className="btn btn-control">
-                          <img src={eya} alt="author" />
-                        </a>
-                      </div>
-                    </>
                   ) : (
-
                     <>
-
-                      <div className="control-block-button">
-                        <a className="btn btn-control">
-                          <img
-                            src={add}
-                            alt="author"
-                            onClick={() =>
-                              dispatch(
-                                JoinGroup(token, activeUser._id, props.dm._id)
-                              )
-                            }
-                          />{" "}
-                          <ul className="more-dropdown">
-                            <li>
-                              <a href=".">Join Group</a>
-                            </li>
-                          </ul>
-                        </a>
-                      </div>
+                      {member ? (
+                        <>
+                          <div className="control-block-button">
+                            <a className="btn btn-control">
+                              <img
+                                src={leave}
+                                alt="author"
+                                onClick={() =>
+                                  dispatch(
+                                    LeaveGroup(
+                                      token,
+                                      activeUser._id,
+                                      props.dm._id
+                                    )
+                                  )
+                                }
+                              />{" "}
+                            </a>
+                            <a className="btn btn-control">
+                              <Popup
+                                trigger={
+                                  <button className='buttonF'>
+                                    <img src={eya} alt="author"/>{" "}
+                                  </button>
+                                }
+                                position="right center"
+                              >
+                                <div>
+                                  {!sent ? (
+                                    <form onSubmit={handleSend}>
+                                      <input
+                                        type="text"
+                                        value={"I want to invite you to this group "+props.dm.name+"Don't hesitate, Join us"}
+                                        placeholder="Enter your .."
+                                        onChange={(e) =>
+                                          setText(e.target.value)
+                                        }
+                                      />
+                                      <input
+                                        type="text"
+                                        value={mail}
+                                        placeholder="Email.."
+                                        onChange={(e) =>
+                                          setMail(e.target.value)
+                                        }
+                                      />
+                                      <Button type="submit">Send</Button>
+                                    </form>
+                                  ) : (
+                                    <h3>Email Sent</h3>
+                                  )}
+                                </div>
+                              </Popup>
+                            </a>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="control-block-button">
+                            <a className="btn btn-control">
+                              <img
+                                src={add}
+                                alt="author"
+                                onClick={() =>
+                                  dispatch(
+                                    JoinGroup(
+                                      token,
+                                      activeUser._id,
+                                      props.dm._id
+                                    )
+                                  )
+                                }
+                              />{" "}
+                              <ul className="more-dropdown">
+                                <li>
+                                  <a href=".">Join Group</a>
+                                </li>
+                              </ul>
+                            </a>
+                          </div>
+                        </>
+                      )}
                     </>
                   )}
-                  </>)}
 
                   {/*  <a href=".html" className="btn btn-control">
                       <div className="more">

@@ -119,9 +119,9 @@ export default function NavBar() {
 
                 <div className="control-icon">
                   <div className="author-title ">
-                    
+                 
                       <div className="c-secondary">Jobs</div>
-                    
+                   
                   </div>
                 </div>
 

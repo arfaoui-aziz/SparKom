@@ -7,6 +7,8 @@ const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const connectToDB = require("../config/db");
 var eventC = require("./models/event");
+const nodemailer =require("nodemailer");
+
 // Importe Routes
 const userRouter = require("./routers/user.router");
 const profileRouter = require("./routers/profile.router");
@@ -105,7 +107,8 @@ app.use(cors());
 app.use(express.json());
 app.use(logger("dev"));
 app.use(express.json());
-
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 //* Connect to DB
 connectToDB();
 
@@ -121,6 +124,36 @@ app.use("/cv", cvRouter);
 app.use("/group", groupRouter);
 app.use("/event", eventRouter);
 app.use("/", postGrRouter);
+
+app.post("/send_mail",cors(), async (req, res) => {
+  let {text} = req.body
+  let {mail} = req.body
+  const transport = nodemailer.createTransport({
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS
+    }
+  })
+
+  await transport.sendMail({
+    from: process.env.MAIL_FROM,
+    to: mail,
+    subject: "test email",
+    html: `<div className="email" style="
+    border: 1px solid black;
+    padding: 20px;
+    font-family: sans-serif;
+    line-height: 2;
+    font-size: 20px;
+    ">
+    <h2>Here is your email!</h2>
+    <p>${text}</p>
+    <p> All the best ,Sparkom</p>
+    </div>`
+  })
+})
 
 const PORT = process.env.PORT || 3000;
 app.set("views", path.join(__dirname, "views"));

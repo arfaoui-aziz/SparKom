@@ -25,6 +25,7 @@ import AddGroup from "./components/Pages/AddGroup";
 import Direction from "./components/Events/DirectionForm";
 import Update from "./components/Group/Update";
 import Home from "./components/Group/PostGR/Home";
+
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
   return (
@@ -34,6 +35,7 @@ function App() {
         <div className="header-spacer header-spacer-small mb-3"></div> */}
         {activeUser ? (
           <Switch>
+        
             <Route path="/settings" component={Settings} />
             <Route path="/quiz" component={Quiz} />
             <Route path="/cv" component={Cv} />
@@ -55,7 +57,9 @@ function App() {
           <Route path="/update/:id" component={Update} />
           <Route path="/add" component={AddGroup} />
           <Route path="/PostHome" component={Home} />
+
             <Route path="/" exact component={Login} />
+          
           </Switch>
         ) : (
           <Switch>

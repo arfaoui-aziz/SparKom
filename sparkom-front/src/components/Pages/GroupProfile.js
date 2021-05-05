@@ -79,7 +79,7 @@ export default function MyProfile() {
                 {" "}
                 <LeftSidebar dm={toRender} />
                 <Home />
-                <RightSidebar dms={toRender2} />
+                <RightSidebar dms={toRender} />
               </>
             )}
           </>

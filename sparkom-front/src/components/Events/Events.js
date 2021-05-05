@@ -128,7 +128,7 @@ const m= events.Date;
                               )
                             }
                           >
-                            Join
+                            Join + Add To Calendar
                           </a>
                         </td>
                       </>
