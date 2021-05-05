@@ -1,6 +1,5 @@
 .quiz {
   background-color: #3d4669;
-
   min-height: 200px;
   height: min-content;
   border-radius: 15px;
@@ -32,6 +31,7 @@
 
 .question-text {
   margin-bottom: 12px;
+  color: #fff;
 }
 
 .timer-text {
@@ -57,9 +57,9 @@ button {
   font-size: 16px;
   color: #ffffff;
   background-color: #252d4a;
-  border-radius: 15px;
+  border-radius: 10px;
   display: flex;
-  padding: 5px;
+  padding: 10px;
   justify-content: flex-start;
   align-items: center;
   border: 2px solid #234668;

@@ -2,7 +2,6 @@ import React from "react";
 
 import Header from "../ProfileSettings/Header";
 import LeftSidebar from "../MyProfile/LeftSidebar";
-import RightSidebar from "../MyProfile/RightSidebar";
 import Questions from "./Questions";
 import NavBar from "../NavBar/NavBar";
 
@@ -20,11 +19,10 @@ export default function Quiz() {
           <LeftSidebar />
 
           {/* Feed */}
-          <div className="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+          <div className="col col-xl-9 order-xl-2 col-lg-9 order-lg-1 col-md-12 col-sm-12 col-12">
             <Questions />
           </div>
           {/* Widgets */}
-          <RightSidebar />
         </div>
       </div>
     </>

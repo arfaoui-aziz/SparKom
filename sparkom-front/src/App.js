@@ -1,4 +1,5 @@
 import React from "react";
+import alanBtn from "@alan-ai/alan-sdk-web";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./App.css";
@@ -23,6 +24,7 @@ import ScrapedResume from "./components/CV/ScrapedResume";
 
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
+
   return (
     <div>
       <Router>

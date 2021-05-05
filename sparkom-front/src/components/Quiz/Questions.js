@@ -1,57 +1,25 @@
 import React, { useState } from "react";
 import "../../assets/css/quiz.css";
+import { useSelector } from "react-redux";
+import { quizSelector } from "../../store/slices/quiz";
 export default function Questions() {
-  const questions = [
-    {
-      questionText:
-        "Which of the following methods in a React Component is called after the component is rendered for the first time?",
-      answerOptions: [
-        { answerText: "componentDidMount", isCorrect: true },
-        { answerText: "componentDidUpdate", isCorrect: false },
-        { answerText: "componentMounted", isCorrect: false },
-        { answerText: "componentUpdated", isCorrect: false },
-      ],
-    },
-    {
-      questionText:
-        "Which of the following is the correct syntax for a button click event handler foo ?",
-      answerOptions: [
-        { answerText: "<button onClick={this.foo()}>", isCorrect: false },
-        { answerText: "<button onClick={this.foo}>", isCorrect: true },
-        { answerText: "<button onclick={this.foo()}>", isCorrect: false },
-        { answerText: "<button onclick={this.foo}>", isCorrect: false },
-      ],
-    },
-    {
-      questionText:
-        "Which of the following methods in a React Component is called after the component is rendered for the first time?",
-      answerOptions: [
-        { answerText: "componentDidMount", isCorrect: true },
-        { answerText: "componentDidUpdate", isCorrect: false },
-        { answerText: "componentMounted", isCorrect: false },
-        { answerText: "componentUpdated", isCorrect: false },
-      ],
-    },
-    {
-      questionText: "What is state in React ?",
-      answerOptions: [
-        { answerText: "A persistant storage.", isCorrect: false },
-        { answerText: "Module", isCorrect: false },
-        { answerText: "Class", isCorrect: false },
-        {
-          answerText: "An internal data store (object) of a component.",
-          isCorrect: true,
-        },
-      ],
-    },
-  ];
+  const questions = useSelector(quizSelector);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
 
+  const correctAnswers = {
+    0: "answer_a",
+    1: "answer_b",
+    2: "answer_c",
+    3: "answer_d",
+  };
+
   const handleAnswerOptionClick = (isCorrect) => {
-    if (isCorrect) {
+    if (
+      questions[currentQuestion].correct_answer === correctAnswers[isCorrect]
+    ) {
       setScore(score + 1);
     }
 
@@ -77,19 +45,18 @@ export default function Questions() {
                 <span>Question {currentQuestion + 1}</span>/{questions.length}
               </div>
               <div className="question-text">
-                {questions[currentQuestion].questionText}
+                {questions[currentQuestion].question}
               </div>
             </div>
             <div className="answer-section">
-              {questions[currentQuestion].answerOptions.map((answerOption) => (
-                <button
-                  onClick={() =>
-                    handleAnswerOptionClick(answerOption.isCorrect)
-                  }
-                >
-                  {answerOption.answerText}
-                </button>
-              ))}
+              {Object.values(questions[currentQuestion].answers).map(
+                (answerOption, i) =>
+                  answerOption && (
+                    <button onClick={() => handleAnswerOptionClick(i)}>
+                      {answerOption}
+                    </button>
+                  )
+              )}
             </div>
           </>
         )}
