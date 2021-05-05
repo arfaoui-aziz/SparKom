@@ -34,14 +34,7 @@ oAuth2Client.setCredentials({
 
 const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-// Create a new event start date instance for temp uses in our calendar.
-const eventStartTime = new Date();
-eventStartTime.setDate(eventStartTime.getDay() + 2);
 
-// Create a new event end date instance for temp uses in our calendar.
-const eventEndTime = new Date();
-eventEndTime.setDate(eventEndTime.getDay() + 2);
-eventEndTime.setMinutes(eventEndTime.getMinutes() + 45);
 
 // Create a dummy event for temp uses in our calendar
 
