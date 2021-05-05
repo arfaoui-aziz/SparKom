@@ -20,7 +20,7 @@ export default function CardDetails() {
         <div>
           <NavBar />
           <Bheader />
-          <Allcards />
+          <Allcards idl={dm.list_id}/>
           <div class="container">
             <CardForm2 dm={toRender} idc={idc} />
           </div>

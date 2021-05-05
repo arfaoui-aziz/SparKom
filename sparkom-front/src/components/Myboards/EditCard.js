@@ -20,7 +20,7 @@ export default function EditCard() {
         <div>
           <NavBar />
           <Bheader />
-          <Allcards />
+          <Allcards idl={dm.list_id}/>
           <div class="container">
             <CardForm dm={toRender} idc={idc} />
           </div>

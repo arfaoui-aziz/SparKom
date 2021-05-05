@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../../assets/img/logo.png";
 import friend from "../../assets/img/friend-harmonic5.jpg";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import { Link } from "react-router-dom";
 import Oneboard from "./OneBoard";
@@ -13,6 +14,24 @@ import { queryApi } from "../../utils/queryApi";
 import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 export default function Boards(props) {
+  const history = useHistory();
+
+  const[dataa,setDataa]=useState([]);
+
+  const [showLoader, setShowLoader] = useState(false);
+  const [userData, setUserData] = useState({
+    board_name: "",
+  });
+
+  const {
+    board_name,
+  } = userData;
+
+  const [error, setError] = useState({ visible: false, message: "" });
+  const handleChange = (e) => {
+    console.log(e.target);
+    setUserData({ ...userData, [e.target.id]: e.target.value });
+  };
 
   const [buttonPopup, setButtonPopup] = useState(false);
   const [dms] = useServerApi("boards/");
@@ -24,6 +43,7 @@ export default function Boards(props) {
     } else await reload();
   };
   console.log(dms);
+
   return (
     <div class="container">
       <div class="row">
@@ -32,21 +52,36 @@ export default function Boards(props) {
             <div class="ui-block-title">
               <div class="h6 title">James’s Boards</div>
 
-              <form class="search-bar w-search notification-list friend-requests bg-white">
-                <div class="form-group with-button bg-white">
-                  <input
-                    class="form-control js-user-search bg-white"
-                    placeholder="Search here "
-                    type="text"
-                  />
-                  <button class="bg-white">
-                    <svg class="olymp-magnifying-glass-icon">
-                      <use
-                        xlinkHref={`${icons}#olymp-magnifying-glass-icon`}
-                      ></use>
-                    </svg>
+              <form className="content" >
+              <div className="row">
+              <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                
+              <div className="form-group label-floating is-empty">
+       
+                   <TextField
+                      label="Board Name"
+                      id="board_name"
+                      variant="outlined"
+                      value={board_name}
+                      onChange={handleChange}
+                      fullWidth
+                    />
+              </div>
+              </div>
+              <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+              <div className="form-group label-floating is-empty">
+                  <button
+                    type="submit"
+                    class="btn btn-smoke btn-md "
+                    style={{width: 250}}
+                  >
+                    <i class="fas fa-search"/> Search
                   </button>
                 </div>
+                  </div>
+                
+                </div>
+
               </form>
             </div>
           </div>
@@ -75,10 +110,10 @@ export default function Boards(props) {
             </div>
           </div>
         </div>
-      
         <Oneboard dms={dms} 
-        deleteboard={deleteboard}
-       />
+              deleteboard={deleteboard}
+             />
+  
       </div>
       <BoardAdd trigger={buttonPopup} setTrigger={setButtonPopup}>
         <PBoardAdd />

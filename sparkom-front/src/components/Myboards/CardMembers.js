@@ -9,7 +9,7 @@ import { useServerApi } from "../../hooks/useServerApi";
 import { queryApi } from "../../utils/queryApi";
 import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
-import AllUsers from "./AllUsers";
+import Allcards from "./Allcards";
 import CardUsers from "./CardUsers";
 import { activeUserSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
@@ -50,7 +50,7 @@ export default function CardMembers() {
       <NavBar />
       <Members />
       <Bheader />
-      <Alllists dm={toRender}/>
+      <Allcards idl={dm.list_id}/>
       <div class="container">
         <div class="row">
           <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

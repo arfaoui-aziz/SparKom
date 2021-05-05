@@ -162,14 +162,17 @@ export default function CardForm(props) {
                 <i class="fas fa-user"></i> Members
               </a>
               <br />
-              <a onClick={() => AddCalender(card._id)}
-                href="#"
-                class="btn btn-smoke btn-md btn-light-bg"
-                style={style}
-              >
-                {" "}
-                <i class="far fa-calendar-check"/> Add to calender
-              </a>
+              {card.Due_date!=null? ( 
+                   <a onClick={() => AddCalender(card._id)}
+                   href="#"
+                   class="btn btn-smoke btn-md btn-light-bg"
+                   style={style}
+                 >
+                   {" "}
+                   <i class="far fa-calendar-check"/> Add to calender
+                 </a>
+              ): (<></>)}
+             
               <br />
               {/*<a
                 href="#"

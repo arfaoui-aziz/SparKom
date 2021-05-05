@@ -1,17 +1,26 @@
 import { PinDropSharp } from "@material-ui/icons";
 import React from "react";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
+import { useServerApi } from "../../hooks/useServerApi";
+import { useHistory } from "react-router-dom";
 export default function Allcards(props) {
-
-  
-  return (
+  const history = useHistory();
+  const list_id = props.idl;
+  const [dm, er, reloadd] = useServerApi("cards/board/" + list_id);
+  console.log("----",dm);
+  const back = () => {
+    history.replace("/ShowBoard/" + dm.board_id);
+    console.log(history);
+  };
+ 
+    return (
     <div class="container">
    
       <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="ui-block responsive-flex">
           <div class="ui-block-title">
                 <div>
-                 <a href="/boards" data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2"><i className="fab fa-trello boards-btn-icon" /> Back to Boards</a>
+                 <a onClick={() => back()} data-toggle="modal" data-target="#create-photo-album" class="btn btn-primary btn-md-2"><i className="fab fa-trello boards-btn-icon" /> Back to Lists</a>
                 </div>
                 <div class="h6 title"> </div>
               

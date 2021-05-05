@@ -58,7 +58,13 @@ router.get("/detail/:id", function (req, res, next) {
 });
 router.get("/get/Allusers",  getAllUsers);
 router.get("/get/members/all/:board_id/:userId",  IsAMember);
-
+router.get("/get/boards/name", function (req, res, next) {
+  const search = req.body.board_name;
+  Board.find({Board_name:{$regex: `${search}`,$options: '$i'} })
+  .then(data=>{
+    res.send(data);
+  });
+});
 /*router.get("/findMember/:id", function (req, res, next) {
   Board.find({_id:req.params.id,function (err, data) {
     if (err) {
