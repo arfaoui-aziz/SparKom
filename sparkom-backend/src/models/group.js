@@ -38,6 +38,7 @@ var group = new Schema(
       default: "0",
     },
     Members: [{ type: ObjectId, ref: "User" }],
+    Attentes: [{ type: ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

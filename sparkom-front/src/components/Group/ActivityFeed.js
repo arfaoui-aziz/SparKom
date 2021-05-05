@@ -1,80 +1,69 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { AcceptGroup , AcceptNo} from "../../redux/actions/groupActions";
+import accept from "../../assets/img/accept.png";
 import pdf from "../../assets/img/avatar49-sm.jpg";
 import pdf1 from "../../assets/img/avatar9-sm.jpg";
-export default function ActivityFeed() {
+import { useParams } from "react-router-dom";
+import { useServerApi } from "../../hooks/useServerApi";
+import { activeUserSelector, thistoken } from "../../store/slices/auth";
+import { useSelector } from "react-redux";
+export default function ActivityFeed(props) {
+  const [attente, err, reload] = useServerApi("group/getuser/" + props.list);
+  const toRender = attente;
+  const { id } = useParams();
+  const token = useSelector(thistoken);
+  const [data, setData] = React.useState([]);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    setData(attente);
+  }, [attente]);
+
   return (
-    <div className="ui-block">
-      <div className="ui-block-title">
-        <h6 className="title">Activity Feed</h6>
-        <a href="." className="more">
-          <svg className="olymp-three-dots-icon">
-            <use xlinkHref="svg-icons/sprites/icons.svg#olymp-three-dots-icon" />
-          </svg>
-        </a>
-      </div>
-      {/* W-Activity-Feed */}
-      <ul className="widget w-activity-feed notification-list">
-        <li>
-          <div className="author-thumb">
-            <img src={pdf} alt="author" />
-          </div>
-          <div className="notification-event">
-            <a href="." className="h6 notification-friend">
-              Marina Polson
-            </a>{" "}
-            commented on Jason Mark’s{" "}
-            <a href="." className="notification-link">
-              photo.
-            </a>
-            .
-            <span className="notification-date">
-              <time className="entry-date updated" dateTime="2004-07-24T18:18">
-                2 mins ago
-              </time>
-            </span>
-          </div>
-        </li>
-        <li>
-          <div className="author-thumb">
-            <img src={pdf1} alt="author" />
-          </div>
-          <div className="notification-event">
-            <a href="." className="h6 notification-friend">
-              Jake Parker{" "}
-            </a>{" "}
-            liked Nicholas Grissom’s{" "}
-            <a href="." className="notification-link">
-              status update.
-            </a>
-            .
-            <span className="notification-date">
-              <time className="entry-date updated" dateTime="2004-07-24T18:18">
-                5 mins ago
-              </time>
-            </span>
-          </div>
-        </li>
-        <li>
-          <div className="author-thumb">
-            <img src={pdf} alt="author" />
-          </div>
-          <div className="notification-event">
-            <a href="." className="h6 notification-friend">
-              Mary Jane Stark{" "}
-            </a>{" "}
-            added 20 new photos to her{" "}
-            <a href="." className="notification-link">
-              gallery album.
-            </a>
-            .
-            <span className="notification-date">
-              <time className="entry-date updated" dateTime="2004-07-24T18:18">
-                12 mins ago
-              </time>
-            </span>
-          </div>
-        </li>
-      </ul>
+    <div>
+      {toRender ? (
+        <>
+        
+
+            <ul className="widget w-activity-feed notification-list">
+              <li>
+                <div className="author-thumb">
+                  <img src={pdf} alt="author" />
+                </div>
+                <div className="notification-event">
+                  <a href="." className="h6 notification-friend">
+                    <h4>{toRender.username}</h4>{" "}
+                  </a>{" "}
+                  Wants to Join Your Group{" "}
+                  <a href="." className="notification-link">
+                    Your Group
+                  </a>
+                  .
+                  
+                  <span className="notification-date">
+                    <time
+                      className="entry-date updated"
+                      dateTime="2004-07-24T18:18"
+                    >
+                     
+                    </time>
+                  </span>
+                  <div className="author-thumb">
+                    
+                    <img src={accept} alt="author"  onClick={() =>
+                      {dispatch(AcceptGroup(token, toRender._id,id));dispatch(AcceptNo(token, toRender._id,id))}
+                    } />
+                   
+                  </div>
+                </div>
+              </li>
+            </ul>
+            
+         
+        </>
+      ) : (
+        <p>not found</p>
+      )}
     </div>
   );
 }

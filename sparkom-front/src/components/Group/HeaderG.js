@@ -39,6 +39,7 @@ export default function HeaderG(props) {
       console.log(error);
     }
   };
+  
   const activeUser = useSelector(activeUserSelector);
   const token = useSelector(thistoken);
   const history = useHistory();

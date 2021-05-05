@@ -3,6 +3,7 @@ const auth = require("../middleware/auth");
 const group = require("../models/group");
 const events = require("../models/event");
 const boards = require("../models/boards");
+const user = require("../models/user");
 const multer = require("multer");
 const path = require("path");
 
@@ -16,13 +17,17 @@ const {
   JoinGroup,
   LeaveGroup,
   JoinEvent,
-  LeaveEvent
+  LeaveEvent,
+  AcceptGroup,
+  AcceptNo,
  
 } = require("../controllers/group");
 router.put("/JoinGroup", auth, JoinGroup);
 router.put("/LeaveGroup", auth, LeaveGroup);
 router.put("/JoinEvent", auth, JoinEvent);
 router.put("/LeaveEvent", auth, LeaveEvent);
+router.put("/AcceptGroup", auth, AcceptGroup);
+router.put("/AcceptNo", auth, AcceptNo);
 
 
 
@@ -54,6 +59,15 @@ router.get("/getdev", function (req, res, next) {
 
 router.get("/getev", function (req, res, next) {
   events.find(function (err, data) {
+    if (err) throw err;
+    res.json(data);
+  });
+});
+
+
+
+router.get("/getuser/:id", function (req, res, next) {
+  user.findById(req.params.id, function (err, data) {
     if (err) throw err;
     res.json(data);
   });

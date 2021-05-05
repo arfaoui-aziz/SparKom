@@ -6,7 +6,28 @@ const _ = require("lodash");
 const JoinGroup = (req, res) => {
   Group.findByIdAndUpdate(
     req.body.groupId,
+    { $push: { Attentes: req.body.userId } },
+    { new: true }
+  ).exec((err, result) => {
+    if (err) res.json({ error: err });
+    res.json(result);
+  });
+};
+const AcceptGroup = (req, res) => {
+  Group.findByIdAndUpdate(
+    req.body.groupId,
     { $push: { Members: req.body.userId } },
+    { new: true }
+  ).exec((err, result) => {
+    if (err) res.json({ error: err });
+    res.json(result);
+  });
+};
+
+const AcceptNo = (req, res) => {
+  Group.findByIdAndUpdate(
+    req.body.groupId,
+    { $pull: { Attentes: req.body.userId } },
     { new: true }
   ).exec((err, result) => {
     if (err) res.json({ error: err });
@@ -46,4 +67,4 @@ const LeaveEvent = (req, res) => {
   });
 };
 
-module.exports = { LeaveGroup, JoinGroup, LeaveEvent,JoinEvent };
+module.exports = { LeaveGroup, JoinGroup, LeaveEvent,JoinEvent,AcceptGroup,AcceptNo };
