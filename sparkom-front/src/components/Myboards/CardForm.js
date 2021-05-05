@@ -139,7 +139,7 @@ export default function CardForm(props) {
               </form>
             </div>
 
-            <div class="form-group label-floating">
+            {/*<div class="form-group label-floating">
               <h7>
                 <i class="fas fa-comments"></i> Activity
               </h7>
@@ -148,7 +148,7 @@ export default function CardForm(props) {
                 placeholder="add a comment"
                 type="email"
               />
-            </div>
+                </div>*/}
           </div>
 
           <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
@@ -213,14 +213,14 @@ export default function CardForm(props) {
               
               </form>
             
-              <a
+              {/*<a
                 href="#"
                 class="btn btn-smoke btn-md btn-light-bg"
                 style={style}
               >
                 {" "}
                 <i class="fas fa-paperclip"></i> Attachment
-              </a>
+              </a>*/}
               <br />
               <br />
               <h6>Action</h6>

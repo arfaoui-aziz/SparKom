@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment,useState, useEffect } from "react";
+import axios from "axios";
 import logo from "../../assets/img/logo.png";
 import friend from "../../assets/img/friend-harmonic5.jpg";
 import friend1 from "../../assets/img/friend-harmonic7.jpg";
@@ -10,12 +11,40 @@ import { useHistory } from "react-router-dom";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import { activeUserSelector, avatarSelector } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
-
+import { queryApi } from "../../utils/queryApi";
 export default function Oneboard(props) {
   const activeUser = useSelector(activeUserSelector);
+
+
   useEffect(() => {
     console.log(props.dms);
   }, [props.dms]);
+    const addmember = async (idb, idu) => {
+    const [err] = await queryApi(
+      "boards/AddMember/",
+      { board_id: idb, userId: idu },
+      "Put",
+      false
+    );
+    if (err) {
+      console.log(err);
+    } else {window.location.reload(false)
+   
+  }
+  };
+  const removemember = async (idb, idu) => {
+    const [err] = await queryApi(
+      "boards/LeaveBoard/",
+      { board_id: idb, userId: idu },
+      "Put",
+      false
+    );
+    if (err) {
+      console.log(err);
+    } else  {window.location.reload(false)
+   
+    }
+  };
   const history = useHistory();
   const Details = (idd) => {
     history.replace("/ShowBoard/" + idd);
@@ -51,13 +80,24 @@ export default function Oneboard(props) {
               </li>):
               (<li></li>)
               }
-               {(dm.creator_id!==activeUser._id) ? (
+               {(dm.creator_id!==activeUser._id) && dm.Members.indexOf(activeUser._id) !== -1 ? (
               <li>
-                <a href="#">unjoin board</a>
+                <a href="#"onClick={() => {
+                        removemember(dm._id,activeUser._id);
+                        window.location.reload(false);
+                    }} >unjoin board</a>
               </li>
               ):
               (<li></li>)
               }
+               {dm.Members.indexOf(activeUser._id) === -1 && dm.creator_id!==activeUser._id ? (
+                  <li>
+                  <a href="#" onClick={() => {
+                      addmember(dm._id, activeUser._id);
+                      window.location.reload(false);
+                    }}>join board</a>
+                </li>
+               ):(<li></li>)}
               {/*<li>
                 <a href="#">Turn Off Notifications</a>
               </li>*/}
@@ -66,9 +106,15 @@ export default function Oneboard(props) {
           <div class="friend-avatar">
            
             <div class="author-content">
+              {dm.Members.indexOf(activeUser._id) !== -1 || dm.creator_id===activeUser._id ? (
               <a  class="h5 author-name"  onClick={() => Details(dm._id)}>
                {dm.Board_name}
               </a>
+              ):(
+                <a  class="h5 author-name"  >
+               {dm.Board_name}
+              </a>
+              )}
               <div class="country">{dm.Members.length} Members in the board</div>
             </div>
           </div>
@@ -85,6 +131,7 @@ export default function Oneboard(props) {
       
 		))}                  
                             <div class="control-block-button">
+                              {dm.Members.indexOf(activeUser._id) !== -1 || dm.creator_id===activeUser._id?(
                                 <a onClick={() => members(dm._id)} className="accept-request">
                                 <span className="icon-add without-text">
                                 <svg className="olymp-happy-face-icon">
@@ -93,6 +140,7 @@ export default function Oneboard(props) {
                                 
                                 </span>
                                 </a>
+                                ):(<h7>You are not a member in this board</h7>)}
                                 {(dm.creator_id===activeUser._id) ? (
                                 <a onClick={() => dmembers(dm._id)} href="#" className="accept-request request-del">
                                 <span className="icon-minus">

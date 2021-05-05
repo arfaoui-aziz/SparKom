@@ -66,18 +66,32 @@ export default function CardForm(props) {
                 </h7>
                 <br/>
                 <br/>
+                {/*<h7>
+             
+                <h8> <i class="far fa-plus-square"></i> Created at : {card.createdAt}</h8>
+       
+                </h7>
+                <br/>
+                <br/>
+                <h7>
+             
+             <h8> <i class="fas fa-pen-square"></i> Updated at : {card.updatedAt}</h8>
+    
+             </h7>
+             <br/>
+             <br/>
                 <h7>
                 {card.Due_date!=null? (<h8> <i class="far fa-calendar-check"></i> Due Date  {card.Due_date} </h8> ): (
                 <h8> <i class="far fa-calendar-check"></i> No Due Date </h8>
                 )} 
-                </h7>
+                </h7>*/}
                   
         
             
               </form>
             </div>
 
-            <div class="form-group label-floating">
+            {/*<div class="form-group label-floating">
               <h7>
                 <i class="fas fa-comments"></i> Activity
               </h7>
@@ -86,67 +100,39 @@ export default function CardForm(props) {
                 placeholder="add a comment"
                 type="email"
               />
-            </div>
+                </div>*/}
           </div>
 
           <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="form-group label-floating" style={{ float: "right" }}>
-              <h6>Add to card</h6>
-              <a onClick={() => members(card._id)} class="btn btn-smoke btn-md btn-light-bg" style={style}>
-                {" "}
-                <i class="fas fa-user"></i> Members
-              </a>
-              <br />
-              {/*<a
-                href="#"
-                class="btn btn-smoke btn-md btn-light-bg"
-                style={style}
-              >
-                {" "}
-                <i class="fas fa-tag"></i> Labels
-              </a>
-              <br />*/}
-              {/*<a
-                href="#"
-                class="btn btn-smoke btn-md btn-light-bg"
-                style={style}
-              >
-                {" "}
-                <i class="fas fa-clock"></i> Due date
-              </a>*/}
-                           
-              <form className="content" >
-              <div className="form-group date-time-picker label-floating">
-                
               
-                
-              </div>
-              
-              </form>
             
-              <a
-                href="#"
-                class="btn btn-smoke btn-md btn-light-bg"
-                style={style}
-              >
-                {" "}
-                <i class="fas fa-paperclip"></i> Attachment
-              </a>
-              <br />
-              <br />
-              <h6>Action</h6>
-
-              <a
-                href="#"
-                class="btn btn-smoke btn-md btn-light-bg"
-                style={style}
-                onClick={() => lists(card._id)}
-              >
-                <i class="fas fa-arrow-alt-circle-right"></i> Move
-              </a>
+            <h7>
+             
+             <h8> <i class="far fa-plus-square"></i> Created at : {card.createdAt}</h8>
+    
+             </h7>
+             <br/>
+             <br/>
+             <h7>
+          
+          <h8> <i class="fas fa-pen-square"></i> Updated at : {card.updatedAt}</h8>
+ 
+          </h7>
+          <br/>
+          <br/>
+             <h7>
+             {card.Due_date!=null? (<h8> <i class="far fa-calendar-check"></i> Due Date  {card.Due_date} </h8> ): (
+             <h8> <i class="far fa-calendar-check"></i> No Due Date </h8>
+             )} 
+             </h7>       
+             
+              
+              
             </div>
           </div>
-        </div>
+          
+           </div>
       </div>
     </div>
   );
