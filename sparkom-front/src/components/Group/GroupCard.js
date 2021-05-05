@@ -57,13 +57,13 @@ export default function GroupCard({ dms }) {
             </svg>
             <ul className="more-dropdown">
               <li>
-                <a href=".">Report Group</a>
+                <a>Report Group</a>
               </li>
               <li>
-                <a href=".">Block Group</a>
+                <a >Block Group</a>
               </li>
               <li>
-                <a href=".">Turn Off Notifications</a>
+                <a >Turn Off Notifications</a>
               </li>
             </ul>
           </div>

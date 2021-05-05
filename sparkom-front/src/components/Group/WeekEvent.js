@@ -5,8 +5,9 @@ import "../../assets/css/main.css";
 import event from "../../assets/img/avatar48-sm.jpg";
 import "../../assets/svg-icons/sprites/icons.svg";
 import "../../assets/svg-icons/back-to-top.svg";
-export default function WeekEvent() {
+export default function WeekEvent(props) {
   return (
+    
     <div className="widget w-birthday-alert">
       <div className="icons-block">
         <svg className="olymp-cupcake-icon">
@@ -22,9 +23,9 @@ export default function WeekEvent() {
         <div className="author-thumb">
           <img src={event} alt="author" />
         </div>
-        <span>Today is</span>
+        <span>Please</span>
         <a href="." className="h4 title">
-          Our Event Createdby Eya
+          Check Our Events 
         </a>
         <p>Event of the Week !!!</p>
       </div>

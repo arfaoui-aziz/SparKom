@@ -189,7 +189,7 @@ export default function HeaderG(props) {
                                     <form onSubmit={handleSend}>
                                       <input
                                         type="text"
-                                        value={"I want to invite you to this group "+props.dm.name+"Don't hesitate, Join us"}
+                                        value={"I want to invite you to this group  "+props.dm.name+" Don't hesitate, Join us"}
                                         placeholder="Enter your .."
                                         onChange={(e) =>
                                           setText(e.target.value)
