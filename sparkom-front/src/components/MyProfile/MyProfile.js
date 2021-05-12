@@ -27,7 +27,7 @@ export default function MyProfile() {
         }
       },
     }).playText(
-      "Welcome To Sparkom , Im Sparki your voice Assistant during your journey "
+      "Welcome To Sparkom , Im Sparki your voice Assistant during your journey. How Can i Help you "
     );
     dispatch(fetchProfile());
     dispatch(fetchFriends());

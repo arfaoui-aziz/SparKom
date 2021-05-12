@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "../../assets/css/quiz.css";
 import { useSelector } from "react-redux";
 import { quizSelector } from "../../store/slices/quiz";
+import SweetAlert from "../SweetAlert";
+import { useHistory } from "react-router";
 export default function Questions() {
+  const history = useHistory();
   const questions = useSelector(quizSelector);
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -28,6 +30,14 @@ export default function Questions() {
       setCurrentQuestion(nextQuestion);
     } else {
       setShowScore(true);
+      if (score >= 12) {
+        SweetAlert(
+          "Congrats !",
+          "You have Earned a Javascript Badge",
+          "success"
+        );
+        history.push("/me/badges");
+      }
     }
   };
 

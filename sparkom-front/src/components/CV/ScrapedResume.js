@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "../../assets/css/Cv.css";
 import Experience from "./Experience";
@@ -27,11 +26,14 @@ export default function ScrapedResume() {
     accomplishment_projects,
   } = useSelector(resumeSelector);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
       <NavBar />
       <div className="header-spacer header-spacer-small mb-3"></div>
-      <div className="main-wrapper">
+      <div className="main-wrapper" id="screen">
         <div className="container px-3 px-lg-5">
           <article className="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg">
             <div className="resume-header">
@@ -48,10 +50,14 @@ export default function ScrapedResume() {
                 <div className="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
                   <ul className="list-unstyled mb-0 ">
                     <li className="mb-2">
-                      <Link to="/pdf" className="btn btn-primary">
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onSubmit={handleSubmit}
+                      >
                         <i className="far fa-file-pdf mr-2" />
                         Download PDF
-                      </Link>
+                      </button>
                     </li>
                     <li className="mb-2">
                       <i className="fas fa-phone-square fa-fw fa-lg mr-2 " />

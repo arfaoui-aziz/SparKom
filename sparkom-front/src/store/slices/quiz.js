@@ -30,6 +30,7 @@ const quizSlice = createSlice({
 // };
 
 export const quizSelector = (state) => state.quiz.quiz;
+export const badgesSelector = (state) => state.quiz.badges;
 
-export const { populateQuiz } = quizSlice.actions;
+export const { populateQuiz, addQuiz, updateQuiz } = quizSlice.actions;
 export default quizSlice.reducer;

@@ -191,7 +191,7 @@ class ComponentToPrint extends React.Component {
 }
 
 export default class Example extends React.Component {
-  static getDerivedStateFromProps(props, state) {
+  componentDidMount() {
     document.getElementById("print").click();
   }
   render() {
@@ -203,7 +203,7 @@ export default class Example extends React.Component {
             // to the root node of the returned component as it will be overwritten.
             return (
               <div>
-                <Link id="print" className="invisible" to="/cv">
+                <Link id="print" className="invisible" to="/me">
                   Print this out!
                 </Link>
               </div>

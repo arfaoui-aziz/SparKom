@@ -47,7 +47,7 @@ const SideBar = () => {
           </div>
 
           <div className="ui-block-title">
-            <Link to="/cv" className="h6 title">
+            <Link to="/resume" className="h6 title">
               My CV
             </Link>
           </div>
