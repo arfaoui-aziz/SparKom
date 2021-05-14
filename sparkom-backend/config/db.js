@@ -18,4 +18,3 @@ const connectToDB = async () => {
 };
 
 module.exports = connectToDB;
-//SCRAPER_API_KEY="1fc696b5-c58e-42ac-88b6-143beb31224e"
