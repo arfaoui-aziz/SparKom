@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { queryApi } from "../../utils/queryApi";
 
 const jobsSlice = createSlice({
   name: "jobs",
@@ -6,7 +7,6 @@ const jobsSlice = createSlice({
     jobs: [],
     selectedJob: {},
     errors: "",
-   
   },
   reducers: {
     populateJobs(state, action) {
@@ -40,6 +40,26 @@ const jobsSlice = createSlice({
   },
 });
 
+export const fetchJobById = async (id, dispatch) => {
+  const [res, err] = await queryApi("job/showbyId/" + id);
+
+  if (err) {
+    dispatch(setErrors(err));
+  } else {
+    dispatch(selectJob(res));
+  }
+};
+
+export const fetchJobs = async (dispatch) => {
+  const [res, err] = await queryApi("job/showJob");
+  if (err) {
+    dispatch(setErrors(err));
+  } else {
+    dispatch(populateJobs(res));
+  }
+
+  console.log(res);
+};
 
 /* selectors */
 export const selectJobs = (state) => {
@@ -47,8 +67,8 @@ export const selectJobs = (state) => {
 };
 
 export const selectSelectedJob = (state) => {
-    return state.jobs.selectedJob;
-    };
+  return state.jobs.selectedJob;
+};
 /* end selectors */
 export const {
   populateJobs,
@@ -56,6 +76,6 @@ export const {
   addJob,
   deleteJob,
   updateJob,
-  selectJob
+  selectJob,
 } = jobsSlice.actions;
 export default jobsSlice.reducer;

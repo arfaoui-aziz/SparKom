@@ -7,27 +7,15 @@ import Joblists from "./JobList";
 import FilterCategorie from "./FilterCategorie";
 import FilterDate from "./FilterDate";
 import Filter from "./Filter";
-import {
-  populateJobs,
-  setErrors,
-  selectJobs,
-} from "../../../store/slices/jobs";
+import { fetchJobs, selectJobs } from "../../../store/slices/jobs";
 import { useDispatch, useSelector } from "react-redux";
-import { queryApi } from "../../../utils/queryApi";
 
 function Index() {
   const dispatch = useDispatch();
   const [jobs] = useSelector(selectJobs);
-  useEffect(async () => {
-    const [res, err] = await queryApi("job/showJob");
-    if (err) {
-      dispatch(setErrors(err));
-    } else {
-      dispatch(populateJobs(res));
-    }
-
-    console.log(res);
-  }, []);
+  useEffect(() => {
+    dispatch(fetchJobs);
+  }, [dispatch]);
 
   return (
     <>

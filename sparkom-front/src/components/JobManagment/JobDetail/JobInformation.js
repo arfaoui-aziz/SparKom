@@ -6,7 +6,7 @@ import companylogo from "../../../assets/img/companypost.png";
 import {
   setErrors,
   selectSelectedJob,
-  selectJob,
+  fetchJobById,
   deleteJob,
 } from "../../../store/slices/jobs";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,15 +20,9 @@ function JobInformation() {
   const { id } = useParams();
 
   const job = useSelector(selectSelectedJob);
-  useEffect(async () => {
-    const [res, err] = await queryApi("job/showbyId/" + id);
-    if (err) {
-      dispatch(setErrors(err));
-    } else {
-      dispatch(selectJob(res));
-    }
-    console.log(job);
-  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchJobById(id));
+  }, [dispatch, id]);
 
   const deleteJobEvent = async () => {
     const [err] = await queryApi("job/deleteJob/" + job._id, {}, "DELETE");
