@@ -21,7 +21,7 @@ function JobInformation() {
 
   const job = useSelector(selectSelectedJob);
   useEffect(() => {
-    dispatch(fetchJobById(id));
+    dispatch(fetchJobById);
   }, [dispatch, id]);
 
   const deleteJobEvent = async () => {

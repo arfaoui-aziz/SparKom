@@ -13,10 +13,10 @@ function JobList(props) {
         <img
           src={`${process.env.REACT_APP_API_URL}/${props.job.image}`}
           className="jobicon"
-          alt="jobImage"
+          alt="jobicon"
         />
         <Link to={`/job/${props.job._id}`} style={{ textDecoration: "none" }}>
-          <a href="job" class="jobtitle">
+          <a href="job" className="jobtitle">
             {" "}
             {props.job.title}
           </a>
@@ -28,13 +28,13 @@ function JobList(props) {
         </p>
         <div>
           <Button href="#" className="jobtags">
-            Full Time
+            {props.job.contract}
           </Button>
           <Button href="#" className="jobtags">
-            Min.1Year
+            {props.job.salary}DT
           </Button>
           <Button href="#" className="jobtags">
-            Senior Level
+            {props.job.study}
           </Button>
         </div>
         <div className="mb-2">
@@ -46,9 +46,6 @@ function JobList(props) {
           >
             Apply Now
           </Button>{" "}
-          <Button variant="secondary" size="lg">
-            Contact
-          </Button>
         </div>
       </div>
     </div>

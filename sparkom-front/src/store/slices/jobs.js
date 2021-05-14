@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
 import { queryApi } from "../../utils/queryApi";
 
 const jobsSlice = createSlice({
@@ -40,15 +41,26 @@ const jobsSlice = createSlice({
   },
 });
 
-export const fetchJobById = async (id, dispatch) => {
-  const [res, err] = await queryApi("job/showbyId/" + id);
+// export const fetchJobById = async (dispatch) => {
+//   const [res, err] = await queryApi(`job/showbyId/${dispatch._id}`);
 
+//   if (err) {
+//     dispatch(setErrors(err));
+//   } else {
+//     console.log(res);
+//     dispatch(selectJob(res));
+//   }
+// };
+
+export const fetchJobById = createAsyncThunk(async (dispatch) => {
+  const [res, err] = await queryApi(`job/showbyId/${dispatch._id}`);
   if (err) {
     dispatch(setErrors(err));
   } else {
+    console.log(res);
     dispatch(selectJob(res));
   }
-};
+});
 
 export const fetchJobs = async (dispatch) => {
   const [res, err] = await queryApi("job/showJob");

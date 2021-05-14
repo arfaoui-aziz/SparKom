@@ -4,8 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import Joblists from "./JobList";
-import FilterCategorie from "./FilterCategorie";
-import FilterDate from "./FilterDate";
 import Filter from "./Filter";
 import { fetchJobs, selectJobs } from "../../../store/slices/jobs";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,15 +35,11 @@ function Index() {
 
       <Container>
         <Row>
-          <Col sm={3}>
-            <FilterDate />
-            <FilterCategorie />
-          </Col>
           <Col sm={9}>
             <Container>
               <Row>
-                {jobs?.map((job) => (
-                  <Col sm={6}>
+                {jobs?.map((job, i) => (
+                  <Col sm={6} key={i}>
                     <Joblists job={job} />
                   </Col>
                 ))}
