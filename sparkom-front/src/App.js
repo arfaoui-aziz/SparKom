@@ -20,15 +20,30 @@ import ForgotPassword from "./components/ForgotPassword";
 import VerificationCode from "./components/VerificationCode";
 import AllProfiles from "./components/MyProfile/AllProfiles";
 import ScrapedResume from "./components/CV/ScrapedResume";
-
+//************************************* Dali ************************************/
 import Landigpage from "./components/JobManagment/JobLanding/JobLanding";
 import Joblists from "./components/JobManagment/JobList/Index";
 import Jobdetails from "./components/JobManagment/JobDetail/Index";
 import Schedule from "./components/JobManagment/ScheduleManagment/Index";
 import AddJob from "./components/JobManagment/JobPost/JobPost";
-
 import CompanyForm from "./components/JobManagment/Company/RegisterCompany";
 import Companyinfo from "./components/JobManagment/CompanySettings/Companyinfos";
+//************************************* Syrine ************************************/
+import Boards from "./components/Myboards/Allboards";
+import Showboard from "./components/Myboards/ShowBoard";
+import BoardForm from "./components/Myboards/BoardForm";
+import PBoardAdd from "./components/Myboards/PBoardAdd";
+import Form2 from "./components/Myboards/Form2";
+import Form3 from "./components/Myboards/Form3";
+import ListForm from "./components/Myboards/ListForm";
+import ActionButtonL from "./components/Myboards/ActionButtonL";
+import EditCard from "./components/Myboards/EditCard";
+import CardDetails from "./components/Myboards/CardDetails";
+import AddMembers from "./components/Myboards/AddMembers";
+import DeleteMembers from "./components/Myboards/DeleteMembers";
+import CardMembers from "./components/Myboards/CardMembers";
+import CardLists from "./components/Myboards/CardLists";
+import Mail from "./components/Myboards/Mail";
 
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
@@ -64,6 +79,22 @@ function App() {
             <Route exact path="/addjob" component={AddJob} />
             <Route exact path="/registercompany" component={CompanyForm} />
             <Route exact path="/companyinfos/:id" component={Companyinfo} />
+            {/***************  Syrine **********************************/}
+            <Route path="/boards" component={Boards} />
+            <Route path="/showboard/:id" component={Showboard} />
+            <Route path="/BoardForm" component={BoardForm} />
+            <Route path="/Form2" component={Form2} />
+            <Route path="/Form3" component={Form3} />
+            <Route path="/ListForm" component={ListForm} />
+            <Route path="/PBoardAdd" component={PBoardAdd} />
+            <Route path="/ActionButtonL" component={ActionButtonL} />
+            <Route path="/EditCard/:idc" component={EditCard} />
+            <Route path="/CardDetails/:idc" component={CardDetails} />
+            <Route path="/AddMembers/:id" component={AddMembers} />
+            <Route path="/DeleteMembers/:id" component={DeleteMembers} />
+            <Route path="/CardMembers/:id/:idl" component={CardMembers} />
+            <Route path="/CardLists/:id/:idl" component={CardLists} />
+            <Route path="/Mail" component={Mail} />
           </Switch>
         ) : (
           <Switch>
