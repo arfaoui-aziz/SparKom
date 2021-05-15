@@ -23,13 +23,13 @@ export default function AllUsers({ dm, board_id, dms }) {
 
   React.useEffect(() => {
     setmembers(dms && dms.Members);
+    function checkmember(members) {
+      let match = members.indexOf(dm._id) !== -1;
+      setmember(match);
+    }
     checkmember(dms && dms.Members);
-  }, [dms.Members, dms, checkmember]);
+  }, [dms.Members, dms, dm._id]);
   console.log(dms.Members);
-  function checkmember(members) {
-    let match = members.indexOf(dm._id) !== -1;
-    setmember(match);
-  }
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function AllUsers({ dm, board_id, dms }) {
                 </a>
                 <div class="birthday-date">{dm.email}</div>
               </div>
-              <a
+              <button
                 class="btn btn-sm bg-blue"
                 onClick={() => {
                   removemember(board_id, dm._id);
@@ -54,7 +54,7 @@ export default function AllUsers({ dm, board_id, dms }) {
                 }}
               >
                 remove{" "}
-              </a>
+              </button>
             </div>
           </div>
         </div>

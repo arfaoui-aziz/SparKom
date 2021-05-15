@@ -27,11 +27,11 @@ export default function OneList({ dm, idl, card, board_id }) {
             <div class="birthday-item inline-items">
               <div class="author-thumb"></div>
               <div class="birthday-author-name">
-                <a href="#" class="h6 author-name">
+                <a href="#top" class="h6 author-name">
                   {dm.List_name}{" "}
                 </a>
               </div>
-              <a
+              <button
                 class="btn btn-sm bg-blue"
                 onClick={() => {
                   move(card._id, dm._id);
@@ -39,7 +39,7 @@ export default function OneList({ dm, idl, card, board_id }) {
                 }}
               >
                 Move{" "}
-              </a>
+              </button>
             </div>
           </div>
         </div>

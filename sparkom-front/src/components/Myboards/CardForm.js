@@ -77,7 +77,6 @@ export default function CardForm(props) {
     }
   };
 
-
   const members = (idd) => {
     history.replace("/CardMembers/" + props.idc + "/" + card.list_id);
     console.log(history);
@@ -160,17 +159,17 @@ export default function CardForm(props) {
           <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="form-group label-floating" style={{ float: "right" }}>
               <h6>Add to card</h6>
-              <a
+              <button
                 onClick={() => members(card._id)}
                 class="btn btn-smoke btn-md btn-light-bg"
                 style={style}
               >
                 {" "}
                 <i class="fas fa-user"></i> Members
-              </a>
+              </button>
               <br />
               {card.Due_date != null ? (
-                <a
+                <button
                   onClick={() => AddCalender(card._id)}
                   href="#"
                   class="btn btn-smoke btn-md btn-light-bg"
@@ -178,7 +177,7 @@ export default function CardForm(props) {
                 >
                   {" "}
                   <i class="far fa-calendar-check" /> Add to calender
-                </a>
+                </button>
               ) : (
                 <></>
               )}
@@ -236,14 +235,13 @@ export default function CardForm(props) {
               <br />
               <h6>Action</h6>
 
-              <a
-                href="#"
+              <button
                 class="btn btn-smoke btn-md btn-light-bg"
                 style={style}
                 onClick={() => lists(card._id)}
               >
                 <i class="fas fa-arrow-alt-circle-right"></i> Move
-              </a>
+              </button>
             </div>
           </div>
         </div>

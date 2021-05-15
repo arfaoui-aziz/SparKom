@@ -19,23 +19,23 @@ export default function CardLists() {
 
   const [delivs, setdelivs] = useState(false);
 
-  const getdelivs = async () => {
-    try {
-      const userPosts = await axios.get(
-        "http://localhost:3002/cards/board/" + idl
-      );
-      console.log("dataaa", userPosts.data.board_id);
-      setdelivs(userPosts.data); // set State
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
   console.log("deliv1", delivs.board_id);
 
   React.useEffect(() => {
+    const getdelivs = async () => {
+      try {
+        const userPosts = await axios.get(
+          "http://localhost:3002/cards/board/" + idl
+        );
+        console.log("dataaa", userPosts.data.board_id);
+        setdelivs(userPosts.data); // set State
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
     getdelivs();
     setData(dms);
-  }, [dms]);
+  }, [dms, idl]);
   const [dm] = useServerApi("cards/detail/" + id);
   const toRender = dm;
 

@@ -80,15 +80,14 @@ export default function Oneboard(props) {
                       {dm.creator_id !== activeUser._id &&
                       dm.Members.indexOf(activeUser._id) !== -1 ? (
                         <li>
-                          <a
-                            href="#"
+                          <button
                             onClick={() => {
                               removemember(dm._id, activeUser._id);
                               window.location.reload(false);
                             }}
                           >
                             unjoin board
-                          </a>
+                          </button>
                         </li>
                       ) : (
                         <li></li>
@@ -96,15 +95,14 @@ export default function Oneboard(props) {
                       {dm.Members.indexOf(activeUser._id) === -1 &&
                       dm.creator_id !== activeUser._id ? (
                         <li>
-                          <a
-                            href="#"
+                          <button
                             onClick={() => {
                               addmember(dm._id, activeUser._id);
                               window.location.reload(false);
                             }}
                           >
                             join board
-                          </a>
+                          </button>
                         </li>
                       ) : (
                         <li></li>
@@ -118,14 +116,16 @@ export default function Oneboard(props) {
                     <div class="author-content">
                       {dm.Members.indexOf(activeUser._id) !== -1 ||
                       dm.creator_id === activeUser._id ? (
-                        <a
+                        <button
                           class="h5 author-name"
                           onClick={() => Details(dm._id)}
                         >
                           {dm.Board_name}
-                        </a>
+                        </button>
                       ) : (
-                        <a class="h5 author-name">{dm.Board_name}</a>
+                        <a href="#top" class="h5 author-name">
+                          {dm.Board_name}
+                        </a>
                       )}
                       <div class="country">
                         {dm.Members.length} Members in the board
@@ -135,7 +135,7 @@ export default function Oneboard(props) {
                   {dm.Members?.map((item, i) => (
                     <ul class="friends-harmonic" key={i}>
                       <li>
-                        <a href="#">
+                        <a href="#top">
                           <img src={friend} alt="friend" />
                         </a>
                       </li>
@@ -144,7 +144,7 @@ export default function Oneboard(props) {
                   <div class="control-block-button">
                     {dm.Members.indexOf(activeUser._id) !== -1 ||
                     dm.creator_id === activeUser._id ? (
-                      <a
+                      <button
                         onClick={() => members(dm._id)}
                         className="accept-request"
                       >
@@ -153,12 +153,12 @@ export default function Oneboard(props) {
                             <use xlinkHref={`${icons}#olymp-happy-face-icon`} />
                           </svg>
                         </span>
-                      </a>
+                      </button>
                     ) : (
                       <h7>You are not a member in this board</h7>
                     )}
                     {dm.creator_id === activeUser._id ? (
-                      <a
+                      <button
                         onClick={() => dmembers(dm._id)}
                         href="#"
                         className="accept-request request-del"
@@ -168,9 +168,9 @@ export default function Oneboard(props) {
                             <use xlinkHref={`${icons}#olymp-happy-face-icon`} />
                           </svg>
                         </span>
-                      </a>
+                      </button>
                     ) : (
-                      <a></a>
+                      <p></p>
                     )}
                   </div>
                 </div>

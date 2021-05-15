@@ -49,7 +49,7 @@ export default function CardUsers({ dm, idl, card, board_id }) {
   useEffect(() => {
     getdelivs2();
     checkmbr();
-  }, []);
+  });
 
   return (
     <>
@@ -66,7 +66,7 @@ export default function CardUsers({ dm, idl, card, board_id }) {
                 </a>
                 <div class="birthday-date">{dm.email}</div>
               </div>
-              <a
+              <button
                 class="btn btn-sm bg-blue"
                 onClick={() => {
                   addmember(card._id, dm._id);
@@ -74,7 +74,7 @@ export default function CardUsers({ dm, idl, card, board_id }) {
                 }}
               >
                 Add{" "}
-              </a>
+              </button>
             </div>
           </div>
         </div>

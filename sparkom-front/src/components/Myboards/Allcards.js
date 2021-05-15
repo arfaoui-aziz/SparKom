@@ -18,14 +18,14 @@ export default function Allcards(props) {
         <div class="ui-block responsive-flex">
           <div class="ui-block-title">
             <div>
-              <a
+              <button
                 onClick={() => back()}
                 data-toggle="modal"
                 data-target="#create-photo-album"
                 class="btn btn-primary btn-md-2"
               >
                 <i className="fab fa-trello boards-btn-icon" /> Back to Lists
-              </a>
+              </button>
             </div>
             <div class="h6 title"> </div>
 
