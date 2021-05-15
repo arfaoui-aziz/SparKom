@@ -48,10 +48,6 @@ function Index() {
 
       <Container>
         <Row>
-          <Col sm={3}>
-            <FilterDate />
-            <FilterCategorie />
-          </Col>
           <Col sm={9}>
             <Container>
               <Row>

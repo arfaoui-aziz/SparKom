@@ -29,7 +29,7 @@ const getPostedonById = async (req, res) => {
 const createPostedon = async (req, res) => {
     Postedon.create(req.body)
       .then(postedon => res.json({ msg: 'Postedon added successfully' }))
-      .catch(err => res.status(400).json({ error: 'Unable to add this Company' }));
+      .catch(err => res.status(400).json({ error: 'Unable to add IT' }));
   };
 
   // @route GET api/books/:id
@@ -52,10 +52,19 @@ const updatePostedonById = async(req, res) => {
       .catch(err => res.status(404).json({ error: 'No such a Postedon' }));
   };
 
+
+  const getapllicantsByjob = async (req, res) => {
+    Postedon.find({job_id:req.params.id})
+    .populate('user')
+      .then(posts => res.json(posts))
+      .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+  };
+
   module.exports = {
     getAllPostedon,
     getPostedonById,
     createPostedon,
     updatePostedonById,
-    deletePostedon
+    deletePostedon,
+    getapllicantsByjob
   };

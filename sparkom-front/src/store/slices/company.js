@@ -21,7 +21,7 @@ const companysSlice = createSlice({
     },
     deleteCompany: (state, action) => {
       const payload = action.payload;
-      const index = state.jobs.findIndex((item) => item._id === payload);
+      const index = state.companies.findIndex((item) => item._id === payload);
       if (index !== -1) {
         state.companies.splice(index, 1);
       }

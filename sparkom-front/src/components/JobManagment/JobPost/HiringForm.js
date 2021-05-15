@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, MenuItem } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,19 @@ import {
   FormControl,
   IconButton,
 } from "@material-ui/core";
+import {
+  logout,
+  activeUserSelector,
+  oAuthSelector,
+} from "../../../store/slices/auth";
+
+import {
+  selectCompanies,
+  populateCompanies,
+  updateCompany,
+  deleteCompany
+} from "../../../store/slices/company";
+
 const countries = [
   { label: "AD", value: "Andorra" },
   { label: "AE", value: "United Arab Emirates" },
@@ -291,6 +304,7 @@ const availabilitytime = [
   { label: "19", value: "19" },
 ];
 function HiringForm() {
+  const activeUser = useSelector(activeUserSelector);
   const history = useHistory();
   const dispatch = useDispatch();
   const [showLoader, setShowLoader] = useState(false);
@@ -304,6 +318,21 @@ function HiringForm() {
     const handleChange = (event) => {
       setCountry(event.target.value);
     };
+
+    const [Compdetails, setCompdetails] = useState(false);
+    const [companies, err] = useSelector(selectCompanies);
+
+    useEffect( async () => {
+      const [res, err] = await queryApi("company/showcompanies");
+      if (err) {
+        dispatch(setErrors(err));
+        } else {
+        dispatch(populateCompanies(res));
+        }
+        setCompdetails(companies.filter(comp=>comp.company_owner==activeUser._id)[0]);
+        
+    }, [])
+
     const initialValues = {
       
       title : "",
@@ -316,33 +345,20 @@ function HiringForm() {
       study : "",
       startingtime : "",
       endingtime : "",
-      languages : "",
-      responsibility : "",
-      employesNeeded : "",
-      image: ''
+      Languages : "",
+      Responsibility : "",
+      employees_needed : "",
+      image: '',
+      company_id: Compdetails._id
     };
     
   const formik = useFormik({
     initialValues,
     validationSchema: yupSchema,
     onSubmit: async (values) => {
-      console.log(values,currentFile,"-----------------");
+      console.log(values,currentFile,"-----------------",Compdetails._id);
       values.image=currentFile;
-     /* let formData = new FormData();    
-      formData.append('image',currentFile);
-      formData.append('endingtime',values.endingtime);
-      formData.append('languages',values.languages);
-      formData.append('responsibility',values.responsibility);
-      formData.append('employesNeeded',values.employesNeeded);
-      formData.append('startingtime',values.startingtime);
-      formData.append('study',values.study);
-      formData.append('experience',values.experience);
-      formData.append('salary',values.salary);
-      formData.append('country',values.country);
-      formData.append('startingdate',values.startingdate);
-      formData.append('contract',values.contract);
-      formData.append('title',values.title);
-      formData.append('description',values.description);*/
+      values.company_id=Compdetails._id
 
       setShowLoader(true);
       const [res, err] = await queryApi("job/", values, "POST", true);
@@ -463,13 +479,13 @@ function HiringForm() {
                     <div className="form-group label-floating is-empty">
                     <TextField
                   className="is-invalid"
-                  id="languages"
-                  name="languages"
+                  id="Languages"
+                  name="Languages"
                   label="Languages"
                   variant="outlined"
-                  value={formik.values.languages}
-                  helpertext={formik.touched.languages && formik.errors.languages}
-                  error={formik.touched.languages && Boolean(formik.errors.languages)}
+                  value={formik.values.Languages}
+                  helpertext={formik.touched.Languages && formik.errors.Languages}
+                  error={formik.touched.Languages && Boolean(formik.errors.Languages)}
                   onChange={formik.handleChange}
                   fullWidth
                 />
@@ -477,13 +493,13 @@ function HiringForm() {
                     <div className="form-group label-floating is-empty">
                     <TextField
                   className="is-invalid"
-                  id="responsibility"
-                  name="responsibility"
+                  id="Responsibility"
+                  name="Responsibility"
                   label="Responsibility"
                   variant="outlined"
-                  value={formik.values.responsibility}
-                  helpertext={formik.touched.responsibility && formik.errors.responsibility}
-                  error={formik.touched.responsibility && Boolean(formik.errors.responsibility)}
+                  value={formik.values.Responsibility}
+                  helpertext={formik.touched.Responsibility && formik.errors.Responsibility}
+                  error={formik.touched.Responsibility && Boolean(formik.errors.Responsibility)}
                   onChange={formik.handleChange}
                   fullWidth
                 />
@@ -491,13 +507,13 @@ function HiringForm() {
                     <div className="form-group label-floating is-empty">
                     <TextField
                   className="is-invalid"
-                  id="employesNeeded"
-                  name="employesNeeded"
-                  label="EmployesNeeded"
+                  id="employees_needed"
+                  name="employees_needed"
+                  label="employees_needed"
                   variant="outlined"
-                  value={formik.values.employesNeeded}
-                  helpertext={formik.touched.employesNeeded && formik.errors.employesNeeded}
-                  error={formik.touched.employesNeeded && Boolean(formik.errors.employesNeeded)}
+                  value={formik.values.employees_needed}
+                  helpertext={formik.touched.employees_needed && formik.errors.employees_needed}
+                  error={formik.touched.employees_needed && Boolean(formik.errors.employees_needed)}
                   onChange={formik.handleChange}
                   fullWidth
                 />
@@ -553,6 +569,30 @@ const yupSchema = Yup.object({
   description: Yup.string()
     .min(7, "Minimum 7 caractéres")
     .max(80, "Maximum 80 caractéres")
+    .required("Champs requis!"),
+    contract: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(5, "Maximum 4 caractéres")
+    .required("Champs requis!"),
+    salary :  Yup.number()
+    .required("Champs requis!"),
+    experience: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(5, "Maximum 4 caractéres")
+    .required("Champs requis!"),
+    study: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(10, "Maximum 10 caractéres")
+    .required("Champs requis!"),
+    Languages: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(10, "Maximum 10 caractéres")
+    .required("Champs requis!"),
+    Responsibility: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(10, "Maximum 10 caractéres")
+    .required("Champs requis!"),
+    employees_needed :  Yup.number()
     .required("Champs requis!"),
 });
 

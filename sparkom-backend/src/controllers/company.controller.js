@@ -46,13 +46,20 @@ const updateCompanyById = async(req, res) => {
       );
   };
   
+  
+  const getCompByOwner = async (req, res) => {
+    Company.find({company_owner:req.params.id})
+      .then(comp => res.json(comp))
+      .catch(err => res.status(404).json({ noCompfound: 'No comp found' }));
+  };
+
   // @route GET api/books/:id
   // @description Delete book by id
   // @access Public
   const deleteCompany = async (req, res) => {
     Company.findByIdAndRemove(req.params.id, req.body)
       .then(companys => res.json({ mgs: 'company entry deleted successfully' }))
-      .catch(err => res.status(404).json({ error: 'No such a book' }));
+      .catch(err => res.status(404).json({ error: 'No such a company' }));
   };
 
   module.exports = {
@@ -60,5 +67,6 @@ const updateCompanyById = async(req, res) => {
     getCompanyById,
     createCompany,
     deleteCompany,
-    updateCompanyById
+    updateCompanyById,
+    getCompByOwner
   };

@@ -3,16 +3,17 @@ let Schema = mongoose.Schema
 const PostedOnSchema = new Schema({
   description: {
     type: String,
-    required: true
+    required: false
   },
   user: {
-    type: String,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    require: false
   },
   job_id: {
     type: Schema.Types.ObjectId,
     ref: 'job',
-    required: true
+    required: false
  }
 });
 

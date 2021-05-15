@@ -27,9 +27,13 @@ import Joblists from './components/JobManagment/JobList/Index';
 import Jobdetails from'./components/JobManagment/JobDetail/Index';
 import Schedule from './components/JobManagment/ScheduleManagment/Index';
 import AddJob from './components/JobManagment/JobPost/JobPost';
+import JobUpdate from './components/JobManagment/JobUpdate/JobUpdate';
+
 
 import CompanyForm from './components/JobManagment/Company/RegisterCompany';
 import Companyinfo from './components/JobManagment/CompanySettings/Companyinfos';
+
+
 
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
@@ -57,11 +61,11 @@ function App() {
             <Route exact path="/jobs" component={Landigpage} />
             <Route exact path="/findjob" component={Joblists} />
             <Route exact path="/job/:id" component={Jobdetails}/>
+            <Route exact path="/jobupdate/:id" component={JobUpdate}/>
             <Route exact path="/myschedule" component={Schedule}/>
             <Route exact path="/addjob" component={AddJob}/>
             <Route exact path="/registercompany" component={CompanyForm}/>
             <Route exact path="/companyinfos/:id" component={Companyinfo}/>
-            
           </Switch>
         ) : (
           <Switch>
@@ -70,6 +74,7 @@ function App() {
             <Route path="/company" component={CompanySignup} />
             <Route path="/test" component={Signup} />
             <Route path="/" exact component={Login} />
+
 
           </Switch>
         )}

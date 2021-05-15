@@ -51,7 +51,18 @@ const createJob = async (req, res) => {
 // @description Update book
 // @access Public
 const updateJobById = async(req, res) => {
-    Job.findByIdAndUpdate(req.params.id, req.body)
+  const j=req.body;
+    Job.findByIdAndUpdate(req.params.id, {
+      Languages:j.Languages,
+      Responsibility:j.Responsibility,
+      contract:j.contract,
+      description:j.description,
+      employees_needed:j.employees_needed,
+      experience:j.experience,
+      salary:j.salary,
+      study:j.study,
+      title:j.title,
+    })
       .then(Jobs => res.json({ msg: 'Updated successfully' }))
       .catch(err =>
         res.status(400).json({ error: 'Unable to update the Database' })
@@ -67,11 +78,18 @@ const updateJobById = async(req, res) => {
       .catch(err => res.status(404).json({ error: 'No such a book' }));
   };
 
+  const getJobByCompany = async (req, res) => {
+    Job.find({company_id:req.params.id})
+      .then(Jobs => res.json(Jobs))
+      .catch(err => res.status(404).json({ noJobsfound: 'No Jobs found' }));
+  };
+
   module.exports = {
     getAllJobs,
     getJobById,
     createJob,
     deleteJob,
     updateJobById,
-    uploadImg
+    uploadImg,
+    getJobByCompany
   };

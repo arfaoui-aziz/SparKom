@@ -1,6 +1,58 @@
-import React from 'react'
+import { useFormik } from 'formik';
+import React from 'react';
+import {populateschedule,
+  setErrors,
+  addschedule,
+} from "../../../store/slices/schedule";
+import { queryApi } from '../../../utils/queryApi';
+import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from "yup";
+import { TextField } from '@material-ui/core';
+import { useHistory, Redirect } from "react-router-dom";
+import {
+  logout,
+  activeUserSelector,
+  oAuthSelector,
+} from "../../../store/slices/auth";
+import { useParams } from 'react-router';
+
 
 function Postuler() {
+  const history = useHistory();
+  const activeUser = useSelector(activeUserSelector);
+  const dispatch = useDispatch();
+  const initialValues = {
+      
+    description : "",
+    user : "",
+    job_id : "",
+  };
+  const { id } = useParams();
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: yupSchema,
+    onSubmit: async (values) => {
+      values.user = activeUser._id;
+      values.job_id = id;
+      const [res, err] = await queryApi("postedon/", values, "POST", false);
+      if (err) {
+        setErrors({
+          visible: true,
+          message: err,
+        });
+      } else {
+        dispatch(addschedule(res));
+        history.push("/findjob");
+      }
+    },
+    
+  });
+
+
+
+
+
     return (
         <div>
         <div className="applyform ">
@@ -13,30 +65,34 @@ function Postuler() {
               data-mh="log-tab"
             >
               <div className="title h6">Application Form</div>
-              <form className="content">
+              <form className="content" onSubmit={formik.handleSubmit}>
                 <div className="row">
                   <div className="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <div className="form-group label-floating is-empty">
-                      <label className="control-label">Message</label>
-                      <input className="form-control" placeholder type="text" />
+                    <TextField
+                  className="is-invalid"
+                  id="description"
+                  name="description"
+                  label="Description"
+                  variant="outlined"
+                  value={formik.values.description}
+                  helpertext={formik.touched.description && formik.errors.description}
+                  error={formik.touched.description && Boolean(formik.errors.description)}
+                  onChange={formik.handleChange}
+                  fullWidth
+                />
                     </div>
                   </div>
                   
                   <div className="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <div className="form-group date-time-picker label-floating">
-                      <label className="control-label">Starting Date</label>
-                      <input name="datetimepicker" defaultValue="04/06/2021" />
-                      <span className="input-group-addon">
-                        <svg className="olymp-calendar-icon">
-                          <use xlinkHref="svg-icons/sprites/icons.svg#olymp-calendar-icon" />
-                        </svg>
-                      </span>
-                    </div>
-                 
                     
-                    <a href="#" className="btn btn-blue btn-lg full-width">
-                      Apply Now
-                    </a>
+                    
+                    <button
+                type="submit"
+                className="btn btn-lg btn-primary full-width"
+              >
+                Apply Now
+              </button>
                   </div>
                 </div>
               </form>
@@ -106,5 +162,9 @@ function Postuler() {
       </div>
     )
 }
+
+const yupSchema = Yup.object({
+ 
+});
 
 export default Postuler

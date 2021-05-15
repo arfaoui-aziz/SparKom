@@ -21,17 +21,14 @@ function JobList(props) {
 
              <p className="jobdesc">The user experience designer posistion exists to create compeling and elegant digital user experience through </p>
          <div>
-         <Button href="#" className="jobtags">Full Time</Button> 
-         <Button href="#" className="jobtags">Min.1Year</Button> 
-         <Button href="#" className="jobtags">Senior Level</Button> 
+         <Button href="#" className="jobtags">{props.job.contract}</Button> 
+         <Button href="#" className="jobtags">{props.job.salary}DT</Button> 
+         <Button href="#" className="jobtags">{props.job.study}</Button> 
          </div>
          <div className="mb-2">
 <Button variant="primary" size="" className="jobbutton" href={`/job/${props.job._id}`}>
  Apply Now
 </Button>{' '}
-<Button variant="secondary" size="lg" >
-  Contact
-</Button>
 </div>
 </div>
     </div>

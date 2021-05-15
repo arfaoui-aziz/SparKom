@@ -52,10 +52,18 @@ const updateScheduleById = async(req, res) => {
       .catch(err => res.status(404).json({ error: 'No such a Schedule' }));
   };
 
+
+  const getScheduleByUserId = async (req, res) => {
+    Schedule.find({User_id:req.params.id})
+      .then(schedule => res.json(schedule))
+      .catch(err => res.status(404).json({ noschedulefound: 'No schedule found' }));
+  };
+
   module.exports = {
     getAllSchedule,
     getScheduleById,
     createSchedule,
     updateScheduleById,
-    deleteSchedule
+    deleteSchedule,
+    getScheduleByUserId
   };

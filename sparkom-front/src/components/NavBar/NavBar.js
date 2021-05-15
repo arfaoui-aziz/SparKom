@@ -46,14 +46,17 @@ export default function NavBar() {
   };
   const [companies, err] = useSelector(selectCompanies);
   useEffect( async () => {
-    const [res, err] = await queryApi("company/showcompanies");
-    if (err) {
-      dispatch(setErrors(err));
-      } else {
-      dispatch(populateCompanies(res));
-      }
-      
-      setHaveComp(companies.filter(comp=>comp.company_owner==activeUser._id).length > 0);
+    if(activeUser!=null){
+
+      const [res, err] = await queryApi("company/showcompanies");
+      if (err) {
+        dispatch(setErrors(err));
+        } else {
+        dispatch(populateCompanies(res));
+        }
+        
+        setHaveComp(companies.filter(comp=>comp.company_owner==activeUser._id).length > 0);
+    }
       
   }, [])
 
@@ -195,17 +198,25 @@ export default function NavBar() {
                               </a>
                             </li>
                             </Link>
-                            <Link to="/addjob">
-                            <li>
+                            {
+                         haveComp  ?
+                         (
+                         
+                          <Link to="/addjob">
+                          <li>
+                          
+                            <a href="/addjob">
+                              <svg className="olymp-menu-icon">
+                                <use xlinkHref={`${icons}#olymp-menu-icon`} />
+                              </svg>
+                              <span>Add Job</span>
+                            </a>
+                          </li>
+                        </Link>
+                         ):
+                         ''
+                        }
                             
-                              <a href="/addjob">
-                                <svg className="olymp-menu-icon">
-                                  <use xlinkHref={`${icons}#olymp-menu-icon`} />
-                                </svg>
-                                <span>Add Job</span>
-                              </a>
-                            </li>
-                          </Link>
                         {
                          haveComp  ? ''
                          :(
@@ -220,19 +231,49 @@ export default function NavBar() {
                             </a>
                           </li>
                         </Link>
-                        <Link to="/registercompany">
-                        <li>
                         
-                          <a href="/registercompany">
-                            <svg className="olymp-menu-icon">
-                              <use xlinkHref={`${icons}#olymp-menu-icon`} />
-                            </svg>
-                            <span>Register Company</span>
-                          </a>
-                        </li>
-                      </Link>
                          )
                         }
+                         {
+                         haveComp  ?(
+                          <Link 
+                          to = { `/companyinfos/${activeUser._id}`}
+                          >
+                          <li>
+                          
+                            <a href="/companyinfos">
+                              <svg className="olymp-menu-icon">
+                                <use xlinkHref={`${icons}#olymp-menu-icon`} />
+                              </svg>
+                              <span>Company Informations</span>
+                            </a>
+                          </li>
+                        </Link>
+                         )
+                         :''
+                        }
+
+{
+                         haveComp  ?(
+                          <Link 
+                          to = "/myschedule"
+                          >
+                          <li>
+                          
+                            <a href="/myschedule">
+                              <svg className="olymp-menu-icon">
+                                <use xlinkHref={`${icons}#olymp-menu-icon`} />
+                              </svg>
+                              <span>My Scheduler</span>
+                            </a>
+                          </li>
+                        </Link>
+                         )
+                         :''
+                        }
+
+
+                        
                           
 
                           <li onClick={Logout}>
@@ -249,7 +290,10 @@ export default function NavBar() {
                   </div>
                   <Link to="/me" className="author-name fn">
                     <div className="author-title ">
-                      <div className="c-secondary">{`${activeUser.firstname} ${activeUser.lastname}`}</div>
+                      {activeUser!=null ?(
+                                              <div className="c-secondary">{`${activeUser.firstname} ${activeUser.lastname}`}</div>
+
+                      ) :''}
                     </div>
                   </Link>
                 </div>
