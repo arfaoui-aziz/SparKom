@@ -152,7 +152,7 @@ export default function HeaderG(props) {
                       {member ? (
                         <>
                           <div className="control-block-button">
-                            <a href="#top" className="btn btn-control">
+                            <a className="btn btn-control">
                               <img
                                 src={leave}
                                 alt="author"
@@ -212,7 +212,7 @@ export default function HeaderG(props) {
                       ) : (
                         <>
                           <div className="control-block-button">
-                            <a href="#top" className="btn btn-control">
+                            <a className="btn btn-control">
                               <img
                                 src={add}
                                 alt="author"
