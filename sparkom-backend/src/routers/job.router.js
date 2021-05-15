@@ -6,7 +6,7 @@ const {
     updateJobById,
     deleteJob,
     uploadImg
-} = require("../controllers/Job.controller");
+} = require("../controllers/job.controller");
 
 const router = new express.Router();
 

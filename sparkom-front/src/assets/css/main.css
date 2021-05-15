@@ -19111,3 +19111,20 @@ input[type="checkbox"] {
 .mynotif:hover {
   cursor: pointer;
 }
+
+.buttonF {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+.photo {
+  height: 170px;
+  width: 170px;
+}
+
+.imgEv {
+  height: 50px;
+  width: 50px;
+}

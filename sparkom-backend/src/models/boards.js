@@ -11,11 +11,11 @@ const boardSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    creator_id:{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+    creator_id: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
-    Members: [{ type: Schema.Types.ObjectId, ref: "User" }]
+    Members: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

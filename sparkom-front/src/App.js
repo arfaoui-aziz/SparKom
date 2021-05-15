@@ -45,6 +45,17 @@ import CardMembers from "./components/Myboards/CardMembers";
 import CardLists from "./components/Myboards/CardLists";
 import Mail from "./components/Myboards/Mail";
 
+//***************************************** Eya *********************************************/
+import GroupProfile from "./components/Pages/GroupProfile";
+import EventsPage from "./components/Pages/EventsPage";
+import AllGroups from "./components/Pages/AllGroups";
+import Statics from "./components/Pages/StaticsPageGroup";
+import AddGroup from "./components/Pages/AddGroup";
+import Direction from "./components/Events/DirectionForm";
+import Update from "./components/Group/Update";
+import Home from "./components/Group/PostGR/Home";
+
+//************************************************************************************** */
 function App() {
   const activeUser = useSelector((state) => state.auth.isAuthenticated);
 
@@ -95,6 +106,15 @@ function App() {
             <Route path="/CardMembers/:id/:idl" component={CardMembers} />
             <Route path="/CardLists/:id/:idl" component={CardLists} />
             <Route path="/Mail" component={Mail} />
+            {/***************  Eya **********************************/}
+            <Route path="/g/:id" component={GroupProfile} />
+            <Route path="/ge/:id" component={EventsPage} />
+            <Route path="/DFe/:id" component={Direction} />
+            <Route path="/allg" component={AllGroups} />
+            <Route path="/static/:id" component={Statics} />
+            <Route path="/update/:id" component={Update} />
+            <Route path="/add" component={AddGroup} />
+            <Route path="/PostHome" component={Home} />
           </Switch>
         ) : (
           <Switch>

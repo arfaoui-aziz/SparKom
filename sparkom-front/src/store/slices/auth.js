@@ -82,12 +82,8 @@ export const activeUserSelector = (state) => state.auth?.user;
 export const isAuthenticatedSelector = (state) => state.auth?.isAuthenticated;
 export const oAuthSelector = (state) => state.auth?.oAuth;
 export const avatarSelector = (state) => state.auth?.user?.avatar;
+export const thistoken = (state) => state.auth?.token;
 
-export const {
-  login,
-  logout,
-  googleAuth,
-  facebookAuth,
-  updateUser,
-} = authSlice.actions;
+export const { login, logout, googleAuth, facebookAuth, updateUser } =
+  authSlice.actions;
 export default authSlice.reducer;

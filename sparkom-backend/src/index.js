@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const connectToDB = require("../config/db");
-// Importe Routes
+const path = require("path");
+
+//* Importe USER Routes
 const userRouter = require("./routers/user.router");
 const profileRouter = require("./routers/profile.router");
 const postRouter = require("./routers/post.router");
@@ -9,7 +11,7 @@ const domainRouter = require("./routers/domain.router");
 const skillRouter = require("./routers/skill.router");
 const badgeRouter = require("./routers/badge.router");
 const cvRouter = require("./routers/cv.router");
-// IMPORTE JOBS Routes
+//* IMPORTE JOBS Routes
 const CompanyRouter = require("./routers/company.rounter");
 const Jobtype = require("./routers/job_type.router");
 const Postedon = require("./routers/posted_on.router");
@@ -23,6 +25,12 @@ var boardRouter = require("./routers/boards");
 var listRouter = require("./routers/lists");
 var cardRouter = require("./routers/cards");
 const bodyParser = require("body-parser");
+//************************************** Events Routes ****************************/
+var groupRouter = require("./routers/group");
+var eventRouter = require("./routers/event");
+var postGrRouter = require("./routers/postGr");
+var eventC = require("./models/event");
+
 //**************************/
 const app = express();
 app.use(cors());
@@ -53,6 +61,10 @@ app.use("/public", express.static("./public"));
 app.use("/boards", boardRouter);
 app.use("/lists", listRouter);
 app.use("/cards", cardRouter);
+//************* Events */
+app.use("/group", groupRouter);
+app.use("/event", eventRouter);
+app.use("/", postGrRouter);
 
 //***************************** Mailing *****************************/
 app.post("/send_mail", cors(), async (req, res) => {
@@ -84,6 +96,9 @@ app.post("/send_mail", cors(), async (req, res) => {
     </div>`,
   });
 });
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 const PORT = process.env.PORT || 3000;
 
