@@ -21,7 +21,10 @@ const List = (props) => {
   return (
     <>
       {props.dms?.map((dm, index) => (
-        <div className="ui-block" data-mh="friend-groups-item">
+        <div
+          className="ui-block mr-3 bg-secondary"
+          data-mh="friend-groups-item"
+        >
           <div style={style.container} key={index}>
             <h4 style={{ color: "white", fontFamily: "bold" }}>
               {dm.List_name}
@@ -52,7 +55,7 @@ const List = (props) => {
 };
 const style = {
   container: {
-    backgroundColor: "#B5B7B6",
+    // backgroundColor: "#B5B7B6",
     borderRadius: 3,
     width: 300,
     padding: 8,

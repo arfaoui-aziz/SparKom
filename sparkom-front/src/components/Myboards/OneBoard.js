@@ -116,16 +116,17 @@ export default function Oneboard(props) {
                     <div class="author-content">
                       {dm.Members.indexOf(activeUser._id) !== -1 ||
                       dm.creator_id === activeUser._id ? (
-                        <button
+                        <p
                           class="h5 author-name"
                           onClick={() => Details(dm._id)}
+                          style={{ cursor: "pointer" }}
                         >
                           {dm.Board_name}
-                        </button>
+                        </p>
                       ) : (
-                        <a href="#top" class="h5 author-name">
+                        <p class="h5 author-name" style={{ cursor: "pointer" }}>
                           {dm.Board_name}
-                        </a>
+                        </p>
                       )}
                       <div class="country">
                         {dm.Members.length} Members in the board
@@ -145,6 +146,7 @@ export default function Oneboard(props) {
                     {dm.Members.indexOf(activeUser._id) !== -1 ||
                     dm.creator_id === activeUser._id ? (
                       <button
+                        style={{ width: 40, height: 34 }}
                         onClick={() => members(dm._id)}
                         className="accept-request"
                       >
@@ -160,7 +162,7 @@ export default function Oneboard(props) {
                     {dm.creator_id === activeUser._id ? (
                       <button
                         onClick={() => dmembers(dm._id)}
-                        href="#"
+                        style={{ width: 40, height: 34 }}
                         className="accept-request request-del"
                       >
                         <span className="icon-minus">

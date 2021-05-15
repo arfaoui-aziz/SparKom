@@ -40,7 +40,7 @@ export default function ShowBoard() {
 
           <Alllists dm={toRender} />
           <div class="container">
-            <div class="row">
+            <div class="row ml-4">
               <div style={styles.Listcontainer}>
                 <div className="row">
                   <List dms={dms} deletelist={deletelist} board_id={id} />

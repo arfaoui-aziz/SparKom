@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -27,13 +26,7 @@ export default function CardForm(props) {
     due_date: new Date(),
   });
   const { due_date } = cardData;
-  const AddCalender = async (id) => {
-    try {
-      await axios.post("http://localhost:3002/showCalendar/" + id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const formik = useFormik({
     initialValues: {
       description: "",
@@ -168,19 +161,7 @@ export default function CardForm(props) {
                 <i class="fas fa-user"></i> Members
               </button>
               <br />
-              {card.Due_date != null ? (
-                <button
-                  onClick={() => AddCalender(card._id)}
-                  href="#"
-                  class="btn btn-smoke btn-md btn-light-bg"
-                  style={style}
-                >
-                  {" "}
-                  <i class="far fa-calendar-check" /> Add to calender
-                </button>
-              ) : (
-                <></>
-              )}
+ 
 
               <br />
               {/*<a
