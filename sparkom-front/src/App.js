@@ -55,6 +55,13 @@ import AddGroup from "./components/Pages/AddGroup";
 import Direction from "./components/Events/DirectionForm";
 import Update from "./components/Group/Update";
 import Home from "./components/Group/PostGR/Home";
+//****************************** Amen  *********************************************/
+import TopicDetails from "./pages/Topics/TopicDetails";
+import AddQuestion from "./pages/Question/addQuestion";
+import AllQuestion from "./pages/Question/AllQuestions";
+import QuestionDetails from "./pages/Question/QuestionDetails";
+import AllTopics from "./pages/Topics/AllTopics";
+import Homee from "./pages/Post Managment/Home";
 
 //************************************************************************************** */
 function App() {
@@ -117,6 +124,15 @@ function App() {
             <Route path="/update/:id" component={Update} />
             <Route path="/add" component={AddGroup} />
             <Route path="/PostHome" component={Home} />
+            {/***************  Amen **********************************/}
+            <Route path="/home" component={Homee} />
+
+            <Route path="/topics" component={AllTopics} />
+            <Route path="/topic/:topicId" component={TopicDetails} />
+            <Route path="/question/:questionId" component={QuestionDetails} />
+
+            <Route path="/questions" component={AllQuestion} />
+            <Route path="/addQuestion" component={AddQuestion} />
           </Switch>
         ) : (
           <Switch>

@@ -1,7 +1,7 @@
-import postTypes from "../types/postTypes";
+import questionTypes from "../types/questionTypes";
 import axios from "axios";
 
-export const getUserPosts = (token, userId) => {
+export const getUserQuestions = (token, userId) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -9,10 +9,10 @@ export const getUserPosts = (token, userId) => {
   };
   return (dispatch) => {
     axios
-      .get(`http://localhost:3002/posts/by/${userId}`, config)
+      .get(`http://localhost:3002/api/questions/by/${userId}`, config)
       .then((res) => {
         dispatch({
-          type: postTypes.USER_POSTS,
+          type: questionTypes.USER_QUESTIONS,
           payload: res.data,
         });
       })
@@ -20,7 +20,7 @@ export const getUserPosts = (token, userId) => {
   };
 };
 
-export const getTopicPosts = (token, topicId) => {
+export const getTopicQuestions = (token, topicId) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,10 +28,10 @@ export const getTopicPosts = (token, topicId) => {
   };
   return (dispatch) => {
     axios
-      .get(`http://localhost:3002/api/posts/byTopic/${topicId}`, config)
+      .get(`http://localhost:3002/api/questions/byTopic/${topicId}`, config)
       .then((res) => {
         dispatch({
-          type: postTypes.GET_ALL,
+          type: questionTypes.GET_ALL,
           payload: res.data,
         });
       })
@@ -39,7 +39,9 @@ export const getTopicPosts = (token, topicId) => {
   };
 };
 
-export const getAllPosts = (token, userId) => {
+
+
+export const getAllQuestions = (token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -47,10 +49,10 @@ export const getAllPosts = (token, userId) => {
   };
   return (dispatch) => {
     axios
-      .get(`http://localhost:3002/posts/${userId}`, config)
+      .get(`http://localhost:3002/api/questions`, config)
       .then((res) => {
         dispatch({
-          type: postTypes.GET_ALL,
+          type: questionTypes.GET_ALL,
           payload: res.data,
         });
       })
@@ -58,18 +60,21 @@ export const getAllPosts = (token, userId) => {
   };
 };
 
-export const addPost = (token, userId, post) => {
+export const addQuestion = (token, userId, question) => {
+
+  
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
+  question.title="ttt";
   return (dispatch) => {
     axios
-      .post(`http://localhost:3002/post/create/${userId}`, post, config)
+      .post(`http://localhost:3002/api/question/create/${userId}`, question, config)
       .then((res) => {
         dispatch({
-          type: postTypes.ADD_POST,
+          type: questionTypes.ADD_QUESTION,
           payload: res.data,
         });
       })
@@ -77,7 +82,7 @@ export const addPost = (token, userId, post) => {
   };
 };
 
-export const likePost = (token, userId, postId) => {
+export const likeQuestion = (token, userId, questionId) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -85,30 +90,10 @@ export const likePost = (token, userId, postId) => {
   };
   return (dispatch) => {
     axios
-      .put(`http://localhost:3002/post/like`, { userId, postId }, config)
+      .put(`http://localhost:3002/api/question/like`, { userId, questionId }, config)
       .then((res) => {
         dispatch({
-          type: postTypes.LIKE_UNLIKE_POST,
-          payload: res.data,
-          userId,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-};
-
-export const unlikePost = (token, userId, postId) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  return (dispatch) => {
-    axios
-      .put(`http://localhost:3002/post/unlike`, { userId, postId }, config)
-      .then((res) => {
-        dispatch({
-          type: postTypes.LIKE_UNLIKE_POST,
+          type: questionTypes.LIKE_UNLIKE_QUESTION,
           payload: res.data,
           userId,
         });
@@ -117,7 +102,27 @@ export const unlikePost = (token, userId, postId) => {
   };
 };
 
-export const addComment = (token, userId, postId, text) => {
+export const unlikeQuestion = (token, userId, questionId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return (dispatch) => {
+    axios
+      .put(`http://localhost:3002/api/question/unlike`, { userId, questionId }, config)
+      .then((res) => {
+        dispatch({
+          type: questionTypes.LIKE_UNLIKE_QUESTION,
+          payload: res.data,
+          userId,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const addComment = (token, userId, questionId, text) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -126,13 +131,13 @@ export const addComment = (token, userId, postId, text) => {
   return (dispatch) => {
     axios
       .put(
-        `http://localhost:3002/post/comment`,
-        { userId, postId, text },
+        `http://localhost:3002/api/question/comment`,
+        { userId, questionId, text },
         config
       )
       .then((res) => {
         dispatch({
-          type: postTypes.ADD_DELETE_COMMENT,
+          type: questionTypes.ADD_DELETE_COMMENT,
           payload: res.data,
           userId,
         });
@@ -141,7 +146,7 @@ export const addComment = (token, userId, postId, text) => {
   };
 };
 
-export const deleteComment = (token, userId, postId, comment) => {
+export const deleteComment = (token, userId, questionId, comment) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -150,13 +155,13 @@ export const deleteComment = (token, userId, postId, comment) => {
   return (dispatch) => {
     axios
       .put(
-        `http://localhost:3002/post/uncomment`,
-        { userId, postId, comment },
+        `http://localhost:3002/api/question/uncomment`,
+        { userId, questionId, comment },
         config
       )
       .then((res) => {
         dispatch({
-          type: postTypes.ADD_DELETE_COMMENT,
+          type: questionTypes.ADD_DELETE_COMMENT,
           payload: res.data,
           userId,
         });
@@ -165,7 +170,7 @@ export const deleteComment = (token, userId, postId, comment) => {
   };
 };
 
-export const deletePost = (token, postId) => {
+export const deleteQuestion = (token, questionId) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -173,10 +178,10 @@ export const deletePost = (token, postId) => {
   };
   return (dispatch) => {
     axios
-      .delete(`http://localhost:3002/post/${postId}`, config)
+      .delete(`http://localhost:3002/api/question/${questionId}`, config)
       .then((res) => {
         dispatch({
-          type: postTypes.REMOVE_POST,
+          type: questionTypes.REMOVE_QUESTION,
           payload: res.data,
         });
       })
