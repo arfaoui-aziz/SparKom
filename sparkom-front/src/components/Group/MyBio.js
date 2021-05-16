@@ -35,6 +35,10 @@ export default function MyBio(props) {
             title="Created At:"
             text={props.dm.createdAt.substring(0, 10)}
           />
+          <BioInfo
+            title="Updated At:"
+            text={props.dm.updatedAt.substring(0, 10)}
+          />
           <BioInfo title="Status:" text={props.dm.IsPrivate} />
           <BioInfo
             title="Topic:"

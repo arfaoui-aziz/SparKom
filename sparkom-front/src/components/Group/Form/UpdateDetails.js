@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Field, reduxForm } from 'redux-form/immutable' ;
+import { Field, reduxForm } from "redux-form/immutable";
 import validate from "../../../validation/validation";
 import FormInput from "../FormInput";
 //import { isLogged } from "../../../helpers/auth";
 
 import { Button, Card, CardBody, Col, FormGroup, Label } from "reactstrap";
 
-
 //const jwt = isLogged();
-
 
 const adaptFileEventToValue = (delegate) => (e) => delegate(e.target.files[0]);
 
@@ -30,19 +28,14 @@ const FileInput = ({
   );
 };
 
-
 const UpdateDetails = (props) => {
-  const { handleSubmit, pristine, submitting } = props
+  const { handleSubmit, pristine, submitting } = props;
   return (
-
-  
     <form onSubmit={handleSubmit}>
       <Col sm="12">
         <Card className="card-border">
           <CardBody>
-         
             <FormGroup row>
-             
               <Col xs="12" lg="6">
                 <Field
                   name="GroupName"
@@ -60,8 +53,7 @@ const UpdateDetails = (props) => {
               label="Description *"
               inputPlaceHolder="Enter Description"
             />
-           
-           
+
             <FormGroup row>
               <Col xs="12" lg="6">
                 <FormGroup row>
@@ -76,7 +68,7 @@ const UpdateDetails = (props) => {
                             name="Type"
                             component="input"
                             type="radio"
-                            value= "Public"
+                            value="Public"
                           />{" "}
                           Public
                         </label>
@@ -109,7 +101,7 @@ const UpdateDetails = (props) => {
             </FormGroup>
           </CardBody>
           <div style={{ paddingBottom: 30 }}>
-          <Button
+            <Button
               color="primary"
               className="btn-pill pull-right"
               type="submit"

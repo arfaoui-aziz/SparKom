@@ -19,7 +19,8 @@ export default function GroupCard({ dms }) {
   const [, setmembers] = React.useState([]);
   const [member, setmember] = React.useState(false);
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
-
+  const [, setattentes] = React.useState([]);
+  const [attente, setattente] = React.useState(false);
   React.useEffect(() => {
     setmembers(dms && dms.Members);
 
@@ -27,6 +28,12 @@ export default function GroupCard({ dms }) {
       let match = members.indexOf(activeUser._id) !== -1;
       setmember(match);
     }
+    setattentes(dms && dms.Attentes);
+    function checkattente(attentes) {
+      let match = attentes.indexOf(activeUser._id) !== -1;
+      setattente(match);
+    }
+    checkattente(dms && dms.Attentes);
     checkmember(dms && dms.Members);
   }, [dms.Members, activeUser, dms]);
 
@@ -49,13 +56,13 @@ export default function GroupCard({ dms }) {
             </svg>
             <ul className="more-dropdown">
               <li>
-                <a href="#top">Report Group</a>
+                <a>Report Group</a>
               </li>
               <li>
-                <a href="#top">Block Group</a>
+                <a>Block Group</a>
               </li>
               <li>
-                <a href="#top">Turn Off Notifications</a>
+                <a>Turn Off Notifications</a>
               </li>
             </ul>
           </div>
@@ -142,31 +149,47 @@ export default function GroupCard({ dms }) {
                       <img
                         src={leave}
                         alt="author"
-                        onClick={() =>
-                          dispatch(LeaveGroup(token, activeUser._id, dms._id))
-                        }
+                        onClick={() => {
+                          dispatch(LeaveGroup(token, activeUser._id, dms._id));
+                          history.go(0);
+                        }}
                       />
                     </a>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="control-block-button">
-                    <a href="#top" className="btn btn-control">
-                      <img
-                        src={add}
-                        alt="author"
-                        onClick={() =>
-                          dispatch(JoinGroup(token, activeUser._id, dms._id))
-                        }
-                      />{" "}
-                      <ul className="more-dropdown">
-                        <li>
-                          <a href=".">Join Group</a>
-                        </li>
-                      </ul>
-                    </a>
-                  </div>
+                  {attente ? (
+                    <>
+                      <div className="control-block-button">
+                        <a className="btn btn-breez btn-sm">
+                          Vous êtes en attente
+                        </a>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="control-block-button">
+                        <a className="btn btn-control">
+                          <img
+                            src={add}
+                            alt="author"
+                            onClick={() => {
+                              dispatch(
+                                JoinGroup(token, activeUser._id, dms._id)
+                              );
+                              history.go(0);
+                            }}
+                          />{" "}
+                          <ul className="more-dropdown">
+                            <li>
+                              <a href=".">Join Group</a>
+                            </li>
+                          </ul>
+                        </a>
+                      </div>
+                    </>
+                  )}
                 </>
               )}
             </>
