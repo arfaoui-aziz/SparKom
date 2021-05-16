@@ -6,14 +6,14 @@ import "../../assets/css/main.css";
 
 import { useDispatch } from "react-redux";
 import { JoinEvent, LeaveEvent } from "../../redux/actions/groupActions";
-
+import { useHistory } from "react-router-dom";
 import { activeUserSelector, thistoken } from "../../store/slices/auth";
 import { useSelector } from "react-redux";
 export default function Events({ props, events }) {
   const dispatch = useDispatch();
   const activeUser = useSelector(activeUserSelector);
   const token = useSelector(thistoken);
-
+  const history = useHistory();
   const [, setmembers] = useState([]);
   const [member, setmember] = useState(false);
   //const CreatedBy = props.CreatedBy._id || props.CreatedBy;
@@ -26,8 +26,6 @@ export default function Events({ props, events }) {
     }
     checkmember(events && events.Participants);
   }, [events, activeUser]);
-
-  
 
   return (
     <div>
@@ -78,7 +76,9 @@ export default function Events({ props, events }) {
             <td className="users">
               <ul className="friends-harmonic">
                 <li>
-                  <a href="#top" className="with-text">{events.Participants.length}</a>
+                  <a href="#top" className="with-text">
+                    {events.Participants.length}
+                  </a>
                 </li>
                 <li className="with-text">Will Assist</li>
               </ul>
@@ -89,9 +89,10 @@ export default function Events({ props, events }) {
                 <td className="add-event">
                   <a
                     className="btn btn-breez btn-sm"
-                    onClick={() =>
-                      dispatch(LeaveEvent(token, activeUser._id, events._id))
-                    }
+                    onClick={() => {
+                      dispatch(LeaveEvent(token, activeUser._id, events._id));
+                      history.go(0);
+                    }}
                   >
                     Leave
                   </a>
@@ -102,9 +103,10 @@ export default function Events({ props, events }) {
                 <td className="add-event">
                   <a
                     className="btn btn-breez btn-sm"
-                    onClick={() =>
-                      dispatch(JoinEvent(token, activeUser._id, events._id))
-                    }
+                    onClick={() => {
+                      dispatch(JoinEvent(token, activeUser._id, events._id));
+                      history.go(0);
+                    }}
                   >
                     Join + Add To Calendar
                   </a>

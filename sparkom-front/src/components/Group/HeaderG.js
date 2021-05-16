@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import cover from "../../assets/img/top-header2.jpg";
-
+import { Link } from "react-router-dom";
 import axios from "axios";
 import eya from "../../assets/img/eya.png";
 import leave from "../../assets/img/leave.png";
@@ -41,6 +41,9 @@ export default function HeaderG(props) {
   const events = (id) => {
     history.replace("/ge/" + id);
   };
+  const all = () => {
+    history.replace("/allg");
+  };
   const statistic = (id) => {
     history.replace("/static/" + id);
   };
@@ -48,14 +51,17 @@ export default function HeaderG(props) {
   const [, setmembers] = React.useState([]);
   const [member, setmember] = React.useState(false);
 
+  const [, setattentes] = React.useState([]);
+  const [attente, setattente] = React.useState(false);
+
   const handleDelete = async (id) => {
-    history.replace("/all");
+    history.replace("/allg");
     const [, err] = await queryApi(`group/delete/${id}`, null, "PUT", false);
 
     if (err) {
       console.log(err);
     } else {
-      history.replace("/all");
+      history.replace("/allg");
     }
   };
 
@@ -67,8 +73,14 @@ export default function HeaderG(props) {
       let match = members.indexOf(activeUser._id) !== -1;
       setmember(match);
     }
+    setattentes(props.dm && props.dm.Attentes);
+    function checkattente(attentes) {
+      let match = attentes.indexOf(activeUser._id) !== -1;
+      setattente(match);
+    }
+    checkattente(props.dm && props.dm.Attentes);
     checkmember(props.dm && props.dm.Members);
-  }, [props.dm.Members, activeUser, props.dm]);
+  }, [props.dm.Members, activeUser, props.dm, props.dm.Attentes]);
 
   useEffect(() => {
     console.log(props.dm);
@@ -156,17 +168,19 @@ export default function HeaderG(props) {
                               <img
                                 src={leave}
                                 alt="author"
-                                onClick={() =>
+                                onClick={() => {
                                   dispatch(
                                     LeaveGroup(
                                       token,
                                       activeUser._id,
                                       props.dm._id
                                     )
-                                  )
-                                }
-                              />{" "}
+                                  );
+                                  history.go(0);
+                                }}
+                              />
                             </a>
+
                             <a href="#top" className="btn btn-control">
                               <Popup
                                 trigger={
@@ -211,28 +225,41 @@ export default function HeaderG(props) {
                         </>
                       ) : (
                         <>
-                          <div className="control-block-button">
-                            <a className="btn btn-control">
-                              <img
-                                src={add}
-                                alt="author"
-                                onClick={() =>
-                                  dispatch(
-                                    JoinGroup(
-                                      token,
-                                      activeUser._id,
-                                      props.dm._id
-                                    )
-                                  )
-                                }
-                              />{" "}
-                              <ul className="more-dropdown">
-                                <li>
-                                  <a href=".">Join Group</a>
-                                </li>
-                              </ul>
-                            </a>
-                          </div>
+                          {attente ? (
+                            <>
+                              <div className="control-block-button">
+                                <a className="btn btn-breez btn-sm">
+                                  Vous êtes en attente
+                                </a>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="control-block-button">
+                                <a className="btn btn-control">
+                                  <img
+                                    src={add}
+                                    alt="author"
+                                    onClick={() => {
+                                      dispatch(
+                                        JoinGroup(
+                                          token,
+                                          activeUser._id,
+                                          props.dm._id
+                                        )
+                                      );
+                                      history.go(0);
+                                    }}
+                                  />{" "}
+                                  <ul className="more-dropdown">
+                                    <li>
+                                      <a href=".">Join Group</a>
+                                    </li>
+                                  </ul>
+                                </a>
+                              </div>
+                            </>
+                          )}
                         </>
                       )}
                     </>

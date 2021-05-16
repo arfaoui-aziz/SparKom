@@ -55,19 +55,20 @@ const LivePreviewExample = () => {
     },
     onSubmit: async (values) => {
       console.log(values);
-
+      history.replace("/ge/" + id);
       const [, err] = await queryApi(
         "group/addEvent/" + activeUser._id + "/" + id,
         values,
         "POST",
         true
       );
+
       if (err) {
         setError({
           visible: true,
           message: JSON.stringify(err.errors, null, 2),
         });
-      } else history.push("/all");
+      } else history.replace("/allg");
     },
   });
 

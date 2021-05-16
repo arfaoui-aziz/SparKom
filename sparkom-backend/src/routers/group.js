@@ -93,7 +93,7 @@ router.put("/updategr/:id", upload, function (req, res, next) {
     description: obj.description,
     IsPrivate: obj.IsPrivate,
     Createdat: obj.Createdat,
-    Image: req.file.filename,
+    
   };
   group.findByIdAndUpdate(
     req.params.id,
