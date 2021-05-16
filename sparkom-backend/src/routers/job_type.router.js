@@ -1,10 +1,10 @@
 const express = require("express");
 const {
-    getAlljob_types,
-    getJob_typeById,
-    createJob_type,
-    updateJob_typeById,
-    deleteJob_type,
+  getAlljob_types,
+  getJob_typeById,
+  createJob_type,
+  updateJob_typeById,
+  deleteJob_type,
 } = require("../controllers/job_type.controller");
 
 const router = new express.Router();

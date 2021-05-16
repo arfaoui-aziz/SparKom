@@ -1,15 +1,13 @@
-const mongoose = require('mongoose');
-let Schema = mongoose.Schema
+const mongoose = require("mongoose");
+let Schema = mongoose.Schema;
 const JobtypeSchema = new Schema({
   type_name: {
     type: String,
-    required: true
+    required: true,
   },
   type_description: {
-   type: String
-  }
+    type: String,
+  },
 });
 
- 
-
-module.exports = Jobtype = mongoose.model('jobtype', JobtypeSchema);
+module.exports = Jobtype = mongoose.model("jobtype", JobtypeSchema);

@@ -52,7 +52,7 @@ app.use("/skills", skillRouter);
 app.use("/badges", badgeRouter);
 app.use("/cv", cvRouter);
 
-// JOB
+//****** JOB  */
 app.use("/company", CompanyRouter);
 app.use("/jobtype", Jobtype);
 app.use("/postedon", Postedon);

@@ -1,19 +1,28 @@
-const mongoose = require('mongoose');
-let Schema = mongoose.Schema
+const mongoose = require("mongoose");
+let Schema = mongoose.Schema;
 const ScheduleSchema = new Schema({
-  date: {
+  StartTime: {
     type: Date,
-    required: true
+    required: false,
+  },
+  EndTime: {
+    type: Date,
+    required: false,
   },
   User_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: false,
   },
-  job_id:{
-  type: Schema.Types.ObjectId,
-    ref: 'job',
-    required: true
-}
+  Applicant_id: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: false,
+  },
+  Subject: {
+    type: String,
+    required: false,
+  },
 });
 
-
-module.exports = Company = mongoose.model('schedule', ScheduleSchema);
+module.exports = Company = mongoose.model("schedule", ScheduleSchema);

@@ -1,19 +1,18 @@
-const mongoose = require('mongoose');
-let Schema = mongoose.Schema
+const mongoose = require("mongoose");
+let Schema = mongoose.Schema;
 const CompanySchema = new Schema({
   company_name: {
     type: String,
-    required: false
+    required: false,
   },
   company_details: {
-   type: String
+    type: String,
   },
   company_owner: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-  required: false
- }
+    ref: "User",
+    required: false,
+  },
 });
 
-
-module.exports = Company = mongoose.model('company', CompanySchema);
+module.exports = Company = mongoose.model("company", CompanySchema);

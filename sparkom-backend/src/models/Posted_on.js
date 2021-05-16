@@ -1,19 +1,20 @@
-const mongoose = require('mongoose');
-let Schema = mongoose.Schema
+const mongoose = require("mongoose");
+let Schema = mongoose.Schema;
 const PostedOnSchema = new Schema({
   description: {
     type: String,
-    required: true
+    required: false,
   },
   user: {
-    type: String,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    require: false,
   },
   job_id: {
     type: Schema.Types.ObjectId,
-    ref: 'job',
-    required: true
- }
+    ref: "job",
+    required: false,
+  },
 });
 
-module.exports = Company = mongoose.model('postedOn', PostedOnSchema);
+module.exports = Company = mongoose.model("postedOn", PostedOnSchema);
