@@ -1,8 +1,10 @@
 import React from "react";
+import NavBar from "../../NavBar/NavBar";
 import RegisterForm from "./RegisterForm";
 function RegisterCompany() {
   return (
     <div>
+      <NavBar />
       <div className="main-header">
         <div className="content-bg-wrap bg-events" />
         <div className="container">

@@ -3,8 +3,6 @@ import { Container } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import {
   selectCompanies,
-  populateCompanies,
-  setErrors,
   updateCompany,
   deleteCompany,
   fetchCompanies,
@@ -15,6 +13,7 @@ import { queryApi } from "../../../utils/queryApi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router";
+import NavBar from "../../NavBar/NavBar";
 
 function Companyinfos() {
   const history = useHistory();
@@ -32,7 +31,7 @@ function Companyinfos() {
       return;
     }
     setCompdetails(comp);
-  }, [dispatch, activeUser, companies, history]);
+  }, []);
 
   const deleteCompanyEvent = async () => {
     await queryApi("company/deletecompany/" + Compdetails._id, {}, "DELETE");
@@ -65,6 +64,7 @@ function Companyinfos() {
 
   return (
     <>
+      <NavBar />
       <div className="main-header">
         <div className="content-bg-wrap bg-events" />
         <div className="container">

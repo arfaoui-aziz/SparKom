@@ -4,9 +4,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Postuler from "./Postuler";
 import Jobinformation from "./JobInformation";
+import NavBar from "../../NavBar/NavBar";
 function Index() {
   return (
     <>
+      <NavBar />
       <div className="main-header">
         <div className="content-bg-wrap bg-events" />
         <div className="container">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import icons from "../../assets/svg-icons/sprites/icons.svg";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -19,11 +19,14 @@ import {
 } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 
+import { selectCompanies, fetchCompanies } from "../../store/slices/company";
+
 export default function NavBar() {
   const dispatch = useDispatch();
   const history = useHistory();
   const activeUser = useSelector(activeUserSelector);
   const oAuth = useSelector(oAuthSelector);
+  const [haveComp, setHaveComp] = useState(false);
   const Logout = async () => {
     if (oAuth) {
       localStorage.clear();
@@ -37,6 +40,18 @@ export default function NavBar() {
       } else console.log(err);
     }
   };
+
+  const [companies] = useSelector(selectCompanies);
+  useEffect(() => {
+    if (activeUser != null) {
+      dispatch(fetchCompanies());
+
+      setHaveComp(
+        companies.filter((comp) => comp.company_owner == activeUser._id)
+          .length > 0
+      );
+    }
+  }, []);
 
   return (
     <header className="header bg-white" id="site-header">
@@ -55,6 +70,18 @@ export default function NavBar() {
 
             <div className="header-content-wrapper">
               <div className="control-block">
+                <div className="control-block">
+                  <div className="author-title ">
+                    <Link to="/findjob">
+                      <div
+                        className="c-secondary"
+                        style={{ borderBottom: "2px solid blue" }}
+                      >
+                        Jobs
+                      </div>
+                    </Link>
+                  </div>
+                </div>
                 <div className="control-icon more has-items">
                   <svg className="olymp-happy-face-icon c-secondary">
                     <PersonAddIcon />
@@ -154,7 +181,70 @@ export default function NavBar() {
                               </a>
                             </li>
                           </Link>
-
+                          {haveComp ? (
+                            <Link to="/addjob">
+                              <li>
+                                <a href="/addjob">
+                                  <svg className="olymp-menu-icon">
+                                    <use
+                                      xlinkHref={`${icons}#olymp-menu-icon`}
+                                    />
+                                  </svg>
+                                  <span>Add Job</span>
+                                </a>
+                              </li>
+                            </Link>
+                          ) : (
+                            ""
+                          )}
+                          {haveComp ? (
+                            ""
+                          ) : (
+                            <Link to="/registercompany">
+                              <li>
+                                <a href="/registercompany">
+                                  <svg className="olymp-menu-icon">
+                                    <use
+                                      xlinkHref={`${icons}#olymp-menu-icon`}
+                                    />
+                                  </svg>
+                                  <span>Register Company</span>
+                                </a>
+                              </li>
+                            </Link>
+                          )}
+                          {haveComp ? (
+                            <Link to={`/companyinfos/${activeUser._id}`}>
+                              <li>
+                                <a href="/companyinfos">
+                                  <svg className="olymp-menu-icon">
+                                    <use
+                                      xlinkHref={`${icons}#olymp-menu-icon`}
+                                    />
+                                  </svg>
+                                  <span>Company Informations</span>
+                                </a>
+                              </li>
+                            </Link>
+                          ) : (
+                            ""
+                          )}
+                          {haveComp ? (
+                            <Link to="/myschedule">
+                              <li>
+                                <a href="/myschedule">
+                                  <svg className="olymp-menu-icon">
+                                    <use
+                                      xlinkHref={`${icons}#olymp-menu-icon`}
+                                    />
+                                  </svg>
+                                  <span>My Scheduler</span>
+                                </a>
+                              </li>
+                            </Link>
+                          ) : (
+                            ""
+                          )}
                           <li onClick={Logout}>
                             <Link to="/">
                               <svg className="olymp-logout-icon">

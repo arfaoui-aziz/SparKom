@@ -9,6 +9,8 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/pickers": "^3.3.10",
+    "@syncfusion/ej2-react-buttons": "^19.1.54",
+    "@syncfusion/ej2-react-schedule": "^19.1.59",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",

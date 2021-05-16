@@ -1,18 +1,21 @@
 const express = require("express");
 const {
-  getAlljob_types,
-  getJob_typeById,
-  createJob_type,
-  updateJob_typeById,
-  deleteJob_type,
-} = require("../controllers/job_type.controller");
+  getAllJobs,
+  getJobById,
+  createJob,
+  updateJobById,
+  deleteJob,
+  uploadImg,
+  getJobByCompany,
+} = require("../controllers/Job.controller");
 
 const router = new express.Router();
 
-router.post("/", createJob_type);
-router.get("/showjobtypes", getAlljob_types);
-router.get("/showjobtypebyId/:id", getJob_typeById);
-router.patch("/updatejobtype/:id", updateJob_typeById);
-router.delete("/deletejobtype/:id", deleteJob_type);
+router.post("/", uploadImg, createJob);
+router.get("/showJob", getAllJobs);
+router.get("/showbyId/:id", getJobById);
+router.patch("/updateJob/:id", updateJobById);
+router.delete("/deleteJob/:id", deleteJob);
+router.get("/showbyCompId/:id", getJobByCompany);
 
 module.exports = router;

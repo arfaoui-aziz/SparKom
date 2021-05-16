@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
 import { Container } from "@material-ui/core";
 import Schedule from "./Schedule";
+import NavBar from "../../NavBar/NavBar";
 function Index() {
-    return (
-        <div>
-         <div className="main-header">
+  return (
+    <div>
+      <NavBar />
+      <div className="main-header">
         <div className="content-bg-wrap bg-events" />
         <div className="container">
           <div className="row">
@@ -16,13 +18,12 @@ function Index() {
             </div>
           </div>
         </div>
-      
       </div>
-            <Container>
-            <Schedule/>
-            </Container>
-        </div>
-    )
+      <Container>
+        <Schedule />
+      </Container>
+    </div>
+  );
 }
 
-export default Index
+export default Index;

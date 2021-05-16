@@ -7,6 +7,7 @@ import Joblists from "./JobList";
 import Filter from "./Filter";
 import { fetchJobs, selectJobs } from "../../../store/slices/jobs";
 import { useDispatch, useSelector } from "react-redux";
+import NavBar from "../../NavBar/NavBar";
 
 function Index() {
   const dispatch = useDispatch();
@@ -14,9 +15,10 @@ function Index() {
   useEffect(() => {
     dispatch(fetchJobs);
   }, [dispatch]);
-  
+
   return (
     <>
+      <NavBar />
       <div className="main-header">
         <div className="content-bg-wrap bg-events" />
         <div className="container">

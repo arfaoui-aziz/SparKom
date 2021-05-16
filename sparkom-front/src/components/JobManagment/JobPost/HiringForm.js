@@ -25,9 +25,9 @@ function HiringForm() {
   useEffect(() => {
     dispatch(fetchCompanies());
     setCompdetails(
-      companies.filter((comp) => comp.company_owner === activeUser._id)[0]
+      companies.filter((comp) => comp.company_owner == activeUser._id)[0]
     );
-  }, [dispatch, companies, activeUser]);
+  }, []);
 
   const initialValues = {
     title: "",

@@ -47,8 +47,9 @@ function PopUp(props) {
   /* 
     Update with your own Client Id and Api key 
   */
-  var CLIENT_ID = process.env.REACT_APP_CALENDAR_CLIENT_ID;
-  var API_KEY = process.env.REACT_APP_CALENDAR_API_KEY;
+  var CLIENT_ID =
+    "1093621710306-elegcmtolg6jrv17n2di3bbronme9eti.apps.googleusercontent.com";
+  var API_KEY = "AIzaSyDhzH3S0DwYDzr2-vvt3piHXTm8KmozhnQ";
   var DISCOVERY_DOCS = [
     "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
   ];
@@ -143,7 +144,7 @@ function PopUp(props) {
             >
               <div className="modal-content">
                 <a
-                  href="#top"
+                  href="#"
                   className="close icon-close"
                   data-dismiss="modal"
                   aria-label="Close"

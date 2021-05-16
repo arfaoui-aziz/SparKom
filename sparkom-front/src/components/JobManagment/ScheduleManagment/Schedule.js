@@ -67,7 +67,7 @@ function Schedule() {
 
   useEffect(() => {
     getCompanyOwner();
-  });
+  }, []);
 
   const handleClickOpen2 = () => {
     setOpen2(true);

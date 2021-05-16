@@ -16,6 +16,7 @@ import { selectCompanies, fetchCompanies } from "../../../store/slices/company";
 
 import { activeUserSelector } from "../../../store/slices/auth";
 import { useFormik } from "formik";
+import NavBar from "../../NavBar/NavBar";
 
 function JobUpdate() {
   const [, setShowLoader] = useState(false);
@@ -30,7 +31,7 @@ function JobUpdate() {
     dispatch(fetchJobById);
     dispatch(fetchCompanies());
     setCompdetails(
-      companies.filter((comp) => comp.company_owner === activeUser._id)
+      companies.filter((comp) => comp.company_owner == activeUser._id)
     );
   }, [dispatch, companies, activeUser]);
 
@@ -65,6 +66,7 @@ function JobUpdate() {
 
   return (
     <>
+      <NavBar />
       <div>
         <div className="main-header">
           <div className="content-bg-wrap bg-events" />
