@@ -26,6 +26,7 @@ import Joblists from "./components/JobManagment/JobList/Index";
 import Jobdetails from "./components/JobManagment/JobDetail/Index";
 import Schedule from "./components/JobManagment/ScheduleManagment/Index";
 import AddJob from "./components/JobManagment/JobPost/JobPost";
+import JobUpdate from "./components/JobManagment/JobUpdate/JobUpdate";
 import CompanyForm from "./components/JobManagment/Company/RegisterCompany";
 import Companyinfo from "./components/JobManagment/CompanySettings/Companyinfos";
 //************************************* Syrine ************************************/
@@ -83,13 +84,14 @@ function App() {
             <Route path="/resume" component={ScrapedResume} />
             <Route path="/" exact component={Login} />
             {/***************  Dali **********************************/}
-            <Route exact path="/jobs" component={Landigpage} />
-            <Route exact path="/findjob" component={Joblists} />
-            <Route exact path="/job/:id" component={Jobdetails} />
-            <Route exact path="/myschedule" component={Schedule} />
-            <Route exact path="/addjob" component={AddJob} />
-            <Route exact path="/registercompany" component={CompanyForm} />
-            <Route exact path="/companyinfos/:id" component={Companyinfo} />
+            <Route path="/jobs" component={Landigpage} />
+            <Route path="/findjob" component={Joblists} />
+            <Route path="/job/:id" component={Jobdetails} />
+            <Route path="/jobupdate/:id" component={JobUpdate} />
+            <Route path="/myschedule" component={Schedule} />
+            <Route path="/addjob" component={AddJob} />
+            <Route path="/registercompany" component={CompanyForm} />
+            <Route path="/companyinfos/:id" component={Companyinfo} />
             {/***************  Syrine **********************************/}
             <Route path="/boards" component={Boards} />
             <Route path="/showboard/:id" component={Showboard} />
