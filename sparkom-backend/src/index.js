@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const connectToDB = require("../config/db");
 const path = require("path");
+const helmet = require("helmet");
 
 //* Importe USER Routes
 const userRouter = require("./routers/user.router");
@@ -37,6 +38,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(helmet());
 
 //* Connect to DB
 connectToDB();
