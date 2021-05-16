@@ -13,10 +13,10 @@ function JobList(props) {
         <img
           src={`${process.env.REACT_APP_API_URL}/${props.job.image}`}
           className="jobicon"
-          alt="jobicon"
+          alt="jicon"
         />
         <Link to={`/job/${props.job._id}`} style={{ textDecoration: "none" }}>
-          <a href="job" className="jobtitle">
+          <a href="job" class="jobtitle">
             {" "}
             {props.job.title}
           </a>

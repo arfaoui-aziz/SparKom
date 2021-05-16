@@ -7,6 +7,7 @@ import jobs from "./slices/jobs";
 import companies from "./slices/company";
 import post from "../redux/reducers/post/postReducer";
 import { reducer as reducerForm } from "redux-form";
+import schedule from "./slices/schedule";
 
 export default combineReducers({
   auth,
@@ -17,4 +18,5 @@ export default combineReducers({
   companies,
   form: reducerForm,
   post,
+  schedule,
 });

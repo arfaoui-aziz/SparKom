@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "@material-ui/core";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import { addJob } from "../../../store/slices/jobs";
 import { queryApi } from "../../../utils/queryApi";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
+import { activeUserSelector } from "../../../store/slices/auth";
+
+import { selectCompanies, fetchCompanies } from "../../../store/slices/company";
+
 function HiringForm() {
+  const activeUser = useSelector(activeUserSelector);
   const history = useHistory();
   const dispatch = useDispatch();
   const [, setShowLoader] = useState(false);
   const [, setError] = useState({ visible: false, message: "" });
+
+  const [Compdetails, setCompdetails] = useState(false);
+  const [companies] = useSelector(selectCompanies);
+
+  useEffect(() => {
+    dispatch(fetchCompanies());
+    setCompdetails(
+      companies.filter((comp) => comp.company_owner === activeUser._id)[0]
+    );
+  }, [dispatch, companies, activeUser]);
 
   const initialValues = {
     title: "",
@@ -25,33 +40,20 @@ function HiringForm() {
     study: "",
     startingtime: "",
     endingtime: "",
-    languages: "",
-    responsibility: "",
-    employesNeeded: "",
+    Languages: "",
+    Responsibility: "",
+    employees_needed: "",
     image: "",
+    company_id: Compdetails._id,
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: yupSchema,
     onSubmit: async (values) => {
-      console.log(values, currentFile, "-----------------");
+      console.log(values, currentFile, "-----------------", Compdetails._id);
       values.image = currentFile;
-      /* let formData = new FormData();    
-      formData.append('image',currentFile);
-      formData.append('endingtime',values.endingtime);
-      formData.append('languages',values.languages);
-      formData.append('responsibility',values.responsibility);
-      formData.append('employesNeeded',values.employesNeeded);
-      formData.append('startingtime',values.startingtime);
-      formData.append('study',values.study);
-      formData.append('experience',values.experience);
-      formData.append('salary',values.salary);
-      formData.append('country',values.country);
-      formData.append('startingdate',values.startingdate);
-      formData.append('contract',values.contract);
-      formData.append('title',values.title);
-      formData.append('description',values.description);*/
+      values.company_id = Compdetails._id;
 
       setShowLoader(true);
       const [res, err] = await queryApi("job/", values, "POST", true);
@@ -194,17 +196,17 @@ function HiringForm() {
                     <div className="form-group label-floating is-empty">
                       <TextField
                         className="is-invalid"
-                        id="languages"
-                        name="languages"
+                        id="Languages"
+                        name="Languages"
                         label="Languages"
                         variant="outlined"
-                        value={formik.values.languages}
+                        value={formik.values.Languages}
                         helpertext={
-                          formik.touched.languages && formik.errors.languages
+                          formik.touched.Languages && formik.errors.Languages
                         }
                         error={
-                          formik.touched.languages &&
-                          Boolean(formik.errors.languages)
+                          formik.touched.Languages &&
+                          Boolean(formik.errors.Languages)
                         }
                         onChange={formik.handleChange}
                         fullWidth
@@ -213,18 +215,18 @@ function HiringForm() {
                     <div className="form-group label-floating is-empty">
                       <TextField
                         className="is-invalid"
-                        id="responsibility"
-                        name="responsibility"
+                        id="Responsibility"
+                        name="Responsibility"
                         label="Responsibility"
                         variant="outlined"
-                        value={formik.values.responsibility}
+                        value={formik.values.Responsibility}
                         helpertext={
-                          formik.touched.responsibility &&
-                          formik.errors.responsibility
+                          formik.touched.Responsibility &&
+                          formik.errors.Responsibility
                         }
                         error={
-                          formik.touched.responsibility &&
-                          Boolean(formik.errors.responsibility)
+                          formik.touched.Responsibility &&
+                          Boolean(formik.errors.Responsibility)
                         }
                         onChange={formik.handleChange}
                         fullWidth
@@ -233,18 +235,18 @@ function HiringForm() {
                     <div className="form-group label-floating is-empty">
                       <TextField
                         className="is-invalid"
-                        id="employesNeeded"
-                        name="employesNeeded"
-                        label="EmployesNeeded"
+                        id="employees_needed"
+                        name="employees_needed"
+                        label="employees_needed"
                         variant="outlined"
-                        value={formik.values.employesNeeded}
+                        value={formik.values.employees_needed}
                         helpertext={
-                          formik.touched.employesNeeded &&
-                          formik.errors.employesNeeded
+                          formik.touched.employees_needed &&
+                          formik.errors.employees_needed
                         }
                         error={
-                          formik.touched.employesNeeded &&
-                          Boolean(formik.errors.employesNeeded)
+                          formik.touched.employees_needed &&
+                          Boolean(formik.errors.employees_needed)
                         }
                         onChange={formik.handleChange}
                         fullWidth
@@ -291,6 +293,8 @@ function HiringForm() {
   );
 }
 
+export default HiringForm;
+
 const yupSchema = Yup.object({
   title: Yup.string()
     .min(8, "Minimum 3 caractéres")
@@ -300,6 +304,26 @@ const yupSchema = Yup.object({
     .min(7, "Minimum 7 caractéres")
     .max(80, "Maximum 80 caractéres")
     .required("Champs requis!"),
+  contract: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(5, "Maximum 4 caractéres")
+    .required("Champs requis!"),
+  salary: Yup.number().required("Champs requis!"),
+  experience: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(5, "Maximum 4 caractéres")
+    .required("Champs requis!"),
+  study: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(10, "Maximum 10 caractéres")
+    .required("Champs requis!"),
+  Languages: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(10, "Maximum 10 caractéres")
+    .required("Champs requis!"),
+  Responsibility: Yup.string()
+    .min(3, "Minimum 3 caractéres")
+    .max(10, "Maximum 10 caractéres")
+    .required("Champs requis!"),
+  employees_needed: Yup.number().required("Champs requis!"),
 });
-
-export default HiringForm;

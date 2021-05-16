@@ -7,11 +7,13 @@ import { addCompany } from "../../../store/slices/company";
 import { queryApi } from "../../../utils/queryApi";
 import * as Yup from "yup";
 import { activeUserSelector } from "../../../store/slices/auth";
+import { useHistory } from "react-router-dom";
 function RegisterForm() {
   const activeUser = useSelector(activeUserSelector);
   const dispatch = useDispatch();
   const [, setShowLoader] = useState(false);
   const [, setError] = useState({ visible: false, message: "" });
+  const history = useHistory();
   const initialValues = {
     company_name: "",
     company_details: "",
@@ -32,6 +34,7 @@ function RegisterForm() {
         });
       } else {
         dispatch(addCompany(res));
+        history.push("/me");
         console.log(res);
       }
     },
@@ -41,7 +44,7 @@ function RegisterForm() {
       <Container>
         <form className="content" onSubmit={formik.handleSubmit}>
           <div className="col col-lg-12 col-md-12 col-sm-12 col-12">
-            <h2 className="presentation-margin">Hiring Form</h2>
+            <h2 className="presentation-margin">Company Registration</h2>
             <div className="ui-block">
               <div className="ui-block-content">
                 <div className="row">

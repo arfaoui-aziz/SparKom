@@ -14,7 +14,7 @@ function Index() {
   useEffect(() => {
     dispatch(fetchJobs);
   }, [dispatch]);
-
+  
   return (
     <>
       <div className="main-header">
@@ -38,8 +38,8 @@ function Index() {
           <Col sm={9}>
             <Container>
               <Row>
-                {jobs?.map((job, i) => (
-                  <Col sm={6} key={i}>
+                {jobs?.map((job) => (
+                  <Col sm={6}>
                     <Joblists job={job} />
                   </Col>
                 ))}

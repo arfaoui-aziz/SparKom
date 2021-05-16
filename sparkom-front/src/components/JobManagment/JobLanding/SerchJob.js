@@ -274,14 +274,14 @@ function SerchJob() {
       <div className="centeredsearch">
         <div className="aligniconsinput">
           <div className="pinsearch">
-            <img src={pin} className="imagespacer" alt="spacer" />
+            <img src={pin} className="imagespacer" />
             <p>Location</p>
           </div>
           <TextField id="standard-basic" placeholder="Job title " />
         </div>
         <div className="aligniconsinput">
           <div className="loupesearch">
-            <img src={loupe} className="imagespacer" alt="loupe" />
+            <img src={loupe} className="imagespacer" />
 
             <p>Search Job</p>
           </div>
