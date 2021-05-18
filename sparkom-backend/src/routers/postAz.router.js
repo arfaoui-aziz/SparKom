@@ -10,7 +10,7 @@ const {
   upload,
   addPhoto,
   getPostImg,
-} = require("../controllers/post.controller");
+} = require("../controllers/postAz.controller");
 
 const router = new express.Router();
 

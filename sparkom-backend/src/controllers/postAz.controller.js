@@ -1,4 +1,4 @@
-const Post = require("../models/post");
+const Post = require("../models/postAz");
 const multer = require("multer");
 const sharp = require("sharp");
 const createPost = async (req, res) => {

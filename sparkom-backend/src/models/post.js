@@ -1,29 +1,38 @@
 const mongoose = require("mongoose");
-
-const postSchema = new mongoose.Schema(
+const { ObjectId } = mongoose.Schema;
+var Schema = mongoose.Schema;
+const PostSchema = new Schema(
   {
-    creator: {
-      type: mongoose.Schema.Types.ObjectId,
+    text: {
+      type: String,
+      trim: true,
       required: true,
-      ref: "User",
     },
-    post_content: String,
-    image: Buffer,
-    video: Buffer,
-    likes: [mongoose.Schema.Types.ObjectId],
+    image: {
+      data: Buffer,
+      contentType: String,
+    },
+    postedBy: {
+      type: ObjectId,
+      ref: "Profile",
+    },
+    likes: [{ type: ObjectId, ref: "Profile" }],
+    topics: { type: ObjectId, ref: "Topic" },
+    hastags: [{ type: ObjectId, ref: "Hashtag" }],
     comments: [
       {
-        comment_txt: String,
-        creationDate: Date,
-        commenter: mongoose.Schema.Types.ObjectId,
+        text: String,
+        created: { type: Date, default: Date.now },
+        postedBy: {
+          type: ObjectId,
+          ref: "Profile",
+        },
       },
     ],
-    topics: [mongoose.Schema.Types.ObjectId],
-    hashtags: [mongoose.Schema.Types.ObjectId],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-const Post = mongoose.model("Post", postSchema);
-
-module.exports = Post;
+module.exports = mongoose.model("Post", PostSchema);

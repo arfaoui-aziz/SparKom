@@ -7,7 +7,7 @@ const helmet = require("helmet");
 //* Importe USER Routes
 const userRouter = require("./routers/user.router");
 const profileRouter = require("./routers/profile.router");
-const postRouter = require("./routers/post.router");
+const postRouter = require("./routers/postAz.router");
 const domainRouter = require("./routers/domain.router");
 const skillRouter = require("./routers/skill.router");
 const badgeRouter = require("./routers/badge.router");
@@ -31,6 +31,10 @@ var groupRouter = require("./routers/group");
 var eventRouter = require("./routers/event");
 var postGrRouter = require("./routers/postGr");
 var eventC = require("./models/event");
+//************************************** Post Routes ****************************/
+const postRoutes = require("./routers/post");
+const topicRoutes = require("./routers/topic");
+const questionRoutes = require("./routers/question");
 
 //**************************/
 const app = express();
@@ -67,7 +71,10 @@ app.use("/cards", cardRouter);
 app.use("/group", groupRouter);
 app.use("/event", eventRouter);
 app.use("/", postGrRouter);
-
+//***************** Post ********/
+app.use("/", postRoutes);
+app.use("/", topicRoutes);
+app.use("/", questionRoutes);
 //***************************** Mailing *****************************/
 app.post("/send_mail", cors(), async (req, res) => {
   let { text2 } = req.body;
@@ -107,3 +114,31 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server Connected on Port ${PORT}`);
 });
+
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
+const { v4: uuidV4 } = require("uuid");
+
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+
+app.get("/live", (req, res) => {
+  res.redirect(`/${uuidV4()}`);
+});
+
+app.get("/:room", (req, res) => {
+  res.render("room", { roomId: req.params.room });
+});
+
+io.on("connection", (socket) => {
+  socket.on("join-room", (roomId, userId) => {
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit("user-connected", userId);
+
+    socket.on("disconnect", () => {
+      socket.to(roomId).broadcast.emit("user-disconnected", userId);
+    });
+  });
+});
+
+server.listen(3006);
