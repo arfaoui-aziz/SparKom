@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { isLogged } from "../../helpers/auth";
 import { addPost } from "../../redux/actions/postActions";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PermMedia from "@material-ui/icons/PermMedia";
+import { activeUserSelector } from "../../store/slices/auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,12 +30,12 @@ const style = {
   borderColor: "#3d3c3b",
   borderRadius: 5,
   color: "#3d3c3b",
-  marginLeft:"20%",
+  marginLeft: "20%",
 };
 const style1 = {
-  padding:"7%",
-  marginLeft:"550%",
-  marginBottom:"15%",
+  padding: "7%",
+  marginLeft: "550%",
+  marginBottom: "15%",
   color: "#fff",
   background: "#236aed",
 };
@@ -46,7 +47,7 @@ export default function AddPost() {
     text: "",
     image: "",
   });
-  const jwt = isLogged();
+  const activeUser = useSelector(activeUserSelector);
   const dispatch = useDispatch();
 
   function handleInputChange(event) {
@@ -65,8 +66,14 @@ export default function AddPost() {
     event.preventDefault();
     post.text && postData.append("text", post.text);
     post.image && postData.append("image", post.image);
-    post.postedBy && postData.append(jwt.user._id);
-    dispatch(addPost(jwt.token, jwt.user._id, postData));
+    post.postedBy && postData.append(activeUser._id);
+    dispatch(
+      addPost(
+        JSON.stringify(localStorage.getItem("token")),
+        activeUser._id,
+        postData
+      )
+    );
   }
 
   return (
@@ -104,7 +111,14 @@ export default function AddPost() {
 
               <label htmlFor={"upload-button"}>
                 <div style={style}>
-                  <PermMedia style={{ marginRight: 5 ,marginLeft: 5, fontSize:"medium"}} /> Photo
+                  <PermMedia
+                    style={{
+                      marginRight: 5,
+                      marginLeft: 5,
+                      fontSize: "medium",
+                    }}
+                  />{" "}
+                  Photo
                 </div>
                 <input
                   style={{ display: "none" }}
@@ -118,14 +132,6 @@ export default function AddPost() {
               </label>
               <span>{"   "}</span>
 
-
-
-
-              
-
-
-
-
               <label htmlFor="icon-button-file">
                 <Button
                   variant="contained"
@@ -136,8 +142,7 @@ export default function AddPost() {
                 >
                   Post
                 </Button>
-          </label>
-
+              </label>
             </div>
           </form>
         </div>

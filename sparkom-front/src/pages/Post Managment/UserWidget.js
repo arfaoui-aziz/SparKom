@@ -1,16 +1,17 @@
 import React from "react";
-import { isLogged } from "../../helpers/auth";
+import { useSelector } from "react-redux";
+
+import { activeUserSelector } from "../../store/slices/auth";
 
 export default function UserWidget() {
-  const jwt = isLogged();
-
+  const activeUser = useSelector(activeUserSelector);
   return (
     <div className="ui-block">
       <div className="widget w-action">
         <a href="/myProfil" className="author-thumb">
           <img
             src={`http://localhost:3002/api/user/photo/${
-              jwt.user._id
+              activeUser._id
             }?${new Date().getTime()}`}
             alt="author"
             width="124"
@@ -18,11 +19,11 @@ export default function UserWidget() {
           />
         </a>
         <div className="content">
-          <h6 className="title">{jwt.user.name}</h6>
+          <h6 className="title">{activeUser.name}</h6>
           <span>
             Followers <br />
             <a href="#" class="alert-link text-white">
-              {jwt.user.followers.length}{" "}
+              6
             </a>
           </span>
           <a href="/myProfil" className="btn btn-bg-secondary ">

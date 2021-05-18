@@ -35,7 +35,7 @@ function Companyinfos() {
 
   const deleteCompanyEvent = async () => {
     await queryApi("company/deletecompany/" + Compdetails._id, {}, "DELETE");
-    dispatch(deleteCompany(Compdetails));
+    // dispatch(deleteCompany(Compdetails));
     history.push("/me");
   };
 

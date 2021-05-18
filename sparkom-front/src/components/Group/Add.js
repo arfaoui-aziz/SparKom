@@ -20,7 +20,7 @@ export default function Add(props) {
   const handleSubmitFile = (values) => {
     console.log(valeurs);
     let formData = new FormData();
-    formData.append("img", valeurs.img);
+    // formData.append("img", valeurs.img);
     formData.append("CreatedBy", activeUser._id);
     formData.append("name", valeurs.GroupName);
     formData.append("description", valeurs.Description);
@@ -39,7 +39,7 @@ export default function Add(props) {
       .catch((err) => {
         console.log(err);
       });
-    history.replace("/all");
+    history.replace("/allg");
   };
   return (
     <section className="sign_in_area bg_color sec_pad">

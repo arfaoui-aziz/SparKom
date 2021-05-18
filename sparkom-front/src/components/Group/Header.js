@@ -24,7 +24,7 @@ const Header = () => {
       {/******** Header Right */}
       <div className="header__right">
         <HeaderOption Icon={HomeIcon} title="Home" />
-        <HeaderOption Link to="/all" Icon={SupervisorAccoutIcon} title="My Network" />
+        <HeaderOption Link to="/allg" Icon={SupervisorAccoutIcon} title="My Network" />
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
         <HeaderOption Icon={ChatIcon} title="Messaging" />
         <HeaderOption Icon={NotificationsIcon} title="Notifications" />

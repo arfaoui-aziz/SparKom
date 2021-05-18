@@ -18,7 +18,6 @@ import {
   oAuthSelector,
 } from "../../store/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
-
 import { selectCompanies, fetchCompanies } from "../../store/slices/company";
 
 export default function NavBar() {
@@ -63,25 +62,57 @@ export default function NavBar() {
                 <img
                   src={logo}
                   alt="logo"
-                  style={{ height: 40, marginTop: -10, marginLeft: -50 }}
+                  style={{ height: 40, marginTop: -10, marginLeft: -55 }}
                 />
               </Link>
             </div>
 
             <div className="header-content-wrapper">
               <div className="control-block">
-                <div className="control-block">
+                <div className="control-icon">
                   <div className="author-title ">
                     <Link to="/findjob">
-                      <div
-                        className="c-secondary"
-                        style={{ borderBottom: "2px solid blue" }}
-                      >
-                        Jobs
-                      </div>
+                      <div className="c-secondary">Jobs</div>
                     </Link>
                   </div>
                 </div>
+
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <Link to="/allg">
+                      <div className="c-secondary">Groups</div>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <Link to="/boards">
+                      <div className="c-secondary">Boards</div>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* <div className="control-icon">
+                  <div className="author-title ">
+                    <Link to="/questions">
+                      <div className="c-secondary">Forum</div>
+                    </Link>
+                  </div>
+                </div> */}
+
+                <div className="control-icon">
+                  <div className="author-title ">
+                    <a
+                      href={"http://localhost:3006/live"}
+                      target="_blank"
+                      className="composition-name"
+                    >
+                      <span style={{ color: "red" }}> Go Live •</span>
+                    </a>
+                  </div>
+                </div>
+
                 <div className="control-icon more has-items">
                   <svg className="olymp-happy-face-icon c-secondary">
                     <PersonAddIcon />

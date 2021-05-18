@@ -2,31 +2,33 @@ import React from "react";
 import Header from "./Header";
 import YourQuestion from "./YourQuestion";
 import { isLogged } from "../../helpers/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addQuestion } from "../../redux/actions/questionActions";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { activeUserSelector } from "../../store/slices/auth";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-      },
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
     },
-    input: {
-      display: "none",
-    },
-  }));
-  
+  },
+  input: {
+    display: "none",
+  },
+}));
+
 const style1 = {
-    padding:"1%",
-    marginLeft:"70%",
-    marginBottom:"2%",
-    color: "#fff",
-    background: "#236aed",
-  };
+  padding: "1%",
+  marginLeft: "70%",
+  marginBottom: "2%",
+  color: "#fff",
+  background: "#236aed",
+};
 function AddQuestion() {
-    const classes = useStyles();
+  const classes = useStyles();
+  const activeUser = useSelector(activeUserSelector);
 
   const jwt = isLogged();
   const dispatch = useDispatch();
@@ -37,7 +39,6 @@ function AddQuestion() {
     type: "",
   });
   function handleInputChange(event) {
-   
     setQuestion({ ...question, [event.target.name]: event.target.value });
   }
   function handleFormSubmit(event) {
@@ -45,10 +46,12 @@ function AddQuestion() {
     question.title && questionData.append("title", question.title);
     question.body && questionData.append("body", question.body);
     question.type && questionData.append("type", question.type);
-    question.questionedBy && questionData.append(jwt.user._id);
+    question.questionedBy && questionData.append(activeUser._id);
 
-    dispatch(addQuestion(jwt.token, jwt.user._id, questionData));
-    window.location.reload(false)
+    dispatch(
+      addQuestion(localStorage.getItem("token"), activeUser._id, questionData)
+    );
+    window.location.reload(false);
   }
   return (
     <div>
@@ -64,7 +67,7 @@ function AddQuestion() {
                 <form onSubmit={handleFormSubmit}>
                   <div className="row">
                     <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                     <div className="form-group">
+                      <div className="form-group">
                         <textarea
                           rows="1"
                           cols="1"
@@ -76,7 +79,7 @@ function AddQuestion() {
                           className="form-control"
                         />
                       </div>
-                     <div className="form-group">
+                      <div className="form-group">
                         <textarea
                           rows="10"
                           cols="1"
@@ -87,7 +90,7 @@ function AddQuestion() {
                           className="form-control"
                         />
                       </div>
-                     <div className="form-group">
+                      <div className="form-group">
                         <textarea
                           rows="1"
                           cols="1"
@@ -100,24 +103,20 @@ function AddQuestion() {
                       </div>
                     </div>
 
-                    
-
                     <div className="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    <button className="btn btn-secondary">
-                Cancel
-              </button>
+                      <button className="btn btn-secondary">Cancel</button>
                     </div>
 
                     <div className="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    <Button
-                  variant="contained"
-                  style={style1}
-                  size="small"
-                  className={classes.button}
-                  type="submit"
-                >
-                  Add Question
-                </Button>
+                      <Button
+                        variant="contained"
+                        style={style1}
+                        size="small"
+                        className={classes.button}
+                        type="submit"
+                      >
+                        Add Question
+                      </Button>
                     </div>
                   </div>
                 </form>

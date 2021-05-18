@@ -18,6 +18,12 @@ export default function MyProfile() {
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
+    dispatch(fetchProfile());
+    dispatch(fetchFriends());
+    dispatch(fetchAllProfiles());
+  }, [dispatch, history]);
+
+  useEffect(() => {
     alanBtn({
       key: process.env.REACT_APP_ALLAN_KEY,
       onCommand: ({ command, questions }) => {
@@ -29,10 +35,7 @@ export default function MyProfile() {
     }).playText(
       "Welcome To Sparkom , Im Sparki your voice Assistant during your journey. How Can i Help you "
     );
-    dispatch(fetchProfile());
-    dispatch(fetchFriends());
-    dispatch(fetchAllProfiles());
-  }, [dispatch, history]);
+  }, []);
   return (
     <>
       <NavBar />
