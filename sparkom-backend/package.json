@@ -28,8 +28,10 @@
     "node-localstorage": "^2.1.6",
     "nodemailer": "^6.6.0",
     "sharp": "^0.27.2",
+    "socket.io": "^4.0.1",
     "twilio": "^3.61.0",
     "upload": "^1.1.1",
+    "uuid": "^8.3.2",
     "validator": "^13.5.2"
   },
   "devDependencies": {

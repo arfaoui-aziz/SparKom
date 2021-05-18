@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {  Col, Row } from "antd";
 import Header from "./Header";
 import TopicSearchBar from "./TopicSearchBar.js";
 import { Button } from '@material-ui/core';
@@ -105,5 +104,6 @@ export default class AllTopics extends Component {
 </div>
   </div>
     );
+    
   }
 }

@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { isLogged } from "../../helpers/auth";
 import { addPost } from "../../redux/actions/postActions";
 import Button from "@material-ui/core/Button";
-import PermMediaIcon from "@material-ui/icons/PermMedia";
-import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import { makeStyles } from "@material-ui/core/styles";
 import PermMedia from "@material-ui/icons/PermMedia";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,12 +32,12 @@ const style = {
   borderColor: "#3d3c3b",
   borderRadius: 5,
   color: "#3d3c3b",
-  marginLeft:"20%",
+  marginLeft: "20%",
 };
 const style1 = {
-  padding:"7%",
-  marginLeft:"550%",
-  marginBottom:"15%",
+  padding: "7%",
+  marginLeft: "550%",
+  marginBottom: "15%",
   color: "#fff",
   background: "#236aed",
 };
@@ -45,12 +45,13 @@ export default function AddPost() {
   const { topicId } = useParams();
   const classes = useStyles();
   const postData = new FormData();
-console.log(topicId);
+  console.log(topicId);
   const [post, setPost] = React.useState({
     text: "",
     image: "",
     topics: topicId,
   });
+  
   const jwt = isLogged();
   const dispatch = useDispatch();
 
@@ -93,7 +94,6 @@ console.log(topicId);
                 onChange={(event) => handleInputChange(event)}
                 className="form-control"
               />
-              
             </div>
             <br />
 
@@ -113,7 +113,14 @@ console.log(topicId);
 
               <label htmlFor={"upload-button"}>
                 <div style={style}>
-                  <PermMedia style={{ marginRight: 5 ,marginLeft: 5, fontSize:"medium"}} /> Photo
+                  <PermMedia
+                    style={{
+                      marginRight: 5,
+                      marginLeft: 5,
+                      fontSize: "medium",
+                    }}
+                  />{" "}
+                  Photo
                 </div>
                 <input
                   style={{ display: "none" }}
@@ -127,14 +134,6 @@ console.log(topicId);
               </label>
               <span>{"   "}</span>
 
-
-
-
-              
-
-
-
-
               <label htmlFor="icon-button-file">
                 <Button
                   variant="contained"
@@ -145,8 +144,7 @@ console.log(topicId);
                 >
                   Post
                 </Button>
-          </label>
-
+              </label>
             </div>
           </form>
         </div>

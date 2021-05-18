@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { isLogged } from "../../helpers/auth";
 import { addPost } from "../../redux/actions/postActions";
 import Button from "@material-ui/core/Button";
-import PermMediaIcon from "@material-ui/icons/PermMedia";
-import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import { makeStyles } from "@material-ui/core/styles";
 import PermMedia from "@material-ui/icons/PermMedia";
 

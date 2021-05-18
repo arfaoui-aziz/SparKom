@@ -5,7 +5,6 @@ import { isLogged } from "../../helpers/auth";
 import { getAllPosts } from "../../redux/actions/postActions";
 import PostList from "./PostList";
 import AddPost from "./AddPost";
-import Feed from "./Feed";
 import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
 function Home({ posts }) {

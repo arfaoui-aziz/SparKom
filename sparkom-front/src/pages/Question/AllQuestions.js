@@ -1,19 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {  Col, Row } from "antd";
 import Header from "./Header";
-import { Button } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import { format } from "timeago.js";
 import ForumSearchBar from "./ForumSearchBar"
 import Pagination from "./Pagination"
 import YourQuestion from "./YourQuestion"
 
-const style1 = {
-  border: 0,
-  color: "#fff",
-  background: "#236aed",
-};
+
 const Question = props => (
   
 <tr>

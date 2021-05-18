@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
@@ -48,11 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const style1 = {
-  border: 0,
-  color: "#fff",
-  background: "#236aed",
-};
 
 function ForumSearchBar() {
   const classes = useStyles();
