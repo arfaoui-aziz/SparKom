@@ -71,6 +71,14 @@ export default function NavBar() {
               <div className="control-block">
                 <div className="control-icon">
                   <div className="author-title ">
+                    <Link to="/home">
+                      <div className="c-secondary">Home</div>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="control-icon">
+                  <div className="author-title ">
                     <Link to="/findjob">
                       <div className="c-secondary">Jobs</div>
                     </Link>

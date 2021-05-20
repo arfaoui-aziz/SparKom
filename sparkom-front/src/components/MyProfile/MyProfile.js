@@ -17,11 +17,6 @@ import { populateQuiz } from "../../store/slices/quiz";
 export default function MyProfile() {
   const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(() => {
-    dispatch(fetchProfile());
-    dispatch(fetchFriends());
-    dispatch(fetchAllProfiles());
-  }, [dispatch, history]);
 
   useEffect(() => {
     alanBtn({
@@ -33,9 +28,13 @@ export default function MyProfile() {
         }
       },
     }).playText(
-      "Welcome To Sparkom , Im Sparki your voice Assistant during your journey. How Can i Help you "
+      "Welcome To Sparkom , Im Sparki your voice Assistant during your journey. How Can i Help you"
     );
-  }, []);
+    dispatch(fetchProfile());
+    dispatch(fetchFriends());
+    dispatch(fetchAllProfiles());
+  }, [dispatch, history]);
+
   return (
     <>
       <NavBar />

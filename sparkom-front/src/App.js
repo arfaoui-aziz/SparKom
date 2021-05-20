@@ -60,8 +60,10 @@ import TopicDetails from "./pages/Topics/TopicDetails";
 import AddQuestion from "./pages/Question/addQuestion";
 import AllQuestion from "./pages/Question/AllQuestions";
 import QuestionDetails from "./pages/Question/QuestionDetails";
-import AllTopics from "./pages/Topics/AllTopics";
-import { HomeAmen } from "./pages/Post Managment/Home";
+// import AllTopics from "./pages/Topics/AllTopics";
+// import { HomeAmen } from "./pages/Post Managment/Home";
+import HomeAmen from "./components/Amen/Home/Home";
+import AllTopics from "./components/Amen/AllTopics/AllTopics";
 
 //************************************************************************************** */
 function App() {
@@ -131,6 +133,8 @@ function App() {
             <Route path="/question/:questionId" component={QuestionDetails} />
             <Route path="/questions" component={AllQuestion} />
             <Route path="/addQuestion" component={AddQuestion} />
+            <Route path="/home" component={HomeAmen} />
+            <Route path="/alltopics" component={AllTopics} />
           </Switch>
         ) : (
           <Switch>
